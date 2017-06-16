@@ -286,7 +286,11 @@
         <tr>
             <th scope="row"><?= __('Subtask Share Holder Count') ?></th>
             <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_share_holder_count) ?></td>
-        </tr>        
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Subtask Instruction') ?></th>
+            <td><?= h($subtaskShareHolderComplete->subtask_instruction) ?></td>
+        </tr>         
     </table> 
             <?php endforeach; ?>    
         <?php endif; ?>

@@ -22,8 +22,9 @@ use Cake\ORM\Entity;
  * @property int $subtask_task_period_demand
  * @property int $participant_id
  * @property float $subtask_dividend_rate
- * @property string $subtask_image
+ * @property int $subtask_image
  * @property int $subtask_symbol
+ * @property string $subtask_instruction
  * @property int $subtask_type_id
  *
  * @property \App\Model\Entity\Task $task

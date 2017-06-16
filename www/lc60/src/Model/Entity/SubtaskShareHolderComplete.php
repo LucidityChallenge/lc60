@@ -29,6 +29,7 @@ use Cake\ORM\Entity;
  * @property string $subtask_category_description
  * @property int $subtask_image
  * @property int $subtask_symbol
+ * @property string $subtask_instruction
  * @property int $subtask_share_holder_count
  *
  * @property \App\Model\Entity\Subtask $subtask
