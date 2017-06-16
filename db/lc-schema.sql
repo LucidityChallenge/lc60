@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2017 at 02:15 PM
+-- Generation Time: Jun 16, 2017 at 07:57 PM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `calculated_subtask_demand_external` (
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` longtext
+,`subtask_description` mediumtext
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `calculated_subtask_demand_final_value` (
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` longtext
+,`subtask_description` mediumtext
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `calculated_subtask_demand_inner` (
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` longtext
+,`subtask_description` mediumtext
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `calculated_subtask_demand_union` (
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` longtext
+,`subtask_description` mediumtext
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `demand_view_success` (
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` text
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `demand_view_success_contemporary_demand` (
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` text
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -288,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `demand_view_success_contemporary_demand_positive` (
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` text
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -321,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `demand_view_uncomplete_contemporary_demand` (
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` text
+,`subtask_description` tinytext
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(1)
 ,`subtask_owner_participant_id` int(11)
@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `demand_view_uncomplete_contemporary_demand_positive`
 ,`subtask_max_value` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` text
+,`subtask_description` tinytext
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(1)
 ,`subtask_owner_participant_id` int(11)
@@ -486,7 +486,7 @@ CREATE TABLE IF NOT EXISTS `recent_successes` (
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
 ,`subtask_task_period_demand` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` text
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -556,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `subtasks` (
   `subtask_starting_demand` tinyint(4) NOT NULL DEFAULT '0',
   `subtask_inflation_rate` decimal(4,1) NOT NULL DEFAULT '102.0',
   `subtask_demand_cutoff` tinyint(4) NOT NULL DEFAULT '7',
-  `subtask_description` text,
+  `subtask_description` tinytext,
   `subtask_url` varchar(48) DEFAULT NULL,
   `subtask_accumulative` tinyint(1) NOT NULL DEFAULT '0',
   `subtask_task_period_demand` tinyint(4) NOT NULL DEFAULT '0',
@@ -564,6 +564,7 @@ CREATE TABLE IF NOT EXISTS `subtasks` (
   `subtask_dividend_rate` decimal(4,1) NOT NULL DEFAULT '0.0',
   `subtask_image` varchar(80) DEFAULT NULL,
   `subtask_symbol` int(11) DEFAULT NULL,
+  `subtask_instruction` tinytext,
   `subtask_type_id` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -660,7 +661,7 @@ CREATE TABLE IF NOT EXISTS `subtask_share_holder_complete` (
 ,`subtask_starting_demand` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` text
+,`subtask_description` tinytext
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(1)
 ,`subtask_task_period_demand` tinyint(4)
@@ -671,6 +672,7 @@ CREATE TABLE IF NOT EXISTS `subtask_share_holder_complete` (
 ,`subtask_category_description` tinytext
 ,`subtask_image` varchar(80)
 ,`subtask_symbol` int(11)
+,`subtask_instruction` tinytext
 ,`subtask_share_holder_count` bigint(21)
 );
 
@@ -700,7 +702,7 @@ CREATE TABLE IF NOT EXISTS `subtask_subtask_category` (
 ,`subtask_starting_demand` tinyint(4)
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
-,`subtask_description` text
+,`subtask_description` tinytext
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(1)
 ,`subtask_task_period_demand` tinyint(4)
@@ -708,6 +710,7 @@ CREATE TABLE IF NOT EXISTS `subtask_subtask_category` (
 ,`subtask_dividend_rate` decimal(4,1)
 ,`subtask_image` varchar(80)
 ,`subtask_symbol` int(11)
+,`subtask_instruction` tinytext
 ,`subtask_category_name` varchar(16)
 ,`subtask_category_class` varchar(16)
 ,`subtask_category_description` tinytext
@@ -746,7 +749,7 @@ CREATE TABLE IF NOT EXISTS `successful_subtask` (
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
 ,`subtask_task_period_demand` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` text
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -855,7 +858,7 @@ CREATE TABLE IF NOT EXISTS `successful_subtask_dividend_scores` (
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
 ,`subtask_task_period_demand` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` text
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -898,7 +901,7 @@ CREATE TABLE IF NOT EXISTS `successful_subtask_task` (
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
 ,`subtask_task_period_demand` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` text
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -933,7 +936,7 @@ CREATE TABLE IF NOT EXISTS `successful_subtask_task_with_calculated_scoring` (
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
 ,`subtask_task_period_demand` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` text
 ,`subtask_url` varchar(48)
 ,`subtask_accumulative` tinyint(4)
 ,`subtask_owner_participant_id` int(11)
@@ -1252,7 +1255,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `subtask_share_holder_complete`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subtask_share_holder_complete` AS select `subtask_share_holder`.`subtask_id` AS `id`,`subtask_share_holder`.`subtask_id` AS `subtask_id`,`subtask_share_holder`.`participant_id` AS `participant_id`,`subtask_subtask_category`.`task_id` AS `task_id`,`subtask_subtask_category`.`subtask_super_id` AS `subtask_super_id`,`subtask_subtask_category`.`subtask_name` AS `subtask_name`,`subtask_subtask_category`.`subtask_category_id` AS `subtask_category_id`,`subtask_subtask_category`.`subtask_base_value` AS `subtask_base_value`,`subtask_subtask_category`.`subtask_max_value` AS `subtask_max_value`,`subtask_subtask_category`.`subtask_starting_demand` AS `subtask_starting_demand`,`subtask_subtask_category`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask_subtask_category`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask_subtask_category`.`subtask_description` AS `subtask_description`,`subtask_subtask_category`.`subtask_url` AS `subtask_url`,`subtask_subtask_category`.`subtask_accumulative` AS `subtask_accumulative`,`subtask_subtask_category`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask_subtask_category`.`participant_id` AS `participant_owner`,`subtask_subtask_category`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_subtask_category`.`subtask_category_description` AS `subtask_category_description`,`subtask_subtask_category`.`subtask_image` AS `subtask_image`,`subtask_subtask_category`.`subtask_symbol` AS `subtask_symbol`,`subtask_share_holder_count`.`subtask_share_holder_count` AS `subtask_share_holder_count` from ((`subtask_share_holder` join `subtask_share_holder_count` on((`subtask_share_holder`.`subtask_id` = `subtask_share_holder_count`.`subtask_id`))) join `subtask_subtask_category` on((`subtask_share_holder`.`subtask_id` = `subtask_subtask_category`.`subtask_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subtask_share_holder_complete` AS select `subtask_share_holder`.`subtask_id` AS `id`,`subtask_share_holder`.`subtask_id` AS `subtask_id`,`subtask_share_holder`.`participant_id` AS `participant_id`,`subtask_subtask_category`.`task_id` AS `task_id`,`subtask_subtask_category`.`subtask_super_id` AS `subtask_super_id`,`subtask_subtask_category`.`subtask_name` AS `subtask_name`,`subtask_subtask_category`.`subtask_category_id` AS `subtask_category_id`,`subtask_subtask_category`.`subtask_base_value` AS `subtask_base_value`,`subtask_subtask_category`.`subtask_max_value` AS `subtask_max_value`,`subtask_subtask_category`.`subtask_starting_demand` AS `subtask_starting_demand`,`subtask_subtask_category`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask_subtask_category`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask_subtask_category`.`subtask_description` AS `subtask_description`,`subtask_subtask_category`.`subtask_url` AS `subtask_url`,`subtask_subtask_category`.`subtask_accumulative` AS `subtask_accumulative`,`subtask_subtask_category`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask_subtask_category`.`participant_id` AS `participant_owner`,`subtask_subtask_category`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_subtask_category`.`subtask_category_description` AS `subtask_category_description`,`subtask_subtask_category`.`subtask_image` AS `subtask_image`,`subtask_subtask_category`.`subtask_symbol` AS `subtask_symbol`,`subtask_subtask_category`.`subtask_instruction` AS `subtask_instruction`,`subtask_share_holder_count`.`subtask_share_holder_count` AS `subtask_share_holder_count` from ((`subtask_share_holder` join `subtask_share_holder_count` on((`subtask_share_holder`.`subtask_id` = `subtask_share_holder_count`.`subtask_id`))) join `subtask_subtask_category` on((`subtask_share_holder`.`subtask_id` = `subtask_subtask_category`.`subtask_id`)));
 
 -- --------------------------------------------------------
 
@@ -1270,7 +1273,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `subtask_subtask_category`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subtask_subtask_category` AS select `subtask`.`id` AS `subtask_id`,`subtask`.`task_id` AS `task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_url` AS `subtask_url`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`participant_id` AS `participant_id`,`subtask`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask`.`subtask_image` AS `subtask_image`,`subtask`.`subtask_symbol` AS `subtask_symbol`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description` from (`subtasks` `subtask` left join `subtask_categories` `subtask_category` on((`subtask`.`subtask_category_id` = `subtask_category`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subtask_subtask_category` AS select `subtask`.`id` AS `subtask_id`,`subtask`.`task_id` AS `task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_url` AS `subtask_url`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`participant_id` AS `participant_id`,`subtask`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask`.`subtask_image` AS `subtask_image`,`subtask`.`subtask_symbol` AS `subtask_symbol`,`subtask`.`subtask_instruction` AS `subtask_instruction`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description` from (`subtasks` `subtask` left join `subtask_categories` `subtask_category` on((`subtask`.`subtask_category_id` = `subtask_category`.`id`)));
 
 -- --------------------------------------------------------
 
