@@ -1,25 +1,25 @@
 # CakePHP 3
 
-/vendor/*
-/config/app.php
+/www/lc60/vendor/*
+/www/lc60/config/app.php
 
-/tmp/cache/models/*
-!/tmp/cache/models/empty
-/tmp/cache/persistent/*
-!/tmp/cache/persistent/empty
-/tmp/cache/views/*
-!/tmp/cache/views/empty
-/tmp/sessions/*
-!/tmp/sessions/empty
-/tmp/tests/*
-!/tmp/tests/empty
+/www/lc60/tmp/cache/models/*
+!/www/lc60/tmp/cache/models/empty
+/www/lc60/tmp/cache/persistent/*
+!/www/lc60/tmp/cache/persistent/empty
+/www/lc60/tmp/cache/views/*
+!/www/lc60/tmp/cache/views/empty
+/www/lc60/tmp/sessions/*
+!/www/lc60/tmp/sessions/empty
+/www/lc60/tmp/tests/*
+!/www/lc60/tmp/tests/empty
 
-/logs/*
-!/logs/empty
+/www/lc60/logs/*
+!/www/lc60/logs/empty
 
 # CakePHP 2
 
-/app/tmp/*
-/app/Config/core.php
-/app/Config/database.php
-/vendors/*
+/www/lc60/app/tmp/*
+/www/lc60/app/Config/core.php
+/www/lc60/app/Config/database.php
+/www/lc60/vendors/*
