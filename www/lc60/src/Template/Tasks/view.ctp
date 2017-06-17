@@ -59,6 +59,7 @@
         <h4><?= __('Task Text') ?></h4>
         <?= $this->Text->autoParagraph(h($task->task_text)); ?>
     </div>
+    <!--
     <div class="related">
         <h4><?= __('Related Current Task') ?></h4>
         <?php if (!empty($task->current_task)): ?>
@@ -89,44 +90,45 @@
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
-    </div>
+    </div>-->
     <div class="related">
-        <h4><?= __('Related Dream With Type') ?></h4>
-        <?php if (!empty($task->dream_with_type)): ?>
+        <h4><?= __('Related Dreams') ?></h4>
+        <?php if (!empty($task->dream_with_type_participant)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th scope="col"><?= __('Participant Id') ?></th>
-                <th scope="col"><?= __('Dream Id') ?></th>
+                <!--<th scope="col"><?= __('Participant Id') ?></th>-->
+                <th scope="col"><?= __('Participant') ?></th>
                 <th scope="col"><?= __('Dream Timestamp') ?></th>
-                <th scope="col"><?= __('Dream Type Id') ?></th>
+                <!--<th scope="col"><?= __('Dream Type Id') ?></th>-->
                 <th scope="col"><?= __('Dream Type Name') ?></th>
-                <th scope="col"><?= __('Dream Type Short Name') ?></th>
-                <th scope="col"><?= __('Final Value Truncate') ?></th>
-                <th scope="col"><?= __('Task Id') ?></th>
-                <th scope="col"><?= __('Task Title') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <!--<th scope="col"><?= __('Dream Type Short Name') ?></th>-->
+                <th scope="col"><?= __('Dream Value') ?></th>
+                <!--<th scope="col"><?= __('Task Id') ?></th>-->
+                <!--<th scope="col"><?= __('Task Title') ?></th>-->
+                <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
             </tr>
-            <?php foreach ($task->dream_with_type as $dreamWithType): ?>
+            <?php foreach ($task->dream_with_type_participant as $dreamWithType): ?>
             <tr>
-                <td><?= h($dreamWithType->participant_id) ?></td>
-                <td><?= h($dreamWithType->dream_id) ?></td>
-                <td><?= h($dreamWithType->dream_timestamp) ?></td>
-                <td><?= h($dreamWithType->dream_type_id) ?></td>
-                <td><?= h($dreamWithType->dream_type_name) ?></td>
-                <td><?= h($dreamWithType->dream_type_short_name) ?></td>
+                <!--<td><?= h($dreamWithType->participant_id) ?></td>-->
+                <td><?= $this->Html->link(($dreamWithType->participant_name), ['controller' => 'Participant', 'action' => 'view', $dreamWithType->participant_id]) ?></td>
+                <td><?= $this->Html->link(($dreamWithType->dream_timestamp), ['controller' => 'Dreams', 'action' => 'view', $dreamWithType->dream_id])  ?></td>
+                <!--<td><?= h($dreamWithType->dream_type_id) ?></td>-->                
+                <td><?= $this->Html->link(($dreamWithType->dream_type_name), ['controller' => 'DreamTypes', 'action' => 'view', $dreamWithType->dream_type_id]) ?></td>
+                <!--<td><?= h($dreamWithType->dream_type_short_name) ?></td>-->
                 <td><?= h($dreamWithType->final_value_truncate) ?></td>
-                <td><?= h($dreamWithType->task_id) ?></td>
-                <td><?= h($dreamWithType->task_title) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'DreamWithType', 'action' => 'view', $dreamWithType->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'DreamWithType', 'action' => 'edit', $dreamWithType->id]) ?>
+                <!--<td><?= h($dreamWithType->task_id) ?></td>-->
+                <!--<td><?= h($dreamWithType->task_title) ?></td>-->
+                <!--<td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Dreams', 'action' => 'view', $dreamWithType->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Dreams', 'action' => 'edit', $dreamWithType->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'DreamWithType', 'action' => 'delete', $dreamWithType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dreamWithType->id)]) ?>
-                </td>
+                </td>-->
             </tr>
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
     </div>
+    <!--
     <div class="related">
         <h4><?= __('Related Subtask Share Holder Complete') ?></h4>
         <?php if (!empty($task->subtask_share_holder_complete)): ?>
@@ -410,4 +412,5 @@
         </table>
         <?php endif; ?>
     </div>
+    -->
 </div>
