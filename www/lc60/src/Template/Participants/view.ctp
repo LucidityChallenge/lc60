@@ -83,7 +83,11 @@
 	<?php $finalScore = (intval(100*$scoreViewComplete->final_value_total_with_dividends)/100);
 	      $subtaskTotalValue = (intval(100*$scoreViewComplete->final_value_total)/100);
 	?>
-	<h4><?= __('Final Score for '.($participant->participant_name).': ') ?></h4>&nbsp;<h2 class="final_score"><?= h($finalScore) ?></h2>
+	<div class="row">
+	  <h4><?= __('Final Score for '.($participant->participant_name).': ') ?></h4>
+	  <h2 class="final_score"><?= h($finalScore) ?></h2>
+	</div>
+	
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <!--<th scope="col"><?= __('Participant Id') ?></th>-->
