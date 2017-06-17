@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2017 at 07:57 PM
+-- Generation Time: Jun 17, 2017 at 03:44 AM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -417,6 +417,24 @@ CREATE TABLE IF NOT EXISTS `dream_type_id` (
 --
 CREATE TABLE IF NOT EXISTS `dream_with_type` (
 `participant_id` int(11)
+,`dream_id` int(11)
+,`dream_timestamp` timestamp
+,`dream_type_id` int(11)
+,`dream_type_name` varchar(32)
+,`dream_type_short_name` varchar(8)
+,`final_value_truncate` double(19,2)
+,`task_id` tinyint(4)
+,`task_title` varchar(48)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `dream_with_type_participant`
+--
+CREATE TABLE IF NOT EXISTS `dream_with_type_participant` (
+`participant_id` int(11)
+,`participant_name` varchar(48)
 ,`dream_id` int(11)
 ,`dream_timestamp` timestamp
 ,`dream_type_id` int(11)
@@ -1193,6 +1211,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `dream_with_type`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dream_with_type` AS select `dream`.`participant_id` AS `participant_id`,`dream`.`id` AS `dream_id`,`dream`.`dream_timestamp` AS `dream_timestamp`,`dream_type_id`.`dream_type_id` AS `dream_type_id`,`dream_type`.`dream_type_name` AS `dream_type_name`,`dream_type`.`dream_type_short_name` AS `dream_type_short_name`,`dream_scoring`.`final_value_truncate` AS `final_value_truncate`,`task`.`id` AS `task_id`,`task`.`task_title` AS `task_title` from (((((`participants` `participant` join `dreams` `dream` on((`participant`.`id` = `dream`.`participant_id`))) left join `dream_type_id` on((`dream`.`id` = `dream_type_id`.`dream_id`))) left join `dream_types` `dream_type` on((`dream_type_id`.`dream_type_id` = `dream_type`.`id`))) join `dream_scoring` on((`dream`.`id` = `dream_scoring`.`dream_id`))) join `tasks` `task` on((`task`.`id` = (select min(`taskmax`.`id`) AS `id` from `tasks` `taskmax` where ((`taskmax`.`task_start` < `dream`.`dream_timestamp`) and (`taskmax`.`task_expiration` >= `dream`.`dream_timestamp`)))))) order by `dream`.`dream_timestamp`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `dream_with_type_participant`
+--
+DROP TABLE IF EXISTS `dream_with_type_participant`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dream_with_type_participant` AS select `dream_with_type`.`participant_id` AS `participant_id`,`participant`.`participant_name` AS `participant_name`,`dream_with_type`.`dream_id` AS `dream_id`,`dream_with_type`.`dream_timestamp` AS `dream_timestamp`,`dream_with_type`.`dream_type_id` AS `dream_type_id`,`dream_with_type`.`dream_type_name` AS `dream_type_name`,`dream_with_type`.`dream_type_short_name` AS `dream_type_short_name`,`dream_with_type`.`final_value_truncate` AS `final_value_truncate`,`dream_with_type`.`task_id` AS `task_id`,`dream_with_type`.`task_title` AS `task_title` from (`dream_with_type` join `participants` `participant` on((`dream_with_type`.`participant_id` = `participant`.`id`)));
 
 -- --------------------------------------------------------
 
