@@ -44,16 +44,39 @@ class TasksController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
-    {
+    {       
+        
+	if (null != ($this->Auth->user('id')))
+	{
         $task = $this->Tasks->get($id, [
             'contain' => ['CurrentTask', 'DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SubtaskSubtaskCategory', 'Subtasks', 'SuccessfulSubtask', 'UnexpiredTask']
         ]);
 
         $this->set('task', $task);
         $this->set('_serialize', ['task']);
-        
-        
+        }
+        else
+        {
+	    $unset = true;
+	    
+	    $tasks = ($this->Tasks->find()
+	      ->where(['Tasks.id' => ($id)])
+	      ->where(['Tasks.task_start <=' => Time::now()])
+	    );
 
+	    foreach ($tasks as $task)
+	    {
+	      $this->set('task', $task);
+	      $this->set('_serialize', ['task']);
+	      $unset = false;
+	    }
+        
+	    if ($unset)
+	    {
+	      $this->Flash->error(__('Sorry! This data is restricted.'));
+	      return $this->redirect(['controller' => 'users', 'action' => 'login']);
+	    }
+        }
     }
 
     /**
