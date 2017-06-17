@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Tasks Controller
@@ -20,8 +21,17 @@ class TasksController extends AppController
      */
     public function index()
     {
-        $tasks = $this->paginate($this->Tasks);
-
+    	if (null != ($this->Auth->user('id')))
+    	{
+	  $tasks = $this->paginate($this->Tasks->find()
+	  );
+	}
+	else
+	{
+	  $tasks = $this->paginate($this->Tasks->find()
+	      ->where(['Tasks.task_start <=' => Time::now()])
+	  );
+	}
         $this->set(compact('tasks'));
         $this->set('_serialize', ['tasks']);
     }
@@ -41,6 +51,9 @@ class TasksController extends AppController
 
         $this->set('task', $task);
         $this->set('_serialize', ['task']);
+        
+        
+
     }
 
     /**
