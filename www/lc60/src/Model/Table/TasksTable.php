@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Tasks Model
  *
  * @property \App\Model\Table\CurrentTaskTable|\Cake\ORM\Association\HasMany $CurrentTask
- * @property |\Cake\ORM\Association\HasMany $DreamWithType
+ * @property |\Cake\ORM\Association\HasMany $DreamWithTypeParticipant
  * @property |\Cake\ORM\Association\HasMany $SubtaskShareHolderComplete
  * @property |\Cake\ORM\Association\HasMany $SubtaskSubtaskCategory
  * @property \App\Model\Table\SubtasksTable|\Cake\ORM\Association\HasMany $Subtasks
@@ -45,7 +45,7 @@ class TasksTable extends Table
         $this->hasMany('CurrentTask', [
             'foreignKey' => 'task_id'
         ]);
-        $this->hasMany('DreamWithType', [
+        $this->hasMany('DreamWithTypeParticipant', [
             'foreignKey' => 'task_id'
         ]);
         $this->hasMany('SubtaskShareHolderComplete', [
