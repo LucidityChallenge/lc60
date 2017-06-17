@@ -9,7 +9,8 @@ use Cake\Validation\Validator;
 /**
  * DreamTypes Model
  *
- * @property \App\Model\Table\DreamTypeIdTable|\Cake\ORM\Association\HasMany $DreamTypeId
+ * @property \App\Model\Table\DreamTypeWithTypeParticipantTable|\Cake\ORM\Association\HasMany $DreamWithTypeParticipant
+ * @property \App\Model\Table\$SuccessfulSubtaskTaskWithCalculatedScoringParticipantTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoringParticipant
  * @property |\Cake\ORM\Association\HasMany $RecentSuccesses
  * @property \App\Model\Table\SuccessfulSubtaskTable|\Cake\ORM\Association\HasMany $SuccessfulSubtask
  * @property \App\Model\Table\SuccessfulSubtaskDividendScoresTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskDividendScores
@@ -41,7 +42,10 @@ class DreamTypesTable extends Table
         $this->setDisplayField('dream_type_name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('DreamTypeId', [
+        $this->hasMany('DreamWithTypeParticipant', [
+            'foreignKey' => 'dream_type_id'
+        ]);
+        $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoringParticipant', [
             'foreignKey' => 'dream_type_id'
         ]);
         $this->hasMany('RecentSuccesses', [

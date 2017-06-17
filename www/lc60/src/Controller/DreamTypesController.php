@@ -36,7 +36,7 @@ class DreamTypesController extends AppController
     public function view($id = null)
     {
         $dreamType = $this->DreamTypes->get($id, [
-            'contain' => ['DreamTypeId', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
+            'contain' => ['DreamWithTypeParticipant', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
         ]);
 
         $this->set('dreamType', $dreamType);

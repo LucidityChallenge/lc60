@@ -89,7 +89,7 @@
                 <!--<th scope="col"><?= __('Subtask Dream Attempt') ?></th>-->
                 <th scope="col"><?= __('Subtask') ?></th>
                 <th scope="col"><?= __('Implied') ?></th>
-                <th scope="col"><?= __('Super Task') ?></th>
+                <th scope="col"><?= __('Super Subtask') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($dream->subtask_dream_super_name as $subtaskDreamSuper): ?>
@@ -167,10 +167,10 @@
                 <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_id) ?></td>
                 <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_task_id) ?></td>
                 <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_super_id) ?></td>-->
-                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',$successfulSubtaskTaskWithCalculatedScoring->subtask_id]) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',$successfulSubtaskTaskWithCalculatedScoring->subtask_id]) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_id) ?></td>-->
-                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_base_value) ?></td>
-                <td><?= h((($successfulSubtaskTaskWithCalculatedScoring->subtask_max_value == 0) || ($successfulSubtaskTaskWithCalculatedScoring->subtask_starting_demand == 0)) ? 'Yes' : 'No') ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_base_value) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h((($successfulSubtaskTaskWithCalculatedScoring->subtask_max_value == 0) || ($successfulSubtaskTaskWithCalculatedScoring->subtask_starting_demand == 0) || ($successfulSubtaskTaskWithCalculatedScoring->subtask_max_value == $successfulSubtaskTaskWithCalculatedScoring->subtask_base_value)) ? 'Yes' : 'No') ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_max_value) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_starting_demand) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_inflation_rate) ?></td>-->
@@ -178,18 +178,18 @@
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_task_period_demand) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_description) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_url) ?></td>-->
-                <td><?= h(($successfulSubtaskTaskWithCalculatedScoring->subtask_accumulative != 0) ? 'Yes' : 'No') ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h(($successfulSubtaskTaskWithCalculatedScoring->subtask_accumulative != 0) ? 'Yes' : 'No') ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_owner_participant_id) ?></td>-->
-                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_name) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_name) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_class) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_description) ?></td>-->
-                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_success_count) ?></td>
-                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_success_count_total) ?></td>
-                <td><?= h((($successfulSubtaskTaskWithCalculatedScoring->contemporary_demand >0) ? '+' : '').$successfulSubtaskTaskWithCalculatedScoring->contemporary_demand) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_success_count) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_success_count_total) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h((($successfulSubtaskTaskWithCalculatedScoring->contemporary_demand >0) ? '+' : '').$successfulSubtaskTaskWithCalculatedScoring->contemporary_demand) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_demand_positive) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->inner_function) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->external_function) ?></td>-->
-                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_dividend_rate) ?></td>-->
                 <!--<td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'view', $successfulSubtaskTaskWithCalculatedScoring->dream_id]) ?>

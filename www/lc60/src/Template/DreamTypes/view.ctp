@@ -39,6 +39,145 @@
             <td><?= $this->Number->format($dreamType->id) ?></td>
         </tr>
     </table>
+    
+        <div class="related">
+        <h4><?= __('Related Dreams') ?></h4>
+        <?php if (!empty($dreamType->dream_with_type_participant)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+		<th scope="col"><?= __('Contemporary Task') ?></th>
+                <th scope="col"><?= __('Participant') ?></th>		
+                <th scope="col"><?= __('Date') ?></th>
+                <!--<th scope="col"><?= __('Type') ?></th>-->
+                <!--<th scope="col"><?= __('Dream Timestamp') ?></th>-->
+                <th scope="col"><?= __('Dream Value') ?></th>
+                <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
+            </tr>
+            <?php $subtotal = 0;
+		  $lastTaskId = null;
+		  $lastTaskTitle = null;
+		  $subtaskTotalValue = 0;
+            ?>
+            <?php foreach ($dreamType->dream_with_type_participant as $dreams): ?>
+            <?php  if ($lastTaskId != ($dreams->task_id)): ?>
+            <?php  if ($lastTaskTitle != null) : ?>
+            <tr>
+	      <td colspan="3"><?= h('Subtotal for ')?><?= $this->Html->link($lastTaskTitle, ['controller' => 'Tasks', 'action' => 'view', $lastTaskId])  ?></td>
+	      <td><?= h($subtotal) ?></td>
+	      <?php $subtaskTotalValue += $subtotal;
+	      ?>
+            </tr>
+            <?php  endif; ?>
+            <?php   $subtotal= 0;
+		    endif;
+            ?>
+            <?php  $subtotal+= ($dreams->final_value_truncate);
+		   $lastTaskId = ($dreams->task_id);
+		   $lastTaskTitle = ($dreams->task_title);
+            ?>
+            <tr>
+	        <td><?= $this->Html->link($dreams->task_title, ['controller' => 'Tasks', 'action' => 'view', $dreams->task_id])  ?></td>
+	        <td><?= $this->Html->link($dreams->participant_name, ['controller' => 'Participants', 'action' => 'view', $dreams->participant_id]) ?></td>
+                <td><?= $this->Html->link($dreams->dream_timestamp, ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id])  ?></td>
+                <!--<td><?= $this->Html->link($dreams->dream_type_name, ['controller' => 'DreamTypes', 'action' => 'view', $dreams->dream_type_id])  ?></td>-->
+                <!--<td><?= h($dreams->dream_timestamp) ?></td>-->
+                <td><?= $this->Html->link($dreams->final_value_truncate, ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id]) ?></td>
+                <!--<td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Dreams', 'action' => 'edit', $dreams->dream_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Dreams', 'action' => 'delete', $dreams->dream_id], ['confirm' => __('Are you sure you want to delete # {0}?', $dreams->dream_id)]) ?>
+                </td>-->
+            </tr>
+            <?php endforeach; ?>
+            <tr>
+	      <td colspan="3"><?= h('Subtotal for ')?><?= $this->Html->link($dreams->task_title, ['controller' => 'Tasks', 'action' => 'view', $dreams->task_id])  ?></td>
+	      <td><?= h($subtotal) ?></td>	      
+	      <?php
+		    $subtaskTotalValue += $subtotal;
+	      ?>
+            </tr>             
+            <tr>
+	      <td colspan="3"><?= h('Total') ?></td>
+	      <td><?= h($subtaskTotalValue) ?></td>
+            </tr>
+        </table>
+        <?php endif; ?>
+	</div>
+
+    
+    
+        <div class="related">
+        <h4><?= __('Related Successful Subtasks') ?></h4>
+        <?php if (!empty($dreamType->successful_subtask_task_with_calculated_scoring_participant)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>		
+		<th scope="col"><?= __('Contemporary Task') ?></th>
+		<!--<th scope="col"><?= __('Task') ?></th>-->
+		<th scope="col"><?= __('Subtask') ?></th>
+                <th scope="col"><?= __('Participant') ?></th>		
+                <th scope="col"><?= __('Date') ?></th>
+                <!--<th scope="col"><?= __('Type') ?></th>-->
+                <!--<th scope="col"><?= __('Dream Timestamp') ?></th>-->
+                <th scope="col"><?= __('Dream Value') ?></th>
+                <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
+            </tr>
+            <?php $subtotal = 0;
+		  $lastTaskId = null;
+		  $lastTaskTitle = null;
+		  $subtaskTotalValue = 0;
+            ?>
+            <?php foreach ($dreamType->successful_subtask_task_with_calculated_scoring_participant as $subtasks): ?>
+            <?php  if ($lastTaskId != ($subtasks->contemporary_task_id)): ?>
+            <?php  if ($lastTaskTitle != null) : ?>
+            <tr>
+	      <td colspan="4"><?= h('Subtotal for ')?><?= $this->Html->link($lastTaskTitle, ['controller' => 'Tasks', 'action' => 'view', $lastTaskId])  ?></td>
+	      <td><?= h($subtotal) ?></td>
+	      <?php $subtaskTotalValue += $subtotal;
+	      ?>
+            </tr>
+            <?php  endif; ?>
+            <?php   $subtotal= 0;
+		    endif;
+            ?>
+            <?php  $subtotal+= ($subtasks->final_value_truncate);
+		   $lastTaskId = ($subtasks->contemporary_task_id);
+		   $lastTaskTitle = ($subtasks->task_title);
+            ?>
+            <tr>
+	        <td><?= $this->Html->link($subtasks->task_title, ['controller' => 'Tasks', 'action' => 'view', $subtasks->contemporary_task_id])  ?></td>	        
+	        <td><?= $this->Html->link($subtasks->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtasks->subtask_id])  ?></td>
+	        <td><?= $this->Html->link($subtasks->participant_name, ['controller' => 'Participants', 'action' => 'view', $subtasks->participant_id]) ?></td>
+                <td><?= $this->Html->link($subtasks->dream_timestamp, ['controller' => 'Dreams', 'action' => 'view', $subtasks->dream_id])  ?></td>
+                <!--<td><?= $this->Html->link($subtasks->dream_type_name, ['controller' => 'DreamTypes', 'action' => 'view', $subtasks->dream_type_id])  ?></td>-->
+                <!--<td><?= h($subtasks->dream_timestamp) ?></td>-->
+                <td><?= $this->Html->link($subtasks->final_value_truncate, ['controller' => 'Dreams', 'action' => 'view', $subtasks->dream_id]) ?></td>
+                <!--<td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Dreams', 'action' => 'view', $subtasks->dream_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Dreams', 'action' => 'edit', $subtasks->dream_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Dreams', 'action' => 'delete', $subtasks->dream_id], ['confirm' => __('Are you sure you want to delete # {0}?', $subtasks->dream_id)]) ?>
+                </td>-->
+            </tr>
+            <?php endforeach; ?>
+            <tr>
+	      <td colspan="4"><?= h('Subtotal for ')?><?= $this->Html->link($subtasks->task_title, ['controller' => 'Tasks', 'action' => 'view', $subtasks->contemporary_task_id])  ?></td>
+	      <td><?= h($subtotal) ?></td>
+	      <?php
+		    $subtaskTotalValue += $subtotal;
+	      ?>
+            </tr>             
+            <tr>
+	      <td colspan="4"><?= h('Total') ?></td>
+	      <td><?= h($subtaskTotalValue) ?></td>
+            </tr>
+        </table>
+        <?php endif; ?>
+    </div>
+
+    <!--
+    
+    
+    
+    
     <div class="related">
         <h4><?= __('Related Dream Type Id') ?></h4>
         <?php if (!empty($dreamType->dream_type_id)): ?>
@@ -378,4 +517,5 @@
         </table>
         <?php endif; ?>
     </div>
+    -->
 </div>

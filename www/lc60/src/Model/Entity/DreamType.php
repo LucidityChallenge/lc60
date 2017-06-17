@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property string $dream_type_name
  * @property string $dream_type_short_name
  *
+ * @property \App\Model\Entity\DreamTypeWithTypeParticipant[] $dream_type_id 
  * @property \App\Model\Entity\DreamTypeId[] $dream_type_id
  * @property \App\Model\Entity\SuccessfulSubtask[] $successful_subtask
  * @property \App\Model\Entity\SuccessfulSubtaskDividendScore[] $successful_subtask_dividend_scores
