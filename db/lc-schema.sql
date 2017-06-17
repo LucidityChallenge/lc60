@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2017 at 03:44 AM
+-- Generation Time: Jun 17, 2017 at 03:04 PM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -1036,7 +1036,8 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `task_start` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'start date for the week.',
   `task_expiration` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Why I cannot set TIMESTAMP(now() + (INTERVAL 1 WEEK)) for default',
   `task_text` text NOT NULL COMMENT '64kb of text',
-  `task_url` varchar(80) NOT NULL
+  `task_url` varchar(80) NOT NULL,
+  `task_image_url` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
