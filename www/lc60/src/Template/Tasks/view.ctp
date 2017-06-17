@@ -110,7 +110,7 @@
             <?php foreach ($task->dream_with_type_participant as $dreamWithType): ?>
             <tr>
                 <!--<td><?= h($dreamWithType->participant_id) ?></td>-->
-                <td><?= $this->Html->link(($dreamWithType->participant_name), ['controller' => 'Participant', 'action' => 'view', $dreamWithType->participant_id]) ?></td>
+                <td><?= $this->Html->link(($dreamWithType->participant_name), ['controller' => 'Participants', 'action' => 'view', $dreamWithType->participant_id]) ?></td>
                 <td><?= $this->Html->link(($dreamWithType->dream_timestamp), ['controller' => 'Dreams', 'action' => 'view', $dreamWithType->dream_id])  ?></td>
                 <!--<td><?= h($dreamWithType->dream_type_id) ?></td>-->                
                 <td><?= $this->Html->link(($dreamWithType->dream_type_name), ['controller' => 'DreamTypes', 'action' => 'view', $dreamWithType->dream_type_id]) ?></td>
