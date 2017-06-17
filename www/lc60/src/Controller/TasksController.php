@@ -36,7 +36,7 @@ class TasksController extends AppController
     public function view($id = null)
     {
         $task = $this->Tasks->get($id, [
-            'contain' => ['CurrentTask', 'DreamWithType', 'SubtaskShareHolderComplete', 'SubtaskSubtaskCategory', 'Subtasks', 'SuccessfulSubtask', 'UnexpiredTask']
+            'contain' => ['CurrentTask', 'DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SubtaskSubtaskCategory', 'Subtasks', 'SuccessfulSubtask', 'UnexpiredTask']
         ]);
 
         $this->set('task', $task);
