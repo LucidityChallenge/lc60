@@ -55,6 +55,12 @@
             <td><?= h($task->task_expiration) ?></td>
         </tr>
     </table>
+    <?php if (($task->task_image_url) != null) : ?>
+    <div class="row">
+        <h4><?= __('Task Image') ?></h4>
+        <?= $this->Html->image(($task->task_image_url)); ?>
+    </div>
+    <?php endif; ?>
     <div class="row">
         <h4><?= __('Task Text') ?></h4>
         <?= $this->Text->autoParagraph(h($task->task_text)); ?>
