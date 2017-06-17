@@ -12,6 +12,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $task_expiration
  * @property string $task_text
  * @property string $task_url
+ * @property string $task_image_url
  *
  * @property \App\Model\Entity\CurrentTask[] $current_task
  * @property \App\Model\Entity\Subtask[] $subtasks
