@@ -77,7 +77,7 @@
             <td><?= $this->Number->format($participant->id) ?></td>
         </tr>
     </table>
-    <div class="chart_view jqplot-cursor-legend-swatch" id="score_bar_line" style="margin-top:20px; margin-left:10px; width:75%; height:400px;">
+    <div class="plot chart_view jqplot-cursor-legend-swatch" id="score_bar_line" style="margin-top:20px; margin-left:10px; width:90%; height:400px;">
     </div>
     <!--<h3><span class="chart_info" id="score_bar_line_info">Hover over line for more precision.</span></h3>-->
     <div class="related">
@@ -87,8 +87,8 @@
 	      $subtaskTotalValue = (intval(100*$scoreViewComplete->final_value_total)/100);
 	?>
 	<div class="row">
-	  <h4><?= __('Final Score for '.($participant->participant_name).': ') ?></h4>
-	  <h2 class="final_score"><?= h($finalScore) ?></h2>
+	  <h4><?= __('Final Score for '.($participant->participant_name).': ') ?>
+	  <span class="final_score"><?= h($finalScore) ?></span></h4>
 	</div>
 	
         <table cellpadding="0" cellspacing="0">
@@ -129,36 +129,7 @@
     </div>
     <div class="related">
         <h4><?= __('Dreams of '.$participant->participant_name) ?></h4>
-        <?php 
-	   $s1data = '["2011-08-01",796.01], ["2011-08-02",510.5], ["2011-08-03",527.8], ["2011-08-04",308.48], 
-    ["2011-08-05",420.36], ["2011-08-06",219.47], ["2011-08-07",333.82], ["2011-08-08",660.55], ["2011-08-09",1093.19], 
-    ["2011-08-10",521], ["2011-08-11",660.68], ["2011-08-12",928.65], ["2011-08-13",864.26], ["2011-08-14",395.55], 
-    ["2011-08-15",623.86], ["2011-08-16",1300.05], ["2011-08-17",972.25], ["2011-08-18",661.98], ["2011-08-19",1008.67], 
-    ["2011-08-20",1546.23], ["2011-08-21",593], ["2011-08-22",560.25], ["2011-08-23",857.8], ["2011-08-24",939.5], 
-    ["2011-08-25",1256.14], ["2011-08-26",1033.01], ["2011-08-27",811.63], ["2011-08-28",735.01], ["2011-08-29",985.35], 
-    ["2011-08-30",1401.58], ["2011-08-31",1177], ["2011-09-01",1023.66], ["2011-09-02",1442.31], ["2011-09-03",1299.24], 
-    ["2011-09-04",1306.29], ["2011-09-06",1800.62], ["2011-09-07",1607.18], ["2011-09-08",1702.38], 
-    ["2011-09-09",4118.48], ["2011-09-10",1988.11], ["2011-09-11",1485.89], ["2011-09-12",2681.97], 
-    ["2011-09-13",1679.56], ["2011-09-14",3538.43], ["2011-09-15",3118.01], ["2011-09-16",4198.97], 
-    ["2011-09-17",3020.44], ["2011-09-18",3383.45], ["2011-09-19",2148.91], ["2011-09-20",3058.82], 
-    ["2011-09-21",3752.88], ["2011-09-22",3972.03], ["2011-09-23",2923.82], ["2011-09-24",2920.59], 
-    ["2011-09-25",2785.93], ["2011-09-26",4329.7], ["2011-09-27",3493.72], ["2011-09-28",4440.55], 
-    ["2011-09-29",5235.81], ["2011-09-30",6473.25]';
-	   $s2data = '["2011-08-01",796.01], ["2011-08-02",510.5], ["2011-08-03",527.8], ["2011-08-04",308.48], 
-    ["2011-08-05",420.36], ["2011-08-06",219.47], ["2011-08-07",333.82], ["2011-08-08",660.55], ["2011-08-09",1093.19], 
-    ["2011-08-10",521], ["2011-08-11",660.68], ["2011-08-12",928.65], ["2011-08-13",864.26], ["2011-08-14",395.55], 
-    ["2011-08-15",623.86], ["2011-08-16",1300.05], ["2011-08-17",972.25], ["2011-08-18",661.98], ["2011-08-19",1008.67], 
-    ["2011-08-20",1546.23], ["2011-08-21",593], ["2011-08-22",560.25], ["2011-08-23",857.8], ["2011-08-24",939.5], 
-    ["2011-08-25",1256.14], ["2011-08-26",1033.01], ["2011-08-27",811.63], ["2011-08-28",735.01], ["2011-08-29",985.35], 
-    ["2011-08-30",1401.58], ["2011-08-31",1177], ["2011-09-01",1023.66], ["2011-09-02",1442.31], ["2011-09-03",1299.24], 
-    ["2011-09-04",1306.29], ["2011-09-06",1800.62], ["2011-09-07",1607.18], ["2011-09-08",1702.38], 
-    ["2011-09-09",4118.48], ["2011-09-10",1988.11], ["2011-09-11",1485.89], ["2011-09-12",2681.97], 
-    ["2011-09-13",1679.56], ["2011-09-14",3538.43], ["2011-09-15",3118.01], ["2011-09-16",4198.97], 
-    ["2011-09-17",3020.44], ["2011-09-18",3383.45], ["2011-09-19",2148.91], ["2011-09-20",3058.82], 
-    ["2011-09-21",3752.88], ["2011-09-22",3972.03], ["2011-09-23",2923.82], ["2011-09-24",2920.59], 
-    ["2011-09-25",2785.93], ["2011-09-26",4329.7], ["2011-09-27",3493.72], ["2011-09-28",4440.55], 
-    ["2011-09-29",5235.81], ["2011-09-30",6473.25]';
-    
+        <?php    
 	   $comma = '';
 	   $s1data = '';
 	   $s2data = '';
@@ -1034,10 +1005,11 @@ $(document).ready(function () {
             gridLineWidth: 2
         },
         legend: {
+	    renderer: $.jqplot.EnhancedLegendRenderer,
             show: true,
-            sizeAdjust: 2,
-            placement: 'inside',
-            location: 'w',
+            sizeAdjust: 0.5,
+            placement: 'insideGrid',
+            location: 'nw',
             showSwatches: true,
         },
         seriesDefaults: {
@@ -1071,7 +1043,7 @@ $(document).ready(function () {
                 tickRenderer: $.jqplot.CanvasAxisTickRenderer,
                 tickOptions: {
                     formatString: "%b %e",
-                    angle: -30,
+                    angle: 270,
                     textColor: '#202020'
                 },
                 tickInterval: "1 day",
@@ -1084,19 +1056,18 @@ $(document).ready(function () {
                     minorTicks: 1
                 },
                 tickOptions: {
-                    formatString: "$%'d",
+                    formatString: "%'d points",
                     showMark: false
                 }
             }
         }
     });
- 
-      $('.jqplot-highlighter-tooltip').addClass('ui-corner-all')
 });
    </script>
 
 
 <?php echo $this->Html->css('jqplot/jquery_jqplot.css',['block'=>true]); ?>
+<?php echo $this->Html->css('http://www.jqplot.com/examples/examples.css',['block'=>true]); ?>
 <?php echo $this->Html->script('jqplot/excanvas.js',['block'=>'notie', 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/jquery_min.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/jquery_jqplot.js', ['block'=>true, 'type' => 'text/javascript']); ?>
@@ -1105,3 +1076,7 @@ $(document).ready(function () {
 <?php echo $this->Html->script('jqplot/plugins/jqplot_cursor.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_highlighter.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_dateAxisRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasAxisTickRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasAxisLabelRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasTextRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_enhancedLegendRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>

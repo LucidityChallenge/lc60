@@ -52,6 +52,10 @@ header .header-title {
     table-layout: fixed;
 }
 
+span.final_score {
+    font-size: 2.5rem;
+     text-decoration: bold;
+}
 .index table thead {
     height: 3.5rem;
 }
