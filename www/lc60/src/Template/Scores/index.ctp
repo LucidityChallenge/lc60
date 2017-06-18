@@ -142,7 +142,7 @@ $(document).ready(function(){
 		var value = data.toString();
 		var floatVal = parseFloat(value.substr(0,value.indexOf(',')));
 		var intVal = parseInt(floatVal*100);
-                $('#score_bar_info').html('score '+ (intVal/100).toFixed(2));
+                $('#score_bar_info').html('score is '+ (intVal/100).toFixed(2));
             }
         );
     });
