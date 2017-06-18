@@ -54,43 +54,45 @@
     </ul>
 </nav>
 <div class="participants view large-9 medium-8 columns content">
-    <h3><?= h($participant->id .': '. $participant->participant_name) ?></h3>
+    <h2><?= h($participant->id .': '. $participant->participant_name) ?></h2>
+    <?php if (!empty($participant->score_view_complete)): ?>
+    <?php $scoreViewComplete = reset($participant->score_view_complete); ?> 
+    <?php $finalScore = (intval(100*$scoreViewComplete->final_value_total_with_dividends)/100);
+	  $subtaskTotalValue = (intval(100*$scoreViewComplete->final_value_total)/100);
+    ?>
     <table class="vertical-table">
+    <!--
         <tr>
             <th scope="row"><?= __('Participant Name') ?></th>
             <td><?= h($participant->participant_name) ?></td>
-        </tr>
+        </tr>-->
         <tr>
-            <th scope="row"><?= __('Participant Goal') ?></th>
+            <th scope="row"><?= __('Personal Goal') ?></th>
             <td><?= h($participant->participant_goal) ?></td>
         </tr>
+        <?php if ($participant->participant_dj_url != null) : ?>
         <tr>
-            <th scope="row"><?= __('Participant DJ Url') ?></th>
+            <th scope="row"><?= __('Dream Journal') ?></th>
             <td><?= $this->Html->link($participant->participant_dj_url,$participant->participant_dj_url) ?></td>
         </tr>
+        <?php endif; ?>
         <tr>
-            <th scope="row"><?= __('Participant Join Url') ?></th>
+            <th scope="row"><?= __('Joining Post') ?></th>
             <td><?= $this->Html->link($participant->participant_join_url,$participant->participant_join_url) ?></td>
         </tr>
+        <!--
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($participant->id) ?></td>
         </tr>
+        -->
+        <tr>
+            <th scope="row"><?= __('Final Score') ?></th>
+            <td><span class="final_score"><?= h($finalScore) ?></span></td>
+        </tr>        
     </table>
-    <div class="plot chart_view jqplot-cursor-legend-swatch" id="score_bar_line" style="margin-top:20px; margin-left:10px; width:90%; height:400px;">
-    </div>
-    <!--<h3><span class="chart_info" id="score_bar_line_info">Hover over line for more precision.</span></h3>-->
+    <h4>Score Totals</h4>
     <div class="related">
-        <?php if (!empty($participant->score_view_complete)): ?>
-	<?php foreach ($participant->score_view_complete as $scoreViewComplete): ?>
-	<?php $finalScore = (intval(100*$scoreViewComplete->final_value_total_with_dividends)/100);
-	      $subtaskTotalValue = (intval(100*$scoreViewComplete->final_value_total)/100);
-	?>
-	<div class="row">
-	  <h4><?= __('Final Score for '.($participant->participant_name).': ') ?>
-	  <span class="final_score"><?= h($finalScore) ?></span></h4>
-	</div>
-	
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <!--<th scope="col"><?= __('Participant Id') ?></th>-->
@@ -123,12 +125,16 @@
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'ScoreViewComplete', 'action' => 'delete', $scoreViewComplete->id], ['confirm' => __('Are you sure you want to delete # {0}?', $scoreViewComplete->id)]) ?>
                 </td>-->
             </tr>
-            <?php endforeach; ?>
         </table>
         <?php endif; ?>
     </div>
+    <h4><?= __('Dreams of '.$participant->participant_name) ?></h4>
+    <?php if (count($participant->dream_with_type) > 1) : ?>
+    <div class="plot chart_view jqplot-cursor-legend-swatch" id="score_bar_line" style="margin-top:20px; margin-left:10px; width:90%; height:400px;">
+    </div>
+    <!--<h3><span class="chart_info" id="score_bar_line_info">Hover over line for more precision.</span></h3>-->
+    <?php endif; ?>
     <div class="related">
-        <h4><?= __('Dreams of '.$participant->participant_name) ?></h4>
         <?php    
 	   $comma = '';
 	   $s1data = '';
@@ -136,6 +142,7 @@
 	   $accValue = 0;
 	   if (!empty($participant->dream_with_type)): 
         ?>
+        <br/>
         <table cellpadding="0" cellspacing="0">
             <tr>
 		<th scope="col"><?= __('Contemporary Task') ?></th>
@@ -153,7 +160,7 @@
             <?php foreach ($participant->dream_with_type as $dreams): ?>
             <?php  if ($lastTaskId != ($dreams->task_id)): ?>
             <?php  if ($lastTaskTitle != null) : ?>
-            <tr>
+            <tr class="subtotal">
 	      <td colspan="3"><?= h('Subtotal for ')?><?= $this->Html->link($lastTaskTitle, ['controller' => 'Tasks', 'action' => 'view', $lastTaskId])  ?></td>
 	      <td><?= h($subtotal) ?></td>
             </tr>  
@@ -177,29 +184,27 @@
                 </td>-->
             </tr>      
             <?php
-            $date = $dreams->dream_timestamp;
-            $value = $dreams->final_value_truncate;
-            $s1data = $s1data."${comma}[\"${date}\",${value}]";
-            $accValue += $value;
-            $s2data = $s2data."${comma}[\"${date}\",${accValue}]";
-            $comma = ',';
+	      $date = $dreams->dream_timestamp;
+	      $value = $dreams->final_value_truncate;
+	      $s1data = $s1data."${comma}[\"${date}\",${value}]";
+	      $accValue += $value;
+	      $s2data = $s2data."${comma}[\"${date}\",${accValue}]";
+	      $comma = ',';
             ?>
             <?php endforeach; ?>
-            <tr>
+            <tr class="subtotal">
 	      <td colspan="3"><?= h('Subtotal for ')?><?= $this->Html->link($dreams->task_title, ['controller' => 'Tasks', 'action' => 'view', $dreams->task_id])  ?></td>
 	      <td><?= h($subtotal) ?></td>
             </tr>             
-            <tr>
+            <tr class="total">
 	      <td colspan="3"><?= h('Total') ?></td>
 	      <td><?= h($subtaskTotalValue) ?></td>
             </tr>
         </table>
         <?php endif; ?>
     </div>   
-
+    <h4><?= __('Shares Owned by '.($participant->participant_name)) ?></h4>
     <div class="related">
-
-        <h4><?= __('Shares Owned by '.($participant->participant_name)) ?></h4>
     <!--
         <?php if (!empty($participant->subtask_share_holder_complete)): ?>
         <table cellpadding="0" cellspacing="0">
@@ -981,6 +986,7 @@
 -->
 </div>
 </div>
+<?php if (count($participant->dream_with_type) > 1) : ?>
 
   <?php echo '<script class="code" type="text/javascript">'; ?>
 $(document).ready(function () {
@@ -991,7 +997,7 @@ $(document).ready(function () {
  
     var plot1 = $.jqplot("score_bar_line", [dream, acc], {
         seriesColors: ["rgba(78, 135, 194, 0.7)", "rgb(211, 235, 59)"],
-        title: 'Score Evolution for <?= $participant->participant_name ?>',
+        title: 'Dream Score Evolution for <?= $participant->participant_name ?>',
         highlighter: {
             show: true,
             sizeAdjust: 1,
@@ -1056,7 +1062,7 @@ $(document).ready(function () {
                     minorTicks: 1
                 },
                 tickOptions: {
-                    formatString: "%'d points",
+                    formatString: "%4.2f points",
                     showMark: false
                 }
             }
@@ -1080,3 +1086,5 @@ $(document).ready(function () {
 <?php echo $this->Html->script('jqplot/plugins/jqplot_canvasAxisLabelRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_canvasTextRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_enhancedLegendRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+
+<?php  endif; ?>
