@@ -8,7 +8,7 @@ a:hover {
 }
 
 a {
-    color: #1798A5;
+    color: #4040B0;
 }
 
 .side-nav li a:not(.button) {
@@ -20,8 +20,6 @@ a {
 }
 
 header {
-    background-color: #D33C44;
-    color: #ffffff;
     font-size: 30px;
     height: 84px;
     line-height: 64px;
@@ -31,10 +29,6 @@ header {
 
 header .header-title {
     padding-left:80px
-}
-
-legend {
-    color:#15848F;
 }
 
 .row {
@@ -53,7 +47,7 @@ legend {
 }
 
 .related table {
-    border: 0;
+    border: 1;
     width: 100%;
     table-layout: fixed;
 }
@@ -161,55 +155,6 @@ input[type=radio] {
 .error label,
 .error label.error {
     color: #C3232D;
-}
-
-.view h2 {
-    color: #6F6F6F;
-}
-
-.view .columns.strings {
-    border-radius: 3px;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.24);
-    margin-right:0.7rem;
-}
-
-.view .numbers {
-    background-color: #B7E3EC;
-    color: #FFF;
-    border-radius: 3px;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.24);
-    margin-right: 0.7rem;
-}
-
-.view .columns.dates {
-    border-radius: 3px;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.24);
-    margin-right:0.7rem;
-    background-color:#DCE47E;
-    color: #fff;
-}
-
-.view .columns.booleans {
-    border-radius: 3px;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.24);
-    margin-right:0.7rem;
-    background-color: #8D6E65;
-    color: #fff;
-}
-
-.view .strings p {
-    border-bottom: 1px solid #eee;
-}
-.view .numbers .subheader, .view .dates .subheader {
-    color:#747474;
-}
-.view .booleans .subheader {
-    color: #E9E9E9
-}
-
-.view .texts .columns {
-    margin-top:1.2rem;
-    border-bottom: 1px solid #eee;
 }
 
 /** Notices and Errors **/
@@ -343,56 +288,6 @@ pre {
     background: #fafafa;
 }
 
-.index table {
-    margin-top: 0rem;
-    border: 0;
-    width: 100%;
-    table-layout: fixed;
-}
-
-table {
-    background: #fff;
-    margin-bottom: 1.25rem;
-    border: none;
-    table-layout: fixed;
-    width: 100%;
-}
-
-table thead {
-    background: none;
-}
-
-table tr {
-    border-bottom: 1px solid #ebebec;
-}
-
-table thead tr {
-    border-bottom: 1px solid #1798A5;
-}
-
-table tr th {
-    padding: 0.5625rem 0.625rem;
-    font-size: 0.875rem;
-    color: #1798A5;
-    text-align: left;
-    border-bottom: 2px solid #1798A5;
-}
-
-table tr:nth-of-type(even) {
-    background: none;
-}
-
-fieldset {
-    border: none;
-    padding: 1.25rem;
-    margin: 1.125rem 0;
-}
-
-fieldset legend {
-    border-bottom: 2px solid #1798A5;
-    width: 100%;
-    line-height: 2rem;
-}
 
 .form button[type="submit"] {
     float: right;
@@ -459,22 +354,6 @@ div.message.hidden {
 }
 
 
-.vertical-table th {
-    padding: 0.5625rem 0.625rem;
-    font-size: 0.875rem;
-    color: #1798A5;
-    border: none;
-    text-align: left;
-}
-
-.vertical-table {
-    vertical-align: middle;
-}
-
-.vertical-table td {
-    text-align: right;
-}
-
 .content {
     padding: 2rem;
 }
@@ -499,20 +378,17 @@ div.message.hidden {
 }
 
 .content h3 {
-    color: #be140b;
     padding-bottom: 0.5rem;
     margin-bottom: 20px;
 }
 
 .content h4 {
-    color: #be140b;
     padding-bottom: 0.5rem;
     margin-bottom: 20px;
     border-bottom: 2px solid #be140b;
 }
 
 .content .related h4 {
-    color: #4d8f97;
     padding-bottom: 0.5rem;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -521,5 +397,4 @@ div.message.hidden {
 
 table td {
     vertical-align: top;
-    word-break: break-all;
 }
