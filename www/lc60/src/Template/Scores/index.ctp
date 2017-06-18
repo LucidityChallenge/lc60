@@ -153,6 +153,5 @@ $(document).ready(function(){
 <?php echo $this->Html->script('jqplot/jquery_min.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/jquery_jqplot.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_barRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
-<?php echo $this->Html->script('jqplot/plugins/jqplot_pieRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_categoryAxisRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_pointLabels.js', ['block'=>true, 'type' => 'text/javascript']); ?>
