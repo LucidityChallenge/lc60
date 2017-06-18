@@ -31,6 +31,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
+    <?php if ($ieCond = $this->fetch('notie')): ?>
+
+       <!--[if lt IE 9]><?= $ieCond ?></script><![endif]-->
+    <?php endif; ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
