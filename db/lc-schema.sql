@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2017 at 09:26 PM
+-- Generation Time: Jun 18, 2017 at 02:48 AM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -531,12 +531,26 @@ CREATE TABLE IF NOT EXISTS `scores` (
 ,`participant` varchar(48)
 ,`successful_subtasks` bigint(21)
 ,`average_subtask_value` double
-,`total_subtask_value` double
+,`total_subtask_value` double(19,2)
 ,`dividend_successes` bigint(21)
 ,`average_dividend_value` double
 ,`total_dividends` double
-,`total_score` double
+,`total_score` double(19,2)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `score_list`
+--
+-- in use(#1146 - Table 'lc.score_list' doesn't exist)
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `score_list_ordinal`
+--
+-- in use(#1146 - Table 'lc.score_list_ordinal' doesn't exist)
 
 -- --------------------------------------------------------
 
@@ -1301,7 +1315,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `scores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `scores` AS select count(0) AS `position`,`a`.`participant_id` AS `participant_id`,`a`.`participant_name` AS `participant`,`a`.`subtask_success_count_participant_total` AS `successful_subtasks`,`a`.`final_value_avg` AS `average_subtask_value`,`a`.`final_value_total` AS `total_subtask_value`,`a`.`dividend_count_participant_total` AS `dividend_successes`,`a`.`final_dividend_value_avg` AS `average_dividend_value`,`a`.`final_dividend_value_total` AS `total_dividends`,`a`.`final_value_total_with_dividends` AS `total_score` from (`score_view_complete_participant` `a` join `score_view_complete_participant` `b`) where ((`a`.`final_value_total_with_dividends` < `b`.`final_value_total_with_dividends`) or (`a`.`participant_id` = `b`.`participant_id`)) group by `a`.`participant_id`,`a`.`subtask_success_count_participant_total`,`a`.`final_value_avg`,`a`.`final_value_total`,`a`.`dividend_count_participant_total`,`a`.`final_dividend_value_avg`,`a`.`final_dividend_value_total`,`a`.`final_value_total_with_dividends` order by `a`.`final_value_total_with_dividends`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `scores` AS select count(0) AS `position`,`a`.`participant_id` AS `participant_id`,`a`.`participant_name` AS `participant`,`a`.`subtask_success_count_participant_total` AS `successful_subtasks`,`a`.`final_value_avg` AS `average_subtask_value`,truncate(`a`.`final_value_total`,2) AS `total_subtask_value`,`a`.`dividend_count_participant_total` AS `dividend_successes`,`a`.`final_dividend_value_avg` AS `average_dividend_value`,`a`.`final_dividend_value_total` AS `total_dividends`,truncate(`a`.`final_value_total_with_dividends`,2) AS `total_score` from (`score_view_complete_participant` `a` join `score_view_complete_participant` `b`) where ((`a`.`final_value_total_with_dividends` < `b`.`final_value_total_with_dividends`) or (`a`.`participant_id` = `b`.`participant_id`)) group by `a`.`participant_id`,`a`.`subtask_success_count_participant_total`,`a`.`final_value_avg`,`a`.`final_value_total`,`a`.`dividend_count_participant_total`,`a`.`final_dividend_value_avg`,`a`.`final_dividend_value_total`,`a`.`final_value_total_with_dividends` order by `a`.`final_value_total_with_dividends`;
 
 -- --------------------------------------------------------
 
