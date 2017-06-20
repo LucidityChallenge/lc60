@@ -88,7 +88,7 @@
         -->
         <tr>
             <th scope="row"><?= __('Final Score') ?></th>
-            <td><span class="final_score"><?= h($finalScore) ?></span></td>
+            <td><span class="final_score"><?= $this->Number->precision($finalScore,2) ?></span></td>
         </tr>        
     </table>
     <h4>Score Totals</h4>
