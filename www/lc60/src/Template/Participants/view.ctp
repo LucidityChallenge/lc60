@@ -112,13 +112,13 @@
                 <!--<td><?= h($scoreViewComplete->participant_id) ?></td>-->
                 <!--<td><?= h($scoreViewComplete->subtask_success_count_sum_total) ?></td>-->
                 <td><?= h($scoreViewComplete->subtask_success_count_participant_total) ?></td>
-                <td><?= h(intval(100*$scoreViewComplete->final_value_avg)/100) ?></td>
-                <td><?= h($subtaskTotalValue) ?></td>
+                <td><?= $this->Number->precision((intval(100*$scoreViewComplete->final_value_avg)/100),2) ?></td>
+                <td><?= $this->Number->precision(($subtaskTotalValue),2) ?></td>
                 <!--<td><?= h($scoreViewComplete->dividend_count_sum_total) ?></td>-->
                 <td><?= h($scoreViewComplete->dividend_count_participant_total) ?></td>
-		<td><?= h(intval(100*$scoreViewComplete->final_dividend_value_avg)/100) ?></td>
-                <td><?= h($scoreViewComplete->final_dividend_value_total) ?></td>
-		<td><?= h($finalScore) ?></td>                
+		<td><?= $this->Number->precision(intval(100*$scoreViewComplete->final_dividend_value_avg)/100,2) ?></td>
+                <td><?= $this->Number->precision(($scoreViewComplete->final_dividend_value_total),2) ?></td>
+		<td><?= $this->Number->precision(($finalScore),2) ?></td>                
                 <!--<td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'ScoreViewComplete', 'action' => 'view', $scoreViewComplete->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'ScoreViewComplete', 'action' => 'edit', $scoreViewComplete->id]) ?>
@@ -162,7 +162,7 @@
             <?php  if ($lastTaskTitle != null) : ?>
             <tr class="subtotal">
 	      <td colspan="3"><?= h('Subtotal for ')?><?= $this->Html->link($lastTaskTitle, ['controller' => 'Tasks', 'action' => 'view', $lastTaskId])  ?></td>
-	      <td><?= h($subtotal) ?></td>
+	      <td><?= $this->Number->precision($subtotal,2) ?></td>
             </tr>  
             <?php  endif; ?>
             <?php $subtotal= 0;  endif; ?>
@@ -176,7 +176,7 @@
                 <!--<td><?= $this->Html->link($participant->participant_name, ['controller' => 'Participants', 'action' => 'view', $participant->id]) ?></td>-->
                 <td><?= $this->Html->link($dreams->dream_type_name, ['controller' => 'DreamTypes', 'action' => 'view', $dreams->dream_type_id])  ?></td>
                 <!--<td><?= h($dreams->dream_timestamp) ?></td>-->
-                <td><?= $this->Html->link($dreams->final_value_truncate, ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id]) ?></td>
+                <td><?= $this->Html->link($this->Number->precision($dreams->final_value_truncate,2), ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id]) ?></td>
                 <!--<td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Dreams', 'action' => 'edit', $dreams->dream_id]) ?>
@@ -194,11 +194,11 @@
             <?php endforeach; ?>
             <tr class="subtotal">
 	      <td colspan="3"><?= h('Subtotal for ')?><?= $this->Html->link($dreams->task_title, ['controller' => 'Tasks', 'action' => 'view', $dreams->task_id])  ?></td>
-	      <td><?= h($subtotal) ?></td>
+	      <td><?= $this->Number->precision($subtotal,2) ?></td>
             </tr>             
             <tr class="total">
 	      <td colspan="3"><?= h('Total') ?></td>
-	      <td><?= h($subtaskTotalValue) ?></td>
+	      <td><?= $this->Number->precision($subtaskTotalValue,2) ?></td>
             </tr>
         </table>
         <?php endif; ?>
