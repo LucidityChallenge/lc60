@@ -111,6 +111,10 @@
     
     <div class="related">
         <h4><?= __('Direct Scoreboard') ?></h4>
+	<div class="chart_view jqplot-cursor-legend-swatch" id="score_bars" style="margin-top:20px; margin-left:20px; width:95%; height:400px;">
+	</div>
+	<h3><span class="chart_info" id="score_bar_info">Click on a bar for more precision.</span></h3>
+	<br/>        
         <?php if (!empty($dream->successful_subtask_task_with_calculated_scoring)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -152,7 +156,11 @@
                 <!--<th scope="col"><?= __('Subtask Dividend Rate') ?></th>-->
                 <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
             </tr>
-            <?php $sum = 0; ?>            
+            <?php $sum = 0;
+		  $sdata  = '';
+		  $tickdata = '';
+		  $comma = '';
+            ?>            
             <?php foreach ($dream->successful_subtask_task_with_calculated_scoring as $successfulSubtaskTaskWithCalculatedScoring): ?>
             <tr>
             <!--
@@ -197,7 +205,11 @@
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'delete', $successfulSubtaskTaskWithCalculatedScoring->dream_id], ['confirm' => __('Are you sure you want to delete # {0}?', $successfulSubtaskTaskWithCalculatedScoring->dream_id)]) ?>
                 </td>-->
             </tr>
-            <?php $sum += ($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate); ?>
+            <?php $sum += ($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate);
+		  $sdata = ($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate).($comma).($sdata);
+		  $tickdata = "'".($successfulSubtaskTaskWithCalculatedScoring->subtask_name)."'".($comma).($tickdata);
+		  $comma = ',';
+            ?>
             <?php endforeach; ?>
             <td colspan="8"><?= h('Total:') ?></td>
             <td><?= $this->Number->precision($sum,2) ?></td>
@@ -537,3 +549,50 @@
     </div>
     -->
 </div>
+
+  <?php echo '<script class="code" type="text/javascript">'; ?>
+$(document).ready(function(){
+        $.jqplot.config.enablePlugins = true;
+        //var s1 = [2, 6, 7, 10];
+        var s1 = [<?= $sdata ?>];
+        //var ticks = ['a', 'b', 'c', 'd'];
+        var ticks = [<?= $tickdata ?>];
+         
+        plot1 = $.jqplot('score_bars', [s1], {
+            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+                shadowAngle: 135,
+                rendererOptions: {
+                    barDirection: 'horizontal'
+                }
+            },
+            axes: {
+                yaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                }
+            },
+            highlighter: { show: false }
+        });
+     
+        $('#score_bars').bind('jqplotDataClick', 
+            function (ev, seriesIndex, pointIndex, data) {
+		var value = data.toString();
+		var floatVal = parseFloat(value.substr(0,value.indexOf(',')));
+		var intVal = parseInt(floatVal*100);
+                $('#score_bar_info').html('score is '+ (intVal/100).toFixed(2));
+            }
+        );
+    });
+   </script>
+
+<?php echo $this->Html->css('jqplot/jquery_jqplot.css',['block'=>true]); ?>
+<?php echo $this->Html->script('jqplot/excanvas.js',['block'=>'notie', 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/jquery_min.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/jquery_jqplot.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_barRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_categoryAxisRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_pointLabels.js', ['block'=>true, 'type' => 'text/javascript']); ?>
