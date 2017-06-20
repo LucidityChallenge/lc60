@@ -68,7 +68,7 @@
                 <!--<td><?= $this->Html->link($participant->participant_name, ['controller' => 'Participants', 'action' => 'view', $participant->id]) ?></td>-->
                 <td><?= $this->Html->link($dreams->dream_type_name, ['controller' => 'DreamTypes', 'action' => 'view', $dreams->dream_type_id])  ?></td>
                 <!--<td><?= h($dreams->dream_timestamp) ?></td>-->
-                <td><?= $this->Html->link($dreams->final_value_truncate, ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id]) ?></td>
+                <td><?= $this->Html->link($this->Number->precision($dreams->final_value_truncate,2), ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id]) ?></td>
                 <!--<td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Dreams', 'action' => 'view', $dreams->dream_id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Dreams', 'action' => 'edit', $dreams->dream_id]) ?>
@@ -189,7 +189,7 @@
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_demand_positive) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->inner_function) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->external_function) ?></td>-->
-                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= $this->Number->precision($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate,2) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_dividend_rate) ?></td>-->
                 <!--<td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'view', $successfulSubtaskTaskWithCalculatedScoring->dream_id]) ?>
@@ -200,7 +200,7 @@
             <?php $sum += ($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate); ?>
             <?php endforeach; ?>
             <td colspan="8"><?= h('Total:') ?></td>
-            <td><?= $sum ?></td>
+            <td><?= $this->Number->precision($sum,2) ?></td>
         </table>
         <?php endif; ?>
     </div>
