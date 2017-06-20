@@ -207,7 +207,7 @@
             </tr>
             <?php $sum += ($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate);
 		  $sdata = ($successfulSubtaskTaskWithCalculatedScoring->final_value_truncate).($comma).($sdata);
-		  $tickdata = "'".($successfulSubtaskTaskWithCalculatedScoring->subtask_name)."'".($comma).($tickdata);
+		  $tickdata = '"'.str_replace('"','\"', $successfulSubtaskTaskWithCalculatedScoring->subtask_name).'"'.($comma).($tickdata);
 		  $comma = ',';
             ?>
             <?php endforeach; ?>
