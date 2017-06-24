@@ -1,0 +1,28 @@
+@font-face {
+  font-family: osemoji;
+  src: url(../font/osemoji/OpenSansEmoji.woff);
+}
+
+@font-face {
+  font-family: notoemoji;
+  src: url(../font/notoemoji/NotoEmoji-Regular.woff);
+}
+
+body {
+  font-family: osemoji, sans-serif;
+    /* fall back to sans serif */
+}
+
+.emoji {
+  font-family: notoemoji, sans-serif;
+    /* fall back to sans serif */
+}
+
+.osemoji {
+  font-family: osemoji, sans-serif;
+    /* fall back to sans serif */
+}
+.notoemoji {
+  font-family: notoemoji, sans-serif;
+    /* fall back to sans serif */
+}
