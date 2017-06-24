@@ -92,7 +92,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Symbol') ?></th>
-            <td><?= ('&#'.($subtask->subtask_symbol).';') ?></td>
+            <td><span class="emoji"><?= ($subtask->subtask_symbol != NULL) ? ('&#'.($subtask->subtask_symbol).';') : '' ?></span></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Accumulative') ?></th>
@@ -104,3 +104,4 @@
         <?= $this->Text->autoParagraph(h($subtask->subtask_description)); ?>
     </div>
 </div>
+<?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
