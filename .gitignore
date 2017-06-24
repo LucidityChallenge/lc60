@@ -1,0 +1,25 @@
+# CakePHP 3
+
+/www/lc60/vendor/*
+/www/lc60/config/app.php
+
+/www/lc60/tmp/cache/models/*
+!/www/lc60/tmp/cache/models/empty
+/www/lc60/tmp/cache/persistent/*
+!/www/lc60/tmp/cache/persistent/empty
+/www/lc60/tmp/cache/views/*
+!/www/lc60/tmp/cache/views/empty
+/www/lc60/tmp/sessions/*
+!/www/lc60/tmp/sessions/empty
+/www/lc60/tmp/tests/*
+!/www/lc60/tmp/tests/empty
+
+/www/lc60/logs/*
+!/www/lc60/logs/empty
+
+# CakePHP 2
+
+/www/lc60/app/tmp/*
+/www/lc60/app/Config/core.php
+/www/lc60/app/Config/database.php
+/www/lc60/vendors/*
