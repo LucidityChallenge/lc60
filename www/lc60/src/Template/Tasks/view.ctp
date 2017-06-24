@@ -163,7 +163,7 @@
     <?php foreach ($task->subtask_share_holder_complete as $subtaskShareHolderComplete): ?>
     <h3><?= $this->Html->link($subtaskShareHolderComplete->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',($subtaskShareHolderComplete->subtask_id)]) ?></h3>
     <div class="subtask_picture"><?= (null != $subtaskShareHolderComplete->subtask_image) ? $this->Html->image($subtaskShareHolderComplete->subtask_image, ['alt' => (null != $subtaskShareHolderComplete->subtask_symbol) ? ('&#'.$subtaskShareHolderComplete->subtask_symbol.'; '.($subtaskShareHolderComplete->subtask_name)) : ($subtaskShareHolderComplete->subtask_name)]) :
-    ((null != $subtaskShareHolderComplete->subtask_symbol) ? '&#'.$subtaskShareHolderComplete->subtask_symbol.';' : '')
+    ((null != $subtaskShareHolderComplete->subtask_symbol) ? '<span class="emoji">&#'.$subtaskShareHolderComplete->subtask_symbol.';</span>' : '')
     ?></div>
     <table class="vertical-table">
         <tr>
@@ -553,3 +553,4 @@
     </div>
     -->
 </div>
+<?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
