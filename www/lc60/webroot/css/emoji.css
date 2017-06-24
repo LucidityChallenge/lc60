@@ -8,11 +8,6 @@
   src: url(../font/notoemoji/NotoEmoji-Regular.woff);
 }
 
-body {
-  font-family: osemoji, sans-serif;
-    /* fall back to sans serif */
-}
-
 .emoji {
   font-family: notoemoji, sans-serif;
     /* fall back to sans serif */
