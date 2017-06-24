@@ -211,7 +211,10 @@ class SubtasksTable extends Table
 
         $validator
             ->allowEmpty('subtask_symbol')
-            ->integer('subtask_symbol');            
+            ->integer('subtask_symbol');
+
+        $validator
+            ->allowEmpty('subtask_instruction');
 /*
         $validator
             ->add('subtask_unicode_symbol', 'size', [
