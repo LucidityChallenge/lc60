@@ -66,9 +66,8 @@
         <?= $this->Text->autoParagraph(h($task->task_text)); ?>
     </div>
 
-  
+    <h4><?= __('Contemporary Dreams') ?></h4>
     <div class="related">
-        <h4><?= __('Related Dreams') ?></h4>
         <?php if (!empty($task->dream_with_type_participant)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -167,74 +166,97 @@
         <?php endif; ?>
     </div>
 -->
+    <h4><?= __('Subtasks Completed') ?></h4>
     <div class="related">
-        <h4><?= __('Related Successful Subtask') ?></h4>
-        <?php if (!empty($task->successful_subtask)): ?>
+        <?php if (!empty($task->successful_subtask_task_with_calculated_scoring_participant)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th scope="col"><?= __('Participant Id') ?></th>
-                <th scope="col"><?= __('Dream Id') ?></th>
+                <!--<th scope="col"><?= __('Participant Id') ?></th>-->
+                <th scope="col"><?= __('Participant') ?></th>
+                <!--<th scope="col"><?= __('Dream Id') ?></th>-->
+                <!--<th scope="col"><?= __('Dream Type Id') ?></th>-->
                 <th scope="col"><?= __('Dream Timestamp') ?></th>
-                <th scope="col"><?= __('Dream Type Id') ?></th>
-                <th scope="col"><?= __('Dream Url') ?></th>
-                <th scope="col"><?= __('Subtask Id') ?></th>
-                <th scope="col"><?= __('Task Id') ?></th>
-                <th scope="col"><?= __('Subtask Super Id') ?></th>
-                <th scope="col"><?= __('Subtask Name') ?></th>
-                <th scope="col"><?= __('Subtask Category Id') ?></th>
-                <th scope="col"><?= __('Subtask Base Value') ?></th>
-                <th scope="col"><?= __('Subtask Max Value') ?></th>
-                <th scope="col"><?= __('Subtask Starting Demand') ?></th>
-                <th scope="col"><?= __('Subtask Inflation Rate') ?></th>
-                <th scope="col"><?= __('Subtask Demand Cutoff') ?></th>
-                <th scope="col"><?= __('Subtask Task Period Demand') ?></th>
-                <th scope="col"><?= __('Subtask Description') ?></th>
-                <th scope="col"><?= __('Subtask Url') ?></th>
-                <th scope="col"><?= __('Subtask Accumulative') ?></th>
-                <th scope="col"><?= __('Subtask Owner Participant Id') ?></th>
-                <th scope="col"><?= __('Subtask Dividend Rate') ?></th>
-                <th scope="col"><?= __('Subtask Category Name') ?></th>
-                <th scope="col"><?= __('Subtask Category Class') ?></th>
-                <th scope="col"><?= __('Subtask Category Description') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <!--<th scope="col"><?= __('Dream Url') ?></th>-->
+                <!--<th scope="col"><?= __('Contemporary Task Id') ?></th>-->
+                <!--<th scope="col"><?= __('Contemporary Task Start') ?></th>-->
+                <!--<th scope="col"><?= __('Contemporary Task Expiration') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Id') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Task Id') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Super Id') ?></th>-->
+                <th scope="col"><?= __('Name') ?></th>
+                <!--<th scope="col"><?= __('Subtask Category Id') ?></th>-->
+                <th scope="col"><?= __('Minimum Value') ?></th>
+                <!--<th scope="col"><?= __('Subtask Max Value') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Starting Demand') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Inflation Rate') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Demand Cutoff') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Task Period Demand') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Description') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Url') ?></th>-->
+                <th scope="col"><?= __('Accumulative') ?></th>
+                <!--<th scope="col"><?= __('Subtask Owner Participant Id') ?></th>-->
+                <th scope="col"><?= __('Category') ?></th>
+                <!--<th scope="col"><?= __('Subtask Category Class') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Category Description') ?></th>-->
+                <th scope="col"><?= __('Subtask Success Count') ?></th>
+                <th scope="col"><?= __('Contemporary Demand') ?></th>
+                <!--<th scope="col"><?= __('Contemporary Demand Positive') ?></th>-->
+                <!--<th scope="col"><?= __('Inner Function') ?></th>-->
+                <!--<th scope="col"><?= __('External Function') ?></th>-->
+                <th scope="col"><?= __('Final Value') ?></th>
+                <!--<th scope="col"><?= __('Subtask Dividend Rate') ?></th>-->
+                <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
             </tr>
-            <?php foreach ($task->successful_subtask as $successfulSubtask): ?>
+            <?php foreach ($task->successful_subtask_task_with_calculated_scoring_participant as $successfulSubtaskTaskWithCalculatedScoring): ?>
             <tr>
-                <td><?= h($successfulSubtask->participant_id) ?></td>
-                <td><?= h($successfulSubtask->dream_id) ?></td>
-                <td><?= h($successfulSubtask->dream_timestamp) ?></td>
-                <td><?= h($successfulSubtask->dream_type_id) ?></td>
-                <td><?= h($successfulSubtask->dream_url) ?></td>
-                <td><?= h($successfulSubtask->subtask_id) ?></td>
-                <td><?= h($successfulSubtask->task_id) ?></td>
-                <td><?= h($successfulSubtask->subtask_super_id) ?></td>
-                <td><?= h($successfulSubtask->subtask_name) ?></td>
-                <td><?= h($successfulSubtask->subtask_category_id) ?></td>
-                <td><?= h($successfulSubtask->subtask_base_value) ?></td>
-                <td><?= h($successfulSubtask->subtask_max_value) ?></td>
-                <td><?= h($successfulSubtask->subtask_starting_demand) ?></td>
-                <td><?= h($successfulSubtask->subtask_inflation_rate) ?></td>
-                <td><?= h($successfulSubtask->subtask_demand_cutoff) ?></td>
-                <td><?= h($successfulSubtask->subtask_task_period_demand) ?></td>
-                <td><?= h($successfulSubtask->subtask_description) ?></td>
-                <td><?= h($successfulSubtask->subtask_url) ?></td>
-                <td><?= h($successfulSubtask->subtask_accumulative) ?></td>
-                <td><?= h($successfulSubtask->subtask_owner_participant_id) ?></td>
-                <td><?= h($successfulSubtask->subtask_dividend_rate) ?></td>
-                <td><?= h($successfulSubtask->subtask_category_name) ?></td>
-                <td><?= h($successfulSubtask->subtask_category_class) ?></td>
-                <td><?= h($successfulSubtask->subtask_category_description) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->participant_id) ?></td>-->
+                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->participant_name, ['controller' => 'Participants', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->participant_id)]) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->dream_id) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->dream_type_id) ?></td>-->
+                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->dream_timestamp,['controller' => 'Dreams', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->dream_id)]) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->dream_url) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_task_id) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_task_start) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_task_expiration) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_id) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_task_id) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_super_id) ?></td>-->
+                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_name,['controller' => 'Subtasks', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->subtask_id)]) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_id) ?></td>-->
+                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_base_value) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_max_value) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_starting_demand) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_inflation_rate) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_demand_cutoff) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_task_period_demand) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_description) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_url) ?></td>-->
+                <td><?= h(($successfulSubtaskTaskWithCalculatedScoring->subtask_accumulative == 1)? 'Yes' : 'No') ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_owner_participant_id) ?></td>-->
+                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_category_name,['controller' => 'SubtaskCategories', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->subtask_category_id)]) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_class) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_description) ?></td>-->
+                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_success_count) ?></td>
+                <td><?= $this->Number->format($successfulSubtaskTaskWithCalculatedScoring->contemporary_demand) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_demand_positive) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->inner_function) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->external_function) ?></td>-->
+               <td><?= $this->Number->precision(intval(100*$successfulSubtaskTaskWithCalculatedScoring->final_value)/100,2) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_dividend_rate) ?></td>-->
+                <!--
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'SuccessfulSubtask', 'action' => 'view', $successfulSubtask->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'SuccessfulSubtask', 'action' => 'edit', $successfulSubtask->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'SuccessfulSubtask', 'action' => 'delete', $successfulSubtask->id], ['confirm' => __('Are you sure you want to delete # {0}?', $successfulSubtask->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'view', $successfulSubtaskTaskWithCalculatedScoring->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'edit', $successfulSubtaskTaskWithCalculatedScoring->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'delete', $successfulSubtaskTaskWithCalculatedScoring->id], ['confirm' => __('Are you sure you want to delete # {0}?', $successfulSubtaskTaskWithCalculatedScoring->id)]) ?>
                 </td>
+                -->
             </tr>
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
     </div>
-</div>
+
+
 <?php if (!empty($task->subtask_share_holder_complete)): ?>
 <div class="subtaskShareHolderComplete view large-9 medium-8 columns content subtask subtask_yellow">
 <h4><?= __('Subtasks') ?></h4>
@@ -332,6 +354,6 @@
     <?php endforeach; ?>    
     <?php endif; ?>
     </div>
-
+</div>
 
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>

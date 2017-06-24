@@ -18,6 +18,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SubtaskSupersTable|\Cake\ORM\Association\BelongsTo $SubtaskSupers
  * @property \App\Model\Table\SubtaskCategoriesTable|\Cake\ORM\Association\BelongsTo $SubtaskCategories
  * @property \App\Model\Table\SubtaskOwnerParticipantsTable|\Cake\ORM\Association\BelongsTo $SubtaskOwnerParticipants
+ * @property \App\Model\Table\TasksTable|\Cake\ORM\Association\BelongsTo $Tasks
  *
  * @method \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedScoringParticipant get($primaryKey, $options = [])
  * @method \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedScoringParticipant newEntity($data = null, array $options = [])
@@ -73,6 +74,9 @@ class SuccessfulSubtaskTaskWithCalculatedScoringParticipantTable extends Table
         $this->belongsTo('SubtaskOwnerParticipants', [
             'foreignKey' => 'subtask_owner_participant_id'
         ]);
+        $this->belongsTo('Tasks', [
+            'foreignKey' => 'subtask_task_id'
+        ]);        
     }
 
     /**

@@ -67,6 +67,10 @@ class TasksTable extends Table
         $this->hasMany('UnexpiredTask', [
             'foreignKey' => 'task_id'
         ]);
+        
+        $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoringParticipant', [
+            'foreignKey' => 'subtask_task_id'
+        ]);        
     }
 
     /**

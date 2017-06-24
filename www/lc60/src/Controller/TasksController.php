@@ -49,7 +49,7 @@ class TasksController extends AppController
 	if (null != ($this->Auth->user('id')))
 	{
         $task = $this->Tasks->get($id, [
-            'contain' => ['DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SubtaskSubtaskCategory', 'SuccessfulSubtask']
+            'contain' => ['DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SubtaskSubtaskCategory', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant']
         ]);
 
         $this->set('task', $task);
@@ -62,7 +62,7 @@ class TasksController extends AppController
 	    $tasks = ($this->Tasks->find()
 	      ->where(['Tasks.id' => ($id)])
 	      ->where(['Tasks.task_start <=' => Time::now()])
-	      ->contain(['DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SubtaskSubtaskCategory', 'SuccessfulSubtask'])
+	      ->contain(['DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SubtaskSubtaskCategory', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant'])
 	    );
 
 	    foreach ($tasks as $task)
