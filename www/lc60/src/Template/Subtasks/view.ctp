@@ -103,5 +103,9 @@
         <h4><?= __('Subtask Description') ?></h4>
         <?= $this->Text->autoParagraph(h($subtask->subtask_description)); ?>
     </div>
+    <div class="row">
+        <h4><?= __('Subtask Instructions') ?></h4>
+        <?= $this->Text->autoParagraph(h($subtask->subtask_instruction)); ?>
+    </div>
 </div>
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
