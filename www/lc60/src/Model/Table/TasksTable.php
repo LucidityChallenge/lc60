@@ -10,9 +10,10 @@ use Cake\Validation\Validator;
  * Tasks Model
  *
  * @property \App\Model\Table\CurrentTaskTable|\Cake\ORM\Association\HasMany $CurrentTask
- * @property |\Cake\ORM\Association\HasMany $DreamWithTypeParticipant
- * @property |\Cake\ORM\Association\HasMany $SubtaskShareHolderComplete
- * @property |\Cake\ORM\Association\HasMany $SubtaskSubtaskCategory
+ * @property |\Cake\ORM\Association\HasMany $DreamWithType
+ * @property \App\Model\Table\DreamWithTypeParticipantTable|\Cake\ORM\Association\HasMany $DreamWithTypeParticipant
+ * @property \App\Model\Table\SubtaskShareHolderCompleteTable|\Cake\ORM\Association\HasMany $SubtaskShareHolderComplete
+ * @property \App\Model\Table\SubtaskSubtaskCategoryTable|\Cake\ORM\Association\HasMany $SubtaskSubtaskCategory
  * @property \App\Model\Table\SubtasksTable|\Cake\ORM\Association\HasMany $Subtasks
  * @property \App\Model\Table\SuccessfulSubtaskTable|\Cake\ORM\Association\HasMany $SuccessfulSubtask
  * @property \App\Model\Table\UnexpiredTaskTable|\Cake\ORM\Association\HasMany $UnexpiredTask
@@ -43,6 +44,9 @@ class TasksTable extends Table
         $this->setPrimaryKey('id');
 
         $this->hasMany('CurrentTask', [
+            'foreignKey' => 'task_id'
+        ]);
+        $this->hasMany('DreamWithType', [
             'foreignKey' => 'task_id'
         ]);
         $this->hasMany('DreamWithTypeParticipant', [
@@ -98,6 +102,9 @@ class TasksTable extends Table
         $validator
             ->requirePresence('task_url', 'create')
             ->notEmpty('task_url');
+
+        $validator
+            ->allowEmpty('task_image_url');
 
         return $validator;
     }

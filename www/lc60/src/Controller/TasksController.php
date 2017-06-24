@@ -62,6 +62,7 @@ class TasksController extends AppController
 	    $tasks = ($this->Tasks->find()
 	      ->where(['Tasks.id' => ($id)])
 	      ->where(['Tasks.task_start <=' => Time::now()])
+	      ->contain(['CurrentTask', 'DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SubtaskSubtaskCategory', 'Subtasks', 'SuccessfulSubtask', 'UnexpiredTask'])
 	    );
 
 	    foreach ($tasks as $task)

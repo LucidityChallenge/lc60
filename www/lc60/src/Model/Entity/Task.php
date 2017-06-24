@@ -15,6 +15,9 @@ use Cake\ORM\Entity;
  * @property string $task_image_url
  *
  * @property \App\Model\Entity\CurrentTask[] $current_task
+ * @property \App\Model\Entity\DreamWithTypeParticipant[] $dream_with_type_participant
+ * @property \App\Model\Entity\SubtaskShareHolderComplete[] $subtask_share_holder_complete
+ * @property \App\Model\Entity\SubtaskSubtaskCategory[] $subtask_subtask_category
  * @property \App\Model\Entity\Subtask[] $subtasks
  * @property \App\Model\Entity\SuccessfulSubtask[] $successful_subtask
  * @property \App\Model\Entity\UnexpiredTask[] $unexpired_task

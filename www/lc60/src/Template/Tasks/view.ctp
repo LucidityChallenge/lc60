@@ -65,7 +65,7 @@
         <h4><?= __('Task Text') ?></h4>
         <?= $this->Text->autoParagraph(h($task->task_text)); ?>
     </div>
-    <!--
+
     <div class="related">
         <h4><?= __('Related Current Task') ?></h4>
         <?php if (!empty($task->current_task)): ?>
@@ -96,7 +96,7 @@
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
-    </div>-->
+    </div>
     <div class="related">
         <h4><?= __('Related Dreams') ?></h4>
         <?php if (!empty($task->dream_with_type_participant)): ?>
@@ -138,7 +138,7 @@
         <div class="related">
 
         <h4><?= __('Related Subtasks') ?></h4>
-    <!--
+
         <?php if (!empty($task->subtask_share_holder_complete)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -158,7 +158,6 @@
             </tr>
             <?php endforeach; ?>
         </table>
-        -->
 <div class="subtaskShareHolderComplete view large-9 medium-8 columns content subtask subtask_yellow">
     <?php foreach ($task->subtask_share_holder_complete as $subtaskShareHolderComplete): ?>
     <h3><?= $this->Html->link($subtaskShareHolderComplete->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',($subtaskShareHolderComplete->subtask_id)]) ?></h3>
@@ -267,7 +266,6 @@
     
     
     
-    <!--
     <div class="related">
         <h4><?= __('Related Subtask Share Holder Complete') ?></h4>
         <?php if (!empty($task->subtask_share_holder_complete)): ?>
@@ -551,6 +549,5 @@
         </table>
         <?php endif; ?>
     </div>
-    -->
 </div>
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
