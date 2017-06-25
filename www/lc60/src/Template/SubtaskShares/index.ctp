@@ -19,20 +19,22 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('subtask_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('participant_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('subtask_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($subtaskShares as $subtaskShare): ?>
             <tr>
-                <td><?= $subtaskShare->has('subtask') ? $this->Html->link($subtaskShare->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShare->subtask->id]) : '' ?></td>
+                <td><?= $this->Number->format($subtaskShare->id) ?></td>
                 <td><?= $subtaskShare->has('participant') ? $this->Html->link($subtaskShare->participant->participant_name, ['controller' => 'Participants', 'action' => 'view', $subtaskShare->participant->id]) : '' ?></td>
+                <td><?= $subtaskShare->has('subtask') ? $this->Html->link($subtaskShare->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShare->subtask->id]) : '' ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $subtaskShare->subtask_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $subtaskShare->subtask_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $subtaskShare->subtask_id], ['confirm' => __('Are you sure you want to delete # {0}?', $subtaskShare->subtask_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $subtaskShare->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $subtaskShare->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $subtaskShare->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subtaskShare->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

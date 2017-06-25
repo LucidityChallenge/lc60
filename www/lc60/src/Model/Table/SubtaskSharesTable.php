@@ -35,7 +35,7 @@ class SubtaskSharesTable extends Table
 
         $this->setTable('subtask_shares');
         $this->setDisplayField('subtask_id');
-        $this->setPrimaryKey(['subtask_id', 'participant_id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Subtasks', [
             'foreignKey' => 'subtask_id',
@@ -45,6 +45,21 @@ class SubtaskSharesTable extends Table
             'foreignKey' => 'participant_id',
             'joinType' => 'INNER'
         ]);
+    }
+
+    /**
+     * Default validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->integer('id')
+            ->allowEmpty('id', 'create');
+
+        return $validator;
     }
 
     /**

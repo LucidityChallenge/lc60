@@ -8,8 +8,8 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $subtaskShare->subtask_id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $subtaskShare->subtask_id)]
+                ['action' => 'delete', $subtaskShare->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $subtaskShare->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Subtask Shares'), ['action' => 'index']) ?></li>
@@ -24,6 +24,8 @@
     <fieldset>
         <legend><?= __('Edit Subtask Share') ?></legend>
         <?php
+            echo $this->Form->control('participant_id', ['options' => $participants]);        
+            echo $this->Form->control('subtask_id', ['options' => $subtasks]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

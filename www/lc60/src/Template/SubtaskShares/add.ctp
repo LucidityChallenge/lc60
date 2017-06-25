@@ -18,6 +18,8 @@
     <fieldset>
         <legend><?= __('Add Subtask Share') ?></legend>
         <?php
+            echo $this->Form->control('participant_id', ['options' => $participants]);
+            echo $this->Form->control('subtask_id', ['options' => $subtasks]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

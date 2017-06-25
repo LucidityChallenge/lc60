@@ -6,6 +6,7 @@ use Cake\ORM\Entity;
 /**
  * SubtaskShare Entity
  *
+ * @property int $id
  * @property int $subtask_id
  * @property int $participant_id
  *
@@ -26,7 +27,6 @@ class SubtaskShare extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'subtask_id' => false,
-        'participant_id' => false
+        'id' => false
     ];
 }
