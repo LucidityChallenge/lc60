@@ -33,6 +33,7 @@
             echo $this->Form->control('task_expiration');
             echo $this->Form->control('task_text');
             echo $this->Form->control('task_url');
+            echo $this->Form->control('task_image_url');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

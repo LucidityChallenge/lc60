@@ -101,12 +101,10 @@ class TasksTable extends Table
             ->notEmpty('task_expiration');
 
         $validator
-            ->requirePresence('task_text', 'create')
-            ->notEmpty('task_text');
+            ->allowEmpty('task_text');
 
         $validator
-            ->requirePresence('task_url', 'create')
-            ->notEmpty('task_url');
+            ->allowEmpty('task_url');
 
         $validator
             ->allowEmpty('task_image_url');

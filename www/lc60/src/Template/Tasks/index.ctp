@@ -40,7 +40,7 @@
         <tbody>
             <?php foreach ($tasks as $task): ?>
             <tr>
-                <td><?= $this->Number->format($task->id) ?></td>
+                <td><?= $this->Html->link($this->Number->format($task->id), ['action' => 'view', $task->id]) ?></td>
                 <td><?= h($task->task_title) ?></td>
                 <td><?= h($task->task_start) ?></td>
                 <td><?= h($task->task_expiration) ?></td>
