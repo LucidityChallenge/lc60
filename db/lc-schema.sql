@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2017 at 05:43 PM
+-- Generation Time: Jun 25, 2017 at 06:04 PM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -688,6 +688,7 @@ CREATE TABLE IF NOT EXISTS `subtask_dream_super_name` (
 --
 
 CREATE TABLE IF NOT EXISTS `subtask_shares` (
+  `id` int(11) NOT NULL,
   `subtask_id` int(11) NOT NULL,
   `participant_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1629,7 +1630,8 @@ ALTER TABLE `subtask_dreams`
 -- Indexes for table `subtask_shares`
 --
 ALTER TABLE `subtask_shares`
-  ADD PRIMARY KEY (`subtask_id`,`participant_id`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subtask_share_subtask` (`subtask_id`),
   ADD KEY `subtask_share_participant` (`participant_id`);
 
 --
@@ -1684,6 +1686,11 @@ ALTER TABLE `subtask_categories`
 -- AUTO_INCREMENT for table `subtask_dreams`
 --
 ALTER TABLE `subtask_dreams`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subtask_shares`
+--
+ALTER TABLE `subtask_shares`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tasks`
