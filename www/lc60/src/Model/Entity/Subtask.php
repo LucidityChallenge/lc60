@@ -26,6 +26,7 @@ use Cake\ORM\Entity;
  * @property int $subtask_symbol
  * @property string $subtask_instruction
  * @property int $subtask_type_id
+ * @property bool $subtask_visible
  *
  * @property \App\Model\Entity\Task $task
  * @property \App\Model\Entity\Subtask $subtask_super
