@@ -33,6 +33,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SuccessfulSubtaskDividendScoresTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskDividendScores
  * @property \App\Model\Table\SuccessfulSubtaskTaskTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTask
  * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedScoringTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoring
+ * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedScoringParticipantTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoringParticipant 
  *
  * @method \App\Model\Entity\Subtask get($primaryKey, $options = [])
  * @method \App\Model\Entity\Subtask newEntity($data = null, array $options = [])
@@ -144,6 +145,9 @@ class SubtasksTable extends Table
             'foreignKey' => 'subtask_id'
         ]);
         */
+        $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoringParticipant', [
+            'foreignKey' => 'subtask_id'
+        ]);        
     }
 
     /**

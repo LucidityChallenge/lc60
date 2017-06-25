@@ -17,6 +17,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SubtasksTable|\Cake\ORM\Association\HasMany $Subtasks
  * @property \App\Model\Table\SuccessfulSubtaskTable|\Cake\ORM\Association\HasMany $SuccessfulSubtask
  * @property \App\Model\Table\UnexpiredTaskTable|\Cake\ORM\Association\HasMany $UnexpiredTask
+ * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedScoringParticipantTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoringParticipant
  *
  * @method \App\Model\Entity\Task get($primaryKey, $options = [])
  * @method \App\Model\Entity\Task newEntity($data = null, array $options = [])

@@ -17,6 +17,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\CurrentTask[] $current_task
  * @property \App\Model\Entity\DreamWithTypeParticipant[] $dream_with_type_participant
  * @property \App\Model\Entity\SubtaskShareHolderComplete[] $subtask_share_holder_complete
+ * @property \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedScoringParticipant[] $successful_subtask_task_with_calculated_scoring_participant
  * @property \App\Model\Entity\SubtaskSubtaskCategory[] $subtask_subtask_category
  * @property \App\Model\Entity\Subtask[] $subtasks
  * @property \App\Model\Entity\SuccessfulSubtask[] $successful_subtask
