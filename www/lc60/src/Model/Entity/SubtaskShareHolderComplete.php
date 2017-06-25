@@ -31,6 +31,7 @@ use Cake\ORM\Entity;
  * @property int $subtask_symbol
  * @property string $subtask_instruction
  * @property int $subtask_share_holder_count
+ * @property string $participant_owner_name
  *
  * @property \App\Model\Entity\Subtask $subtask
  * @property \App\Model\Entity\Participant $participant

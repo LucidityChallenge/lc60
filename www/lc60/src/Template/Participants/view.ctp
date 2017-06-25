@@ -299,7 +299,7 @@
         <?php endif; ?>
     </div>
     
-    <h4><?= __('Shares Owned by '.($participant->participant_name)) ?></h4>
+    <h4><?= __('Shares Owned or Held by '.($participant->participant_name)) ?></h4>
     <div class="related">
     <!--
         <?php if (!empty($participant->subtask_share_holder_complete)): ?>
@@ -394,8 +394,11 @@
             <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_task_period_demand) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Participant Owner') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->participant_owner) ?></td>
+            <th scope="row"><?= __('Participant Owner/Holders') ?></th>
+            <td><?= ($subtaskShareHolderComplete->subtask_share_holder_count == 1) ?
+            $this->Html->link(($subtaskShareHolderComplete->participant_owner_name), ['controller' => 'Participants', 'action' => 'view',($subtaskShareHolderComplete->participant_owner)])
+            :
+            $this->Number->format($subtaskShareHolderComplete->subtask_share_holder_count).' holders' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Dividend Rate') ?></th>
