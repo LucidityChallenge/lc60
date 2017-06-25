@@ -22,7 +22,7 @@
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Subtask') ?></th>
-            <td><?= $subtaskShare->has('subtask') ? $this->Html->link($subtaskShare->subtask->id, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShare->subtask->id]) : '' ?></td>
+            <td><?= $subtaskShare->has('subtask') ? $this->Html->link($subtaskShare->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShare->subtask->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Participant') ?></th>

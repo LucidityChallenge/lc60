@@ -27,7 +27,7 @@
         <tbody>
             <?php foreach ($subtaskShares as $subtaskShare): ?>
             <tr>
-                <td><?= $subtaskShare->has('subtask') ? $this->Html->link($subtaskShare->subtask->id, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShare->subtask->id]) : '' ?></td>
+                <td><?= $subtaskShare->has('subtask') ? $this->Html->link($subtaskShare->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShare->subtask->id]) : '' ?></td>
                 <td><?= $subtaskShare->has('participant') ? $this->Html->link($subtaskShare->participant->participant_name, ['controller' => 'Participants', 'action' => 'view', $subtaskShare->participant->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $subtaskShare->subtask_id]) ?>

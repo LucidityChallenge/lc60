@@ -49,6 +49,7 @@
             echo $this->Form->control('subtask_symbol');
             echo $this->Form->control('subtask_type_id', ['options' => $subtaskTypes]);
             echo $this->Form->control('subtask_instruction');
+            echo $this->Form->control('subtask_visible');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -47,7 +47,7 @@
         <tbody>
             <?php foreach ($subtasks as $subtask): ?>
             <tr>
-                <td><?= $this->Number->format($subtask->id) ?></td>
+                <td><?= $this->Html->link($this->Number->format($subtask->id), ['action' => 'view', $subtask->id]) ?></td>
                 <td><?= $subtask->has('task') ? $this->Html->link($subtask->task->task_title, ['controller' => 'Tasks', 'action' => 'view', $subtask->task->id]) : '' ?></td>
                 <td><?= $subtask->has('subtask') ? $this->Html->link($subtask->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtask->subtask->id]) : '' ?></td>
                 <td><?= h($subtask->subtask_name) ?></td>

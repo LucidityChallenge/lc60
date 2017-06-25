@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Datasource\Exception\RecordNotFoundException;
+use Cake\I18n\Time;
 
 /**
  * Subtasks Controller
@@ -21,11 +22,26 @@ class SubtasksController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Tasks', /*'Subtasks',*/ 'SubtaskCategories', 'Participants', 'SubtaskTypes']
-        ];
-        $subtasks = $this->paginate($this->Subtasks);
-
+	$subtasks = null;
+	$contains = ['Tasks', 'SubtaskCategories', 'Participants', 'SubtaskTypes'];
+        
+        if (null != ($this->Auth->user('id')))
+    	{
+    	
+	  $this->paginate = [
+	      'contain' => $contains
+	  ];
+	  $subtasks = $this->paginate($this->Subtasks);
+	}
+	else
+	{
+	  $subtasks = $this->paginate($this->Subtasks->find('all',
+	    ['contain' => $contains]
+	    )
+	    ->where(['Subtasks.subtask_visible' => 1])
+	    ->where(['Tasks.task_start <=' => Time::now()])
+	  );
+	}
         $this->set(compact('subtasks'));
         $this->set('_serialize', ['subtasks']);
     }
@@ -41,6 +57,7 @@ class SubtasksController extends AppController
     {
     
 	$showSubtask = false;
+	$subtasks = null;
 	
 	if (null != ($this->Auth->user('id')))
 	{
@@ -67,15 +84,39 @@ class SubtasksController extends AppController
 	
 	if ($showSubtask)
 	{
-	  $subtask = $this->Subtasks->get($id, [
-	      'contain' => ['Tasks', /*'Subtasks',*/ 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant',
-	      //'CalculatedSubtaskDemandExternal', 'CalculatedSubtaskDemandFinalValue', 'CalculatedSubtaskDemandInner', 'CalculatedSubtaskDemandUnion', 'DemandView', 'DemandViewSuccess', 'DemandViewSuccessContemporaryDemand', 'DemandViewSuccessContemporaryDemandPositive', 'DemandViewUncompleteContemporaryDemand', 'DemandViewUncompleteContemporaryDemandPositive', 'RecentSuccesses', 'SubtaskDreamSuper', 'SubtaskDreams', 'SubtaskShareHolder', 'SubtaskShareHolderComplete', 'SubtaskShareHolderCount', 'SubtaskShares', 'SubtaskSubtaskCategory', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring'
-	      'ShareHoldersParticipant'
-	      ]
-	  ]);
-
-	  $this->set('subtask', $subtask);
-	  $this->set('_serialize', ['subtask']);
+	  $contains = ['Tasks', 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant',		
+		'ShareHoldersParticipant'
+	  ];
+	
+	  if (null != ($this->Auth->user('id')))
+	  {
+	    $subtask = $this->Subtasks->get($id, ['contain' => $contains]);
+	    $this->set('subtask', $subtask);
+	    $this->set('_serialize', ['subtask']);
+	  }
+	  else
+	  {
+	    $unset = true;
+	    $subtasks = $this->Subtasks->find('all')
+	      ->contain($contains)
+	      ->where(['Subtasks.id' => $id])
+	      ->where(['Subtasks.subtask_visible' => 1])
+	      ->where(['Tasks.task_start <=' => Time::now()])
+	    ;
+	    
+	    foreach ($subtasks as $subtask)
+	    {
+	      $this->set('subtask', $subtask);
+	      $this->set('_serialize', ['subtask']);
+	      $unset = false;
+	    }
+        
+	    if ($unset)
+	    {
+	      $this->Flash->error(__('Sorry! This data is restricted.'));
+	      return $this->redirect(['controller' => 'users', 'action' => 'login']);
+	    }
+	  }  
         }
     }
 
