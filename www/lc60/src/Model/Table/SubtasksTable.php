@@ -14,6 +14,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SubtaskCategoriesTable|\Cake\ORM\Association\BelongsTo $SubtaskCategories
  * @property \App\Model\Table\ParticipantsTable|\Cake\ORM\Association\BelongsTo $Participants
  * @property \App\Model\Table\SubtaskTypesTable|\Cake\ORM\Association\BelongsTo $SubtaskTypes
+ * @property \App\Model\Table\DreamTypesTable|\Cake\ORM\Association\BelongsTo $DreamTypes
  * @property \App\Model\Table\CalculatedSubtaskDemandExternalTable|\Cake\ORM\Association\HasMany $CalculatedSubtaskDemandExternal
  * @property \App\Model\Table\CalculatedSubtaskDemandFinalValueTable|\Cake\ORM\Association\HasMany $CalculatedSubtaskDemandFinalValue
  * @property \App\Model\Table\CalculatedSubtaskDemandInnerTable|\Cake\ORM\Association\HasMany $CalculatedSubtaskDemandInner
@@ -77,6 +78,11 @@ class SubtasksTable extends Table
             'foreignKey' => 'subtask_type_id',
             'joinType' => 'INNER'
         ]);
+        
+        $this->hasOne('DreamTypes', [
+            'foreignKey' => 'id',
+            'joinType' => 'OUTER'
+        ]);        
 /*
         $this->hasMany('CalculatedSubtaskDemandExternal', [
             'foreignKey' => 'subtask_id'

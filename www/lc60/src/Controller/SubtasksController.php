@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Datasource\Exception\RecordNotFoundException;
 
 /**
  * Subtasks Controller
@@ -38,14 +39,43 @@ class SubtasksController extends AppController
      */
     public function view($id = null)
     {
-        $subtask = $this->Subtasks->get($id, [
-            'contain' => ['Tasks', /*'Subtasks',*/ 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant'
-            //'CalculatedSubtaskDemandExternal', 'CalculatedSubtaskDemandFinalValue', 'CalculatedSubtaskDemandInner', 'CalculatedSubtaskDemandUnion', 'DemandView', 'DemandViewSuccess', 'DemandViewSuccessContemporaryDemand', 'DemandViewSuccessContemporaryDemandPositive', 'DemandViewUncompleteContemporaryDemand', 'DemandViewUncompleteContemporaryDemandPositive', 'RecentSuccesses', 'SubtaskDreamSuper', 'SubtaskDreams', 'SubtaskShareHolder', 'SubtaskShareHolderComplete', 'SubtaskShareHolderCount', 'SubtaskShares', 'SubtaskSubtaskCategory', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring'
-            ]
-        ]);
+    
+	$showSubtask = false;
+	
+	if (null != ($this->Auth->user('id')))
+	{
+	  // do not redirect for logged users.
+	  $showSubtask = true;
+	}
+	else
+	{
+	  try
+	  {
+	    $dream_type = $this->Subtasks->DreamTypes->get($id);
+	    if ($dream_type != null) {
+		    $this->Flash->success(__('Redirected to Dream Type.'));
 
-        $this->set('subtask', $subtask);
-        $this->set('_serialize', ['subtask']);
+		    return $this->redirect(['controller' => 'dream_types','action' => 'view',($id)]);
+	    }
+	  }
+	  catch (RecordNotFoundException $e)
+	  {
+	    //not found, proceed with current subtask
+	    $showSubtask = true;
+	  }
+	}
+	
+	if ($showSubtask)
+	{
+	  $subtask = $this->Subtasks->get($id, [
+	      'contain' => ['Tasks', /*'Subtasks',*/ 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant'
+	      //'CalculatedSubtaskDemandExternal', 'CalculatedSubtaskDemandFinalValue', 'CalculatedSubtaskDemandInner', 'CalculatedSubtaskDemandUnion', 'DemandView', 'DemandViewSuccess', 'DemandViewSuccessContemporaryDemand', 'DemandViewSuccessContemporaryDemandPositive', 'DemandViewUncompleteContemporaryDemand', 'DemandViewUncompleteContemporaryDemandPositive', 'RecentSuccesses', 'SubtaskDreamSuper', 'SubtaskDreams', 'SubtaskShareHolder', 'SubtaskShareHolderComplete', 'SubtaskShareHolderCount', 'SubtaskShares', 'SubtaskSubtaskCategory', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring'
+	      ]
+	  ]);
+
+	  $this->set('subtask', $subtask);
+	  $this->set('_serialize', ['subtask']);
+        }
     }
 
     /**
