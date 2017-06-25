@@ -43,6 +43,9 @@ use Cake\ORM\Entity;
  * @property float $subtask_dividend_rate
  * @property string $participant_name
  * @property string $task_title
+ * @property int $subtask_share_holder_count
+ * @property int $participant_holder_id
+ * @property string $participant_holder_name
  *
  * @property \App\Model\Entity\Participant $participant
  * @property \App\Model\Entity\Dream $dream

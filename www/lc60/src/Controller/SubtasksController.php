@@ -68,8 +68,9 @@ class SubtasksController extends AppController
 	if ($showSubtask)
 	{
 	  $subtask = $this->Subtasks->get($id, [
-	      'contain' => ['Tasks', /*'Subtasks',*/ 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant'
+	      'contain' => ['Tasks', /*'Subtasks',*/ 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant',
 	      //'CalculatedSubtaskDemandExternal', 'CalculatedSubtaskDemandFinalValue', 'CalculatedSubtaskDemandInner', 'CalculatedSubtaskDemandUnion', 'DemandView', 'DemandViewSuccess', 'DemandViewSuccessContemporaryDemand', 'DemandViewSuccessContemporaryDemandPositive', 'DemandViewUncompleteContemporaryDemand', 'DemandViewUncompleteContemporaryDemandPositive', 'RecentSuccesses', 'SubtaskDreamSuper', 'SubtaskDreams', 'SubtaskShareHolder', 'SubtaskShareHolderComplete', 'SubtaskShareHolderCount', 'SubtaskShares', 'SubtaskSubtaskCategory', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring'
+	      'ShareHoldersParticipant'
 	      ]
 	  ]);
 

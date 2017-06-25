@@ -97,7 +97,7 @@
         <tr>
             <th scope="row"><?= __('Subtask Accumulative') ?></th>
             <td><?= $subtask->subtask_accumulative ? __('Yes') : __('No'); ?></td>
-        </tr>
+        </tr>        
     </table>
     <div class="row">
         <h4><?= __('Subtask Description') ?></h4>
@@ -146,6 +146,7 @@
                 <!--<th scope="col"><?= __('Inner Function') ?></th>-->
                 <!--<th scope="col"><?= __('External Function') ?></th>-->
                 <th scope="col"><?= __('Final Value') ?></th>
+                <th scope="col"><?= __('Holder') ?></th>                
                 <!--<th scope="col"><?= __('Subtask Dividend Rate') ?></th>-->
                 <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
             </tr>
@@ -185,6 +186,7 @@
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->external_function) ?></td>-->
                <td><?= $this->Number->precision(intval(100*$successfulSubtaskTaskWithCalculatedScoring->final_value)/100,2) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_dividend_rate) ?></td>-->
+                <td><?= (($successfulSubtaskTaskWithCalculatedScoring->subtask_share_holder_count) == 1)? $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->participant_holder_name,['controller' => 'Participants', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->participant_holder_id)]) : $this->Number->format($successfulSubtaskTaskWithCalculatedScoring->subtask_share_holder_count).' holders' ?></td>
                 <!--
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'view', $successfulSubtaskTaskWithCalculatedScoring->id]) ?>
@@ -198,5 +200,31 @@
         <?php endif; ?>
     </div>
 
+    <h4><?= __('Holders of "'.($subtask->subtask_name).'" Subtask') ?></h4>
+    <div class="related">
+        <?php if (!empty($subtask->share_holders_participant)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Participant') ?></th>
+                <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
+            </tr>
+            <?php foreach ($subtask->share_holders_participant as $holder): ?>
+            <tr>
+                <!--<td><?= h($holder->participant_id) ?></td>-->
+                <td><?= $this->Html->link($holder->participant_name, ['controller' => 'Participants', 'action' => 'view',($holder->participant_id)]) ?></td>     
+                <!--
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Participants', 'action' => 'view', $holder->participant_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Participants', 'action' => 'edit', $holder->participant_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Participants', 'action' => 'delete', $holder->participant_id], ['confirm' => __('Are you sure you want to delete # {0}?', $successfulSubtaskTaskWithCalculatedScoring->id)]) ?>
+                </td>
+                -->
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+
+    
 </div>
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
