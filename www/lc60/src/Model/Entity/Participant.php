@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property string $participant_goal
  * @property string $participant_dj_url
  * @property string $participant_join_url
+ * @property string $participant_image_url
  *
  * @property \App\Model\Entity\Dream[] $dreams
  * @property \App\Model\Entity\DreamWithType[] $dream_with_type
