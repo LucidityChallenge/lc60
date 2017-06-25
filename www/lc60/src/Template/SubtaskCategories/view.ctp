@@ -11,6 +11,7 @@
         <li><?= $this->Form->postLink(__('Delete Subtask Category'), ['action' => 'delete', $subtaskCategory->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subtaskCategory->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Subtask Categories'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Subtask Category'), ['action' => 'add']) ?> </li>
+        <!--
         <li><?= $this->Html->link(__('List Calculated Subtask Demand External'), ['controller' => 'CalculatedSubtaskDemandExternal', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Calculated Subtask Demand External'), ['controller' => 'CalculatedSubtaskDemandExternal', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Calculated Subtask Demand Final Value'), ['controller' => 'CalculatedSubtaskDemandFinalValue', 'action' => 'index']) ?> </li>
@@ -29,7 +30,9 @@
         <li><?= $this->Html->link(__('New Demand View Uncomplete Contemporary Demand'), ['controller' => 'DemandViewUncompleteContemporaryDemand', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Demand View Uncomplete Contemporary Demand Positive'), ['controller' => 'DemandViewUncompleteContemporaryDemandPositive', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Demand View Uncomplete Contemporary Demand Positive'), ['controller' => 'DemandViewUncompleteContemporaryDemandPositive', 'action' => 'add']) ?> </li>
+        -->
         <li><?= $this->Html->link(__('List Subtasks'), ['controller' => 'Subtasks', 'action' => 'index']) ?> </li>
+        <!--
         <li><?= $this->Html->link(__('New Subtask'), ['controller' => 'Subtasks', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Successful Subtask'), ['controller' => 'SuccessfulSubtask', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Successful Subtask'), ['controller' => 'SuccessfulSubtask', 'action' => 'add']) ?> </li>
@@ -45,6 +48,7 @@
         <li><?= $this->Html->link(__('New Successful Subtask Task'), ['controller' => 'SuccessfulSubtaskTask', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Successful Subtask Task With Calculated Scoring'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Successful Subtask Task With Calculated Scoring'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'add']) ?> </li>
+        -->
     </ul>
 </nav>
 <div class="subtaskCategories view large-9 medium-8 columns content">

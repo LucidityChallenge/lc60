@@ -13,10 +13,13 @@
         <li><?= $this->Html->link(__('New Dream'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Participants'), ['controller' => 'Participants', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Participant'), ['controller' => 'Participants', 'action' => 'add']) ?> </li>
+        <!--
         <li><?= $this->Html->link(__('List Subtask Dream Super'), ['controller' => 'SubtaskDreamSuper', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Subtask Dream Super'), ['controller' => 'SubtaskDreamSuper', 'action' => 'add']) ?> </li>
+        -->
         <li><?= $this->Html->link(__('List Subtask Dreams'), ['controller' => 'SubtaskDreams', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Subtask Dream'), ['controller' => 'SubtaskDreams', 'action' => 'add']) ?> </li>
+        <!--
         <li><?= $this->Html->link(__('List Successful Subtask'), ['controller' => 'SuccessfulSubtask', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Successful Subtask'), ['controller' => 'SuccessfulSubtask', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Successful Subtask Dividend Scores'), ['controller' => 'SuccessfulSubtaskDividendScores', 'action' => 'index']) ?> </li>
@@ -25,6 +28,7 @@
         <li><?= $this->Html->link(__('New Successful Subtask Task'), ['controller' => 'SuccessfulSubtaskTask', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Successful Subtask Task With Calculated Scoring'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Successful Subtask Task With Calculated Scoring'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'add']) ?> </li>
+        -->
     </ul>
 </nav>
 <div class="dreams view large-9 medium-8 columns content">
