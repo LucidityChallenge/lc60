@@ -25,7 +25,8 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SuccessfulSubtaskCategoryCompleteInnerTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategoryCompleteInner
  * @property \App\Model\Table\SuccessfulSubtaskDividendScoresTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskDividendScores
  * @property \App\Model\Table\SuccessfulSubtaskTaskTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTask
- * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedScoringTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoring
+ * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedScoringParticipantTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoringParticipant
+ * @property \App\Model\Table\SubtaskShareHolderCompleteTable|\Cake\ORM\Association\HasMany $SubtaskShareHolderComplete 
  *
  * @method \App\Model\Entity\SubtaskCategory get($primaryKey, $options = [])
  * @method \App\Model\Entity\SubtaskCategory newEntity($data = null, array $options = [])
@@ -100,9 +101,13 @@ class SubtaskCategoriesTable extends Table
         $this->hasMany('SuccessfulSubtaskTask', [
             'foreignKey' => 'subtask_category_id'
         ]);
-        $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoring', [
+        $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoringParticipant', [
             'foreignKey' => 'subtask_category_id'
         ]);
+        
+        $this->hasMany('SubtaskShareHolderComplete', [
+            'foreignKey' => 'subtask_category_id'
+        ]);        
     }
 
     /**

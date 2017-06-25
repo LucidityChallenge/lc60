@@ -36,7 +36,7 @@ class SubtaskCategoriesController extends AppController
     public function view($id = null)
     {
         $subtaskCategory = $this->SubtaskCategories->get($id, [
-            'contain' => ['CalculatedSubtaskDemandExternal', 'CalculatedSubtaskDemandFinalValue', 'CalculatedSubtaskDemandInner', 'CalculatedSubtaskDemandUnion', 'DemandViewSuccess', 'DemandViewSuccessContemporaryDemand', 'DemandViewSuccessContemporaryDemandPositive', 'DemandViewUncompleteContemporaryDemand', 'DemandViewUncompleteContemporaryDemandPositive', 'Subtasks', 'SuccessfulSubtask', 'SuccessfulSubtaskCategory', 'SuccessfulSubtaskCategoryCompleteFinal', 'SuccessfulSubtaskCategoryCompleteInner', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
+            'contain' => ['SubtaskShareHolderComplete', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant']
         ]);
 
         $this->set('subtaskCategory', $subtaskCategory);
