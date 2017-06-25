@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2017 at 01:15 AM
+-- Generation Time: Jun 25, 2017 at 04:16 AM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -473,7 +473,8 @@ CREATE TABLE IF NOT EXISTS `participants` (
   `participant_name` varchar(48) NOT NULL,
   `participant_goal` varchar(128) DEFAULT NULL,
   `participant_dj_url` varchar(80) DEFAULT NULL,
-  `participant_join_url` varchar(80) DEFAULT NULL
+  `participant_join_url` varchar(80) DEFAULT NULL,
+  `participant_image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
