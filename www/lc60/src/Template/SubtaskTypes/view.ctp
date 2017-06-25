@@ -217,3 +217,4 @@
     </div>
 
 </div>
+<?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
