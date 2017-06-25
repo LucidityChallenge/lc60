@@ -82,9 +82,9 @@
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
-    </div>       
-  
-    <h3><?= $this->Html->link(__('Add Subtask to this Dream'), ['controller' => 'SubtaskDreams', 'action' => 'add',($dream->id)]) ?></h3>
+    </div>
+
+    <h3><?= $this->Html->link(__('Add Subtask to this Dream'), ['controller' => 'SubtaskDreams', 'action' => 'add',($dream->id)]) ?></h3>   
     <div class="related">
         <h4><?= __('Associated Subtasks') ?></h4>
         <?php if (!empty($dream->subtask_dream_super_name)): ?>

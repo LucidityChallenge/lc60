@@ -11,6 +11,7 @@
         <li><?= $this->Form->postLink(__('Delete Dream Type'), ['action' => 'delete', $dreamType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dreamType->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Dream Types'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Dream Type'), ['action' => 'add']) ?> </li>
+        <!--
         <li><?= $this->Html->link(__('List Dream Type Id'), ['controller' => 'DreamTypeId', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Dream Type Id'), ['controller' => 'DreamTypeId', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Successful Subtask'), ['controller' => 'SuccessfulSubtask', 'action' => 'index']) ?> </li>
@@ -21,6 +22,7 @@
         <li><?= $this->Html->link(__('New Successful Subtask Task'), ['controller' => 'SuccessfulSubtaskTask', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Successful Subtask Task With Calculated Scoring'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Successful Subtask Task With Calculated Scoring'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'add']) ?> </li>
+        -->
     </ul>
 </nav>
 <div class="dreamTypes view large-9 medium-8 columns content">
