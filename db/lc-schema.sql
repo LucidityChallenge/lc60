@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2017 at 06:56 AM
+-- Generation Time: Jun 25, 2017 at 07:46 AM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -448,6 +448,18 @@ CREATE TABLE IF NOT EXISTS `dream_with_type_participant` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `first_share_holder_participant`
+--
+CREATE TABLE IF NOT EXISTS `first_share_holder_participant` (
+`subtask_share_holder_count` bigint(21)
+,`subtask_id` int(11)
+,`participant_id` int(11)
+,`participant_name` varchar(48)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `news`
 --
 
@@ -573,6 +585,17 @@ CREATE TABLE IF NOT EXISTS `score_view_complete_participant` (
 ,`final_dividend_value_avg` double
 ,`final_dividend_value_total` double
 ,`final_value_total_with_dividends` double
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `share_holders_participant`
+--
+CREATE TABLE IF NOT EXISTS `share_holders_participant` (
+`subtask_id` int(11)
+,`participant_id` int(11)
+,`participant_name` varchar(48)
 );
 
 -- --------------------------------------------------------
@@ -1039,6 +1062,9 @@ CREATE TABLE IF NOT EXISTS `successful_subtask_task_with_calculated_scoring_part
 ,`subtask_type_id` tinyint(4)
 ,`participant_name` varchar(48)
 ,`task_title` varchar(48)
+,`subtask_share_holder_count` bigint(21)
+,`participant_holder_id` int(11)
+,`participant_holder_name` varchar(48)
 );
 
 -- --------------------------------------------------------
@@ -1294,6 +1320,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `first_share_holder_participant`
+--
+DROP TABLE IF EXISTS `first_share_holder_participant`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `first_share_holder_participant` AS select `subtask_share_holder_count`.`subtask_share_holder_count` AS `subtask_share_holder_count`,`subtask_share_holder_count`.`subtask_id` AS `subtask_id`,min(`participant`.`id`) AS `participant_id`,min(`participant`.`participant_name`) AS `participant_name` from ((`subtask_share_holder_count` join `subtask_share_holder` on((`subtask_share_holder_count`.`subtask_id` = `subtask_share_holder`.`subtask_id`))) join `participants` `participant` on((`subtask_share_holder`.`participant_id` = `participant`.`id`))) group by `subtask_share_holder_count`.`subtask_share_holder_count`,`subtask_share_holder_count`.`subtask_id`,`participant`.`participant_name`;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `recent_successes`
 --
 DROP TABLE IF EXISTS `recent_successes`;
@@ -1326,6 +1361,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `score_view_complete_participant`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `score_view_complete_participant` AS select `participant`.`id` AS `participant_id`,`participant`.`participant_name` AS `participant_name`,`score_view_complete`.`subtask_success_count_sum_total` AS `subtask_success_count_sum_total`,`score_view_complete`.`subtask_success_count_participant_total` AS `subtask_success_count_participant_total`,`score_view_complete`.`final_value_avg` AS `final_value_avg`,`score_view_complete`.`final_value_total` AS `final_value_total`,`score_view_complete`.`dividend_count_sum_total` AS `dividend_count_sum_total`,`score_view_complete`.`dividend_count_participant_total` AS `dividend_count_participant_total`,`score_view_complete`.`final_dividend_value_avg` AS `final_dividend_value_avg`,`score_view_complete`.`final_dividend_value_total` AS `final_dividend_value_total`,`score_view_complete`.`final_value_total_with_dividends` AS `final_value_total_with_dividends` from (`participants` `participant` join `score_view_complete` on((`participant`.`id` = `score_view_complete`.`participant_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `share_holders_participant`
+--
+DROP TABLE IF EXISTS `share_holders_participant`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `share_holders_participant` AS select `subtask_share_holder`.`subtask_id` AS `subtask_id`,`participant`.`id` AS `participant_id`,`participant`.`participant_name` AS `participant_name` from (`subtask_share_holder` join `participants` `participant` on((`subtask_share_holder`.`participant_id` = `participant`.`id`)));
 
 -- --------------------------------------------------------
 
@@ -1478,7 +1522,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `successful_subtask_task_with_calculated_scoring_participant`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `successful_subtask_task_with_calculated_scoring_participant` AS select `successful_subtask_task_with_calculated_scoring`.`participant_id` AS `participant_id`,`successful_subtask_task_with_calculated_scoring`.`dream_id` AS `dream_id`,`successful_subtask_task_with_calculated_scoring`.`dream_type_id` AS `dream_type_id`,`successful_subtask_task_with_calculated_scoring`.`dream_timestamp` AS `dream_timestamp`,`successful_subtask_task_with_calculated_scoring`.`dream_url` AS `dream_url`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_start` AS `contemporary_task_start`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_expiration` AS `contemporary_task_expiration`,`successful_subtask_task_with_calculated_scoring`.`subtask_id` AS `subtask_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_name` AS `subtask_name`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_starting_demand` AS `subtask_starting_demand`,`successful_subtask_task_with_calculated_scoring`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task_with_calculated_scoring`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task_with_calculated_scoring`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task_with_calculated_scoring`.`subtask_description` AS `subtask_description`,`successful_subtask_task_with_calculated_scoring`.`subtask_url` AS `subtask_url`,`successful_subtask_task_with_calculated_scoring`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task_with_calculated_scoring`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_description` AS `subtask_category_description`,`successful_subtask_task_with_calculated_scoring`.`subtask_success_count` AS `subtask_success_count`,`successful_subtask_task_with_calculated_scoring`.`subtask_success_count_total` AS `subtask_success_count_total`,`successful_subtask_task_with_calculated_scoring`.`contemporary_demand` AS `contemporary_demand`,`successful_subtask_task_with_calculated_scoring`.`contemporary_demand_positive` AS `contemporary_demand_positive`,`successful_subtask_task_with_calculated_scoring`.`inner_function` AS `inner_function`,`successful_subtask_task_with_calculated_scoring`.`external_function` AS `external_function`,`successful_subtask_task_with_calculated_scoring`.`final_value` AS `final_value`,`successful_subtask_task_with_calculated_scoring`.`final_value_truncate` AS `final_value_truncate`,`successful_subtask_task_with_calculated_scoring`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`successful_subtask_task_with_calculated_scoring`.`subtask_type_id` AS `subtask_type_id`,`participant`.`participant_name` AS `participant_name`,`task`.`task_title` AS `task_title` from ((`successful_subtask_task_with_calculated_scoring` join `participants` `participant` on((`successful_subtask_task_with_calculated_scoring`.`participant_id` = `participant`.`id`))) join `tasks` `task` on((`successful_subtask_task_with_calculated_scoring`.`contemporary_task_id` = `task`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `successful_subtask_task_with_calculated_scoring_participant` AS select `successful_subtask_task_with_calculated_scoring`.`participant_id` AS `participant_id`,`successful_subtask_task_with_calculated_scoring`.`dream_id` AS `dream_id`,`successful_subtask_task_with_calculated_scoring`.`dream_type_id` AS `dream_type_id`,`successful_subtask_task_with_calculated_scoring`.`dream_timestamp` AS `dream_timestamp`,`successful_subtask_task_with_calculated_scoring`.`dream_url` AS `dream_url`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_start` AS `contemporary_task_start`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_expiration` AS `contemporary_task_expiration`,`successful_subtask_task_with_calculated_scoring`.`subtask_id` AS `subtask_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_name` AS `subtask_name`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_starting_demand` AS `subtask_starting_demand`,`successful_subtask_task_with_calculated_scoring`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task_with_calculated_scoring`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task_with_calculated_scoring`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task_with_calculated_scoring`.`subtask_description` AS `subtask_description`,`successful_subtask_task_with_calculated_scoring`.`subtask_url` AS `subtask_url`,`successful_subtask_task_with_calculated_scoring`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task_with_calculated_scoring`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_description` AS `subtask_category_description`,`successful_subtask_task_with_calculated_scoring`.`subtask_success_count` AS `subtask_success_count`,`successful_subtask_task_with_calculated_scoring`.`subtask_success_count_total` AS `subtask_success_count_total`,`successful_subtask_task_with_calculated_scoring`.`contemporary_demand` AS `contemporary_demand`,`successful_subtask_task_with_calculated_scoring`.`contemporary_demand_positive` AS `contemporary_demand_positive`,`successful_subtask_task_with_calculated_scoring`.`inner_function` AS `inner_function`,`successful_subtask_task_with_calculated_scoring`.`external_function` AS `external_function`,`successful_subtask_task_with_calculated_scoring`.`final_value` AS `final_value`,`successful_subtask_task_with_calculated_scoring`.`final_value_truncate` AS `final_value_truncate`,`successful_subtask_task_with_calculated_scoring`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`successful_subtask_task_with_calculated_scoring`.`subtask_type_id` AS `subtask_type_id`,`participant`.`participant_name` AS `participant_name`,`task`.`task_title` AS `task_title`,`first_share_holder_participant`.`subtask_share_holder_count` AS `subtask_share_holder_count`,`first_share_holder_participant`.`participant_id` AS `participant_holder_id`,`first_share_holder_participant`.`participant_name` AS `participant_holder_name` from (((`successful_subtask_task_with_calculated_scoring` join `participants` `participant` on((`successful_subtask_task_with_calculated_scoring`.`participant_id` = `participant`.`id`))) join `tasks` `task` on((`successful_subtask_task_with_calculated_scoring`.`contemporary_task_id` = `task`.`id`))) left join `first_share_holder_participant` on((`successful_subtask_task_with_calculated_scoring`.`subtask_id` = `first_share_holder_participant`.`subtask_id`)));
 
 -- --------------------------------------------------------
 
