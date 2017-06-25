@@ -69,10 +69,13 @@
             <th scope="row"><?= __('Participant Name') ?></th>
             <td><?= h($participant->participant_name) ?></td>
         </tr>-->
+        <?php foreach ($participant->subtasks as $subtask): ?>
         <tr>
-            <th scope="row"><?= __('Personal Goal') ?></th>
-            <td><?= h($participant->participant_goal) ?></td>
+            <th scope="row"><?= __('Personal Goal')?></th>
+            
+            <td><?= $this->Html->link($subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtask->id])  ?></td>
         </tr>
+        <?php endforeach; ?>
         <?php if ($participant->participant_dj_url != null) : ?>
         <tr>
             <th scope="row"><?= __('Dream Journal') ?></th>

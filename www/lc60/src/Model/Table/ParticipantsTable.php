@@ -15,6 +15,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\ScoreViewCompleteParticipantTable|\Cake\ORM\Association\HasMany $ScoreViewCompleteParticipant
  * @property \App\Model\Table\SubtaskShareHolderCompleteTable|\Cake\ORM\Association\HasMany $SubtaskShareHolderComplete
  * @property \App\Model\Table\SubtaskSharesTable|\Cake\ORM\Association\HasMany $SubtaskShares
+ * @property \App\Model\Table\SubtasksTable|\Cake\ORM\Association\HasMany $Subtasks
  * @property \App\Model\Table\SuccessfulSubtaskTable|\Cake\ORM\Association\HasMany $SuccessfulSubtask
  * @property \App\Model\Table\SuccessfulSubtaskCategoryTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategory
  * @property \App\Model\Table\SuccessfulSubtaskCategoryCompleteFinalTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategoryCompleteFinal
@@ -115,6 +116,11 @@ class ParticipantsTable extends Table
         $this->hasMany('SuccessfulSubtaskTaskWithCalculatedTotalParticipant', [
             'foreignKey' => 'participant_id'
         ]);
+
+        $this->hasMany('Subtasks', [
+            'foreignKey' => 'participant_id',
+            'associationForeignKey' => 'id'
+        ]);        
     }
 
     /**

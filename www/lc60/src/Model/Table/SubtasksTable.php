@@ -82,7 +82,9 @@ class SubtasksTable extends Table
         $this->hasOne('DreamTypes', [
             'foreignKey' => 'id',
             'joinType' => 'OUTER'
-        ]);        
+        ]);
+
+        
 /*
         $this->hasMany('CalculatedSubtaskDemandExternal', [
             'foreignKey' => 'subtask_id'
@@ -153,7 +155,7 @@ class SubtasksTable extends Table
         */
         $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoringParticipant', [
             'foreignKey' => 'subtask_id'
-        ]);        
+        ]);
     }
 
     /**

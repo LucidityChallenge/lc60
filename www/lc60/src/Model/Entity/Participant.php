@@ -8,9 +8,9 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $participant_name
- * @property string $participant_goal
  * @property string $participant_dj_url
  * @property string $participant_join_url
+ * @property int $participant_goal
  * @property string $participant_image_url
  *
  * @property \App\Model\Entity\Dream[] $dreams
@@ -20,6 +20,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\SubtaskShareHolderComplete[] $subtask_share_holder_complete
  * @property \App\Model\Entity\SubtaskShare[] $subtask_shares
  * @property \App\Model\Entity\SuccessfulSubtask[] $successful_subtask
+ * @property \App\Model\Entity\Subtasks[] $subtasks
  * @property \App\Model\Entity\SuccessfulSubtaskCategory[] $successful_subtask_category
  * @property \App\Model\Entity\SuccessfulSubtaskCategoryCompleteFinal[] $successful_subtask_category_complete_final
  * @property \App\Model\Entity\SuccessfulSubtaskCategoryCompleteFinalMinimum[] $successful_subtask_category_complete_final_minimum

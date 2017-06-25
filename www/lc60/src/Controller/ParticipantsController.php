@@ -36,7 +36,7 @@ class ParticipantsController extends AppController
     public function view($id = null)
     {
         $participant = $this->Participants->get($id, [
-            'contain' => ['Dreams', 'DreamWithType', 'ScoreViewComplete','SubtaskShareHolderComplete','SuccessfulSubtaskTaskWithCalculatedScoring']
+            'contain' => ['Dreams', 'Subtasks', 'DreamWithType', 'ScoreViewComplete','SubtaskShareHolderComplete','SuccessfulSubtaskTaskWithCalculatedScoring']
         ]);
 
         $this->set('participant', $participant);
