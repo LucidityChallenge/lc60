@@ -55,11 +55,14 @@
 </nav>
 <div class="participants view large-9 medium-8 columns content">
     <h2><?= h($participant->id .': '. $participant->participant_name) ?></h2>
+    <?php if ($participant->participant_image_url != null) : ?>
+            <div class="profile_picture"><?= $this->Html->image($participant->participant_image_url, ['alt' => ($participant->participant_name.': Profile Picture')]) ?></div>
+    <?php endif; ?>    
     <?php if (!empty($participant->score_view_complete)): ?>
     <?php $scoreViewComplete = reset($participant->score_view_complete); ?> 
     <?php $finalScore = (intval(100*$scoreViewComplete->final_value_total_with_dividends)/100);
 	  $subtaskTotalValue = (intval(100*$scoreViewComplete->final_value_total)/100);
-    ?>
+    ?>    
     <table class="vertical-table">
     <!--
         <tr>
