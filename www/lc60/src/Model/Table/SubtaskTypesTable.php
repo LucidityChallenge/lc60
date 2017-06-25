@@ -9,7 +9,8 @@ use Cake\Validation\Validator;
 /**
  * SubtaskTypes Model
  *
- * @property \App\Model\Table\SubtasksTable|\Cake\ORM\Association\HasMany $Subtasks
+ * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedScoringParticipantTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoringParticipant
+ * @property \App\Model\Table\SubtaskShareHolderCompleteTable|\Cake\ORM\Association\HasMany $SubtaskShareHolderComplete
  *
  * @method \App\Model\Entity\SubtaskType get($primaryKey, $options = [])
  * @method \App\Model\Entity\SubtaskType newEntity($data = null, array $options = [])
@@ -36,7 +37,11 @@ class SubtaskTypesTable extends Table
         $this->setDisplayField('subtask_type_name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('Subtasks', [
+        $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoringParticipant', [
+            'foreignKey' => 'subtask_type_id'
+        ]);
+        
+        $this->hasMany('SubtaskShareHolderComplete', [
             'foreignKey' => 'subtask_type_id'
         ]);
     }

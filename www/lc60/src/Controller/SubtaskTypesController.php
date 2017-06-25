@@ -36,7 +36,7 @@ class SubtaskTypesController extends AppController
     public function view($id = null)
     {
         $subtaskType = $this->SubtaskTypes->get($id, [
-            'contain' => ['Subtasks']
+            'contain' => ['SuccessfulSubtaskTaskWithCalculatedScoringParticipant', 'SubtaskShareHolderComplete']
         ]);
 
         $this->set('subtaskType', $subtaskType);

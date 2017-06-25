@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property string $subtask_type_name
  *
  * @property \App\Model\Entity\Subtask[] $subtasks
+ * @property \App\Model\Entity\SubtaskShareHolderComplete[] $subtask_share_holder_complete
  */
 class SubtaskType extends Entity
 {

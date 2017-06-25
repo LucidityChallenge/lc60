@@ -48,7 +48,7 @@
     </ul>
 </nav>
 <div class="subtaskCategories view large-9 medium-8 columns content">
-    <h3><?= h($subtaskCategory->id) ?></h3>
+    <h3><?= h(($subtaskCategory->subtask_category_name).' Subtasks') ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Subtask Category Name') ?></th>
@@ -72,7 +72,7 @@
         <?= $this->Text->autoParagraph(h($subtaskCategory->subtask_category_description)); ?>
     </div>
     
-    <h4><?= __('Completed Subtasks') ?></h4>
+    <h4><?= __('Completed '.($subtaskCategory->subtask_category_name).' Subtasks') ?></h4>
     <div class="related">
         <?php if (!empty($subtaskCategory->successful_subtask_task_with_calculated_scoring_participant)): ?>
         <table cellpadding="0" cellspacing="0">
@@ -164,7 +164,7 @@
     
 <?php if (!empty($subtaskCategory->subtask_share_holder_complete)): ?>
 <div class="subtaskShareHolderComplete view large-9 medium-8 columns content subtask subtask_yellow">
-<h4><?= __('Subtasks') ?></h4>
+<h4><?= __(($subtaskCategory->subtask_category_name).' Subtasks') ?></h4>
     <?php foreach ($subtaskCategory->subtask_share_holder_complete as $subtaskShareHolderComplete): ?>
     <h3><?= $this->Html->link($subtaskShareHolderComplete->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',($subtaskShareHolderComplete->subtask_id)]) ?></h3>
     <div class="subtask_picture"><?= (null != $subtaskShareHolderComplete->subtask_image) ? $this->Html->image($subtaskShareHolderComplete->subtask_image, ['alt' => (null != $subtaskShareHolderComplete->subtask_symbol) ? ('&#'.$subtaskShareHolderComplete->subtask_symbol.'; '.($subtaskShareHolderComplete->subtask_name)) : ($subtaskShareHolderComplete->subtask_name)]) :
