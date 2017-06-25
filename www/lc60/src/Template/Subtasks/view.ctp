@@ -107,7 +107,17 @@
         <h4><?= __('Subtask Instructions') ?></h4>
         <?= $this->Text->autoParagraph(h($subtask->subtask_instruction)); ?>
     </div>
-    
+    <?php    
+      $comma = '';
+      $s1data = '';
+      $s2data = '';      
+    ?>
+    <?php if (count($subtask->successful_subtask_task_with_calculated_scoring_participant)>1) : ?>
+    <h4><?= __('Value evolution for "'.($subtask->subtask_name).'"') ?></h4>
+    <div class="plot chart_view jqplot-cursor-legend-swatch" id="score_bar_line" style="margin-top:20px; margin-left:10px; width:90%; height:400px;">
+    </div>
+    <?php endif; ?>
+    <!--<h3><span class="chart_info" id="score_bar_line_info">Hover over line for more precision.</span></h3>-->
     <h4><?= __('Completed "'.($subtask->subtask_name).'" Instances') ?></h4>
     <div class="related">
         <?php if (!empty($subtask->successful_subtask_task_with_calculated_scoring_participant)): ?>
@@ -195,6 +205,14 @@
                 </td>
                 -->
             </tr>
+            <?php
+	      $date = $successfulSubtaskTaskWithCalculatedScoring->dream_timestamp;
+	      $value =  $successfulSubtaskTaskWithCalculatedScoring->final_value;
+	      $s1data = $s1data."${comma}[\"${date}\",${value}]";
+	      $baseValue = ($successfulSubtaskTaskWithCalculatedScoring->subtask_base_value);
+	      $s2data = $s2data."${comma}[\"${date}\",${baseValue}]";
+	      $comma = ',';
+            ?>           
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
@@ -228,3 +246,110 @@
     
 </div>
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
+
+<?php if (count($subtask->successful_subtask_task_with_calculated_scoring_participant)>1) : ?>
+
+  <?php echo '<script class="code" type="text/javascript">'; ?>
+$(document).ready(function () {
+    $.jqplot._noToImageButton = true;
+    var dream = [<?= $s1data ?>];
+ 
+    var acc = [<?= $s2data ?>];
+ 
+    var plot1 = $.jqplot("score_bar_line", [dream, acc], {
+        seriesColors: ["rgba(78, 135, 194, 0.7)", "rgb(211, 235, 59)"],
+        title: '<?= ('Value evolution for "'.($subtask->subtask_name).'"') ?>',
+        highlighter: {
+            show: true,
+            sizeAdjust: 1,
+            tooltipOffset: 1
+        },
+        grid: {
+            background: 'rgba(57,57,57,0.0)',
+            drawBorder: false,
+            shadow: false,
+            gridLineColor: '#808080',
+            gridLineWidth: 2
+        },
+        legend: {
+	    renderer: $.jqplot.EnhancedLegendRenderer,
+            show: true,
+            sizeAdjust: 0.5,
+            placement: 'insideGrid',
+            location: 'nw',
+            showSwatches: true,
+        },
+        seriesDefaults: {
+            rendererOptions: {
+                smooth: true,
+                animation: {
+                    show: true
+                }
+            },
+            showMarker: false
+        },
+        series: [
+            {
+                fill: true,
+                label: 'Actual Value'
+            },
+            {
+                label: 'Minimum Value'
+            }
+        ],
+        axesDefaults: {
+            rendererOptions: {
+                baselineWidth: 1.5,
+                baselineColor: '#444444',
+                drawBaseline: false
+            }
+        },
+        axes: {
+            xaxis: {
+                renderer: $.jqplot.DateAxisRenderer,
+                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                tickOptions: {
+                    formatString: "%b %e",
+                    angle: 270,
+                    textColor: '#202020'
+                },
+                tickInterval: "1 day",
+                drawMajorGridlines: false
+            },
+            yaxis: {
+                renderer: $.jqplot.LogAxisRenderer,
+                pad: 0,
+                rendererOptions: {
+                    minorTicks: 1
+                },
+                tickOptions: {
+                    formatString: "%4.2f points",
+                    showMark: false
+                },
+                min: 0,
+                pad: 2
+            }
+        }
+    });
+});
+   </script>
+
+
+<?php echo $this->Html->css('jqplot/jquery_jqplot.css',['block'=>true]); ?>
+<?php echo $this->Html->css('http://www.jqplot.com/examples/examples.css',['block'=>true]); ?>
+<?php echo $this->Html->script('jqplot/excanvas.js',['block'=>'notie', 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/jquery_min.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/jquery_jqplot.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_barRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_pointLabels.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_cursor.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_highlighter.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_dateAxisRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasAxisTickRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasAxisLabelRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasTextRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_enhancedLegendRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
+
+<?php  endif; ?>
+

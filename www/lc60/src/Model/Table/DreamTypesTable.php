@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * DreamTypes Model
  *
+ * @property \App\Model\Table\SubtasksTable|\Cake\ORM\Association\HasOne $Subtasks
  * @property \App\Model\Table\DreamTypeWithTypeParticipantTable|\Cake\ORM\Association\HasMany $DreamWithTypeParticipant
  * @property \App\Model\Table\$SuccessfulSubtaskTaskWithCalculatedScoringParticipantTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoringParticipant
  * @property |\Cake\ORM\Association\HasMany $RecentSuccesses
@@ -63,6 +64,10 @@ class DreamTypesTable extends Table
         $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoring', [
             'foreignKey' => 'dream_type_id'
         ]);
+        
+        $this->hasOne('Subtasks', [
+            'foreignKey' => 'id'
+        ]);        
     }
 
     /**

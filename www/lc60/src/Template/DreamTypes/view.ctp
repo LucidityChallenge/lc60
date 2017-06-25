@@ -42,8 +42,19 @@
         </tr>
     </table>
     
+    <?php if (count($dreamType->dream_with_type_participant) > 1) : ?>
+    <div class="plot chart_view jqplot-cursor-legend-swatch" id="score_bar_line" style="margin-top:20px; margin-left:10px; width:90%; height:400px;">
+    </div>
+    <!--<h3><span class="chart_info" id="score_bar_line_info">Hover over line for more precision.</span></h3>-->
+    <?php endif; ?>
+    
         <div class="related">
         <h4><?= __('Related Dreams') ?></h4>
+        <?php    
+	   $comma = '';
+	   $s1data = '';
+	   $s2data = '';
+	?>
         <?php if (!empty($dreamType->dream_with_type_participant)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -90,6 +101,14 @@
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Dreams', 'action' => 'delete', $dreams->dream_id], ['confirm' => __('Are you sure you want to delete # {0}?', $dreams->dream_id)]) ?>
                 </td>-->
             </tr>
+            <?php
+	      $date = ($dreams->dream_timestamp);
+	      $value = ($dreams->final_value_truncate);
+	      $s1data = $s1data."${comma}[\"${date}\",${value}]";
+	      $dreamValue = ($dreamType->subtask_base_value);
+	      $s2data = $s2data."${comma}[\"${date}\",${dreamValue}]";
+	      $comma = ',';
+            ?>            
             <?php endforeach; ?>
             <tr>
 	      <td colspan="3"><?= h('Subtotal for ')?><?= $this->Html->link($dreams->task_title, ['controller' => 'Tasks', 'action' => 'view', $dreams->task_id])  ?></td>
@@ -521,3 +540,108 @@
     </div>
     -->
 </div>
+
+<?php if (count($dreamType->dream_with_type_participant) > 1) : ?>
+  <?php echo '<script class="code" type="text/javascript">'; ?>
+$(document).ready(function () {
+    $.jqplot._noToImageButton = true;
+    var acc = [<?= $s1data ?>];
+ 
+    var dream = [<?= $s2data ?>];
+ 
+    var plot1 = $.jqplot("score_bar_line", [acc, dream], {
+        seriesColors: ["rgba(78, 135, 194, 0.7)", "rgb(211, 235, 59)"],
+        title: '<?= ('Value Evolution for "'.($dreamType->dream_type_name).'" with subtasks') ?>',
+        highlighter: {
+            show: true,
+            sizeAdjust: 1,
+            tooltipOffset: 1
+        },
+        grid: {
+            background: 'rgba(57,57,57,0.0)',
+            drawBorder: false,
+            shadow: false,
+            gridLineColor: '#808080',
+            gridLineWidth: 2
+        },
+        legend: {
+	    renderer: $.jqplot.EnhancedLegendRenderer,
+            show: true,
+            sizeAdjust: 0.5,
+            placement: 'insideGrid',
+            location: 'nw',
+            showSwatches: true,
+        },
+        seriesDefaults: {
+            rendererOptions: {
+                smooth: true,
+                animation: {
+                    show: true
+                }
+            },
+            showMarker: false
+        },
+        series: [
+            {
+                fill: true,
+                label: 'Accumulated Subtask Value'
+            },
+            {
+                label: 'Dream Type Value'
+            }
+        ],
+        axesDefaults: {
+            rendererOptions: {
+                baselineWidth: 1.5,
+                baselineColor: '#444444',
+                drawBaseline: false
+            }
+        },
+        axes: {
+            xaxis: {
+                renderer: $.jqplot.DateAxisRenderer,
+                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                tickOptions: {
+                    formatString: "%b %e",
+                    angle: 270,
+                    textColor: '#202020'
+                },
+                tickInterval: "1 day",
+                drawMajorGridlines: false
+            },
+            yaxis: {
+                renderer: $.jqplot.LogAxisRenderer,
+                pad: 0,
+                rendererOptions: {
+                    minorTicks: 1
+                },
+                tickOptions: {
+                    formatString: "%4.2f points",
+                    showMark: false
+                },
+                min: 0,
+                pad: 2
+            }
+        }
+    });
+});
+   </script>
+
+
+<?php echo $this->Html->css('jqplot/jquery_jqplot.css',['block'=>true]); ?>
+<?php echo $this->Html->css('http://www.jqplot.com/examples/examples.css',['block'=>true]); ?>
+<?php echo $this->Html->script('jqplot/excanvas.js',['block'=>'notie', 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/jquery_min.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/jquery_jqplot.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_barRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_pointLabels.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_cursor.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_highlighter.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_dateAxisRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasAxisTickRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasAxisLabelRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_canvasTextRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->script('jqplot/plugins/jqplot_enhancedLegendRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
+<?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
+
+<?php  endif; ?>

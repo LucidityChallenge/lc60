@@ -9,8 +9,10 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $dream_type_name
  * @property string $dream_type_short_name
+ * @property int $subtask_base_value 
  *
- * @property \App\Model\Entity\DreamTypeWithTypeParticipant[] $dream_type_id 
+ * @property \App\Model\Entity\Subtasks $subtasks
+ * @property \App\Model\Entity\DreamTypeWithTypeParticipant[] $dream_type_id
  * @property \App\Model\Entity\DreamTypeId[] $dream_type_id
  * @property \App\Model\Entity\SuccessfulSubtask[] $successful_subtask
  * @property \App\Model\Entity\SuccessfulSubtaskDividendScore[] $successful_subtask_dividend_scores

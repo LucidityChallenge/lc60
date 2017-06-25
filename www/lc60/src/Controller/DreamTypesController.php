@@ -39,6 +39,7 @@ class DreamTypesController extends AppController
             'contain' => ['DreamWithTypeParticipant', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
         ]);
 
+        $dreamType->subtask_base_value=  $this->DreamTypes->Subtasks->get($id)->subtask_base_value;
         $this->set('dreamType', $dreamType);
         $this->set('_serialize', ['dreamType']);
     }
