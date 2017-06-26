@@ -39,7 +39,7 @@ class DreamsController extends AppController
     public function view($id = null)
     {
         $dream = $this->Dreams->get($id, [
-            'contain' => ['Participants', 'DreamWithType', 'SubtaskDreamSuperName', 'SubtaskDreams', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
+            'contain' => ['Participants', 'DreamWithType', 'SubtaskDreamSuperName', 'SubtaskDreams', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
         ]);
 
         $this->set('dream', $dream);

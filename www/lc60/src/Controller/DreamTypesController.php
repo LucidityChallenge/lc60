@@ -36,7 +36,7 @@ class DreamTypesController extends AppController
     public function view($id = null)
     {
         $dreamType = $this->DreamTypes->get($id, [
-            'contain' => ['DreamWithTypeParticipant', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant', 'SuccessfulSubtask', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
+            'contain' => ['DreamWithTypeParticipant', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
         ]);
 
         $dreamType->subtask_base_value=  $this->DreamTypes->Subtasks->get($id)->subtask_base_value;
