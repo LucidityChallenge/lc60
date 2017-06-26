@@ -40,7 +40,7 @@ class DreamsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('dreams');
+        $this->setTable('lc60_dreams');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
@@ -63,9 +63,11 @@ class DreamsTable extends Table
         $this->hasMany('SubtaskDreams', [
             'foreignKey' => 'dream_id'
         ]);
+        /*
         $this->hasMany('SuccessfulSubtask', [
             'foreignKey' => 'dream_id'
         ]);
+        */
         $this->hasMany('SuccessfulSubtaskDividendScores', [
             'foreignKey' => 'dream_id'
         ]);

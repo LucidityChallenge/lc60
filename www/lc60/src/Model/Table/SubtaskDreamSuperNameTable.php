@@ -33,7 +33,7 @@ class SubtaskDreamSuperNameTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('subtask_dream_super_name');
+        $this->setTable('lc60_subtask_dream_super_name');
 
         $this->belongsTo('Subtasks', [
             'foreignKey' => 'subtask_id'

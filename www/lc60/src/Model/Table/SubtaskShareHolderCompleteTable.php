@@ -38,7 +38,7 @@ class SubtaskShareHolderCompleteTable extends Table
         $this->setDisplayField('subtask_name');
         $this->setPrimaryKey('id');
 
-        $this->setTable('subtask_share_holder_complete');
+        $this->setTable('lc60_subtask_share_holder_complete');
 
         $this->belongsTo('Subtasks', [
             'foreignKey' => 'subtask_id',

@@ -40,7 +40,7 @@ class TasksTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('tasks');
+        $this->setTable('lc60_tasks');
         $this->setDisplayField('task_title');
         $this->setPrimaryKey('id');
 

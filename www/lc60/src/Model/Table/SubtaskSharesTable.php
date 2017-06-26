@@ -33,7 +33,7 @@ class SubtaskSharesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('subtask_shares');
+        $this->setTable('lc60_subtask_shares');
         $this->setDisplayField('subtask_id');
         $this->setPrimaryKey('id');
 

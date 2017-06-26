@@ -33,7 +33,7 @@ class SubtaskTypesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('subtask_types');
+        $this->setTable('lc60_subtask_types');
         $this->setDisplayField('subtask_type_name');
         $this->setPrimaryKey('id');
 

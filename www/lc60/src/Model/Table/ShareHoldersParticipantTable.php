@@ -33,7 +33,7 @@ class ShareHoldersParticipantTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('share_holders_participant');
+        $this->setTable('lc60_share_holders_participant');
 
         $this->belongsTo('Subtasks', [
             'foreignKey' => 'subtask_id',

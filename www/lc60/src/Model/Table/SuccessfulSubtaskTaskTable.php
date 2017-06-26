@@ -40,7 +40,7 @@ class SuccessfulSubtaskTaskTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('successful_subtask_task');
+        $this->setTable('lc60_successful_subtask_task');
 
         $this->belongsTo('Participants', [
             'foreignKey' => 'participant_id',

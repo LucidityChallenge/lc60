@@ -32,7 +32,7 @@ class NewsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('news');
+        $this->setTable('lc60_news');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
 

@@ -33,7 +33,7 @@ class SubtaskDreamsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('subtask_dreams');
+        $this->setTable('lc60_subtask_dreams');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 

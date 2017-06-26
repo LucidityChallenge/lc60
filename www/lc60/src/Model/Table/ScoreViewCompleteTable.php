@@ -32,7 +32,7 @@ class ScoreViewCompleteTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('score_view_complete');
+        $this->setTable('lc60_score_view_complete');
         $this->setDisplayField('participant_name');
         $this->setPrimaryKey('participant_id');
 

@@ -40,7 +40,7 @@ class SuccessfulSubtaskTaskWithCalculatedScoringTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('successful_subtask_task_with_calculated_scoring');
+        $this->setTable('lc60_successful_subtask_task_with_calculated_scoring');
 
         $this->belongsTo('Participants', [
             'foreignKey' => 'participant_id',

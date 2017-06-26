@@ -35,7 +35,7 @@ class DreamWithTypeParticipantTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('dream_with_type_participant');
+        $this->setTable('lc60_dream_with_type_participant');
 
         $this->belongsTo('Participants', [
             'foreignKey' => 'participant_id',

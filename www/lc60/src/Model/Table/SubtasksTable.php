@@ -58,7 +58,7 @@ class SubtasksTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('subtasks');
+        $this->setTable('lc60_subtasks');
         $this->setDisplayField('subtask_name');
         $this->setPrimaryKey('id');
 

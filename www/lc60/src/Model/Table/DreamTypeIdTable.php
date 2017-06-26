@@ -33,7 +33,7 @@ class DreamTypeIdTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('dream_type_id');
+        $this->setTable('lc60_dream_type_id');
         $this->setDisplayField('dream_id');
         $this->setPrimaryKey('dream_id');        
 
