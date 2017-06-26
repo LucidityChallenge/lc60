@@ -84,7 +84,7 @@ class SubtasksController extends AppController
 	
 	if ($showSubtask)
 	{
-	  $contains = ['Tasks', 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant',		
+	  $contains = ['SubtaskValues', 'Tasks', 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant',		
 		'ShareHoldersParticipant'
 	  ];
 	

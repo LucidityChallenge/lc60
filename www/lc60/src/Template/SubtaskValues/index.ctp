@@ -123,7 +123,7 @@
 		</tr>
                 <tr>
 		  <th scope="row">Demand:</th>
-		  <td><span class="digital"><?= $this->Number->format($subtaskValue->contemporary_demand_cur) ?></span></td><td>per Week</td>
+		  <td><span class="digital"><?= $this->Number->precision($subtaskValue->contemporary_demand_cur,1) ?></span></td><td>per Week</td>
 		</tr>
                 <tr>
 		  <th scope="row">Current:</th>

@@ -40,6 +40,10 @@
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($dreamType->id) ?></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('Dream Value') ?></th>
+            <td><?= $this->Number->precision(intval(100*($dreamType->subtask_base_value))/100,2) ?> points</td>
+        </tr>
     </table>
     
     <?php if (count($dreamType->dream_with_type_participant) > 1) : ?>

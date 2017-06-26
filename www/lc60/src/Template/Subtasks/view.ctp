@@ -99,6 +99,48 @@
             <td><?= $subtask->subtask_accumulative ? __('Yes') : __('No'); ?></td>
         </tr>        
     </table>
+    <h4><?= __('Current Values') ?></h4>
+    <?php 
+      $showImage = false;
+    ?>
+    <?php foreach ($subtask->subtask_values as $subtaskValue): ?>
+    <div class="subtask_value_box <?= 'box_'.($subtaskValue->subtask_category_class) ?>">
+    <table>
+	<?php 
+	  $variation = 
+	  (
+	    100
+	    *
+	    ($subtaskValue->final_value_cur - $subtaskValue->final_value_pre)
+	    /
+	    max(1,$subtaskValue->final_value_pre)
+	  )
+	?>
+	<tr>
+	  <th scope="row" colspan="2">
+	    <?= $this->Html->link($subtaskValue->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskValue->subtask_id]) ?>
+	  </th>
+	  <td>
+	    <?= $this->Html->link(( ($subtaskValue->subtask_symbol != null) ? ('<span class="emoji">&#'.$subtaskValue->subtask_symbol.';</span>') : ((($subtaskValue->subtask_image != null) && $showImage) ? ($this->Html->image($subtaskValue->subtask_image,['alt' => ($subtaskValue->subtask_name)])) : ('')) ), ['controller' => 'Subtasks', 'action' => 'view', $subtaskValue->subtask_id],['escape' => false]) ?>
+	  </td>
+	</tr>
+	<tr>
+	  <th scope="row">Demand:</th>
+	  <td><span class="digital"><?= $this->Number->precision($subtaskValue->contemporary_demand_cur,1) ?></span></td><td>per Week</td>
+	</tr>
+	<tr>
+	  <th scope="row">Current:</th>
+	  <td><span class="digital"><?= $this->Number->precision((intval(100*$subtaskValue->final_value_cur)/100),2) ?></span></td><td>Points</td>
+	</tr>
+	<tr>
+	  <th scope="row">Change:</th>
+	  <td><span class="digital"><?= $this->Number->precision($variation,3) ?>%&nbsp;</span></td>
+	  <td><span class="emoji"><?= (($variation) > 0) ? '&#9652;' : ((($variation) == 0) ? '&#9656;' : '&#9662;') ?></span></td>
+	</tr>
+    </table>
+    </div>
+    <?php endforeach; ?>    
+    
     <div class="row">
         <h4><?= __('Subtask Description') ?></h4>
         <?= $this->Text->autoParagraph(h($subtask->subtask_description)); ?>
@@ -349,7 +391,8 @@ $(document).ready(function () {
 <?php echo $this->Html->script('jqplot/plugins/jqplot_canvasAxisLabelRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_canvasTextRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_enhancedLegendRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
-<?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
 
 <?php  endif; ?>
 
+<?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
+<?php echo $this->Html->css('crystal.css',['block'=>true]); ?>

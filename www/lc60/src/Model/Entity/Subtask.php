@@ -55,6 +55,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedScoringParticipant[] $successful_subtask_task_with_calculated_scoring_participant
  * @property \App\Model\Entity\DreamTypes $dream_type
  * @property \App\Model\Entity\ShareHoldersParticipant[] $share_holders_participant
+ * @property \App\Model\Entity\SubtaskValues[] $subtask_values
  */
 class Subtask extends Entity
 {
