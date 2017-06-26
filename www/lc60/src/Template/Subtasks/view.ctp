@@ -63,8 +63,8 @@
             <td><?= $this->Number->format($subtask->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Base Value') ?></th>
-            <td><?= $this->Number->format($subtask->subtask_base_value) ?></td>
+            <th scope="row"><?= __('Minimum Value') ?></th>
+            <td><?= $this->Number->precision(intval(100*($subtask->subtask_base_value))/100,2) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Max Value') ?></th>
@@ -218,7 +218,7 @@
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_super_id) ?></td>-->
                 <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_name,['controller' => 'Subtasks', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->subtask_id)]) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_id) ?></td>-->
-                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_base_value) ?></td>
+                <td><?= $this->Number->precision(intval(100*($successfulSubtaskTaskWithCalculatedScoring->subtask_base_value))/100,2) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_max_value) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_starting_demand) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_inflation_rate) ?></td>-->
