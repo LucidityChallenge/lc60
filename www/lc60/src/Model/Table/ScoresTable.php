@@ -31,7 +31,7 @@ class ScoresTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('scores');
+        $this->setTable('lc60_scores');
         $this->setDisplayField('participant_id');
         $this->setPrimaryKey('participant_id');
 /*
