@@ -1,0 +1,11 @@
+@font-face {
+	font-family: 'Crystal';
+	src: url('../font/crystal/Crysta.eot');
+	src: url('../font/crystal/Crysta.woff') format('woff'), url('../font/crystal/Crysta.ttf') format('truetype'), url('../font/crystal/Crysta.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+span.digital {
+  font-face: Crystal;
+}
