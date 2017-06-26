@@ -6,6 +6,6 @@
 	font-style: normal;
 }
 
-span.digital {
-  font-face: Crystal;
+.digital {
+  font-family: Crystal;
 }

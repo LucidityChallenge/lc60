@@ -27,7 +27,7 @@
     <?= $this->Form->create($task) ?>
     <fieldset>
         <legend><?= __('Add Task') ?></legend>
-        <?php
+        <?php  
             echo $this->Form->control('task_title');
             echo $this->Form->control('task_start');
             echo $this->Form->control('task_expiration');
