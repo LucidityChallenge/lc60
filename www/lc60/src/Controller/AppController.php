@@ -51,6 +51,8 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
         
+        /*
+        
         $this->loadComponent('Auth', [
             'loginRedirect' => [
                 'controller' => 'Dreams',
@@ -62,12 +64,25 @@ class AppController extends Controller
                 'home'
             ]
         ]);
+        */
+        
+        $this->loadComponent('Auth', [
+            'loginRedirect' => [
+                'controller' => 'Signups',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Signups',
+                'action' => 'index'
+            ]
+        ]);        
     }
     
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view', 'display', 'rss']);
+        $this->Auth->allow([]);//['index', 'view', 'display', 'rss']);
+        return $this->redirect(array('controller' => 'Signups', 'action' => 'index'));
     }    
 
     /**
