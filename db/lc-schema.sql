@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2017 at 04:07 AM
+-- Generation Time: Jun 27, 2017 at 12:31 AM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -596,6 +596,32 @@ CREATE TABLE IF NOT EXISTS `lc60_share_holders_participant` (
 `subtask_id` int(11)
 ,`participant_id` int(11)
 ,`participant_name` varchar(48)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `lc60_signups`
+--
+CREATE TABLE IF NOT EXISTS `lc60_signups` (
+`signup_url` varchar(45)
+,`signup_image_url` varchar(12)
+,`now_date` datetime
+,`now_date_unix` bigint(17)
+,`end_date` varchar(19)
+,`end_date_unix` bigint(17)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `lc60_start`
+--
+CREATE TABLE IF NOT EXISTS `lc60_start` (
+`now_date` datetime
+,`now_date_unix` bigint(17)
+,`end_date` varchar(19)
+,`end_date_unix` bigint(17)
 );
 
 -- --------------------------------------------------------
@@ -1396,6 +1422,24 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `lc60_share_holders_participant`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lc60_share_holders_participant` AS select `subtask_share_holder`.`subtask_id` AS `subtask_id`,`participant`.`id` AS `participant_id`,`participant`.`participant_name` AS `participant_name` from (`lc60_subtask_share_holder` `subtask_share_holder` join `lc60_participants` `participant` on((`subtask_share_holder`.`participant_id` = `participant`.`id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `lc60_signups`
+--
+DROP TABLE IF EXISTS `lc60_signups`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lc60_signups` AS select 'http://ld4all.com/forum/viewtopic.php?t=50763' AS `signup_url`,'baddudes.gif' AS `signup_image_url`,now() AS `now_date`,unix_timestamp(now()) AS `now_date_unix`,'2017-06-28 18:00:00' AS `end_date`,unix_timestamp('2017-06-28 18:00:00') AS `end_date_unix`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `lc60_start`
+--
+DROP TABLE IF EXISTS `lc60_start`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lc60_start` AS select now() AS `now_date`,unix_timestamp(now()) AS `now_date_unix`,'2017-06-28 18:00:00' AS `end_date`,unix_timestamp('2017-06-28 18:00:00') AS `end_date_unix`;
 
 -- --------------------------------------------------------
 
