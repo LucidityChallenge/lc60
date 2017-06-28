@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 27, 2017 at 02:00 AM
+-- Generation Time: Jun 28, 2017 at 03:37 PM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -814,7 +814,9 @@ CREATE TABLE IF NOT EXISTS `lc60_subtask_subtask_category` (
 
 CREATE TABLE IF NOT EXISTS `lc60_subtask_types` (
   `id` tinyint(4) NOT NULL,
-  `subtask_type_name` varchar(32) NOT NULL
+  `subtask_type_name` varchar(32) NOT NULL,
+  `subtask_type_ownable` tinyint(1) unsigned DEFAULT '1',
+  `subtask_type_shareable` tinyint(1) unsigned DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -832,6 +834,7 @@ CREATE TABLE IF NOT EXISTS `lc60_subtask_values` (
 ,`subtask_success_count_total` bigint(21)
 ,`subtask_task_period_demand` tinyint(4)
 ,`subtask_task_id` tinyint(4)
+,`task_title` varchar(48)
 ,`subtask_super_id` int(11)
 ,`subtask_name` varchar(48)
 ,`subtask_category_id` tinyint(4)
@@ -844,8 +847,13 @@ CREATE TABLE IF NOT EXISTS `lc60_subtask_values` (
 ,`subtask_owner_participant_id` int(11)
 ,`subtask_symbol` int(11)
 ,`subtask_image` varchar(80)
+,`subtask_type_id` tinyint(4)
+,`subtask_type_name` varchar(32)
+,`subtask_type_ownable` tinyint(1) unsigned
+,`subtask_type_shareable` tinyint(1) unsigned
 ,`subtask_category_name` varchar(16)
 ,`subtask_category_class` varchar(16)
+,`subtask_category_color` varchar(8)
 ,`contemporary_demand_cur` decimal(44,0)
 ,`contemporary_demand_positive_cur` decimal(44,0)
 ,`contemporary_demand_pre` decimal(44,0)
@@ -1502,7 +1510,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_subtask_values`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_subtask_values` AS select `subtask`.`id` AS `id`,`cur`.`current_task_id` AS `current_task_id`,`cur`.`contemporary_task_id` AS `contemporary_task_id`,`subtask`.`id` AS `subtask_id`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,`cur`.`subtask_success_count` AS `subtask_success_count`,`cur`.`subtask_success_count_total` AS `subtask_success_count_total`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`task_id` AS `subtask_task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_symbol` AS `subtask_symbol`,`subtask`.`subtask_image` AS `subtask_image`,`cur`.`subtask_category_name` AS `subtask_category_name`,`cur`.`subtask_category_class` AS `subtask_category_class`,max(coalesce(`cur`.`contemporary_demand`,`subtask`.`subtask_starting_demand`)) AS `contemporary_demand_cur`,max(coalesce(`cur`.`contemporary_demand_positive`,`subtask`.`subtask_starting_demand`)) AS `contemporary_demand_positive_cur`,max(coalesce(`pre`.`contemporary_demand`,`subtask`.`subtask_starting_demand`)) AS `contemporary_demand_pre`,max(coalesce(`pre`.`contemporary_demand_positive`,`subtask`.`subtask_starting_demand`)) AS `contemporary_demand_positive_pre`,max(coalesce(`pre`.`final_value`,`calculated_subtask_demand_final_value`.`final_value`)) AS `final_value_pre`,max(coalesce(`cur`.`final_value`,`calculated_subtask_demand_final_value`.`final_value`)) AS `final_value_cur` from (((`lc60_subtasks` `subtask` join `lc60_tasks` `task` on((`subtask`.`task_id` = `task`.`id`))) left join (`lc60_calculated_subtask_demand_final_value` `cur` join `lc60_calculated_subtask_demand_final_value` `pre` on(((`cur`.`subtask_id` = `pre`.`subtask_id`) and (`cur`.`contemporary_task_id` = (`pre`.`contemporary_task_id` + 1))))) on(((`subtask`.`id` = `cur`.`subtask_id`) and (`subtask`.`subtask_visible` <> 0) and (`cur`.`contemporary_task_id` = (select max(`m`.`contemporary_task_id`) from `lc60_calculated_subtask_demand_final_value` `m` where (`m`.`subtask_id` = `cur`.`subtask_id`))) and (`cur`.`current_task_id` = (select `unexpired_task`.`task_id` from `lc60_unexpired_task` `unexpired_task` limit 1))))) left join `lc60_calculated_subtask_demand_final_value` `calculated_subtask_demand_final_value` on(((`subtask`.`id` = `calculated_subtask_demand_final_value`.`subtask_id`) and (`calculated_subtask_demand_final_value`.`contemporary_task_id` = (select max(`m`.`contemporary_task_id`) from `lc60_calculated_subtask_demand_final_value` `m` where (`m`.`subtask_id` = `calculated_subtask_demand_final_value`.`subtask_id`)))))) where ((`task`.`task_start` <= now()) and (`subtask`.`subtask_visible` <> 0)) group by `subtask`.`id`,`cur`.`current_task_id`,`cur`.`contemporary_task_id`,`subtask`.`subtask_starting_demand`,`cur`.`subtask_success_count`,`cur`.`subtask_success_count_total`,`subtask`.`subtask_task_period_demand`,`subtask`.`task_id`,`subtask`.`subtask_super_id`,`subtask`.`subtask_name`,`subtask`.`subtask_category_id`,`subtask`.`subtask_base_value`,`subtask`.`subtask_max_value`,`subtask`.`subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff`,`subtask`.`subtask_description`,`subtask`.`subtask_accumulative`,`subtask`.`participant_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_subtask_values` AS select `subtask`.`id` AS `id`,`cur`.`current_task_id` AS `current_task_id`,`cur`.`contemporary_task_id` AS `contemporary_task_id`,`subtask`.`id` AS `subtask_id`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,coalesce(`cur`.`subtask_success_count`,0) AS `subtask_success_count`,coalesce(`cur`.`subtask_success_count_total`,0) AS `subtask_success_count_total`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`task_id` AS `subtask_task_id`,`task`.`task_title` AS `task_title`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_symbol` AS `subtask_symbol`,`subtask`.`subtask_image` AS `subtask_image`,`subtask`.`subtask_type_id` AS `subtask_type_id`,`subtask_type`.`subtask_type_name` AS `subtask_type_name`,`subtask_type`.`subtask_type_ownable` AS `subtask_type_ownable`,`subtask_type`.`subtask_type_shareable` AS `subtask_type_shareable`,`cat`.`subtask_category_name` AS `subtask_category_name`,`cat`.`subtask_category_class` AS `subtask_category_class`,`cat`.`subtask_category_color` AS `subtask_category_color`,max(coalesce(`cur`.`contemporary_demand`,`subtask`.`subtask_starting_demand`)) AS `contemporary_demand_cur`,max(coalesce(`cur`.`contemporary_demand_positive`,`subtask`.`subtask_starting_demand`)) AS `contemporary_demand_positive_cur`,max(coalesce(`pre`.`contemporary_demand`,`subtask`.`subtask_starting_demand`)) AS `contemporary_demand_pre`,max(coalesce(`pre`.`contemporary_demand_positive`,`subtask`.`subtask_starting_demand`)) AS `contemporary_demand_positive_pre`,max(coalesce(`pre`.`final_value`,`calculated_subtask_demand_final_value`.`final_value`)) AS `final_value_pre`,max(coalesce(`cur`.`final_value`,`calculated_subtask_demand_final_value`.`final_value`)) AS `final_value_cur` from (((((`lc60_subtasks` `subtask` join `lc60_tasks` `task` on((`subtask`.`task_id` = `task`.`id`))) left join `lc60_subtask_categories` `cat` on((`subtask`.`subtask_category_id` = `cat`.`id`))) left join `lc60_subtask_types` `subtask_type` on((`subtask`.`subtask_type_id` = `subtask_type`.`id`))) left join (`lc60_calculated_subtask_demand_final_value` `cur` join `lc60_calculated_subtask_demand_final_value` `pre` on(((`cur`.`subtask_id` = `pre`.`subtask_id`) and (`cur`.`contemporary_task_id` = (`pre`.`contemporary_task_id` + 1))))) on(((`subtask`.`id` = `cur`.`subtask_id`) and (`subtask`.`subtask_visible` <> 0) and (`cur`.`contemporary_task_id` = (select max(`m`.`contemporary_task_id`) from `lc60_calculated_subtask_demand_final_value` `m` where (`m`.`subtask_id` = `cur`.`subtask_id`))) and (`cur`.`current_task_id` = (select `unexpired_task`.`task_id` from `lc60_unexpired_task` `unexpired_task` limit 1))))) left join `lc60_calculated_subtask_demand_final_value` `calculated_subtask_demand_final_value` on(((`subtask`.`id` = `calculated_subtask_demand_final_value`.`subtask_id`) and (`calculated_subtask_demand_final_value`.`contemporary_task_id` = (select max(`m`.`contemporary_task_id`) from `lc60_calculated_subtask_demand_final_value` `m` where (`m`.`subtask_id` = `calculated_subtask_demand_final_value`.`subtask_id`)))))) where ((`task`.`task_start` <= now()) and (`subtask`.`subtask_visible` <> 0)) group by `subtask`.`id`,`cur`.`current_task_id`,`cur`.`contemporary_task_id`,`subtask`.`subtask_starting_demand`,`cur`.`subtask_success_count`,`cur`.`subtask_success_count_total`,`subtask`.`subtask_task_period_demand`,`subtask`.`task_id`,`subtask`.`subtask_super_id`,`subtask`.`subtask_name`,`subtask`.`subtask_category_id`,`subtask`.`subtask_base_value`,`subtask`.`subtask_max_value`,`subtask`.`subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff`,`subtask`.`subtask_description`,`subtask`.`subtask_accumulative`,`subtask`.`participant_id`;
 
 -- --------------------------------------------------------
 
