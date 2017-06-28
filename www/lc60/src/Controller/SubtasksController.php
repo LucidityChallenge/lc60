@@ -199,32 +199,144 @@ class SubtasksController extends ImageController
     }
 
     /**
+     * img method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function img($id = null)
+    { 
+      return $this->image($id);
+    }
+
+    /**
+     * img method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function image($id = null)
+    {
+      $params = explode('.',$id);
+      
+      if (count($params) > 0)
+      {
+	$sid = $params[0];
+	$ext = 'svg';
+	
+	if (count($params) > 1)
+	{
+	  $ext = $params[1];
+	}
+	
+	if ($ext == 'png')
+	{
+	  return $this->png($sid);
+	}
+	else
+	if ($ext == 'svg')
+	{
+	  return $this->svg($sid);
+	}
+	else
+	{
+	  return null;
+	}
+      }
+      else
+      {
+	return null;
+      }
+    }    
+
+    /**
      * svg method
      *
      * @return \Cake\Http\Response|null
      */
     public function svg($id = null)
     {
-      return $this->svgBody("osemoji",
-"osemoji",
-'XXXXXX',
-"X",
-'osemoji',
-["Instructions in fine print.",'Second'],
-'osemoji',
-'Personal Subtask',
-'Own',
-'#A00000',
-'descrrr',
-[
-  ['a1','b1'],
-  ['a2','b2'],
-  ['a3','b3'],
-  ['a4','b4'],
-  ['a5','b5']
+    if ($id != null)
+    {
+      $subtasks = $this->Subtasks->find('all')
+	->contain(['SubtaskValues','Tasks', 'ShareHoldersParticipant'])
+	->where(['Subtasks.id' => $id])
+	->where(['Subtasks.subtask_visible' => 1])
+	->where(['Tasks.task_start <=' => Time::now()])
+      ;
+      
+      $unset = true;
+      
+      $subtask_fetch = null;
+      
+      foreach ($subtasks as $subtask)
+      {
+	$this->set('subtask', $subtask);
+	$this->set('_serialize', ['subtask']);
+	$subtask_fetch = $subtask;
+	$unset = false;
+      }
+  
+      if ($unset)
+      {
+	$this->Flash->error(__('Sorry! This data is restricted.'));
+	return $this->redirect(['controller' => 'users', 'action' => 'login']);
+      }
+      else
+      {
+      $ins[0] = '';
+      $ins[1] = '';
+      {
+	$ins_t = explode("\n",$subtask_fetch->subtask_instruction);
+	if (count($ins_t) > 0)
+	{
+	  $ins[0] = $ins_t[0];
+	  if (count($ins_t) > 1)
+	  {
+	    $ins[1] = $ins_t[1];
+	  }
+	}
+	unset($ins_t);
+      }
+     
+      $values = reset($subtask_fetch->subtask_values);
+      $owner = '';
+      $comma = '';
+      
+      foreach ($subtask_fetch->share_holders_participant as $holder)
+      {
+	$owner = $owner . $comma . $holder->participant_name;
+	$comma = ', ';
+      }
 
-]
+      return $this->svgBody("Roman",
+'osemoji',
+$subtask_fetch->subtask_name,
+($subtask_fetch->subtask_symbol != null) ? ('&#'.intval($subtask_fetch->subtask_symbol).';') : null,
+'osemoji',
+[($ins[0]),($ins[1])],
+'osemoji',
+$values->subtask_type_name,
+($owner != '') ? ($owner) : (($values->subtask_type_ownable != 0) ? 'Available' : '' ),
+(($subtask_fetch->subtask_accumulative != 0) ? 'Accumulative' : 'Non-Accumulative'),
+($values->subtask_category_color != null) ? ($values->subtask_category_color) : '#D0D0D0',
+$subtask_fetch->subtask_description,
+[
+  ['Task:',$values->task_title],
+  ['Value Range:',sprintf("[%0.2f;%0.2f]",intval(100*$values->subtask_base_value)/100,
+  intval(100*(($values->subtask_max_value !== null)? ($values->subtask_max_value) : ($values->subtask_base_value)))/100)],
+  ['Successes:',intval($values->subtask_success_count_total)],
+  ['Demand:',sprintf("%+0.2f",intval(100*$values->contemporary_demand_cur)/100)],
+  ['Current Value:',sprintf("%0.2f",intval(100*$values->final_value_cur)/100)]
+
+],
+$subtask_fetch->subtask_image,
+'Last Update: '.Time::now().' UTC'//Configure::getInstance()->read('Datasources')['default']['timezone']
 );
+    }
+    }
+    else
+    {
+      return null;
+    }
     }
 
     /**
@@ -236,30 +348,83 @@ class SubtasksController extends ImageController
     {
       if ($id != null)
       {
-	$baseUrl= (Router::url('/', true));
+    $subtasks = $this->Subtasks->find('all')
+	->contain(['SubtaskValues','Tasks', 'ShareHoldersParticipant'])
+	->where(['Subtasks.id' => $id])
+	->where(['Subtasks.subtask_visible' => 1])
+	->where(['Tasks.task_start <=' => Time::now()])
+      ;
+      
+      $unset = true;
+      
+      $subtask_fetch = null;
+      
+      foreach ($subtasks as $subtask)
+      {
+	$this->set('subtask', $subtask);
+	$this->set('_serialize', ['subtask']);
+	$subtask_fetch = $subtask;
+	$unset = false;
+      }
+  
+      if ($unset)
+      {
+	$this->Flash->error(__('Sorry! This data is restricted.'));
+	return $this->redirect(['controller' => 'users', 'action' => 'login']);
+      }
+      else
+      {
+      $ins[0] = '';
+      $ins[1] = '';
+      {
+	$ins_t = explode("\n",$subtask_fetch->subtask_instruction);
+	if (count($ins_t) > 0)
+	{
+	  $ins[0] = $ins_t[0];
+	  if (count($ins_t) > 1)
+	  {
+	    $ins[1] = $ins_t[1];
+	  }
+	}
+	unset($ins_t);
+      }
+     
+      $values = reset($subtask_fetch->subtask_values);
+      $owner = '';
+      $comma = '';
+      
+      foreach ($subtask_fetch->share_holders_participant as $holder)
+      {
+	$owner = $owner . $comma . $holder->participant_name;
+	$comma = ', ';
+      }
 
-
-
-	return $this->pngBody('webroot/font/osemoji/OpenSansEmoji.ttf',
+      return $this->pngBody('webroot/font/roman/NimbusRomNo9L-Reg.ttf',
 'webroot/font/osemoji/OpenSansEmoji.ttf',
-'XXXXXX',
-"X",
+$subtask_fetch->subtask_name,
+($subtask_fetch->subtask_symbol != null) ? ('&#'.intval($subtask_fetch->subtask_symbol).';') : null,
 'webroot/font/osemoji/OpenSansEmoji.ttf',
-["Instructions in fine print.",'Second'],
-'osemoji',
-'Personal Subtask',
-'Own',
-'#A00000',
-'descrrr',
+[($ins[0]),($ins[1])],
+'webroot/font/osemoji/OpenSansEmoji.ttf',
+$values->subtask_type_name,
+($owner != '') ? ($owner) : (($values->subtask_type_ownable != 0) ? 'Available' : '' ),
+(($subtask_fetch->subtask_accumulative != 0) ? 'Accumulative' : 'Non-Accumulative'),
+($values->subtask_category_color != null) ? ($values->subtask_category_color) : '#D0D0D0',
+$subtask_fetch->subtask_description,
 [
-  ['a1','b1'],
-  ['a2','b2'],
-  ['a3','b3'],
-  ['a4','b4'],
-  ['a5','b5']
+  ['Task:',$values->task_title],
+  ['Value Range:',sprintf("[%0.2f;%0.2f]",intval(100*$values->subtask_base_value)/100,
+  intval(100*(($values->subtask_max_value !== null)? ($values->subtask_max_value) : ($values->subtask_base_value)))/100)],
+  ['Successes:',intval($values->subtask_success_count_total)],
+  ['Demand:',sprintf("%+0.2f",intval(100*$values->contemporary_demand_cur)/100)],
+  ['Current Value:',sprintf("%0.2f",intval(100*$values->final_value_cur)/100)]
 
-]
+],
+$subtask_fetch->subtask_image,
+'Update: '.Time::now().' UTC'//Configure::getInstance()->read('Datasources')['default']['timezone']
 );
+    }
+
       }
       else
       {

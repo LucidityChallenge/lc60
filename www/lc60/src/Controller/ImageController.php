@@ -174,15 +174,19 @@ $fine_print,
 $fine_font,
 $type,
 $owner,
+$accumulative,
 $rect_color,
 $description,
-$number
+$number,
+$image_url = null,
+$updated = ''
 )
 {
 
 $image = 
 '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 .'<?xml-stylesheet type="text/css" href="/css/emoji.css" ?>'
+.'<?xml-stylesheet type="text/css" href="/css/roman.css" ?>'
 .'<svg '
 .'   xmlns:xlink="http://www.w3.org/1999/xlink"'
 .'   xmlns:dc="http://purl.org/dc/elements/1.1/"'
@@ -274,7 +278,7 @@ $image =
 .'         id="text3400"'
 .'         y="777.60071"'
 .'         x="48.487324"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
 .'           x="48.487324"'
@@ -285,16 +289,16 @@ $image =
 .'         id="text3404"'
 .'         y="777.60071"'
 .'         x="492.95444"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="text-align:end;text-anchor:end;font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
-.'           x="492.95444"'
+.'           x="650.00"'
 .'           id="tspan3406"'
 .'           sodipodi:role="line">'.($number[0][1]).'</tspan></text>'
 .'    </g>'
 .'    <text'
 .'       xml:space="preserve"'
-.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'       x="12.121831"'
 .'       y="39.765083"'
 .'       id="text3408"'
@@ -302,8 +306,20 @@ $image =
 .'         sodipodi:role="line"'
 .'         id="tspan3410"'
 .'         x="12.121831"'
-.'         y="39.765083"'
+.'         y="55"'
 .'         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'."'$font'".'">'.$type.'</tspan></text>'
+.'    <text'
+.'       xml:space="preserve"'
+.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'       x="12.121831"'
+.'       y="39.765083"'
+.'       id="text3408"'
+.'       sodipodi:linespacing="125%"><tspan'
+.'         sodipodi:role="line"'
+.'         id="tspan3410"'
+.'         x="40"'
+.'         y="54%"'
+.'         style="font-style:italic;font-variant:normal;font-size:25px;font-weight:normal;font-stretch:normal;font-family:'."'$font'".'">'.$accumulative.'</tspan></text>'
 .'    <g'
 .'       transform="translate(19.63691,-5.259286)"'
 .'       id="g3412-2">'
@@ -312,7 +328,7 @@ $image =
 .'         id="text3400-4"'
 .'         y="777.60071"'
 .'         x="48.487324"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
 .'           x="48.487324"'
@@ -323,10 +339,10 @@ $image =
 .'         id="text3404-9"'
 .'         y="777.60071"'
 .'         x="492.95444"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="text-align:end;text-anchor:end;font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
-.'           x="492.95444"'
+.'           x="650.00"'
 .'           id="tspan3406-3"'
 .'           sodipodi:role="line">'.($number[1][1]).'</tspan></text>'
 .'    </g>'
@@ -338,7 +354,7 @@ $image =
 .'         id="text3400-2"'
 .'         y="777.60071"'
 .'         x="48.487324"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
 .'           x="48.487324"'
@@ -349,10 +365,10 @@ $image =
 .'         id="text3404-3"'
 .'         y="777.60071"'
 .'         x="492.95444"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="text-align:end;text-anchor:end;font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
-.'           x="492.95444"'
+.'           x="650.00"'
 .'           id="tspan3406-0"'
 .'           sodipodi:role="line">'.($number[2][1]).'</tspan></text>'
 .'    </g>'
@@ -364,7 +380,7 @@ $image =
 .'         id="text3400-9"'
 .'         y="777.60071"'
 .'         x="48.487324"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
 .'           x="48.487324"'
@@ -375,10 +391,10 @@ $image =
 .'         id="text3404-5"'
 .'         y="777.60071"'
 .'         x="492.95444"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="text-align:end;text-anchor:end;font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
-.'           x="492.95444"'
+.'           x="650.00"'
 .'           id="tspan3406-7"'
 .'           sodipodi:role="line">'.($number[3][1]).'</tspan></text>'
 .'    </g>'
@@ -390,7 +406,7 @@ $image =
 .'         id="text3400-7"'
 .'         y="777.60071"'
 .'         x="48.487324"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         style="font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
 .'           x="48.487324"'
@@ -400,18 +416,18 @@ $image =
 .'         sodipodi:linespacing="125%"'
 .'         id="text3404-1"'
 .'         y="777.60071"'
-.'         x="492.95444"'
-.'         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'         x="730.95444"'
+.'         style="text-align:end;text-anchor:end;font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'         xml:space="preserve"><tspan'
 .'           y="777.60071"'
-.'           x="492.95444"'
+.'           x="650.00"'
 .'           id="tspan3406-5"'
 .'           sodipodi:role="line">'.($number[4][1]).'</tspan></text>'
 .'    </g>'
 /**/
 .'    <text'
 .'       xml:space="preserve"'
-.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'       style="font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'       x="730.23999"'
 .'       y="39.423279"'
 .'       id="text3408-4"'
@@ -419,12 +435,12 @@ $image =
 .'         sodipodi:role="line"'
 .'         id="tspan3410-9"'
 .'         x="50%"'
-.'         y="92.5%"'
+.'         y="93%"'
 .'         style="font-style:italic;font-size:30px;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'."'$fine_font'".';text-align:center;text-anchor:middle;fill:#000000">'.($fine_print[0]).'</tspan></text>'
 /**/
 .'    <text'
 .'       xml:space="preserve"'
-.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'       style="font-style:normal;font-weight:normal;font-size:35px;line-height:125%;font-family:'."'$font'".';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'       x="730.23999"'
 .'       y="39.423279"'
 .'       id="text3408-4"'
@@ -432,12 +448,12 @@ $image =
 .'         sodipodi:role="line"'
 .'         id="tspan3410-9"'
 .'         x="50%"'
-.'         y="95%"'
+.'         y="95.5%"'
 .'         style="font-style:italic;font-size:30px;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'."'$fine_font'".';text-align:center;text-anchor:middle;fill:#000000">'.($fine_print[1]).'</tspan></text>'
 /**/
 .'    <text'
 .'       xml:space="preserve"'
-.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:'."'$font'".';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'       x="730.23999"'
 .'       y="39.423279"'
 .'       id="text3408-4"'
@@ -445,12 +461,12 @@ $image =
 .'         sodipodi:role="line"'
 .'         id="tspan3410-9"'
 .'         x="730.23999"'
-.'         y="39.423279"'
+.'         y="55"'
 .'         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'."'$font'".';text-align:end;text-anchor:end;fill:#000080">'.$owner.'</tspan></text>'
 /**/
 .'    <text'
 .'       xml:space="preserve"'
-.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:'."'$font'".';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'       x="730.23999"'
 .'       y="39.423279"'
 .'       id="text3408-4"'
@@ -463,7 +479,7 @@ $image =
 /**/
 .'    <text'
 .'       xml:space="preserve"'
-.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:'."'$font'".';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
 .'       x="730.23999"'
 .'       y="39.423279"'
 .'       id="text3408-4"'
@@ -475,12 +491,40 @@ $image =
 .'         style="font-size:35px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'."'$font'".';text-align:center;text-anchor:middle;fill:#000000">'.$description.'</tspan></text>'
 /**/
 .'    <text'
+.'       xml:space="preserve"'
+.'       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:'."'$font'".';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"'
+.'       x="730.23999"'
+.'       y="39.423279"'
+.'       id="text3408-4"'
+.'       sodipodi:linespacing="125%"><tspan'
+.'         sodipodi:role="line"'
+.'         id="tspan3410-9"'
+.'         x="96%"'
+.'         y="99.0%"'
+.'         style="font-size:20px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'."'$font'".';text-align:end;text-anchor:end;fill:#000000">'.$updated.'</tspan></text>';
+/**/
+if ($image_url != null)
+{
+$image = $image.'</g>'.'<image preserveAspectRatio="xMinYMin" xlink:href="'.$image_url.'" x="59.75mm" y="66.0mm" height="78mm" width="78mm" />';
+}
+else
+{
+if (($emojitext != null) && ($emojifont !=null))
+{
+$image = $image
+.'    <text'
 .'       id="text4403"'
 .'       sodipodi:linespacing="100%"'
 .'         sodipodi:role="line"'
 .'         x="50%"'
 .'         y="39.75%"'
-.'         style="font-size:180px;text-align:center;text-anchor:middle;font-family:'."'$emojifont'".';">'.$emojitext.'</text></g>'
+.'         style="font-size:180px;text-align:center;text-anchor:middle;font-family:'."'$emojifont'".';">'.$emojitext.'</text>';
+}
+
+$image = $image.'</g>';
+}
+
+$image= $image
 .'</svg>'."\n";
 
     $response = $this->response;
@@ -536,13 +580,16 @@ $fine_print,
 $fine_font,
 $type,
 $owner,
+$accumulative,
 $rect_color,
 $description,
-$number
-)     
+$number,
+$image_url = null,
+$updated = ''
+)   
 {
     $handle = ImageCreate (200, 300) or die ("Cannot Create image"); 
-    $bg_color = ImageColorAllocate ($handle, 0xD0, 0xD0, 0xD0);
+    $bg_color = ImageColorAllocate ($handle, 0xE0, 0xE0, 0xE0);
     $black = ImageColorAllocate ($handle, 0x00, 0x00, 0x00);
     $navy = ImageColorAllocate ($handle, 0x00, 0x00, 0xA0);
     //$white = ImageColorAllocate ($handle, 0xFF, 0xFF, 0xFF);
@@ -559,13 +606,24 @@ $number
     $this->ImageRectangleWithRoundedCorners($handle, 10+2,10+15+2,215-25-2,10+120-2, 5, $chosen_color);
     $this->ImageRectangleWithRoundedCorners($handle, 25,10+35,200-25-2,10+100, 5, $black);
     $this->ImageRectangleWithRoundedCorners($handle, 25+2,10+35+2,200-25-2-2,10+100-2, 5, $bg_color);
-
+    
     ImageTTFText ($handle, 14, 0, 10, 20, $navy, $title_font,  ($owner != null)? $owner : $type);
-
-    for ($r = 0; $r < 5; $r++)
+    
+    $i = 0;
+    foreach ($fine_print as $print)
     {
-      ImageTTFText ($handle, 15, 0, 10, $r *30 + 170, $black, $font,  ($number[$r][0]));
-      ImageTTFText ($handle, 15, 0, 140, $r *30 + 170, $black, $font,  ($number[$r][1]));
+      ImageTTFText ($handle, 9, 0, 10, ($i++)*10 + 265, $black, $fine_font,  $print);
+    }
+    
+    ImageTTFText ($handle, 9, 0, 10,145, $black, $font,  $description);
+    
+    ImageTTFText ($handle, 9, 0, 10, 26 + 265, $black, $font,  $updated);
+
+    ImageTTFText ($handle, 12, 0, 10, 165, $black, $font, ($number[0][0]).'  '.($number[0][1]));
+    for ($r = 1; $r < 5; $r++)
+    {
+      ImageTTFText ($handle, 12, 0, 10, $r *20 + 165, $black, $font,  ($number[$r][0]));
+      ImageTTFText ($handle, 12, 0, 110, $r *20 + 165, $black, $font,  ($number[$r][1]));
     }
 
     $explode = explode(' ', trim($title));
@@ -576,7 +634,7 @@ $number
     foreach ($explode as $word)
     {
       $len += strlen($word)+1; 
-      if ($len > 14)
+      if ($len > 17)
       {
 	$baser++;
 	$len = 0;
@@ -589,18 +647,18 @@ $number
     $words ='';
     foreach ($explode as $word)
     {      
-      $len += strlen($word)+1;
-      $words = $words.' '.$word;      
-      if ($len > 14)
+      $len += strlen($word)+1;           
+      if ($len > 17)
       {
-        ImageTTFText ($handle, 12, 0,104.85-(strlen($words)*4.85) , (($r)*18) + ($baser), $black, $title_font,  $words);
+        ImageTTFText ($handle, 12, 0,28, (($r)*18) + ($baser), $black, $title_font,  $words);
         $words = '';
 	$r++;
 	$len = 0;
       }
+      $words = $words.' '.$word;
     }
 
-    ImageTTFText ($handle, 12, 0,104.85-(strlen($words)*4.85), (($r)*18) + ($baser), $black, $title_font,  $words);
+    ImageTTFText ($handle, 12, 0,28, (($r)*18) + ($baser), $black, $title_font,  $words);
 
     // Enable output buffering
     ob_start();
