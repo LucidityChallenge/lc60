@@ -1,0 +1,7 @@
+@font-face {
+	font-family: 'roman';
+	src: url('../font/roman/NimbusRomNo9L-Reg.eot');
+	src: url('../font/roman/NimbusRomNo9L-Reg.woff') format('woff'), url('../font/roman/NimbusRomNo9L-Reg.ttf') format('truetype'), url('../font/roman/NimbusRomNo9L-Reg.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} 
