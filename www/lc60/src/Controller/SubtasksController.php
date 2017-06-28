@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\I18n\Time;
+use Cake\Routing\Router;
 
 /**
  * Subtasks Controller
@@ -12,7 +13,7 @@ use Cake\I18n\Time;
  *
  * @method \App\Model\Entity\Subtask[] paginate($object = null, array $settings = [])
  */
-class SubtasksController extends AppController
+class SubtasksController extends ImageController
 {
 
     /**
@@ -195,5 +196,74 @@ class SubtasksController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * svg method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function svg($id = null)
+    {
+      return $this->svgBody("osemoji",
+"osemoji",
+'XXXXXX',
+"X",
+'osemoji',
+["Instructions in fine print.",'Second'],
+'osemoji',
+'Personal Subtask',
+'Own',
+'#A00000',
+'descrrr',
+[
+  ['a1','b1'],
+  ['a2','b2'],
+  ['a3','b3'],
+  ['a4','b4'],
+  ['a5','b5']
+
+]
+);
+    }
+
+    /**
+     * png method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function png($id = null)
+    {
+      if ($id != null)
+      {
+	$baseUrl= (Router::url('/', true));
+
+
+
+	return $this->pngBody('webroot/font/osemoji/OpenSansEmoji.ttf',
+'webroot/font/osemoji/OpenSansEmoji.ttf',
+'XXXXXX',
+"X",
+'webroot/font/osemoji/OpenSansEmoji.ttf',
+["Instructions in fine print.",'Second'],
+'osemoji',
+'Personal Subtask',
+'Own',
+'#A00000',
+'descrrr',
+[
+  ['a1','b1'],
+  ['a2','b2'],
+  ['a3','b3'],
+  ['a4','b4'],
+  ['a5','b5']
+
+]
+);
+      }
+      else
+      {
+	return null;
+      }
     }
 }
