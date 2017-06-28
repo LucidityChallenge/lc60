@@ -15,6 +15,7 @@ use Cake\ORM\Entity;
  * @property int $subtask_success_count_total
  * @property int $subtask_task_period_demand
  * @property int $subtask_task_id
+ * @property string $task_title
  * @property int $subtask_super_id
  * @property string $subtask_name
  * @property int $subtask_category_id
@@ -23,12 +24,17 @@ use Cake\ORM\Entity;
  * @property float $subtask_inflation_rate
  * @property int $subtask_demand_cutoff
  * @property string $subtask_description
- * @property int $subtask_accumulative
+ * @property bool $subtask_accumulative
  * @property int $subtask_owner_participant_id
  * @property int $subtask_symbol
  * @property string $subtask_image
+ * @property int $subtask_type_id
+ * @property string $subtask_type_name
+ * @property bool $subtask_type_ownable
+ * @property bool $subtask_type_shareable
  * @property string $subtask_category_name
  * @property string $subtask_category_class
+ * @property string $subtask_category_color 
  * @property float $contemporary_demand_cur
  * @property float $contemporary_demand_positive_cur
  * @property float $contemporary_demand_pre
