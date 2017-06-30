@@ -84,8 +84,17 @@ They are the root of every other subtask you can claim.</p>
 
 <h4>Fun is the only Mandatory Subtask</h4>
 <p class="bigemoji icon">&#128516; &#128515; &#128516;</p>
-<p>We are not forcing members to dream, this is a game that every one is invited.</p>
-<p>New features will allow <b>everyone</b> to have fun, with or without their own dreams.</p>
+<p>We are not forcing members to dream, this is a game that every one is invited.
+New features will allow <b>everyone</b> to have fun, with or without their own dreams.</p>
+
+<p class="bigemoji icon">&#128275; &#128273;</p>
+<p>New unlockable subtasks could appear at any minute! Now you have even more reasons to check updates.</p>
+
+<p class="bigemoji icon"><span class="notoemoji" style="font-size:150%">&#9822; &#9820;</span></p>
+<p>New features include more strategic choices that will reward your ability to plan what to claim.</p>
+
+<p class="bigemoji icon">&#9858; &#9860;</p>
+<p>Help fellow participants. Bet on their upcoming succeses and earn points.</p>
 
 <p></p>
 
@@ -133,7 +142,9 @@ Extreme changes were implemented to allow adaptative balancing and increase the 
 You will be able to track your scoring with indepth details and graphs.</p>
 
 
-<p></p>
+<p>&nbsp;</p>
+<br/>
+<p>&nbsp;</p>
 
 <?php endif; ?>
 <div>
