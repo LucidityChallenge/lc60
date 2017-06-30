@@ -55,7 +55,7 @@ If you really want to post your dream here, the usage of spoiler tags is recomme
 
 <!--[size=16][b]Unlike previous challenges, we will not allow to post dreams from previous week.[/b][/size]
 Do not miss the deadlines! We are going to provide only a small tolerance due to timezones!
-Please accept our appologies, but this is required to implement the completely new scoring system of LC60.
+Please accept our apologies, but this is required to implement the completely new scoring system of LC60.
 
 Most subtasks are worth points, with clear instructions on what you are supposed to perform.
 Some subtasks might include subsubtasks. In case you accomplish a subsubtask, you automatically claim its parent subtask.
@@ -94,7 +94,7 @@ New features will allow <b>everyone</b> to have fun, with or without their own d
 <p>New features include more strategic choices that will reward your ability to plan what to claim.</p>
 
 <p class="bigemoji icon">&#9858; &#9860;</p>
-<p>Help fellow participants. Bet on their upcoming succeses and earn points.</p>
+<p>Help fellow participants. Bet on their upcoming successes and earn points.</p>
 
 <p></p>
 
@@ -138,8 +138,14 @@ You will be able to see your scores and how other participants are doing <b>bett
 <h4>Scoring</h4>
 <p class="bigemoji icon">&#128200;  &#128202;</p>
 <p>The scoring system of LC60 is unique! 	
-Extreme changes were implemented to allow adaptative balancing and increase the competition and the cooperation.
-You will be able to track your scoring with indepth details and graphs.</p>
+Extreme changes were implemented to allow adaptive balancing and increase the competition and the cooperation.
+You will be able to track your scoring with in-depth details and graphs.</p>
+
+<h4>Length</h4>
+<p class="bigemoji icon">&#9203; &#9200;</p>
+<p>If you think this is a nice challenge, you can make it last longer.
+The LC60 will have 4 or 5 weeks. Decided by voting during the third week.</p>
+
 
 
 <p>&nbsp;</p>
