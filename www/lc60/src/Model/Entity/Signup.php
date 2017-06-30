@@ -10,8 +10,10 @@ use Cake\ORM\Entity;
  * @property string $signup_url
  * @property string $signup_image_url
  * @property int $now_date_unix
- * @property string $end_date
- * @property int $end_date_unix
+ * @property string $open_date
+ * @property int $open_date_unix
+ * @property string $begin_date
+ * @property int $begin_date_unix 
  */
 class Signup extends Entity
 {
