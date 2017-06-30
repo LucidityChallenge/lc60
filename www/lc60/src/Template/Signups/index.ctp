@@ -101,7 +101,7 @@ New features will allow <b>everyone</b> to have fun, with or without their own d
 <h4>Inovation on Balancing</h4>
 <p class="bigemoji icon">&#127943;&nbsp;&#9878;&nbsp;&#127943;</p> 
 <p>LC60 Balancing system is completely new. No one will be able to win too soon.</p>
-<p class="bigemoji icon">&#127906;;&nbsp;&#127904;</p> 
+<p class="bigemoji icon">&#127906;&nbsp;&#127904;</p> 
 <p>Subtasks will have their score balanced weekly. Harder subtasks more worth to try than ever.</p>
 
 <p></p>
