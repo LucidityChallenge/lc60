@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 28, 2017 at 03:37 PM
+-- Generation Time: Jun 30, 2017 at 05:04 AM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -608,8 +608,11 @@ CREATE TABLE IF NOT EXISTS `lc60_signups` (
 ,`signup_image_url` varchar(12)
 ,`now_date` datetime
 ,`now_date_unix` bigint(17)
-,`end_date` varchar(19)
-,`end_date_unix` bigint(17)
+,`open_date` varchar(19)
+,`open_date_unix` bigint(17)
+,`begin_date` varchar(19)
+,`begin_date_unix` bigint(17)
+,`participant_count` int(1)
 );
 
 -- --------------------------------------------------------
@@ -1438,7 +1441,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_signups`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_signups` AS select 'http://ld4all.com/forum/viewtopic.php?t=50763' AS `signup_url`,'baddudes.gif' AS `signup_image_url`,now() AS `now_date`,unix_timestamp(now()) AS `now_date_unix`,'2017-06-28 18:00:00' AS `end_date`,unix_timestamp('2017-06-28 18:00:00') AS `end_date_unix`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_signups` AS select 'http://ld4all.com/forum/viewtopic.php?t=50763' AS `signup_url`,'baddudes.gif' AS `signup_image_url`,now() AS `now_date`,unix_timestamp(now()) AS `now_date_unix`,'2017-06-28 18:00:00' AS `open_date`,unix_timestamp('2017-06-28 18:00:00') AS `open_date_unix`,'2017-06-30 18:00:00' AS `begin_date`,unix_timestamp('2017-06-30 18:00:00') AS `begin_date_unix`,0 AS `participant_count`;
 
 -- --------------------------------------------------------
 
