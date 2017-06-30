@@ -21,3 +21,9 @@
   font-family: notoemoji, sans-serif;
     /* fall back to sans serif */
 }
+
+.bigemoji {
+  font-family: osemoji, sans-serif;
+  font-size:400%;
+    /* fall back to sans serif */
+}
