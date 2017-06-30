@@ -40,7 +40,7 @@ class RecentSuccessesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('recent_successes');
+        $this->setTable('lc60_recent_successes');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
