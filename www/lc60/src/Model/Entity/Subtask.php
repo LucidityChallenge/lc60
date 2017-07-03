@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property int $subtask_starting_demand
  * @property float $subtask_inflation_rate
  * @property int $subtask_demand_cutoff
+ * @property int $subtask_bonus_base
  * @property string $subtask_description
  * @property string $subtask_url
  * @property bool $subtask_accumulative
