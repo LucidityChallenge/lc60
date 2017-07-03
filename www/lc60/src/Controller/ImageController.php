@@ -23,139 +23,13 @@ class ImageController extends AppController
     
 
      /**
-     * rssHead method
-     *
-     * @return string|null
-     */
-protected function svgHead($baseUrl,$title,$description,$ttl)
-{
-  $rssString =
-  '<?xml version="1.0" encoding="UTF-8"?>'.
-  '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">'.
-  '<channel>'.
-  '<atom:link href="'.$baseUrl.'news/rss'.'" rel="self" type="application/rss+xml"/>'.
-  '<title>'.$title.'</title>'.
-  '<description>'.$description.'</description>'.
-  '<link>'.$baseUrl.'news/</link>'.
-  '<lastBuildDate>'.date('r').'</lastBuildDate>'.
-  '<pubDate>'.date('r').'</pubDate>'.
-  '<ttl>'.$ttl.'</ttl>';
-
-  return $rssString;
-}
-
-     /**
-     * rssItem method
-     *
-     * @return string|null
-     */
-protected function svgItem($itemTitle,$itemDescription,$itemUrl,$permalink,$publishTime)
-{
- $rssString = "\n".
- '<item>'.
-  '<title>'.$itemTitle.'</title>'.
-  '<description>'.$itemDescription.'</description>';
-  
-  $useUrl = true;
-  
-  if ($itemUrl != null)
-  {
-      $useUrl = (strlen($itemUrl)>0);
-  }
-  else
-  {
-    $useUrl = false;
-  }
-  
-  if ($useUrl)
-  {
-     $rssString = $rssString.'<link>'.$itemUrl.'</link>';
-  }
-  else
-  {
-   $rssString = $rssString.'<link>'.$permalink.'</link>';
-  }
-  $rssString = $rssString.
-  '<guid isPermaLink="true">'.$permalink.'</guid>'.
-  '<pubDate>'.date('r', $publishTime).'</pubDate>'.
- '</item>';
- 
- return $rssString;
-}
-
-     /**
-     * rssTail method
-     *
-     * @return string|null
-     */
-protected function svgTail()
-{
-  return "\n".
-'</channel>'.
-'</rss>'."\n";
-}
-
-
-     /**
      * svgData method
      *
-     * @return SVGImage|null
+     * @return null
      */
 protected function svgData()
 {
-$image = new SVGImage(400, 600);
-$doc = $image->getDocument();
-
-// blue 40x40 square at (0, 0)
-{
-$square = new SVGRect(38.572, 14.225, 326.857, 245.341);
-
-/*
-    <rect
-       style="fill:#008000;fill-rule:evenodd;:;:2.7834549;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect3336"
-       width="324.0737"
-       height="242.55823"
-       x="87.963165"
-       y="421.18774"
-       ry="47.71637" />
-*/
-
-$square->setStyle('fill', '#008000');
-$square->setStyle('fill-rule', 'evenodd');
-$square->setStyle('stroke', '#000000');
-$square->setStyle('stroke-width', '2');
-$square->setStyle('stroke-linecap', 'round');
-$square->setStyle('stroke-linejoin', 'miter');
-$square->setStyle('stroke-miterlimit', '4');
-$doc->addChild($square);
-}
-
-{
-$square = new SVGRect(90.000, 52.827, 224.000, 168.136);
-
-/*
-    <rect
-       style="fill:#008000;fill-rule:evenodd;:;:2.7834549;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect3336"
-       width="324.0737"
-       height="242.55823"
-       x="87.963165"
-       y="421.18774"
-       ry="47.71637" />
-*/
-
-$square->setStyle('fill', '#FFFFFF');
-$square->setStyle('fill-rule', 'evenodd');
-$square->setStyle('stroke', '#000000');
-$square->setStyle('stroke-width', '2');
-$square->setStyle('stroke-linecap', 'round');
-$square->setStyle('stroke-linejoin', 'miter');
-$square->setStyle('stroke-miterlimit', '4');
-$doc->addChild($square);
-}
-
-return $image;
+  return null;
 }
 
 
@@ -238,22 +112,7 @@ $image =
 .'       height="948.57141"'
 .'       x="22.857143"'
 .'       y="72.362206" />'
-.'    <rect'
-.'       style="fill:'.$rect_color.';fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"'
-.'       id="rect3336"'
-.'       width="465.71429"'
-.'       height="348.57144"'
-.'       x="139.19009"'
-.'       y="177.89539"'
-.'       ry="68.571426" />'
-.'    <rect'
-.'       style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"'
-.'       id="rect3338"'
-.'       width="328.57144"'
-.'       height="240"'
-.'       x="207.76152"'
-.'       y="232.18109"'
-.'       ry="37.142841" />'
+/* original image rectangle was here */
 .'    <rect'
 .'       style="fill:#000000"'
 .'       id="rect3348"'
@@ -505,26 +364,32 @@ $image =
 /**/
 if ($image_url != null)
 {
-$image = $image.'</g>'.'<image preserveAspectRatio="xMinYMin" xlink:href="'.$image_url.'" x="59.75mm" y="66.0mm" height="78mm" width="78mm" />';
+  $image = $image.'</g>'.'<image preserveAspectRatio="xMaxYMid" xlink:href="'.$image_url.'" x="28.0%" y="20.0%" height="26.85%" width="44%" />';
 }
 else
 {
-if (($emojitext != null) && ($emojifont !=null))
-{
-$image = $image
-.'    <text'
-.'       id="text4403"'
-.'       sodipodi:linespacing="100%"'
-.'         sodipodi:role="line"'
-.'         x="50%"'
-.'         y="39.75%"'
-.'         style="font-size:180px;text-align:center;text-anchor:middle;font-family:'."'$emojifont'".';">'.$emojitext.'</text>';
-}
+  if (($emojitext != null) && ($emojifont !=null))
+  {
+    $image = $image
+    .'    <text'
+    .'       id="text4403"'
+    .'       sodipodi:linespacing="100%"'
+    .'         sodipodi:role="line"'
+    .'         x="50%"'
+    .'         y="39.75%"'
+    .'         style="font-size:180px;text-align:center;text-anchor:middle;font-family:'."'$emojifont'".';">'.$emojitext.'</text>';
+  }
 
-$image = $image.'</g>';
+  $image = $image.'</g>';
 }
 
 $image= $image
+/* superimposed image rectangle as single path */
+.'  <path'
+.'     style="fill:'.$rect_color.';fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"'
+.'     d="M 207.76172 177.89453 C 169.77315 177.89453 139.18945 208.47823 139.18945 246.4668 L 139.18945 457.89453 C 139.18945 495.8831 169.77315 526.4668 207.76172 526.4668 L 536.33203 526.4668 C 574.3206 526.4668 604.9043 495.8831 604.9043 457.89453 L 604.9043 246.4668 C 604.9043 208.47823 574.3206 177.89453 536.33203 177.89453 L 207.76172 177.89453 z M 244.9043 232.18164 L 499.18945 232.18164 C 519.76659 232.18164 536.33203 248.74708 536.33203 269.32422 L 536.33203 435.03906 C 536.33203 455.6162 519.76659 472.18164 499.18945 472.18164 L 244.9043 472.18164 C 224.32716 472.18164 207.76172 455.6162 207.76172 435.03906 L 207.76172 269.32422 C 207.76172 248.74708 224.32716 232.18164 244.9043 232.18164 z "'
+.'     id="rect3336" />'
+/* */
 .'</svg>'."\n";
 
     $response = $this->response;
