@@ -34,6 +34,7 @@
             echo $this->Form->control('subtask_starting_demand');
             echo $this->Form->control('subtask_inflation_rate');
             echo $this->Form->control('subtask_demand_cutoff');
+            echo $this->Form->control('subtask_bonus_base');
             echo $this->Form->control('subtask_description');
             echo $this->Form->control('subtask_url');
             echo $this->Form->control('subtask_accumulative');

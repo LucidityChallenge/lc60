@@ -83,6 +83,10 @@
             <td><?= $this->Number->format($subtask->subtask_demand_cutoff) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Subtask Bonus Base') ?></th>
+            <td><?= $this->Number->format($subtask->subtask_bonus_base) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Subtask Task Period Demand') ?></th>
             <td><?= $this->Number->format($subtask->subtask_task_period_demand) ?></td>
         </tr>
@@ -107,7 +111,8 @@
     <div class="subtask_value_box <?= 'box_'.($subtaskValue->subtask_category_class) ?>">
     <table>
 	<?php 
-	  $variation = 
+	  $variation = ($subtaskValue->final_value_pre != null)
+	  ?
 	  (
 	    100
 	    *
@@ -115,6 +120,8 @@
 	    /
 	    max(1,$subtaskValue->final_value_pre)
 	  )
+	  :
+	  null;
 	?>
 	<tr>
 	  <th scope="row" colspan="2">
@@ -126,16 +133,16 @@
 	</tr>
 	<tr>
 	  <th scope="row">Demand:</th>
-	  <td><span class="digital"><?= $this->Number->precision($subtaskValue->contemporary_demand_cur,1) ?></span></td><td>per Week</td>
+	  <td><span class="digital"><?= $this->Number->format($subtaskValue->contemporary_demand_cur) ?></span></td><td>this week</td>
 	</tr>
 	<tr>
 	  <th scope="row">Current:</th>
-	  <td><span class="digital"><?= $this->Number->precision((intval(100*$subtaskValue->final_value_cur)/100),2) ?></span></td><td>Points</td>
+	  <td><span class="digital"><?= $this->Number->precision((intval(100*$subtaskValue->final_value_cur)/100),0) ?></span></td><td>points</td>
 	</tr>
 	<tr>
 	  <th scope="row">Change:</th>
-	  <td><span class="digital"><?= $this->Number->precision($variation,3) ?>%&nbsp;</span></td>
-	  <td><span class="emoji"><?= (($variation) > 0) ? '&#9652;' : ((($variation) == 0) ? '&#9656;' : '&#9662;') ?></span></td>
+	  <td><span class="digital"><?= ($variation != null)? $this->Number->precision($variation,3).'%' : ('NO DATA') ?>&nbsp;</span></td>
+	  <td><span class="emoji"><?= ($variation != null)? ((($variation) > 0) ? '&#9652;' : ((($variation) == 0) ? '&#9656;' : '&#9662;')) : ('-') ?></span></td>
 	</tr>
     </table>
     </div>
