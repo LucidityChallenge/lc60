@@ -28,6 +28,7 @@ use Cake\ORM\Entity;
  * @property string $subtask_instruction
  * @property int $subtask_type_id
  * @property bool $subtask_visible
+ * @property string $svg
  *
  * @property \App\Model\Entity\Task $task
  * @property \App\Model\Entity\Subtask $subtask_super

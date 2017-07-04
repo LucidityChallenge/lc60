@@ -20,25 +20,13 @@ class ImageController extends AppController
     {
 
     }
-    
 
      /**
      * svgData method
      *
-     * @return null
-     */
-protected function svgData()
-{
-  return null;
-}
-
-
-     /**
-     * svgBody method
-     *
      * @return string|null
      */
-protected function svgBody(
+protected function svgData(
 $font,
 $title_font,
 $title,
@@ -53,24 +41,49 @@ $rect_color,
 $description,
 $number,
 $image_url = null,
-$updated = ''
+$updated = '',
+$header = true,
+$width,
+$height
 )
 {
+$image = '';
 
+if ($header)
+{
 $image = 
 '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 .'<?xml-stylesheet type="text/css" href="/css/emoji.css" ?>'
-.'<?xml-stylesheet type="text/css" href="/css/roman.css" ?>'
-.'<svg '
+.'<?xml-stylesheet type="text/css" href="/css/roman.css" ?>';
+}
+$image = $image
+.'<svg ';
+
+if ($header)
+{
+$image = $image
 .'   xmlns:xlink="http://www.w3.org/1999/xlink"'
 .'   xmlns:dc="http://purl.org/dc/elements/1.1/"'
 .'   xmlns:cc="http://creativecommons.org/ns#"'
 .'   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"'
 .'   xmlns:svg="http://www.w3.org/2000/svg"'
 .'   xmlns="http://www.w3.org/2000/svg"'
-.'   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"'
-.'   width="210mm"'
-.'   height="297mm"'
+.'   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"';
+}
+
+if ($width != null)
+{
+$image = $image
+.'   width="'.$width.'"';
+}
+
+if ($height != null)
+{
+$image = $image
+.'   height="'.$height.'"';
+}
+
+$image = $image
 .'   viewBox="0 0 744.09448819 1052.3622047"'
 .'   id="svg2"'
 .'   version="1.1"'
@@ -392,14 +405,30 @@ $image= $image
 /* */
 .'</svg>'."\n";
 
+
+  return $image;
+}
+
+protected function svgBody(
+$svgData
+)
+{
+   if ($svgData != null)
+   {   
     $response = $this->response;
     $response->body(
-      $image
-    );
+      $svgData
+    );    
 
     $response = $response->withType('image/svg+xml');
     
     return $response;
+   }
+   else
+   {
+    return null;
+   }
+    
 }
 
 /**
@@ -451,7 +480,7 @@ $description,
 $number,
 $image_url = null,
 $updated = ''
-)   
+)
 {
     $handle = ImageCreate (200, 300) or die ("Cannot Create image"); 
     $bg_color = ImageColorAllocate ($handle, 0xE0, 0xE0, 0xE0);

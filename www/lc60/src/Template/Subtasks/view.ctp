@@ -103,6 +103,11 @@
             <td><?= $subtask->subtask_accumulative ? __('Yes') : __('No'); ?></td>
         </tr>        
     </table>
+    <div class="subtask_img" >
+<?= $this->Html->link($subtask->svg,['action' => 'image',($subtask->id).'.svg'],['escape' => false]); ?>
+<div class="subtask_img" ><?= $this->Html->link($this->Html->image(['action' => 'image',($subtask->id).'.png'], ['alt' => ($subtask->subtask_name)]),['action' => 'image',($subtask->id).'.png'],['escape' => false]) ?></div>
+    
+    </div>
     <h4><?= __('Current Values') ?></h4>
     <?php 
       $showImage = false;
@@ -402,4 +407,5 @@ $(document).ready(function () {
 <?php  endif; ?>
 
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
+<?php echo $this->Html->css('roman.css',['block'=>true]); ?>
 <?php echo $this->Html->css('crystal.css',['block'=>true]); ?>

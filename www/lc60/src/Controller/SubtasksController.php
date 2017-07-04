@@ -59,6 +59,8 @@ class SubtasksController extends ImageController
     
 	$showSubtask = false;
 	$subtasks = null;
+	$img_width = '350px';
+	$img_height = null;
 	
 	if (null != ($this->Auth->user('id')))
 	{
@@ -92,6 +94,7 @@ class SubtasksController extends ImageController
 	  if (null != ($this->Auth->user('id')))
 	  {
 	    $subtask = $this->Subtasks->get($id, ['contain' => $contains]);
+	     $subtask->svg = $this->generateSvg($id, false, $img_width, $img_height);
 	    $this->set('subtask', $subtask);
 	    $this->set('_serialize', ['subtask']);
 	  }
@@ -107,6 +110,8 @@ class SubtasksController extends ImageController
 	    
 	    foreach ($subtasks as $subtask)
 	    {
+	      $subtask->svg = $this->generateSvg($id, false, $img_width, $img_height);
+	    
 	      $this->set('subtask', $subtask);
 	      $this->set('_serialize', ['subtask']);
 	      $unset = false;
@@ -245,14 +250,14 @@ class SubtasksController extends ImageController
       {
 	return null;
       }
-    }    
-
+    }
+    
     /**
-     * svg method
+     * generateSvg method
      *
      * @return \Cake\Http\Response|null
      */
-    public function svg($id = null)
+    private function generateSvg($id = null, $header = true, $width = '210mm', $height = '297mm')
     {
     if ($id != null)
     {
@@ -307,7 +312,7 @@ class SubtasksController extends ImageController
 	$comma = ', ';
       }
 
-      return $this->svgBody("Roman",
+      return ($this->svgData("Roman",
 'osemoji',
 $subtask_fetch->subtask_name,
 ($subtask_fetch->subtask_symbol != null) ? ('&#'.intval($subtask_fetch->subtask_symbol).';') : null,
@@ -330,13 +335,27 @@ $subtask_fetch->subtask_description,
 ],
 $subtask_fetch->subtask_image,
 'Last Update: '.Time::now().' UTC'//Configure::getInstance()->read('Datasources')['default']['timezone']
-);
+,
+$header,
+$width,
+$height
+));
     }
     }
     else
     {
       return null;
     }
+    }
+    
+    /**
+     * svg method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function svg($id = null)
+    {
+	return $this->svgBody($this->generateSvg($id));
     }
 
     /**
