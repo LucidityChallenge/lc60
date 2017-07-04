@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2017 at 05:49 AM
+-- Generation Time: Jul 04, 2017 at 08:31 PM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `lc60_calculated_subtask_demand_external` (
 `current_task_id` tinyint(4)
 ,`contemporary_task_id` tinyint(4)
 ,`subtask_id` int(11)
-,`subtask_starting_demand` int(11)
+,`subtask_starting_demand` tinyint(4)
 ,`subtask_success_count` decimal(42,0)
 ,`subtask_success_count_total` bigint(21)
 ,`subtask_task_period_demand` tinyint(4)
@@ -42,14 +42,14 @@ CREATE TABLE IF NOT EXISTS `lc60_calculated_subtask_demand_external` (
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
 ,`subtask_bonus_base` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` tinytext
 ,`subtask_url` varchar(48)
-,`subtask_accumulative` tinyint(4)
+,`subtask_accumulative` tinyint(1)
 ,`subtask_owner_participant_id` int(11)
 ,`subtask_dividend_rate` decimal(4,1)
 ,`subtask_category_name` varchar(16)
 ,`subtask_category_class` varchar(16)
-,`subtask_category_description` mediumtext
+,`subtask_category_description` tinytext
 ,`contemporary_demand` decimal(44,0)
 ,`contemporary_demand_positive` decimal(44,0)
 ,`inner_function` decimal(44,0)
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `lc60_calculated_subtask_demand_final_value` (
 `current_task_id` tinyint(4)
 ,`contemporary_task_id` tinyint(4)
 ,`subtask_id` int(11)
-,`subtask_starting_demand` int(11)
+,`subtask_starting_demand` tinyint(4)
 ,`subtask_success_count` decimal(42,0)
 ,`subtask_success_count_total` bigint(21)
 ,`subtask_task_period_demand` tinyint(4)
@@ -78,14 +78,14 @@ CREATE TABLE IF NOT EXISTS `lc60_calculated_subtask_demand_final_value` (
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
 ,`subtask_bonus_base` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` tinytext
 ,`subtask_url` varchar(48)
-,`subtask_accumulative` tinyint(4)
+,`subtask_accumulative` tinyint(1)
 ,`subtask_owner_participant_id` int(11)
 ,`subtask_dividend_rate` decimal(4,1)
 ,`subtask_category_name` varchar(16)
 ,`subtask_category_class` varchar(16)
-,`subtask_category_description` mediumtext
+,`subtask_category_description` tinytext
 ,`contemporary_demand` decimal(44,0)
 ,`contemporary_demand_positive` decimal(44,0)
 ,`inner_function` decimal(44,0)
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `lc60_calculated_subtask_demand_inner` (
 `current_task_id` tinyint(4)
 ,`contemporary_task_id` tinyint(4)
 ,`subtask_id` int(11)
-,`subtask_starting_demand` int(11)
+,`subtask_starting_demand` tinyint(4)
 ,`subtask_success_count` decimal(42,0)
 ,`subtask_success_count_total` bigint(21)
 ,`subtask_task_period_demand` tinyint(4)
@@ -115,51 +115,17 @@ CREATE TABLE IF NOT EXISTS `lc60_calculated_subtask_demand_inner` (
 ,`subtask_inflation_rate` decimal(4,1)
 ,`subtask_demand_cutoff` tinyint(4)
 ,`subtask_bonus_base` tinyint(4)
-,`subtask_description` mediumtext
+,`subtask_description` tinytext
 ,`subtask_url` varchar(48)
-,`subtask_accumulative` tinyint(4)
+,`subtask_accumulative` tinyint(1)
 ,`subtask_owner_participant_id` int(11)
 ,`subtask_dividend_rate` decimal(4,1)
 ,`subtask_category_name` varchar(16)
 ,`subtask_category_class` varchar(16)
-,`subtask_category_description` mediumtext
+,`subtask_category_description` tinytext
 ,`contemporary_demand` decimal(44,0)
 ,`contemporary_demand_positive` decimal(44,0)
 ,`inner_function` decimal(44,0)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `lc60_calculated_subtask_demand_union`
---
-CREATE TABLE IF NOT EXISTS `lc60_calculated_subtask_demand_union` (
-`current_task_id` tinyint(4)
-,`contemporary_task_id` tinyint(4)
-,`subtask_id` int(11)
-,`subtask_starting_demand` int(11)
-,`subtask_success_count` decimal(42,0)
-,`subtask_success_count_total` bigint(21)
-,`subtask_task_period_demand` tinyint(4)
-,`subtask_task_id` tinyint(4)
-,`subtask_super_id` int(11)
-,`subtask_name` varchar(48)
-,`subtask_category_id` tinyint(4)
-,`subtask_base_value` tinyint(4)
-,`subtask_max_value` tinyint(4)
-,`subtask_inflation_rate` decimal(4,1)
-,`subtask_demand_cutoff` tinyint(4)
-,`subtask_bonus_base` tinyint(4)
-,`subtask_description` mediumtext
-,`subtask_url` varchar(48)
-,`subtask_accumulative` tinyint(4)
-,`subtask_owner_participant_id` int(11)
-,`subtask_dividend_rate` decimal(4,1)
-,`subtask_category_name` varchar(16)
-,`subtask_category_class` varchar(16)
-,`subtask_category_description` mediumtext
-,`contemporary_demand` decimal(44,0)
-,`contemporary_demand_positive` decimal(44,0)
 );
 
 -- --------------------------------------------------------
@@ -212,6 +178,73 @@ CREATE TABLE IF NOT EXISTS `lc60_demand_view` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `lc60_demand_view_complete_contemporary_demand`
+--
+CREATE TABLE IF NOT EXISTS `lc60_demand_view_complete_contemporary_demand` (
+`current_task_id` tinyint(4)
+,`contemporary_task_id` tinyint(4)
+,`subtask_id` int(11)
+,`subtask_starting_demand` tinyint(4)
+,`subtask_success_count` decimal(42,0)
+,`subtask_success_count_total` bigint(21)
+,`subtask_task_period_demand` tinyint(4)
+,`subtask_task_id` tinyint(4)
+,`subtask_super_id` int(11)
+,`subtask_name` varchar(48)
+,`subtask_category_id` tinyint(4)
+,`subtask_base_value` tinyint(4)
+,`subtask_max_value` tinyint(4)
+,`subtask_inflation_rate` decimal(4,1)
+,`subtask_demand_cutoff` tinyint(4)
+,`subtask_bonus_base` tinyint(4)
+,`subtask_description` tinytext
+,`subtask_url` varchar(48)
+,`subtask_accumulative` tinyint(1)
+,`subtask_owner_participant_id` int(11)
+,`subtask_dividend_rate` decimal(4,1)
+,`subtask_category_name` varchar(16)
+,`subtask_category_class` varchar(16)
+,`subtask_category_description` tinytext
+,`contemporary_demand` decimal(44,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `lc60_demand_view_complete_contemporary_demand_positive`
+--
+CREATE TABLE IF NOT EXISTS `lc60_demand_view_complete_contemporary_demand_positive` (
+`current_task_id` tinyint(4)
+,`contemporary_task_id` tinyint(4)
+,`subtask_id` int(11)
+,`subtask_starting_demand` tinyint(4)
+,`subtask_success_count` decimal(42,0)
+,`subtask_success_count_total` bigint(21)
+,`subtask_task_period_demand` tinyint(4)
+,`subtask_task_id` tinyint(4)
+,`subtask_super_id` int(11)
+,`subtask_name` varchar(48)
+,`subtask_category_id` tinyint(4)
+,`subtask_base_value` tinyint(4)
+,`subtask_max_value` tinyint(4)
+,`subtask_inflation_rate` decimal(4,1)
+,`subtask_demand_cutoff` tinyint(4)
+,`subtask_bonus_base` tinyint(4)
+,`subtask_description` tinytext
+,`subtask_url` varchar(48)
+,`subtask_accumulative` tinyint(1)
+,`subtask_owner_participant_id` int(11)
+,`subtask_dividend_rate` decimal(4,1)
+,`subtask_category_name` varchar(16)
+,`subtask_category_class` varchar(16)
+,`subtask_category_description` tinytext
+,`contemporary_demand` decimal(44,0)
+,`contemporary_demand_positive` decimal(44,0)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `lc60_demand_view_success`
 --
 CREATE TABLE IF NOT EXISTS `lc60_demand_view_success` (
@@ -238,140 +271,6 @@ CREATE TABLE IF NOT EXISTS `lc60_demand_view_success` (
 ,`subtask_category_name` varchar(16)
 ,`subtask_category_class` varchar(16)
 ,`subtask_category_description` text
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `lc60_demand_view_success_contemporary_demand`
---
-CREATE TABLE IF NOT EXISTS `lc60_demand_view_success_contemporary_demand` (
-`current_task_id` tinyint(4)
-,`contemporary_task_id` tinyint(4)
-,`subtask_id` int(11)
-,`subtask_starting_demand` int(4)
-,`subtask_success_count` decimal(42,0)
-,`subtask_success_count_total` bigint(21)
-,`subtask_task_period_demand` tinyint(4)
-,`subtask_task_id` tinyint(4)
-,`subtask_super_id` int(11)
-,`subtask_name` varchar(48)
-,`subtask_category_id` tinyint(4)
-,`subtask_base_value` tinyint(4)
-,`subtask_max_value` tinyint(4)
-,`subtask_inflation_rate` decimal(4,1)
-,`subtask_demand_cutoff` tinyint(4)
-,`subtask_bonus_base` tinyint(4)
-,`subtask_description` text
-,`subtask_url` varchar(48)
-,`subtask_accumulative` tinyint(4)
-,`subtask_owner_participant_id` int(11)
-,`subtask_dividend_rate` decimal(4,1)
-,`subtask_category_name` varchar(16)
-,`subtask_category_class` varchar(16)
-,`subtask_category_description` text
-,`contemporary_demand` decimal(44,0)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `lc60_demand_view_success_contemporary_demand_positive`
---
-CREATE TABLE IF NOT EXISTS `lc60_demand_view_success_contemporary_demand_positive` (
-`current_task_id` tinyint(4)
-,`contemporary_task_id` tinyint(4)
-,`subtask_id` int(11)
-,`subtask_starting_demand` int(4)
-,`subtask_success_count` decimal(42,0)
-,`subtask_success_count_total` bigint(21)
-,`subtask_task_period_demand` tinyint(4)
-,`subtask_task_id` tinyint(4)
-,`subtask_super_id` int(11)
-,`subtask_name` varchar(48)
-,`subtask_category_id` tinyint(4)
-,`subtask_base_value` tinyint(4)
-,`subtask_max_value` tinyint(4)
-,`subtask_inflation_rate` decimal(4,1)
-,`subtask_demand_cutoff` tinyint(4)
-,`subtask_bonus_base` tinyint(4)
-,`subtask_description` text
-,`subtask_url` varchar(48)
-,`subtask_accumulative` tinyint(4)
-,`subtask_owner_participant_id` int(11)
-,`subtask_dividend_rate` decimal(4,1)
-,`subtask_category_name` varchar(16)
-,`subtask_category_class` varchar(16)
-,`subtask_category_description` text
-,`contemporary_demand` decimal(44,0)
-,`contemporary_demand_positive` decimal(44,0)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `lc60_demand_view_uncomplete_contemporary_demand`
---
-CREATE TABLE IF NOT EXISTS `lc60_demand_view_uncomplete_contemporary_demand` (
-`current_task_id` tinyint(4)
-,`contemporary_task_id` tinyint(4)
-,`subtask_id` int(11)
-,`subtask_starting_demand` tinyint(4)
-,`subtask_success_count` int(1)
-,`subtask_success_count_total` int(1)
-,`subtask_task_period_demand` tinyint(4)
-,`subtask_task_id` tinyint(4)
-,`subtask_super_id` int(11)
-,`subtask_name` varchar(48)
-,`subtask_category_id` tinyint(4)
-,`subtask_base_value` tinyint(4)
-,`subtask_max_value` tinyint(4)
-,`subtask_inflation_rate` decimal(4,1)
-,`subtask_demand_cutoff` tinyint(4)
-,`subtask_bonus_base` tinyint(4)
-,`subtask_description` tinytext
-,`subtask_url` varchar(48)
-,`subtask_accumulative` tinyint(1)
-,`subtask_owner_participant_id` int(11)
-,`subtask_dividend_rate` decimal(4,1)
-,`subtask_category_name` varchar(16)
-,`subtask_category_class` varchar(16)
-,`subtask_category_description` tinytext
-,`contemporary_demand` int(9)
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `lc60_demand_view_uncomplete_contemporary_demand_positive`
---
-CREATE TABLE IF NOT EXISTS `lc60_demand_view_uncomplete_contemporary_demand_positive` (
-`current_task_id` tinyint(4)
-,`contemporary_task_id` tinyint(4)
-,`subtask_id` int(11)
-,`subtask_starting_demand` tinyint(4)
-,`subtask_success_count` int(1)
-,`subtask_success_count_total` int(1)
-,`subtask_task_period_demand` tinyint(4)
-,`subtask_task_id` tinyint(4)
-,`subtask_super_id` int(11)
-,`subtask_name` varchar(48)
-,`subtask_category_id` tinyint(4)
-,`subtask_base_value` tinyint(4)
-,`subtask_max_value` tinyint(4)
-,`subtask_inflation_rate` decimal(4,1)
-,`subtask_demand_cutoff` tinyint(4)
-,`subtask_bonus_base` tinyint(4)
-,`subtask_description` tinytext
-,`subtask_url` varchar(48)
-,`subtask_accumulative` tinyint(1)
-,`subtask_owner_participant_id` int(11)
-,`subtask_dividend_rate` decimal(4,1)
-,`subtask_category_name` varchar(16)
-,`subtask_category_class` varchar(16)
-,`subtask_category_description` tinytext
-,`contemporary_demand` int(9)
-,`contemporary_demand_positive` bigint(11)
 );
 
 -- --------------------------------------------------------
@@ -452,6 +351,17 @@ CREATE TABLE IF NOT EXISTS `lc60_dream_with_type_participant` (
 ,`final_value_truncate` decimal(65,2)
 ,`task_id` tinyint(4)
 ,`task_title` varchar(48)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `lc60_first_dream_subtask`
+--
+CREATE TABLE IF NOT EXISTS `lc60_first_dream_subtask` (
+`participant_id` int(11)
+,`dream_timestamp` timestamp
+,`subtask_id` int(11)
 );
 
 -- --------------------------------------------------------
@@ -730,10 +640,15 @@ CREATE TABLE IF NOT EXISTS `lc60_subtask_pre_values` (
 `subtask_id` int(11)
 ,`current_task_id` tinyint(4)
 ,`contemporary_task_id` tinyint(4)
-,`contemporary_demand` decimal(44,0)
-,`contemporary_demand_positive` decimal(44,0)
-,`final_value_cur` decimal(48,0)
+,`contemporary_task_id_pre` tinyint(4)
+,`subtask_success_count` decimal(42,0)
+,`subtask_success_count_total` bigint(21)
+,`contemporary_demand_pre` decimal(44,0)
+,`contemporary_demand_positive_pre` decimal(44,0)
+,`contemporary_demand_cur` decimal(44,0)
+,`contemporary_demand_positive_cur` decimal(44,0)
 ,`final_value_pre` decimal(48,0)
+,`final_value_cur` decimal(48,0)
 );
 
 -- --------------------------------------------------------
@@ -1283,16 +1198,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_calculated_subtask_demand_inner`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_calculated_subtask_demand_inner` AS select `calculated_subtask_demand_union`.`current_task_id` AS `current_task_id`,`calculated_subtask_demand_union`.`contemporary_task_id` AS `contemporary_task_id`,`calculated_subtask_demand_union`.`subtask_id` AS `subtask_id`,`calculated_subtask_demand_union`.`subtask_starting_demand` AS `subtask_starting_demand`,`calculated_subtask_demand_union`.`subtask_success_count` AS `subtask_success_count`,`calculated_subtask_demand_union`.`subtask_success_count_total` AS `subtask_success_count_total`,`calculated_subtask_demand_union`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`calculated_subtask_demand_union`.`subtask_task_id` AS `subtask_task_id`,`calculated_subtask_demand_union`.`subtask_super_id` AS `subtask_super_id`,`calculated_subtask_demand_union`.`subtask_name` AS `subtask_name`,`calculated_subtask_demand_union`.`subtask_category_id` AS `subtask_category_id`,`calculated_subtask_demand_union`.`subtask_base_value` AS `subtask_base_value`,`calculated_subtask_demand_union`.`subtask_max_value` AS `subtask_max_value`,`calculated_subtask_demand_union`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`calculated_subtask_demand_union`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`calculated_subtask_demand_union`.`subtask_bonus_base` AS `subtask_bonus_base`,`calculated_subtask_demand_union`.`subtask_description` AS `subtask_description`,`calculated_subtask_demand_union`.`subtask_url` AS `subtask_url`,`calculated_subtask_demand_union`.`subtask_accumulative` AS `subtask_accumulative`,`calculated_subtask_demand_union`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`calculated_subtask_demand_union`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`calculated_subtask_demand_union`.`subtask_category_name` AS `subtask_category_name`,`calculated_subtask_demand_union`.`subtask_category_class` AS `subtask_category_class`,`calculated_subtask_demand_union`.`subtask_category_description` AS `subtask_category_description`,`calculated_subtask_demand_union`.`contemporary_demand` AS `contemporary_demand`,`calculated_subtask_demand_union`.`contemporary_demand_positive` AS `contemporary_demand_positive`,(case when (isnull(`calculated_subtask_demand_union`.`subtask_max_value`) or isnull(`calculated_subtask_demand_union`.`subtask_starting_demand`)) then 0 else (case when (`calculated_subtask_demand_union`.`contemporary_demand_positive` >= `calculated_subtask_demand_union`.`subtask_demand_cutoff`) then `calculated_subtask_demand_union`.`subtask_demand_cutoff` else `calculated_subtask_demand_union`.`contemporary_demand_positive` end) end) AS `inner_function` from `lc60_calculated_subtask_demand_union` `calculated_subtask_demand_union`;
-
--- --------------------------------------------------------
-
---
--- Structure for view `lc60_calculated_subtask_demand_union`
---
-DROP TABLE IF EXISTS `lc60_calculated_subtask_demand_union`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_calculated_subtask_demand_union` AS select `demand_view_success_contemporary_demand_positive`.`current_task_id` AS `current_task_id`,`demand_view_success_contemporary_demand_positive`.`contemporary_task_id` AS `contemporary_task_id`,`demand_view_success_contemporary_demand_positive`.`subtask_id` AS `subtask_id`,`demand_view_success_contemporary_demand_positive`.`subtask_starting_demand` AS `subtask_starting_demand`,`demand_view_success_contemporary_demand_positive`.`subtask_success_count` AS `subtask_success_count`,`demand_view_success_contemporary_demand_positive`.`subtask_success_count_total` AS `subtask_success_count_total`,`demand_view_success_contemporary_demand_positive`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`demand_view_success_contemporary_demand_positive`.`subtask_task_id` AS `subtask_task_id`,`demand_view_success_contemporary_demand_positive`.`subtask_super_id` AS `subtask_super_id`,`demand_view_success_contemporary_demand_positive`.`subtask_name` AS `subtask_name`,`demand_view_success_contemporary_demand_positive`.`subtask_category_id` AS `subtask_category_id`,`demand_view_success_contemporary_demand_positive`.`subtask_base_value` AS `subtask_base_value`,`demand_view_success_contemporary_demand_positive`.`subtask_max_value` AS `subtask_max_value`,`demand_view_success_contemporary_demand_positive`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`demand_view_success_contemporary_demand_positive`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`demand_view_success_contemporary_demand_positive`.`subtask_bonus_base` AS `subtask_bonus_base`,`demand_view_success_contemporary_demand_positive`.`subtask_description` AS `subtask_description`,`demand_view_success_contemporary_demand_positive`.`subtask_url` AS `subtask_url`,`demand_view_success_contemporary_demand_positive`.`subtask_accumulative` AS `subtask_accumulative`,`demand_view_success_contemporary_demand_positive`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`demand_view_success_contemporary_demand_positive`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`demand_view_success_contemporary_demand_positive`.`subtask_category_name` AS `subtask_category_name`,`demand_view_success_contemporary_demand_positive`.`subtask_category_class` AS `subtask_category_class`,`demand_view_success_contemporary_demand_positive`.`subtask_category_description` AS `subtask_category_description`,`demand_view_success_contemporary_demand_positive`.`contemporary_demand` AS `contemporary_demand`,`demand_view_success_contemporary_demand_positive`.`contemporary_demand_positive` AS `contemporary_demand_positive` from `lc60_demand_view_success_contemporary_demand_positive` `demand_view_success_contemporary_demand_positive` union select `demand_view_uncomplete_contemporary_demand_positive`.`current_task_id` AS `current_task_id`,`demand_view_uncomplete_contemporary_demand_positive`.`contemporary_task_id` AS `contemporary_task_id`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_id` AS `subtask_id`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_starting_demand` AS `subtask_starting_demand`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_success_count` AS `subtask_success_count`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_success_count_total` AS `subtask_success_count_total`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_task_id` AS `subtask_task_id`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_super_id` AS `subtask_super_id`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_name` AS `subtask_name`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_category_id` AS `subtask_category_id`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_base_value` AS `subtask_base_value`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_max_value` AS `subtask_max_value`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_bonus_base` AS `subtask_bonus_base`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_description` AS `subtask_description`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_url` AS `subtask_url`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_accumulative` AS `subtask_accumulative`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_category_name` AS `subtask_category_name`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_category_class` AS `subtask_category_class`,`demand_view_uncomplete_contemporary_demand_positive`.`subtask_category_description` AS `subtask_category_description`,`demand_view_uncomplete_contemporary_demand_positive`.`contemporary_demand` AS `contemporary_demand`,`demand_view_uncomplete_contemporary_demand_positive`.`contemporary_demand_positive` AS `contemporary_demand_positive` from `lc60_demand_view_uncomplete_contemporary_demand_positive` `demand_view_uncomplete_contemporary_demand_positive`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_calculated_subtask_demand_inner` AS select `calculated_demand`.`current_task_id` AS `current_task_id`,`calculated_demand`.`contemporary_task_id` AS `contemporary_task_id`,`calculated_demand`.`subtask_id` AS `subtask_id`,`calculated_demand`.`subtask_starting_demand` AS `subtask_starting_demand`,`calculated_demand`.`subtask_success_count` AS `subtask_success_count`,`calculated_demand`.`subtask_success_count_total` AS `subtask_success_count_total`,`calculated_demand`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`calculated_demand`.`subtask_task_id` AS `subtask_task_id`,`calculated_demand`.`subtask_super_id` AS `subtask_super_id`,`calculated_demand`.`subtask_name` AS `subtask_name`,`calculated_demand`.`subtask_category_id` AS `subtask_category_id`,`calculated_demand`.`subtask_base_value` AS `subtask_base_value`,`calculated_demand`.`subtask_max_value` AS `subtask_max_value`,`calculated_demand`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`calculated_demand`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`calculated_demand`.`subtask_bonus_base` AS `subtask_bonus_base`,`calculated_demand`.`subtask_description` AS `subtask_description`,`calculated_demand`.`subtask_url` AS `subtask_url`,`calculated_demand`.`subtask_accumulative` AS `subtask_accumulative`,`calculated_demand`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`calculated_demand`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`calculated_demand`.`subtask_category_name` AS `subtask_category_name`,`calculated_demand`.`subtask_category_class` AS `subtask_category_class`,`calculated_demand`.`subtask_category_description` AS `subtask_category_description`,`calculated_demand`.`contemporary_demand` AS `contemporary_demand`,`calculated_demand`.`contemporary_demand_positive` AS `contemporary_demand_positive`,(case when (isnull(`calculated_demand`.`subtask_max_value`) or isnull(`calculated_demand`.`subtask_starting_demand`)) then 0 else (case when (`calculated_demand`.`contemporary_demand_positive` >= `calculated_demand`.`subtask_demand_cutoff`) then `calculated_demand`.`subtask_demand_cutoff` else `calculated_demand`.`contemporary_demand_positive` end) end) AS `inner_function` from `lc60_demand_view_complete_contemporary_demand_positive` `calculated_demand`;
 
 -- --------------------------------------------------------
 
@@ -1333,47 +1239,29 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 -- --------------------------------------------------------
 
 --
+-- Structure for view `lc60_demand_view_complete_contemporary_demand`
+--
+DROP TABLE IF EXISTS `lc60_demand_view_complete_contemporary_demand`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_complete_contemporary_demand` AS select `current_task`.`task_id` AS `current_task_id`,`contemporary_task`.`task_id` AS `contemporary_task_id`,`subtask`.`id` AS `subtask_id`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,coalesce(`demand_view_success`.`subtask_success_count`,0) AS `subtask_success_count`,coalesce(`demand_view_success`.`subtask_success_count_total`,0) AS `subtask_success_count_total`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`task_id` AS `subtask_task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_bonus_base` AS `subtask_bonus_base`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_url` AS `subtask_url`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description`,(case when isnull(`demand_view_success`.`subtask_task_period_demand`) then ((`subtask`.`subtask_task_period_demand` * (`current_task`.`task_id` - `subtask`.`task_id`)) + `subtask`.`subtask_starting_demand`) else (((`demand_view_success`.`subtask_task_period_demand` * (`demand_view_success`.`contemporary_task_id` - `demand_view_success`.`subtask_task_id`)) - `demand_view_success`.`subtask_success_count`) + `demand_view_success`.`subtask_starting_demand`) end) AS `contemporary_demand` from ((((`lc60_current_task` `current_task` join `lc60_current_task` `contemporary_task`) join `lc60_subtasks` `subtask`) left join `lc60_subtask_categories` `subtask_category` on((`subtask`.`subtask_category_id` = `subtask_category`.`id`))) left join `lc60_demand_view_success` `demand_view_success` on(((`subtask`.`id` = `demand_view_success`.`subtask_id`) and (`contemporary_task`.`task_id` = `demand_view_success`.`contemporary_task_id`))));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `lc60_demand_view_complete_contemporary_demand_positive`
+--
+DROP TABLE IF EXISTS `lc60_demand_view_complete_contemporary_demand_positive`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_complete_contemporary_demand_positive` AS select `demand_view_complete`.`current_task_id` AS `current_task_id`,`demand_view_complete`.`contemporary_task_id` AS `contemporary_task_id`,`demand_view_complete`.`subtask_id` AS `subtask_id`,`demand_view_complete`.`subtask_starting_demand` AS `subtask_starting_demand`,`demand_view_complete`.`subtask_success_count` AS `subtask_success_count`,`demand_view_complete`.`subtask_success_count_total` AS `subtask_success_count_total`,`demand_view_complete`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`demand_view_complete`.`subtask_task_id` AS `subtask_task_id`,`demand_view_complete`.`subtask_super_id` AS `subtask_super_id`,`demand_view_complete`.`subtask_name` AS `subtask_name`,`demand_view_complete`.`subtask_category_id` AS `subtask_category_id`,`demand_view_complete`.`subtask_base_value` AS `subtask_base_value`,`demand_view_complete`.`subtask_max_value` AS `subtask_max_value`,`demand_view_complete`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`demand_view_complete`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`demand_view_complete`.`subtask_bonus_base` AS `subtask_bonus_base`,`demand_view_complete`.`subtask_description` AS `subtask_description`,`demand_view_complete`.`subtask_url` AS `subtask_url`,`demand_view_complete`.`subtask_accumulative` AS `subtask_accumulative`,`demand_view_complete`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`demand_view_complete`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`demand_view_complete`.`subtask_category_name` AS `subtask_category_name`,`demand_view_complete`.`subtask_category_class` AS `subtask_category_class`,`demand_view_complete`.`subtask_category_description` AS `subtask_category_description`,`demand_view_complete`.`contemporary_demand` AS `contemporary_demand`,(case when (`demand_view_complete`.`contemporary_demand` <= 0) then 0 else `demand_view_complete`.`contemporary_demand` end) AS `contemporary_demand_positive` from `lc60_demand_view_complete_contemporary_demand` `demand_view_complete`;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `lc60_demand_view_success`
 --
 DROP TABLE IF EXISTS `lc60_demand_view_success`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_success` AS select `successful_subtask_task`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task`.`subtask_id` AS `subtask_id`,(case when ((`successful_subtask_task`.`subtask_starting_demand` <= 0) or isnull(`successful_subtask_task`.`subtask_max_value`) or isnull(`successful_subtask_task`.`subtask_starting_demand`)) then 0 else `successful_subtask_task`.`subtask_starting_demand` end) AS `subtask_starting_demand`,min(`demand_accumulated_success`.`subtask_success_count`) AS `subtask_success_count`,count(0) AS `subtask_success_count_total`,`successful_subtask_task`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task`.`subtask_name` AS `subtask_name`,`successful_subtask_task`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task`.`subtask_bonus_base` AS `subtask_bonus_base`,`successful_subtask_task`.`subtask_description` AS `subtask_description`,`successful_subtask_task`.`subtask_url` AS `subtask_url`,`successful_subtask_task`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`successful_subtask_task`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task`.`subtask_category_description` AS `subtask_category_description` from (`lc60_successful_subtask_task` `successful_subtask_task` join `lc60_demand_accumulated_success` `demand_accumulated_success` on(((`successful_subtask_task`.`subtask_id` = `demand_accumulated_success`.`subtask_id`) and (`successful_subtask_task`.`contemporary_task_id` = `demand_accumulated_success`.`contemporary_task_id`)))) group by `successful_subtask_task`.`contemporary_task_id`,`successful_subtask_task`.`subtask_id`,`successful_subtask_task`.`subtask_id`,`successful_subtask_task`.`subtask_starting_demand`,`successful_subtask_task`.`subtask_task_period_demand`,`successful_subtask_task`.`subtask_task_id`,`successful_subtask_task`.`subtask_super_id`,`successful_subtask_task`.`subtask_name`,`successful_subtask_task`.`subtask_category_id`,`successful_subtask_task`.`subtask_base_value`,`successful_subtask_task`.`subtask_max_value`,`successful_subtask_task`.`subtask_inflation_rate`,`successful_subtask_task`.`subtask_demand_cutoff`,`successful_subtask_task`.`subtask_url`,`successful_subtask_task`.`subtask_accumulative`,`successful_subtask_task`.`subtask_owner_participant_id`,`successful_subtask_task`.`subtask_dividend_rate`;
-
--- --------------------------------------------------------
-
---
--- Structure for view `lc60_demand_view_success_contemporary_demand`
---
-DROP TABLE IF EXISTS `lc60_demand_view_success_contemporary_demand`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_success_contemporary_demand` AS select `current_task`.`task_id` AS `current_task_id`,`demand_view_success`.`contemporary_task_id` AS `contemporary_task_id`,`demand_view_success`.`subtask_id` AS `subtask_id`,`demand_view_success`.`subtask_starting_demand` AS `subtask_starting_demand`,`demand_view_success`.`subtask_success_count` AS `subtask_success_count`,`demand_view_success`.`subtask_success_count_total` AS `subtask_success_count_total`,`demand_view_success`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`demand_view_success`.`subtask_task_id` AS `subtask_task_id`,`demand_view_success`.`subtask_super_id` AS `subtask_super_id`,`demand_view_success`.`subtask_name` AS `subtask_name`,`demand_view_success`.`subtask_category_id` AS `subtask_category_id`,`demand_view_success`.`subtask_base_value` AS `subtask_base_value`,`demand_view_success`.`subtask_max_value` AS `subtask_max_value`,`demand_view_success`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`demand_view_success`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`demand_view_success`.`subtask_bonus_base` AS `subtask_bonus_base`,`demand_view_success`.`subtask_description` AS `subtask_description`,`demand_view_success`.`subtask_url` AS `subtask_url`,`demand_view_success`.`subtask_accumulative` AS `subtask_accumulative`,`demand_view_success`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`demand_view_success`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`demand_view_success`.`subtask_category_name` AS `subtask_category_name`,`demand_view_success`.`subtask_category_class` AS `subtask_category_class`,`demand_view_success`.`subtask_category_description` AS `subtask_category_description`,(((`demand_view_success`.`subtask_task_period_demand` * (`demand_view_success`.`contemporary_task_id` - `demand_view_success`.`subtask_task_id`)) - `demand_view_success`.`subtask_success_count`) + `demand_view_success`.`subtask_starting_demand`) AS `contemporary_demand` from (`lc60_current_task` `current_task` join `lc60_demand_view_success` `demand_view_success`) group by `current_task`.`task_id`,`demand_view_success`.`contemporary_task_id`,`demand_view_success`.`subtask_id`,`demand_view_success`.`subtask_starting_demand`,`demand_view_success`.`subtask_success_count`,`demand_view_success`.`subtask_task_period_demand`,`demand_view_success`.`subtask_task_id`,`demand_view_success`.`subtask_super_id`,`demand_view_success`.`subtask_name`,`demand_view_success`.`subtask_category_id`,`demand_view_success`.`subtask_base_value`,`demand_view_success`.`subtask_max_value`,`demand_view_success`.`subtask_inflation_rate`,`demand_view_success`.`subtask_demand_cutoff`,`demand_view_success`.`subtask_url`,`demand_view_success`.`subtask_accumulative`,`demand_view_success`.`subtask_owner_participant_id`,`demand_view_success`.`subtask_dividend_rate`;
-
--- --------------------------------------------------------
-
---
--- Structure for view `lc60_demand_view_success_contemporary_demand_positive`
---
-DROP TABLE IF EXISTS `lc60_demand_view_success_contemporary_demand_positive`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_success_contemporary_demand_positive` AS select `demand_view_success_contemporary_demand`.`current_task_id` AS `current_task_id`,`demand_view_success_contemporary_demand`.`contemporary_task_id` AS `contemporary_task_id`,`demand_view_success_contemporary_demand`.`subtask_id` AS `subtask_id`,`demand_view_success_contemporary_demand`.`subtask_starting_demand` AS `subtask_starting_demand`,`demand_view_success_contemporary_demand`.`subtask_success_count` AS `subtask_success_count`,`demand_view_success_contemporary_demand`.`subtask_success_count_total` AS `subtask_success_count_total`,`demand_view_success_contemporary_demand`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`demand_view_success_contemporary_demand`.`subtask_task_id` AS `subtask_task_id`,`demand_view_success_contemporary_demand`.`subtask_super_id` AS `subtask_super_id`,`demand_view_success_contemporary_demand`.`subtask_name` AS `subtask_name`,`demand_view_success_contemporary_demand`.`subtask_category_id` AS `subtask_category_id`,`demand_view_success_contemporary_demand`.`subtask_base_value` AS `subtask_base_value`,`demand_view_success_contemporary_demand`.`subtask_max_value` AS `subtask_max_value`,`demand_view_success_contemporary_demand`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`demand_view_success_contemporary_demand`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`demand_view_success_contemporary_demand`.`subtask_bonus_base` AS `subtask_bonus_base`,`demand_view_success_contemporary_demand`.`subtask_description` AS `subtask_description`,`demand_view_success_contemporary_demand`.`subtask_url` AS `subtask_url`,`demand_view_success_contemporary_demand`.`subtask_accumulative` AS `subtask_accumulative`,`demand_view_success_contemporary_demand`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`demand_view_success_contemporary_demand`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`demand_view_success_contemporary_demand`.`subtask_category_name` AS `subtask_category_name`,`demand_view_success_contemporary_demand`.`subtask_category_class` AS `subtask_category_class`,`demand_view_success_contemporary_demand`.`subtask_category_description` AS `subtask_category_description`,`demand_view_success_contemporary_demand`.`contemporary_demand` AS `contemporary_demand`,(case when (`demand_view_success_contemporary_demand`.`contemporary_demand` <= 0) then 0 else `demand_view_success_contemporary_demand`.`contemporary_demand` end) AS `contemporary_demand_positive` from `lc60_demand_view_success_contemporary_demand` `demand_view_success_contemporary_demand`;
-
--- --------------------------------------------------------
-
---
--- Structure for view `lc60_demand_view_uncomplete_contemporary_demand`
---
-DROP TABLE IF EXISTS `lc60_demand_view_uncomplete_contemporary_demand`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_uncomplete_contemporary_demand` AS select `current_task`.`task_id` AS `current_task_id`,`subtask`.`task_id` AS `contemporary_task_id`,`subtask`.`id` AS `subtask_id`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,0 AS `subtask_success_count`,0 AS `subtask_success_count_total`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`task_id` AS `subtask_task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_bonus_base` AS `subtask_bonus_base`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_url` AS `subtask_url`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description`,((`subtask`.`subtask_task_period_demand` * (`current_task`.`task_id` - `subtask`.`task_id`)) + `subtask`.`subtask_starting_demand`) AS `contemporary_demand` from ((`lc60_current_task` `current_task` join `lc60_subtasks` `subtask` on(1)) left join `lc60_subtask_categories` `subtask_category` on((`subtask`.`subtask_category_id` = `subtask_category`.`id`))) where ((`subtask`.`subtask_visible` <> 0) and (not(`subtask`.`id` in (select `subtask_dream_super`.`subtask_id` from `lc60_subtask_dream_super` `subtask_dream_super`))));
-
--- --------------------------------------------------------
-
---
--- Structure for view `lc60_demand_view_uncomplete_contemporary_demand_positive`
---
-DROP TABLE IF EXISTS `lc60_demand_view_uncomplete_contemporary_demand_positive`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_uncomplete_contemporary_demand_positive` AS select `demand_view_uncomplete_contemporary_demand`.`current_task_id` AS `current_task_id`,`demand_view_uncomplete_contemporary_demand`.`contemporary_task_id` AS `contemporary_task_id`,`demand_view_uncomplete_contemporary_demand`.`subtask_id` AS `subtask_id`,`demand_view_uncomplete_contemporary_demand`.`subtask_starting_demand` AS `subtask_starting_demand`,`demand_view_uncomplete_contemporary_demand`.`subtask_success_count` AS `subtask_success_count`,`demand_view_uncomplete_contemporary_demand`.`subtask_success_count_total` AS `subtask_success_count_total`,`demand_view_uncomplete_contemporary_demand`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`demand_view_uncomplete_contemporary_demand`.`subtask_task_id` AS `subtask_task_id`,`demand_view_uncomplete_contemporary_demand`.`subtask_super_id` AS `subtask_super_id`,`demand_view_uncomplete_contemporary_demand`.`subtask_name` AS `subtask_name`,`demand_view_uncomplete_contemporary_demand`.`subtask_category_id` AS `subtask_category_id`,`demand_view_uncomplete_contemporary_demand`.`subtask_base_value` AS `subtask_base_value`,`demand_view_uncomplete_contemporary_demand`.`subtask_max_value` AS `subtask_max_value`,`demand_view_uncomplete_contemporary_demand`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`demand_view_uncomplete_contemporary_demand`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`demand_view_uncomplete_contemporary_demand`.`subtask_bonus_base` AS `subtask_bonus_base`,`demand_view_uncomplete_contemporary_demand`.`subtask_description` AS `subtask_description`,`demand_view_uncomplete_contemporary_demand`.`subtask_url` AS `subtask_url`,`demand_view_uncomplete_contemporary_demand`.`subtask_accumulative` AS `subtask_accumulative`,`demand_view_uncomplete_contemporary_demand`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`demand_view_uncomplete_contemporary_demand`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`demand_view_uncomplete_contemporary_demand`.`subtask_category_name` AS `subtask_category_name`,`demand_view_uncomplete_contemporary_demand`.`subtask_category_class` AS `subtask_category_class`,`demand_view_uncomplete_contemporary_demand`.`subtask_category_description` AS `subtask_category_description`,`demand_view_uncomplete_contemporary_demand`.`contemporary_demand` AS `contemporary_demand`,(case when (`demand_view_uncomplete_contemporary_demand`.`contemporary_demand` <= 0) then 0 else `demand_view_uncomplete_contemporary_demand`.`contemporary_demand` end) AS `contemporary_demand_positive` from `lc60_demand_view_uncomplete_contemporary_demand` `demand_view_uncomplete_contemporary_demand`;
 
 -- --------------------------------------------------------
 
@@ -1410,6 +1298,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 DROP TABLE IF EXISTS `lc60_dream_with_type_participant`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_dream_with_type_participant` AS select `dream_with_type`.`participant_id` AS `participant_id`,`participant`.`participant_name` AS `participant_name`,`dream_with_type`.`dream_id` AS `dream_id`,`dream_with_type`.`dream_timestamp` AS `dream_timestamp`,`dream_with_type`.`dream_type_id` AS `dream_type_id`,`dream_with_type`.`dream_type_name` AS `dream_type_name`,`dream_with_type`.`dream_type_short_name` AS `dream_type_short_name`,`dream_with_type`.`final_value_truncate` AS `final_value_truncate`,`dream_with_type`.`task_id` AS `task_id`,`dream_with_type`.`task_title` AS `task_title` from (`lc60_dream_with_type` `dream_with_type` join `lc60_participants` `participant` on((`dream_with_type`.`participant_id` = `participant`.`id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `lc60_first_dream_subtask`
+--
+DROP TABLE IF EXISTS `lc60_first_dream_subtask`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_first_dream_subtask` AS select `dream`.`participant_id` AS `participant_id`,min(`dream`.`dream_timestamp`) AS `dream_timestamp`,`subtask_dreams`.`subtask_id` AS `subtask_id` from (`lc60_dreams` `dream` join `lc60_subtask_dreams` `subtask_dreams` on((`dream`.`id` = `subtask_dreams`.`dream_id`))) group by `dream`.`participant_id`,`subtask_dreams`.`subtask_id`;
 
 -- --------------------------------------------------------
 
@@ -1508,7 +1405,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_subtask_pre_values`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_subtask_pre_values` AS select `pre`.`subtask_id` AS `subtask_id`,`pre`.`current_task_id` AS `current_task_id`,`pre`.`contemporary_task_id` AS `contemporary_task_id`,`pre`.`contemporary_demand` AS `contemporary_demand`,`pre`.`contemporary_demand_positive` AS `contemporary_demand_positive`,`cur`.`final_value` AS `final_value_cur`,`pre`.`final_value` AS `final_value_pre` from (`lc60_calculated_subtask_demand_final_value` `cur` join `lc60_calculated_subtask_demand_final_value` `pre` on(((`cur`.`subtask_id` = `pre`.`subtask_id`) and (`pre`.`current_task_id` = `cur`.`current_task_id`) and (`pre`.`contemporary_task_id` = (select max(`m`.`contemporary_task_id`) from `lc60_calculated_subtask_demand_final_value` `m` where ((`pre`.`subtask_id` = `m`.`subtask_id`) and (`pre`.`current_task_id` = `m`.`current_task_id`) and (`m`.`contemporary_task_id` < `cur`.`contemporary_task_id`)) limit 1))))) where (`cur`.`current_task_id` = `cur`.`contemporary_task_id`) order by `pre`.`subtask_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_subtask_pre_values` AS select `pre`.`subtask_id` AS `subtask_id`,`cur`.`current_task_id` AS `current_task_id`,`cur`.`contemporary_task_id` AS `contemporary_task_id`,`pre`.`contemporary_task_id` AS `contemporary_task_id_pre`,`cur`.`subtask_success_count` AS `subtask_success_count`,`cur`.`subtask_success_count_total` AS `subtask_success_count_total`,`pre`.`contemporary_demand` AS `contemporary_demand_pre`,`pre`.`contemporary_demand_positive` AS `contemporary_demand_positive_pre`,`cur`.`contemporary_demand` AS `contemporary_demand_cur`,`cur`.`contemporary_demand_positive` AS `contemporary_demand_positive_cur`,`pre`.`final_value` AS `final_value_pre`,`cur`.`final_value` AS `final_value_cur` from (`lc60_calculated_subtask_demand_final_value` `cur` join `lc60_calculated_subtask_demand_final_value` `pre` on(((`cur`.`subtask_id` = `pre`.`subtask_id`) and (`cur`.`contemporary_task_id` = (`pre`.`contemporary_task_id` + 1))))) where ((`pre`.`current_task_id` = `pre`.`contemporary_task_id`) and (`cur`.`current_task_id` = `cur`.`contemporary_task_id`));
 
 -- --------------------------------------------------------
 
@@ -1553,7 +1450,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_subtask_values`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_subtask_values` AS select `subtask`.`id` AS `id`,`cur`.`current_task_id` AS `current_task_id`,`cur`.`contemporary_task_id` AS `contemporary_task_id`,`subtask`.`id` AS `subtask_id`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,coalesce(`cur`.`subtask_success_count`,0) AS `subtask_success_count`,coalesce(`cur`.`subtask_success_count_total`,0) AS `subtask_success_count_total`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`task_id` AS `subtask_task_id`,`task`.`task_title` AS `task_title`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_bonus_base` AS `subtask_bonus_base`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_symbol` AS `subtask_symbol`,`subtask`.`subtask_image` AS `subtask_image`,`subtask`.`subtask_type_id` AS `subtask_type_id`,`subtask_type`.`subtask_type_name` AS `subtask_type_name`,`subtask_type`.`subtask_type_ownable` AS `subtask_type_ownable`,`subtask_type`.`subtask_type_shareable` AS `subtask_type_shareable`,`cat`.`subtask_category_name` AS `subtask_category_name`,`cat`.`subtask_category_class` AS `subtask_category_class`,`cat`.`subtask_category_color` AS `subtask_category_color`,coalesce(`cur`.`contemporary_demand`,`subtask`.`subtask_starting_demand`) AS `contemporary_demand_cur`,coalesce(`cur`.`contemporary_demand_positive`,`subtask`.`subtask_starting_demand`) AS `contemporary_demand_positive_cur`,coalesce(`pre`.`contemporary_demand`,`subtask`.`subtask_starting_demand`) AS `contemporary_demand_pre`,coalesce(`pre`.`contemporary_demand_positive`,`subtask`.`subtask_starting_demand`) AS `contemporary_demand_positive_pre`,`pre`.`final_value_pre` AS `final_value_pre`,`cur`.`final_value` AS `final_value_cur` from ((((((`lc60_unexpired_task` `unexpired_task` join `lc60_subtasks` `subtask`) join `lc60_tasks` `task` on((`subtask`.`task_id` = `task`.`id`))) left join `lc60_subtask_categories` `cat` on((`subtask`.`subtask_category_id` = `cat`.`id`))) left join `lc60_subtask_types` `subtask_type` on((`subtask`.`subtask_type_id` = `subtask_type`.`id`))) left join `lc60_calculated_subtask_demand_final_value` `cur` on(((`subtask`.`id` = `cur`.`subtask_id`) and (`cur`.`contemporary_task_id` = `cur`.`current_task_id`) and (`cur`.`current_task_id` = `unexpired_task`.`task_id`)))) left join `lc60_subtask_pre_values` `pre` on(((`subtask`.`id` = `pre`.`subtask_id`) and (`pre`.`current_task_id` = `cur`.`current_task_id`) and (`pre`.`contemporary_task_id` = (select max(`mp`.`contemporary_task_id`) from `lc60_subtask_pre_values` `mp` where ((`pre`.`subtask_id` = `mp`.`subtask_id`) and (`pre`.`current_task_id` = `mp`.`current_task_id`)) limit 1))))) where ((`task`.`task_start` <= now()) and (`subtask`.`subtask_visible` <> 0));
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_subtask_values` AS select `subtask`.`id` AS `id`,`pre`.`current_task_id` AS `current_task_id`,`pre`.`contemporary_task_id` AS `contemporary_task_id`,`subtask`.`id` AS `subtask_id`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,coalesce(`pre`.`subtask_success_count`,0) AS `subtask_success_count`,coalesce(`pre`.`subtask_success_count_total`,0) AS `subtask_success_count_total`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`task_id` AS `subtask_task_id`,`task`.`task_title` AS `task_title`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_bonus_base` AS `subtask_bonus_base`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_symbol` AS `subtask_symbol`,`subtask`.`subtask_image` AS `subtask_image`,`subtask`.`subtask_type_id` AS `subtask_type_id`,`subtask_type`.`subtask_type_name` AS `subtask_type_name`,`subtask_type`.`subtask_type_ownable` AS `subtask_type_ownable`,`subtask_type`.`subtask_type_shareable` AS `subtask_type_shareable`,`cat`.`subtask_category_name` AS `subtask_category_name`,`cat`.`subtask_category_class` AS `subtask_category_class`,`cat`.`subtask_category_color` AS `subtask_category_color`,coalesce(`pre`.`contemporary_demand_cur`,`subtask`.`subtask_starting_demand`) AS `contemporary_demand_cur`,coalesce(`pre`.`contemporary_demand_positive_cur`,`subtask`.`subtask_starting_demand`) AS `contemporary_demand_positive_cur`,coalesce(`pre`.`contemporary_demand_pre`,`subtask`.`subtask_starting_demand`) AS `contemporary_demand_pre`,coalesce(`pre`.`contemporary_demand_positive_pre`,`subtask`.`subtask_starting_demand`) AS `contemporary_demand_positive_pre`,`pre`.`final_value_pre` AS `final_value_pre`,`pre`.`final_value_cur` AS `final_value_cur` from (((((`lc60_unexpired_task` `unexpired_task` join `lc60_subtasks` `subtask`) join `lc60_tasks` `task` on((`subtask`.`task_id` = `task`.`id`))) left join `lc60_subtask_categories` `cat` on((`subtask`.`subtask_category_id` = `cat`.`id`))) left join `lc60_subtask_types` `subtask_type` on((`subtask`.`subtask_type_id` = `subtask_type`.`id`))) left join `lc60_subtask_pre_values` `pre` on(((`subtask`.`id` = `pre`.`subtask_id`) and (`pre`.`current_task_id` = `unexpired_task`.`task_id`)))) where ((`task`.`task_start` <= now()) and (`subtask`.`subtask_visible` <> 0));
 
 -- --------------------------------------------------------
 
@@ -1562,7 +1459,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_successful_subtask`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_successful_subtask` AS select `dream`.`participant_id` AS `participant_id`,`subtask_dream_super`.`dream_id` AS `dream_id`,`dream`.`dream_timestamp` AS `dream_timestamp`,`dream_type_id`.`dream_type_id` AS `dream_type_id`,`dream`.`dream_url` AS `dream_url`,`subtask`.`id` AS `subtask_id`,`subtask`.`task_id` AS `task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_bonus_base` AS `subtask_bonus_base`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_url` AS `subtask_url`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description`,`subtask`.`subtask_type_id` AS `subtask_type_id` from ((((`lc60_subtask_dream_super` `subtask_dream_super` join `lc60_subtasks` `subtask` on((`subtask_dream_super`.`subtask_id` = `subtask`.`id`))) left join `lc60_subtask_categories` `subtask_category` on((`subtask`.`subtask_category_id` = `subtask_category`.`id`))) join `lc60_dreams` `dream` on((`subtask_dream_super`.`dream_id` = `dream`.`id`))) left join `lc60_dream_type_id` `dream_type_id` on((`dream`.`id` = `dream_type_id`.`dream_id`))) where (`subtask`.`subtask_accumulative` <> 0) union select `dream`.`participant_id` AS `participant_id`,min(`subtask_dream_super`.`dream_id`) AS `dream_id`,`dream`.`dream_timestamp` AS `dream_timestamp`,`dream_type_id`.`dream_type_id` AS `dream_type_id`,`dream`.`dream_url` AS `dream_url`,`subtask`.`id` AS `subtask_id`,`subtask`.`task_id` AS `task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_bonus_base` AS `subtask_bonus_base`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_url` AS `subtask_url`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description`,`subtask`.`subtask_type_id` AS `subtask_type_id` from ((((`lc60_subtask_dream_super` `subtask_dream_super` join `lc60_subtasks` `subtask` on((`subtask_dream_super`.`subtask_id` = `subtask`.`id`))) left join `lc60_subtask_categories` `subtask_category` on((`subtask`.`subtask_category_id` = `subtask_category`.`id`))) join `lc60_dreams` `dream` on((`subtask_dream_super`.`dream_id` = `dream`.`id`))) left join `lc60_dream_type_id` `dream_type_id` on((`dream`.`id` = `dream_type_id`.`dream_id`))) where (`subtask`.`subtask_accumulative` = 0) group by `dream`.`participant_id`,`subtask`.`id`,`subtask`.`task_id`,`subtask`.`subtask_super_id`,`subtask`.`subtask_name`,`subtask`.`subtask_category_id`,`subtask`.`subtask_base_value`,`subtask`.`subtask_max_value`,`subtask`.`subtask_starting_demand`,`subtask`.`subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff`,`subtask`.`subtask_task_period_demand`,`subtask`.`subtask_description`,`subtask`.`subtask_url`,`subtask`.`subtask_accumulative`,`subtask`.`subtask_type_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_successful_subtask` AS select `dream`.`participant_id` AS `participant_id`,`subtask_dream_super`.`dream_id` AS `dream_id`,`dream`.`dream_timestamp` AS `dream_timestamp`,`dream_type_id`.`dream_type_id` AS `dream_type_id`,`dream`.`dream_url` AS `dream_url`,`subtask`.`id` AS `subtask_id`,`subtask`.`task_id` AS `task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_bonus_base` AS `subtask_bonus_base`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_url` AS `subtask_url`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description`,`subtask`.`subtask_type_id` AS `subtask_type_id` from ((((`lc60_subtask_dream_super` `subtask_dream_super` join `lc60_subtasks` `subtask` on((`subtask_dream_super`.`subtask_id` = `subtask`.`id`))) left join `lc60_subtask_categories` `subtask_category` on((`subtask`.`subtask_category_id` = `subtask_category`.`id`))) join `lc60_dreams` `dream` on((`subtask_dream_super`.`dream_id` = `dream`.`id`))) left join `lc60_dream_type_id` `dream_type_id` on((`dream`.`id` = `dream_type_id`.`dream_id`))) where (`subtask`.`subtask_accumulative` <> 0) union select `dream`.`participant_id` AS `participant_id`,min(`dream`.`id`) AS `dream_id`,min(`dream`.`dream_timestamp`) AS `dream_timestamp`,`dream_type_id`.`dream_type_id` AS `dream_type_id`,`dream`.`dream_url` AS `dream_url`,`subtask`.`id` AS `subtask_id`,`subtask`.`task_id` AS `task_id`,`subtask`.`subtask_super_id` AS `subtask_super_id`,`subtask`.`subtask_name` AS `subtask_name`,`subtask`.`subtask_category_id` AS `subtask_category_id`,`subtask`.`subtask_base_value` AS `subtask_base_value`,`subtask`.`subtask_max_value` AS `subtask_max_value`,`subtask`.`subtask_starting_demand` AS `subtask_starting_demand`,`subtask`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`subtask`.`subtask_bonus_base` AS `subtask_bonus_base`,`subtask`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`subtask`.`subtask_description` AS `subtask_description`,`subtask`.`subtask_url` AS `subtask_url`,`subtask`.`subtask_accumulative` AS `subtask_accumulative`,`subtask`.`participant_id` AS `subtask_owner_participant_id`,`subtask`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description`,`subtask`.`subtask_type_id` AS `subtask_type_id` from ((((`lc60_subtasks` `subtask` left join `lc60_subtask_categories` `subtask_category` on((`subtask`.`subtask_category_id` = `subtask_category`.`id`))) join `lc60_first_dream_subtask` `first_dream` on((`subtask`.`id` = `first_dream`.`subtask_id`))) join `lc60_dreams` `dream` on(((`dream`.`dream_timestamp` = `first_dream`.`dream_timestamp`) and (`dream`.`participant_id` = `first_dream`.`participant_id`)))) left join `lc60_dream_type_id` `dream_type_id` on((`dream`.`id` = `dream_type_id`.`dream_id`))) where (`subtask`.`subtask_accumulative` = 0) group by `dream`.`participant_id`,`subtask`.`id`,`subtask`.`task_id`,`subtask`.`subtask_super_id`,`subtask`.`subtask_name`,`subtask`.`subtask_category_id`,`subtask`.`subtask_base_value`,`subtask`.`subtask_max_value`,`subtask`.`subtask_starting_demand`,`subtask`.`subtask_inflation_rate`,`subtask`.`subtask_demand_cutoff`,`subtask`.`subtask_task_period_demand`,`subtask`.`subtask_description`,`subtask`.`subtask_url`,`subtask`.`subtask_accumulative`,`subtask`.`subtask_type_id`;
 
 -- --------------------------------------------------------
 
