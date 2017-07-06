@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 06, 2017 at 12:04 PM
+-- Generation Time: Jul 06, 2017 at 12:49 PM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -525,7 +525,7 @@ CREATE TABLE IF NOT EXISTS `lc60_share_holders_participant` (
 -- Stand-in structure for view `lc60_signups`
 --
 CREATE TABLE IF NOT EXISTS `lc60_signups` (
-`signup_url` varchar(45)
+`signup_url` varchar(42)
 ,`signup_image_url` varchar(12)
 ,`now_date` datetime
 ,`now_date_unix` bigint(17)
@@ -1371,7 +1371,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_signups`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_signups` AS select 'http://ld4all.com/forum/viewtopic.php?t=50763' AS `signup_url`,'baddudes.gif' AS `signup_image_url`,now() AS `now_date`,unix_timestamp(now()) AS `now_date_unix`,'2017-06-28 18:00:00' AS `open_date`,unix_timestamp('2017-06-28 18:00:00') AS `open_date_unix`,'2017-06-30 18:00:00' AS `begin_date`,unix_timestamp('2017-06-30 18:00:00') AS `begin_date_unix`,0 AS `participant_count`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_signups` AS select 'http://ld4all.com/forum/viewforum.php?f=49' AS `signup_url`,'baddudes.gif' AS `signup_image_url`,now() AS `now_date`,unix_timestamp(now()) AS `now_date_unix`,'2017-07-07 18:00:00' AS `open_date`,unix_timestamp('2017-07-07 18:00:00') AS `open_date_unix`,'2017-07-09 20:00:00' AS `begin_date`,unix_timestamp('2017-07-09 20:00:00') AS `begin_date_unix`,0 AS `participant_count`;
 
 -- --------------------------------------------------------
 
