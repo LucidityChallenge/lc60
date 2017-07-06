@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 06, 2017 at 05:03 AM
+-- Generation Time: Jul 06, 2017 at 12:04 PM
 -- Server version: 10.0.29-MariaDB
 -- PHP Version: 5.6.30
 
@@ -1157,6 +1157,7 @@ CREATE TABLE IF NOT EXISTS `lc60_unexpired_task` (
 ,`task_expiration` timestamp
 ,`task_text` text
 ,`task_url` varchar(80)
+,`task_unexpired` int(1)
 );
 
 -- --------------------------------------------------------
@@ -1586,7 +1587,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_unexpired_task`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_unexpired_task` AS select `current_task`.`task_id` AS `task_id`,`current_task`.`task_title` AS `task_title`,`current_task`.`task_start` AS `task_start`,`current_task`.`task_expiration` AS `task_expiration`,`current_task`.`task_text` AS `task_text`,`current_task`.`task_url` AS `task_url` from `lc60_current_task` `current_task` where (now() <= `current_task`.`task_expiration`) order by `current_task`.`task_start` desc limit 1;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_unexpired_task` AS select `current_task`.`task_id` AS `task_id`,`current_task`.`task_title` AS `task_title`,`current_task`.`task_start` AS `task_start`,`current_task`.`task_expiration` AS `task_expiration`,`current_task`.`task_text` AS `task_text`,`current_task`.`task_url` AS `task_url`,(now() <= `current_task`.`task_expiration`) AS `task_unexpired` from `lc60_current_task` `current_task` order by `current_task`.`task_start` desc limit 1;
 
 --
 -- Indexes for dumped tables
