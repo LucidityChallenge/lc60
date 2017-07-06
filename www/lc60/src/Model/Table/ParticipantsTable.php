@@ -148,6 +148,9 @@ class ParticipantsTable extends Table
         $validator
             ->allowEmpty('participant_join_url');
 
+        $validator
+            ->allowEmpty('participant_join_timestamp');
+
         return $validator;
     }
 }
