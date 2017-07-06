@@ -81,7 +81,7 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['login']);//['index', 'view', 'display', 'rss']);
+        $this->Auth->allow(['login', 'display', 'rss']);//['index', 'view', 'display', 'rss']);
         //return $this->redirect(array('controller' => 'Signups', 'action' => 'index'));
     }    
 
