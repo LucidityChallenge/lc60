@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+use App\Controller\RssController;
+use Cake\I18n\Time;
+use Cake\Routing\Router;
 
 /**
  * Dreams Controller
@@ -10,7 +12,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Dream[] paginate($object = null, array $settings = [])
  */
-class DreamsController extends AppController
+class DreamsController extends RssController
 {
 
     /**
@@ -112,5 +114,52 @@ class DreamsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    
+    /**
+     * rss method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function rss()
+    {
+      $baseUrl= (Router::url('/', true));
+      $title= 'LC60D';
+      $description= 'Lucidity Challenge 60 Recent Dreams';
+      $ttl = 1200;
+
+      $rssString = ($this->rssHead($baseUrl,$title,$description,$ttl));
+	      
+      $queryDreams = $this->Dreams->find()
+	    ->contain('Participants')
+	    ->contain('DreamWithType')
+	    ->where(['Dreams.dream_timestamp <=' => Time::now()])
+	    ->order(['Dreams.dream_timestamp' => 'desc'])
+	    ->limit(10)
+      ;
+      
+      foreach ($queryDreams as $dream)
+      {
+        $dream_type = 'Dream';
+	$dream_value = null;
+	
+	foreach ($dream->dream_with_type as $dreamWithType)
+	{
+	  $dream_type  = $dreamWithType->dream_type_short_name;
+	  $dream_value = $dreamWithType->final_value_truncate;
+	}
+      
+	$itemTitle =  $dream_type. ' by '. $dream->participant->participant_name.(($dream_value != null) ? (sprintf(' (%d points)',$dream_value)):('')).sprintf(' (%04d-%02d-%02d)',$dream->dream_timestamp->year,$dream->dream_timestamp->month,$dream->dream_timestamp->day);
+	$itemDescription = '';
+	$itemUrl = $dream->url;
+	$permalink = $baseUrl.'dreams/view/'.$dream->id;
+	$publishTime =  strtotime($dream->dream_timestamp);
+
+	$rssString = $rssString.($this->rssItem($itemTitle,$itemDescription,$itemUrl,$permalink,$publishTime));
+      }
+
+      $rssString = $rssString.($this->rssTail());
+
+      return $this->rssBody($rssString);
     }
 }

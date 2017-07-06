@@ -196,7 +196,9 @@ class NewsController extends RssController
       $rssString = ($this->rssHead($baseUrl,$title,$description,$ttl));
 	      
       $queryNews = $this->News->find()
-	    ->where(['News.publish <=' => Time::now()]);
+	    ->where(['News.publish <=' => Time::now()])
+	    ->order(['News.publish <=' => 'desc'])
+      ;
 
       foreach ($queryNews as $news)
       {
