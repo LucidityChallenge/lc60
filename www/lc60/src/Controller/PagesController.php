@@ -59,6 +59,7 @@ class PagesController extends AppController
 
         try {
             $this->render(implode('/', $path));
+            return $this->redirect('/signups');
         } catch (MissingTemplateException $e) {
             if (Configure::read('debug')) {
                 throw $e;
