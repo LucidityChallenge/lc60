@@ -13,14 +13,15 @@
 </nav>
 -->
 <div class="signups index large-9 medium-8 columns content">
+<?php $always_show = true; ?>
 <?php foreach ($signups as $signup): ?>
 <?php $open = ( ($signup->now_date_unix) >= ($signup->open_date_unix) ); ?>
-<?php if ($open) : ?>
+<?php if ($open or $always_show) : ?>
 <div class="landing">
 <a name="open"></a><h3>Lucidity Challenge 60</h3>
 <h4>The Special Challenge you should not miss!</h4>
 
-<p>Dear people of LD4all, this is Tggtt! I am your host for Lucidity Challenge 60 (LC60).
+<p>Dear people of LD4all, this is Tggtt! I am your host for Lucidity Challenge 60 (<b>LC60&reg;</b>).
 Please greet the co-host as well, Mew151. It is our honor to host such a special event.</p>
 
 <p>The Lucidity Challenge (LC) is a traditional game in LD4all. It has now reached the number 60.</p>
@@ -28,13 +29,13 @@ Please greet the co-host as well, Mew151. It is our honor to host such a special
 <p>60 is a very unique number, did you know it's divisible by 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, and 60?
 There is no number below 60 with so many divisors. This is so special that it was chosen to divide minutes into seconds (and so on).</p>
 
-<p>After five dozens of Lucidity Challenges, <b>LC60</b> (or LC:LX) is also special in every sense. It is a milestone for LD4all history, which has recently reached its 21st anniversary.</p>
+<p>After five dozens of Lucidity Challenges, <b>LC60&reg;</b> (or LC:LX) is also special in every sense. It is a milestone for LD4all history, which has recently reached its 21st anniversary.</p>
 
 <p>Here, the dreamer is the most important. And they are also given points for dreaming.
 The highest score wins!</p>
 
 
-<!--The winner of LC60 will be be asked to host LC 61! That is a real honor! However, If they don't want to, the option to host passes on the second place, and so on. Still, the primary objective of LC is to have fun, while the secondary is to train your LDing techniques as well as dream recall.
+<!--The winner of <b>LC60&reg;</b> will be be asked to host LC 61! That is a real honor! However, If they don't want to, the option to host passes on the second place, and so on. Still, the primary objective of LC is to have fun, while the secondary is to train your LDing techniques as well as dream recall.
 
 The LC60 is going to be unique in several ways, but first, we are going to tell you what is common to all other Lucidity Challenges.-->
 
@@ -48,14 +49,14 @@ If you really want to post your dream here, the usage of spoiler tags is recomme
 <p></p>
 
 <h4>We Heard the Community</h4>
-<p class="bigemoji icon">&#128588;&nbsp;&#128588;</p>
+<p class="bigemoji icon">&#128588;&nbsp;&#128588; &#128588;&nbsp;&#128588; &#128588;&nbsp;&#128588; &#128588;&nbsp;&#128588;</p>
 <p>People asked to bring back subtasks. LC60 has 3 levels of tasks: Tasks, Subtasks and Subsubtasks.</p>
 <p class="bigemoji icon">&#128587;&nbsp;&#128077;</p>
 <p>We have added new ways of cooperation without enforcing people to join teams.</p>
 
 <!--[size=16][b]Unlike previous challenges, we will not allow to post dreams from previous week.[/b][/size]
 Do not miss the deadlines! We are going to provide only a small tolerance due to timezones!
-Please accept our apologies, but this is required to implement the completely new scoring system of LC60.
+Please accept our apologies, but this is required to implement the completely new scoring system of <b><b>LC60&reg;</b>&reg;</b>.
 
 Most subtasks are worth points, with clear instructions on what you are supposed to perform.
 Some subtasks might include subsubtasks. In case you accomplish a subsubtask, you automatically claim its parent subtask.
@@ -75,7 +76,7 @@ They are the root of every other subtask you can claim.</p>
 <p>Keeping a dream journal is not easy, but now it will give you points.</p>
 
 <p class="bigemoji icon">&#127912;&nbsp;&#128214;&nbsp;&#9835; </p>
-<p>LC60 is going to encourage you to share your dream art.</p>
+<p><b>LC60&reg;</b> is going to encourage you to share your dream art.</p>
 
 <p class="bigemoji icon">&#128218;&nbsp;&#128218;</p>
 <p>Your knowledge on Lucid Dreaming incubation techniques will also be rewarded.</p>
@@ -90,7 +91,7 @@ New features will allow <b>everyone</b> to have fun, with or without their own d
 <p class="bigemoji icon">&#128275; &#128273;</p>
 <p>New unlockable subtasks could appear at any minute! Now you have even more reasons to check updates.</p>
 
-<p class="bigemoji icon"><span class="notoemoji" style="font-size:150%">&#9822; &#9820;</span></p>
+<p class="bignotoemoji icon" style="font-size: 550%">&#9822;&#9820;</p>
 <p>New features include more strategic choices that will reward your ability to plan what to claim.</p>
 
 <p class="bigemoji icon">&#9858; &#9860;</p>
@@ -100,13 +101,13 @@ New features will allow <b>everyone</b> to have fun, with or without their own d
 
 <h4>Inovation on Balancing</h4>
 <p class="bigemoji icon">&#127943;&nbsp;&#9878;&nbsp;&#127943;</p> 
-<p>LC60 Balancing system is completely new. No one will be able to win too soon.</p>
+<p><b>LC60&reg;</b> Balancing system is completely new. No one will be able to win too soon.</p>
 <p class="bigemoji icon">&#127906;&nbsp;&#127904;</p> 
 <p>Subtasks will have their score balanced weekly. Harder subtasks more worth to try than ever.</p>
 
 <p></p>
 
-<h4>LC60: Transparency, Free News and Dreamocracy</h4>
+<h4><b>LC60&reg;</b>: Transparency, Free News and Dreamocracy</h4>
 <p class="bigemoji icon">&#9785; &#128173;</p>
 <p>The scoring will not be based on subjectivity of the host.
 There will be no creativity points. No control points.</p>
@@ -137,14 +138,19 @@ You will be able to see your scores and how other participants are doing <b>bett
 
 <h4>Scoring</h4>
 <p class="bigemoji icon">&#128200;  &#128202;</p>
-<p>The scoring system of LC60 is unique! 	
+<p>The scoring system of <b>LC60&reg;</b> is unique! 	
 Extreme changes were implemented to allow adaptive balancing and increase the competition and the cooperation.
 You will be able to track your scoring with in-depth details and graphs.</p>
 
+<h4>Everyday is Caturday</h4>
+<p class="bigemoji icon">&#128197; &#128568;</p>
+<p>Caturday is the official IRC bot of <b>LC60&reg;</b>. 
+You will be able to see updates on IRC like never before.</p>
+
 <h4>Length</h4>
-<p class="bigemoji icon">&#9203; &#9200;</p>
+<p class="bignotoemoji icon">&#9203;&#9200;</p>
 <p>If you think this is a nice challenge, you can make it last longer.
-The LC60 will have 4 or 5 weeks. Decided by voting during the third week.</p>
+The <b>LC60&reg;</b> will have 4 or 5 weeks. Decided by voting during the third week.</p>
 
 
 
