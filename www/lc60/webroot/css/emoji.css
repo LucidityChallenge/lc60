@@ -1,11 +1,17 @@
 @font-face {
   font-family: osemoji;
-  src: url(../font/osemoji/OpenSansEmoji.woff);
+  src: url('../font/osemoji/OpenSansEmoji.eot');
+  src: url('../font/osemoji/OpenSansEmoji.woff') format('woff'), url('../font/osemoji/OpenSansEmoji.ttf') format('truetype'), url('../font/osemoji/OpenSansEmoji.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: notoemoji;
-  src: url(../font/notoemoji/NotoEmoji-Regular.woff);
+  src: url('../font/notoemoji/NotoEmoji-Regular.eot');
+  src: url('../font/notoemoji/NotoEmoji-Regular.woff') format('woff'), url('../font/notoemoji/NotoEmoji-Regular.ttf') format('truetype'), url('../font/notoemoji/NotoEmoji-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .emoji {
@@ -24,6 +30,12 @@
 
 .bigemoji {
   font-family: osemoji, sans-serif;
-  font-size:400%;
+  font-size: 400%;
+    /* fall back to sans serif */
+}
+
+.bignotoemoji {
+  font-family: notoemoji, sans-serif;
+  font-size: 400%;
     /* fall back to sans serif */
 }
