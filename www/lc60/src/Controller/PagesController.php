@@ -58,7 +58,7 @@ class PagesController extends AppController
         $this->set(compact('page', 'subpage'));
 
         try {
-            $this->render(implode('/', $path));
+            //$this->render(implode('/', $path));
             return $this->redirect('/signups');
         } catch (MissingTemplateException $e) {
             if (Configure::read('debug')) {
