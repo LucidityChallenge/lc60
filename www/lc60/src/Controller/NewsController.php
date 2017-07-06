@@ -197,7 +197,7 @@ class NewsController extends RssController
 	      
       $queryNews = $this->News->find()
 	    ->where(['News.publish <=' => Time::now()])
-	    ->order(['News.publish <=' => 'desc'])
+	    ->order(['News.publish' => 'desc'])
 	    ->limit(10)
       ;
 
