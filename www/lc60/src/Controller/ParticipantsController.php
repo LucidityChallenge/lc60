@@ -1,7 +1,10 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+use App\Controller\RssController;
+use Cake\I18n\Time;
+use Cake\Event\Event;
+use Cake\Routing\Router;
 
 /**
  * Participants Controller
@@ -10,7 +13,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Participant[] paginate($object = null, array $settings = [])
  */
-class ParticipantsController extends AppController
+class ParticipantsController extends RssController
 {
 
     /**
@@ -108,4 +111,40 @@ class ParticipantsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+      
+    /**
+     * rss method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function rss()
+    {
+      $baseUrl= (Router::url('/', true));
+      $title= 'LC60NP';
+      $description= 'Lucidity Challenge 60: New Participants';
+      $ttl = 1200;
+
+      $rssString = ($this->rssHead($baseUrl,$title,$description,$ttl));
+	      
+      $queryParticipants = $this->Participants->find()
+	    ->where(['Participants.participant_join_timestamp <=' => Time::now()])
+	    ->order('Participants.participant_join_timestamp','desc')
+	    ->limit(10)
+      ;
+
+      foreach ($queryParticipants as $part)
+      {
+	$itemTitle = $part->participant_name.' has joined LC60.';
+	$itemDescription = $part->participant_name.' joined LC60 on '.($part->participant_join_timestamp);
+	$itemUrl = $part->participant_join_url;
+	$permalink = $baseUrl.'participants/view/'.$part->id;
+	$publishTime =  strtotime($part->participant_join_timestamp);
+
+	$rssString = $rssString.($this->rssItem($itemTitle,$itemDescription,$itemUrl,$permalink,$publishTime));
+      }
+
+      $rssString = $rssString.($this->rssTail());
+
+      return $this->rssBody($rssString);
+    } 
 }
