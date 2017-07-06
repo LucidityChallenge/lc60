@@ -149,7 +149,9 @@ class ParticipantsTable extends Table
             ->allowEmpty('participant_join_url');
 
         $validator
-            ->allowEmpty('participant_join_timestamp');
+            ->dateTime('participant_join_timestamp')
+            ->requirePresence('participant_join_timestamp', 'create')
+            ->notEmpty('participant_join_timestamp');
 
         return $validator;
     }

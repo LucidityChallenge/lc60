@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property string $participant_dj_url
  * @property string $participant_join_url
  * @property int $participant_goal
- * @property int $participant_join_timestamp
+ * @property \Cake\I18n\FrozenTime $participant_join_timestamp
  * @property string $participant_image_url
  *
  * @property \App\Model\Entity\Dream[] $dreams
