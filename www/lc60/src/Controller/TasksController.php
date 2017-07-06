@@ -1,8 +1,9 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+use App\Controller\RssController;
 use Cake\I18n\Time;
+use Cake\Routing\Router;
 
 /**
  * Tasks Controller
@@ -11,7 +12,7 @@ use Cake\I18n\Time;
  *
  * @method \App\Model\Entity\Task[] paginate($object = null, array $settings = [])
  */
-class TasksController extends AppController
+class TasksController extends RssController
 {
 
     /**
@@ -145,4 +146,40 @@ class TasksController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    
+    /**
+     * rss method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function rss()
+    {
+      $baseUrl= (Router::url('/', true));
+      $title= 'LC60T';
+      $description= 'Lucidity Challenge 60 Tasks';
+      $ttl = 1200;
+
+      $rssString = ($this->rssHead($baseUrl,$title,$description,$ttl));
+
+      $tasks = ($this->Tasks->find()
+	->where(['Tasks.task_start <=' => Time::now()])
+	->contain(['DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant'])
+	->order(['Tasks.task_start' => 'desc', 'Tasks.id' => 'desc'])
+      );
+
+      foreach ($tasks as $task)
+      {
+	$itemTitle = $task->task_title;
+	$itemDescription = $task->task_text;
+	$itemUrl = $task->url;
+	$permalink = $baseUrl.'tasks/view/'.$task->id;
+	$publishTime =  strtotime($task->task_start);
+
+	$rssString = $rssString.($this->rssItem($itemTitle,$itemDescription,$itemUrl,$permalink,$publishTime));
+      }
+
+      $rssString = $rssString.($this->rssTail());
+
+      return $this->rssBody($rssString);
+    }     
 }
