@@ -128,7 +128,7 @@ class ParticipantsController extends RssController
 	      
       $queryParticipants = $this->Participants->find()
 	    ->where(['Participants.participant_join_timestamp <=' => Time::now()])
-	    ->order('Participants.participant_join_timestamp','desc')
+	    ->order(['Participants.participant_join_timestamp' => 'desc', 'Participants.id' => 'desc'])
 	    ->limit(10)
       ;
 
