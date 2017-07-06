@@ -163,13 +163,12 @@ class TasksController extends RssController
 
       $tasks = ($this->Tasks->find()
 	->where(['Tasks.task_start <=' => Time::now()])
-	->contain(['DreamWithTypeParticipant', 'SubtaskShareHolderComplete', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant'])
 	->order(['Tasks.task_start' => 'desc', 'Tasks.id' => 'desc'])
       );
 
       foreach ($tasks as $task)
       {
-	$itemTitle = $task->task_title;
+	$itemTitle = 'Task '.$task->id.': '.$task->task_title.sprintf(' (%04d-%02d-%02d)',$task->task_start->year,$task->task_start->month,$task->task_start->day);
 	$itemDescription = $task->task_text;
 	$itemUrl = $task->url;
 	$permalink = $baseUrl.'tasks/view/'.$task->id;
