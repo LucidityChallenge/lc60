@@ -86,6 +86,10 @@
             <th scope="row"><?= __('Joining Post') ?></th>
             <td><?= $this->Html->link($participant->participant_join_url,$participant->participant_join_url) ?></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('Joining Date') ?></th>
+            <td><?= h($participant->participant_join_timestamp) ?></td>
+        </tr>
         <!--
         <tr>
             <th scope="row"><?= __('Id') ?></th>

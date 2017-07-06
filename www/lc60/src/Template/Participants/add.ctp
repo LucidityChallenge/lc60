@@ -56,6 +56,7 @@
             echo $this->Form->control('participant_goal');
             echo $this->Form->control('participant_dj_url');
             echo $this->Form->control('participant_join_url');
+            echo $this->Form->control('participant_join_timestamp');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
