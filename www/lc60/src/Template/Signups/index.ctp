@@ -169,6 +169,8 @@ The <b>LC60&reg;</b> will have 4 or 5 weeks. Decided by voting during the third 
 <h4>Tggtt &amp; Mew151</h4>
 </div>
 </div>
+</div>
+</div>
 
 <?php echo '<script class="code" type="text/javascript">'; ?>
 window.onload = function() {callCount()};
