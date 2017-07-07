@@ -1,0 +1,12 @@
+@font-face {
+	font-family: 'pixel';
+	src: url('../font/pixel/Pixel-Emulator.eot');
+	src: url('../font/pixel/Pixel-Emulator.woff') format('woff'), url('../font/pixel/Pixel-Emulator.ttf') format('truetype'), url('../font/pixel/Pixel-Emulator.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.pixel_text {
+  font-family: pixel, sans-serif;
+    /* fall back to sans serif */
+}
