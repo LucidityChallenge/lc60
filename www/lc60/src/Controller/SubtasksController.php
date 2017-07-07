@@ -450,4 +450,65 @@ $subtask_fetch->subtask_image,
 	return null;
       }
     }
+    
+    
+    /**
+     * rss method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function rss()
+    {
+      $baseUrl= (Router::url('/', true));
+      $title= 'LC60Sub';
+      $description= 'Lucidity Challenge 60 Subtasks';
+      $ttl = 1200;
+
+      $rssString = ($this->rssHead($baseUrl,$title,$description,$ttl));
+	      
+      $querySubtasks = $this->Subtasks->find()
+	    ->contain('Tasks')
+	    ->contain('SubtaskValues')
+	    ->where(['Tasks.task_start <=' => Time::now()])
+	    ->where(['Subtasks.subtask_visible <=' => 1])
+	    ->order(['Tasks.task_start' => 'desc', 'Subtasks.id' => 'desc'])
+	    ->limit(10)
+      ;
+      
+      foreach ($querySubtasks as $subtask)
+      {
+	foreach ($subtask->subtask_values as $subtaskValue)
+	{
+	  $variation = ($subtaskValue->final_value_pre != null)
+	  ?
+	  (
+	    100
+	    *
+	    ($subtaskValue->final_value_cur - $subtaskValue->final_value_pre)
+	    /
+	    max(1,$subtaskValue->final_value_pre)
+	  )
+	  :
+	  null;
+	  
+	  
+	  
+	  $itemTitle = (($subtask->subtask_accumulative == 1)? ('Accumulative') : ('Non-Accumulative'))
+	    .' Subtask: "'. $subtaskValue->subtask_name
+	    .sprintf('" %d point', (intval(100*$subtaskValue->final_value_cur)/100))
+	    .(($subtaskValue->final_value_cur == 1)? ('') : ('s'))
+	    .(($variation != 0)?(sprintf(', change %+0.2f', $variation).'%'): (''));
+	  $itemDescription = $subtask->subtask_description;
+	  $itemUrl = $subtask->url;
+	  $permalink = $baseUrl.'subtasks/view/'.$subtask->id;
+	  $publishTime =  strtotime($subtask->task->task_start);
+
+	  $rssString = $rssString.($this->rssItem($itemTitle,$itemDescription,$itemUrl,$permalink,$publishTime));
+	}
+      }
+
+      $rssString = $rssString.($this->rssTail());
+
+      return $this->rssBody($rssString);
+    } 
 }

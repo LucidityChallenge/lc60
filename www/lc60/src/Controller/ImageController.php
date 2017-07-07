@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use App\Controller\AppController;
+use App\Controller\RssController;
 
 /**
  * Image Controller
  *
  */
-class ImageController extends AppController
+class ImageController extends RssController
 {
 
     /**
