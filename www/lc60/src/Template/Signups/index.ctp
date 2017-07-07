@@ -69,8 +69,7 @@ When you complete the subsubtask, the subtask is automatically added as complete
 
 <h4>New Scoring, More Motivation</h4>
 <p class="bigemoji icon">&#128164;&nbsp;&#128161;</p>
-<p>Dream types are now considered prime subtasks.
-They are the root of every other subtask you can claim.</p>
+<p>Dream types are now considered prime subtasks. Please specify a dream and its type in order to claim subtasks.</p>
 
 <p class="bigemoji icon">&#128555;&nbsp;&#128211;</p>
 <p>Keeping a dream journal is not easy, but now it will give you points.</p>
@@ -78,7 +77,7 @@ They are the root of every other subtask you can claim.</p>
 <p class="bigemoji icon">&#127912;&nbsp;&#128214;&nbsp;&#9835; </p>
 <p><b>LC60&reg;</b> is going to encourage you to share your dream art.</p>
 
-<p class="bigemoji icon">&#128218;&nbsp;&#128218;</p>
+<p class="bigemoji icon">&#128218;&nbsp;&#128218;&#128218;&nbsp;&#128218;</p>
 <p>Your knowledge on Lucid Dreaming incubation techniques will also be rewarded.</p>
 
 <p></p>
@@ -103,14 +102,14 @@ New features will allow <b>everyone</b> to have fun, with or without their own d
 <p class="bigemoji icon">&#127943;&nbsp;&#9878;&nbsp;&#127943;</p> 
 <p><b>LC60&reg;</b> Balancing system is completely new. No one will be able to win too soon.</p>
 <p class="bigemoji icon">&#127906;&nbsp;&#127904;</p> 
-<p>Subtasks will have their score balanced weekly. Harder subtasks more worth to try than ever.</p>
+<p>Subtasks will have bonus scores balanced weekly. Hard subtasks are now more worthy than ever.</p>
 
 <p></p>
 
 <h4><b>LC60&reg;</b>: Transparency, Free News and Dreamocracy</h4>
 <p class="bigemoji icon">&#9785; &#128173;</p>
 <p>The scoring will not be based on subjectivity of the host.
-There will be no creativity points. No control points.</p>
+</p>
 <p class="bigemoji icon">&#128221; &#10004;</p>
 <p>We will do our best to add instructions to subtasks and subsubtasks to avoid confusion.
 The way the scores are calculated are public and can be checked by anyone.</p>
@@ -121,11 +120,10 @@ News are going to be updated at least once a day. There is no more reason on idl
 
 <p class="bigemoji icon">&#9744; &#9746; &#9744;</p>
 <p>Some subtasks will be supported by voting. <b>Open to anyone.</b>
-Please pay attention, we are going to post polls to see what kind of dreams are you wishing for our LCers!</p>
+We will run polls where you can choose the best subtasks for our LCers!</p>
 
 <p class="bigemoji icon">&#128294; &#128269;</p>
-<p>Were you searching for a reason to join or watch the LC even if you do not LD?
-I have written plenty. But it is not enough.</p>
+<p>You have found the challenge that is right for you! In <b>LC60&reg;</b> we will have plenty of features to ensure fun even if you cannot LD.</p>
 
 <p></p>
 
@@ -164,8 +162,8 @@ The <b>LC60&reg;</b> will have 4 or 5 weeks. Decided by voting during the third 
 <a name="hype"></a><h3>Get Hype.</h3>
 <div>
 <p id="intro">Do not miss it!</p>
-<p id="count"><?= ($open)? 'We will try to begin in' : 'We will open the signups in' ?>&nbsp;<span id="day_count"></span> <span id="hour_count"></span> <span id="minute_count"></span> <span id="second_count"></span> </p>
-<p id="target"><?= ($open)? ($signup->begin_date) : ($signup->open_date) ?> UTC.</p>
+<p id="count" class="pixel_text"><?= ($open)? 'We will try to begin in:' : 'We will open the signups in:' ?><br/><span id="day_count"></span> <span id="hour_count"></span> <span id="minute_count"></span> <span id="second_count"></span> </p>
+<p id="target" class="pixel_text"><?= ($open)? ($signup->begin_date) : ($signup->open_date) ?> UTC.</p>
 <p><?= $this->Html->image($signup->signup_image_url,['alt' => 'Signups']) ?></p>
 <br/>
 <h4>Tggtt &amp; Mew151</h4>
@@ -227,3 +225,4 @@ function callCount() {
 <?php endforeach; ?>
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
 <?php echo $this->Html->css('landing.css',['block'=>true]); ?>
+<?php echo $this->Html->css('pixel.css',['block'=>true]); ?>
