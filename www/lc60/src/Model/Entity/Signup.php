@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property int $open_date_unix
  * @property string $begin_date
  * @property int $begin_date_unix 
+ * @property int $participant_count
  */
 class Signup extends Entity
 {
