@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+use App\Controller\ImageController;
 use Cake\Event\Event;
 
 /**
@@ -11,7 +11,7 @@ use Cake\Event\Event;
  *
  * @method \App\Model\Entity\Signup[] paginate($object = null, array $settings = [])
  */
-class SignupsController extends AppController
+class SignupsController extends ImageController
 {
 
     /**
@@ -118,6 +118,78 @@ class SignupsController extends AppController
         // Allow users to register and logout.
         // You should not add the "login" action to allow list. Doing so would
         // cause problems with normal functioning of AuthComponent.
-        $this->Auth->allow(['index']);
+        $this->Auth->allow(['index','image','img','png']);
     }
+    
+    /**
+     * rss method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function rss()
+    {
+      return $this->redirect(['controller' => 'Participants', 'action' => 'rss']);
+    }
+    
+    /**
+     * img method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function img($id = null)
+    {
+      return $this->image($id);
+    }
+
+    /**
+     * image method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function image($id = null)
+    {
+      return $this->png($id);
+    }
+    
+    /**
+     * png method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function png($id = null)
+    {
+      if ($id != null)
+      {
+	$signups = $this->Signups->find()->limit(1);
+	
+	
+	foreach ($signups as $signup)
+	{
+	  if ($signup->now_date_unix >= $signup->open_date_unix)
+	  {
+	    $participant_count = sprintf('%02d ',$signup->participant_count).'participant'.(($signup->participant_count == 1) ? (' ') : 's ')."\n".'joined!';
+	    $date = 'Beginning in'. $signup->begin_date;
+	  }
+	  else
+	  {
+	    $participant_count = ' Get Ready!';
+	    $hours = intval(($signup->open_date_unix - $signup->now_date_unix) / 3600);
+	    $date = '   Join in'."\n   ".$hours.' hour'.(($hours == 1) ? ('') : 's').'!';
+	  }
+	}
+	
+	return $this->pngAvatar('#E4ECEE',
+	  '../webroot/img/' . $id,
+	  ['../webroot/font/pixel/Pixel-Emulator.ttf','../webroot/font/pixel/Pixel-Emulator.ttf'],
+	  [8,7],
+	  [$participant_count, $date]
+	);
+      }
+      else
+      {
+	return null;
+      }
+    }
+    
+    
 }

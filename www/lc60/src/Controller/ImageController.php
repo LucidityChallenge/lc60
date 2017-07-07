@@ -571,5 +571,56 @@ $updated = ''
     return $response;
 }
 
+     /**
+     * pngBody method
+     *
+     * @return string|null
+     */
+protected function pngAvatar($rect_color,
+$name,
+$font,
+$size,
+$text
+)
+{
+    $handle = @imagecreatefrompng($name);
+
+    if (! ($handle))
+    {
+      $handle = ImageCreate (100, 100) or die ("Cannot Create image"); 
+      $bg_color = ImageColorAllocate ($handle, 0xE0, 0xE0, 0xE0);
+    }
+    
+    $shadow = ImageColorAllocate ($handle, 0x00, 0x00, 0x00);
+    $face = ImageColorAllocate ($handle, 0x50, 0x50, 0x80);
+
+    $red = hexdec(substr($rect_color,1,2));
+    $green = hexdec(substr($rect_color,3,2));
+    $blue = hexdec(substr($rect_color,5,2));
+
+    
+    for ($i = 0; $i < count($text); $i++)
+    {
+      ImageTTFText ($handle, $size[$i], 0,   1, ($i*9) +9, $shadow, $font[$i],  $text[$i]);
+      ImageTTFText ($handle, $size[$i], 0, 1-1, ($i*9) + 9-1, $face, $font[$i],  $text[$i]);
+    }    
+
+
+    // Enable output buffering
+    ob_start();
+    imagepng($handle);
+    // Capture the output
+    $imagedata = ob_get_contents();
+    // Clear the output buffer
+    ob_end_clean();
+  
+    $response = $this->response;
+    $response->body(
+      $imagedata
+    );
+    $response = $response->withType('image/png');
+    
+    return $response;
+}
 
 }
