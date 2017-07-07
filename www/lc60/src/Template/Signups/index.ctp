@@ -98,7 +98,7 @@ New features will allow <b>everyone</b> to have fun, with or without their own d
 
 <p></p>
 
-<h4>Inovation on Balancing</h4>
+<h4>Innovation on Balancing</h4>
 <p class="bigemoji icon">&#127943;&nbsp;&#9878;&nbsp;&#127943;</p> 
 <p><b>LC60&reg;</b> Balancing system is completely new. No one will be able to win too soon.</p>
 <p class="bigemoji icon">&#127906;&nbsp;&#127904;</p> 
