@@ -4,6 +4,7 @@
   * @var \App\Model\Entity\Subtask $subtask
   */
 ?>
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -22,8 +23,11 @@
         <li><?= $this->Html->link(__('List Subtask Types'), ['controller' => 'SubtaskTypes', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Subtask Type'), ['controller' => 'SubtaskTypes', 'action' => 'add']) ?> </li>
     </ul>
-</nav>
+</nav>-->
+
 <div class="subtasks view large-9 medium-8 columns content">
+    <h4><?= __('Subtask Information') ?></h4>
+    <div>
     <h3><?= h($subtask->subtask_name) ?></h3>
     <table class="vertical-table">
         <tr>
@@ -31,8 +35,8 @@
             <td><?= $subtask->has('task') ? $this->Html->link($subtask->task->task_title, ['controller' => 'Tasks', 'action' => 'view', $subtask->task->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask') ?></th>
-            <td><?= $subtask->has('subtask') ? $this->Html->link($subtask->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtask->subtask->id]) : '' ?></td>
+            <th scope="row"><?= __('Parent Subtask') ?></th>
+            <td><?= $subtask->has('subtask') ? $this->Html->link($subtask->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtask->subtask->id]) : 'None' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Name') ?></th>
@@ -40,59 +44,31 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Category') ?></th>
-            <td><?= $subtask->has('subtask_category') ? $this->Html->link($subtask->subtask_category->subtask_category_name, ['controller' => 'SubtaskCategories', 'action' => 'view', $subtask->subtask_category->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Url') ?></th>
-            <td><?= h($subtask->subtask_url) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Participant') ?></th>
-            <td><?= $subtask->has('participant') ? $this->Html->link($subtask->participant->participant_name, ['controller' => 'Participants', 'action' => 'view', $subtask->participant->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Image') ?></th>
-            <td><?= ($subtask->subtask_image != null) ? $this->Html->image($subtask->subtask_image, ['alt' => ($subtask->subtask_name)]) : '' ?></td>
+            <td><?= $subtask->has('subtask_category') ? $this->Html->link($subtask->subtask_category->subtask_category_name, ['controller' => 'SubtaskCategories', 'action' => 'view', $subtask->subtask_category->id]) : 'None' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Type') ?></th>
-            <td><?= $subtask->has('subtask_type') ? $this->Html->link($subtask->subtask_type->subtask_type_name, ['controller' => 'SubtaskTypes', 'action' => 'view', $subtask->subtask_type->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($subtask->id) ?></td>
+            <td><?= $subtask->has('subtask_type') ? $this->Html->link($subtask->subtask_type->subtask_type_name, ['controller' => 'SubtaskTypes', 'action' => 'view', $subtask->subtask_type->id]) : 'None' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Minimum Value') ?></th>
-            <td><?= $this->Number->precision(intval(100*($subtask->subtask_base_value))/100,2) ?></td>
+            <td><?= $this->Number->precision(intval(($subtask->subtask_base_value)),0) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Max Value') ?></th>
-            <td><?= $this->Number->format($subtask->subtask_max_value) ?></td>
+            <td><?= $this->Number->format((($subtask->subtask_max_value) == 0) ? ($subtask->subtask_base_value) : ($subtask->subtask_max_value)) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Starting Demand') ?></th>
-            <td><?= $this->Number->format($subtask->subtask_starting_demand) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Inflation Rate') ?></th>
-            <td><?= $this->Number->format($subtask->subtask_inflation_rate) ?> (<?=$this->Number->format($subtask->subtask_inflation_rate-100)?>% per demand)</td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Demand Cutoff') ?></th>
+            <th scope="row"><?= __('Subtask Max Bonus') ?></th>
             <td><?= $this->Number->format($subtask->subtask_demand_cutoff) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Bonus Base') ?></th>
-            <td><?= $this->Number->format($subtask->subtask_bonus_base) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Task Period Demand') ?></th>
+            <th scope="row"><?= __('Weekly Bonus Increase') ?></th>
             <td><?= $this->Number->format($subtask->subtask_task_period_demand) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Dividend Rate') ?></th>
-            <td><?= $this->Number->format($subtask->subtask_dividend_rate) ?></td>
+            <th scope="row"><?= __('Owner Receives') ?></th>
+            <td><?= $this->Number->format($subtask->subtask_dividend_rate).'%' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Subtask Symbol') ?></th>
@@ -103,12 +79,13 @@
             <td><?= $subtask->subtask_accumulative ? __('Yes') : __('No'); ?></td>
         </tr>        
     </table>
-    <div class="subtask_img" >
-<?= $this->Html->link($subtask->svg,['action' => 'image',($subtask->id).'.svg'],['escape' => false]); ?>
-<div class="subtask_img" ><?= $this->Html->link($this->Html->image(['action' => 'image',($subtask->id).'.png'], ['alt' => ($subtask->subtask_name)]),['action' => 'image',($subtask->id).'.png'],['escape' => false]) ?></div>
-    
     </div>
-    <h4><?= __('Current Values') ?></h4>
+    <?php if ($subtask->subtask_image != null) : ?>
+    <h4><?= __('Subtask Image') ?></h4>
+    <div><?= $this->Html->image($subtask->subtask_image, ['alt' => ($subtask->subtask_name)]) ?></td>
+    </div>
+    <?php endif; ?>
+    <h4><?= __('Current Values for Dreamers') ?></h4>
     <?php 
       $showImage = false;
     ?>
@@ -128,6 +105,9 @@
 	  :
 	  null;
 	?>
+	<tr class="subtask_color">
+	  <td colspan="3" class="<?= ($subtaskValue->subtask_category_class) ?>"></td>
+	</tr>
 	<tr>
 	  <th scope="row" colspan="2">
 	    <?= $this->Html->link($subtaskValue->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskValue->subtask_id]) ?>
@@ -137,7 +117,7 @@
 	  </td>
 	</tr>
 	<tr>
-	  <th scope="row">Demand:</th>
+	  <th scope="row">Bonus:</th>
 	  <td><span class="digital"><?= $this->Number->format($subtaskValue->contemporary_demand_cur) ?></span></td><td>this week</td>
 	</tr>
 	<tr>
@@ -148,6 +128,10 @@
 	  <th scope="row">Change:</th>
 	  <td><span class="digital"><?= ($variation != null)? $this->Number->precision($variation,3).'%' : ('NO DATA') ?>&nbsp;</span></td>
 	  <td><span class="emoji"><?= ($variation != null)? ((($variation) > 0) ? '&#9652;' : ((($variation) == 0) ? '&#9656;' : '&#9662;')) : ('-') ?></span></td>
+	</tr>
+	<tr>
+	  <th scope="row">Status:</th>
+	  <td colspan="2"><span class="digital"><?= (($subtaskValue->subtask_type_ownable == 1) && ($subtaskValue->subtask_share_holder_count == 0) && (($subtaskValue->subtask_type_id == 7) || ($subtaskValue->subtask_type_id == 6)) ) ? 'LOCKED' : 'OPEN' ?></span></td>
 	</tr>
     </table>
     </div>
@@ -269,10 +253,12 @@
             ?>           
             <?php endforeach; ?>
         </table>
+        <?php else: ?>
+        <?= __('None Known.') ?>
         <?php endif; ?>
     </div>
 
-    <h4><?= __('Holders of "'.($subtask->subtask_name).'" Subtask') ?></h4>
+    <h4><?= __('Owners of "'.($subtask->subtask_name).'" Subtask') ?></h4>
     <div class="related">
         <?php if (!empty($subtask->share_holders_participant)): ?>
         <table cellpadding="0" cellspacing="0">
@@ -294,10 +280,17 @@
             </tr>
             <?php endforeach; ?>
         </table>
+        <?php else: ?>
+        <?= __('No participants own this subtask.') ?>
         <?php endif; ?>
     </div>
-
     
+    <h4><?= __('"'.($subtask->subtask_name).'" Collectible Cards') ?></h4>
+    <div class="subtask_img" >
+<?= $this->Html->link($subtask->svg,['action' => 'image',($subtask->id).'.svg'],['escape' => false]); ?>
+<div class="subtask_img" ><?= $this->Html->link($this->Html->image(['action' => 'image',($subtask->id).'.png'], ['alt' => ($subtask->subtask_name)]),['action' => 'image',($subtask->id).'.png'],['escape' => false]) ?></div>
+    
+    </div>
 </div>
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
 
@@ -409,3 +402,4 @@ $(document).ready(function () {
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
 <?php echo $this->Html->css('roman.css',['block'=>true]); ?>
 <?php echo $this->Html->css('crystal.css',['block'=>true]); ?>
+<?php echo $this->Html->css('subtask_color.css',['block'=>true]); ?>

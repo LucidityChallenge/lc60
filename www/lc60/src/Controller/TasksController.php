@@ -163,6 +163,7 @@ class TasksController extends RssController
 
       $tasks = ($this->Tasks->find()
 	->where(['Tasks.task_start <=' => Time::now()])
+        ->where(['1 =' => 0 ]) //remove this
 	->order(['Tasks.task_start' => 'desc', 'Tasks.id' => 'desc'])
       );
 

@@ -203,7 +203,7 @@ class NewsController extends RssController
 
       foreach ($queryNews as $news)
       {
-	$itemTitle = $news->title;
+	$itemTitle = $news->title.sprintf(' (%04d-%02d-%02d)',$news->publish->year,$news->publish->month,$news->publish->day);;
 	$itemDescription = $news->description;
 	$itemUrl = $news->url;
 	$permalink = $baseUrl.'news/view/'.$news->id;

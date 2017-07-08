@@ -19,6 +19,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\DemandViewUncompleteContemporaryDemandTable|\Cake\ORM\Association\HasMany $DemandViewUncompleteContemporaryDemand
  * @property \App\Model\Table\DemandViewUncompleteContemporaryDemandPositiveTable|\Cake\ORM\Association\HasMany $DemandViewUncompleteContemporaryDemandPositive
  * @property \App\Model\Table\SubtasksTable|\Cake\ORM\Association\HasMany $Subtasks
+ * @property \App\Model\Table\ParticipantsTable|\Cake\ORM\Association\HasMany $Participants
  * @property \App\Model\Table\SuccessfulSubtaskTable|\Cake\ORM\Association\HasMany $SuccessfulSubtask
  * @property \App\Model\Table\SuccessfulSubtaskCategoryTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategory
  * @property \App\Model\Table\SuccessfulSubtaskCategoryCompleteFinalTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategoryCompleteFinal
@@ -83,6 +84,11 @@ class SubtaskCategoriesTable extends Table
         $this->hasMany('Subtasks', [
             'foreignKey' => 'subtask_category_id'
         ]);
+        
+        $this->hasMany('Participants', [
+            'foreignKey' => 'subtask_category_id'
+        ]);
+        
         $this->hasMany('SuccessfulSubtask', [
             'foreignKey' => 'subtask_category_id'
         ]);

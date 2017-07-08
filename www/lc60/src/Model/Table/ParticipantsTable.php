@@ -18,6 +18,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SubtasksTable|\Cake\ORM\Association\HasMany $Subtasks
  * @property \App\Model\Table\SuccessfulSubtaskTable|\Cake\ORM\Association\HasMany $SuccessfulSubtask
  * @property \App\Model\Table\SuccessfulSubtaskCategoryTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategory
+ * @property \App\Model\Table\SubtaskCategoriesTable|\Cake\ORM\Association\HasMany $SubtaskCategories
  * @property \App\Model\Table\SuccessfulSubtaskCategoryCompleteFinalTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategoryCompleteFinal
  * @property \App\Model\Table\SuccessfulSubtaskCategoryCompleteFinalMinimumTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategoryCompleteFinalMinimum
  * @property \App\Model\Table\SuccessfulSubtaskCategoryCompleteInnerTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategoryCompleteInner
@@ -119,8 +120,13 @@ class ParticipantsTable extends Table
 
         $this->hasMany('Subtasks', [
             'foreignKey' => 'participant_id',
-            'associationForeignKey' => 'id'
-        ]);        
+            'bindingKey' => 'id'
+        ]);
+        
+        $this->hasMany('SubtaskCategories', [
+            'foreignKey' => 'id',
+            'bindingKey' => 'subtask_category_id'
+        ]);
     }
 
     /**

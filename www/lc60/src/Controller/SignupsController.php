@@ -165,16 +165,25 @@ class SignupsController extends ImageController
 	
 	foreach ($signups as $signup)
 	{
-	  if ($signup->now_date_unix >= $signup->open_date_unix)
+	  if ($signup->now_date_unix > $signup->open_date_unix)
 	  {
-	    $participant_count = sprintf('%02d ',$signup->participant_count).'participant'.(($signup->participant_count == 1) ? (' ') : 's ')."\n".'joined!';
-	    $date = 'Beginning in'. $signup->begin_date;
+	    $participant_count = sprintf(' %02d',$signup->participant_count).' joined!';
+	    // days
+	    $date = ' '.intval(($signup->begin_date_unix - $signup->now_date_unix) / (3600*24)).' days left!';
 	  }
 	  else
 	  {
-	    $participant_count = ' Get Ready!';
+	    $participant_count = 'Almost There!';
 	    $hours = intval(($signup->open_date_unix - $signup->now_date_unix) / 3600);
-	    $date = '   Join in'."\n   ".$hours.' hour'.(($hours == 1) ? ('') : 's').'!';
+	    if ($hours >= 1)
+	    {
+	      $date = '   Join in'."\n   ".$hours.' hour'.(($hours == 1) ? ('') : 's').'!';
+	    }
+	    else
+	    {
+	      $participant_count = '  Open in a ';
+	      $date= '  few minutes! ';
+	    }
 	  }
 	}
 	

@@ -44,8 +44,8 @@ $cakeDescription = 'LC60';
         </ul>
         <div class="top-bar-section">
             <ul class="right">
-                <li><a target="_blank" href="/Scores/">Scoreboard</a></li>
-                <li><a target="_blank" href="/Participants/">Participants</a></li>
+                <li><a target="_blank" href="/subtask-values/">Subtasks &amp; Values</a></li>
+                <li><a target="_blank" href="/scores/">Scores &amp; Participants</a></li>
                 <li><a target="_blank" href="http://ld4all.com/">LD4all</a></li>                
             </ul>
         </div>

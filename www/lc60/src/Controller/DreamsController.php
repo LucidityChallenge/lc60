@@ -134,6 +134,7 @@ class DreamsController extends RssController
 	    ->contain('Participants')
 	    ->contain('DreamWithType')
 	    ->where(['Dreams.dream_timestamp <=' => Time::now()])
+	    ->where(['Dreams.id <' => 2000 ]) //remove this
 	    ->order(['Dreams.dream_timestamp' => 'desc'])
 	    ->limit(10)
       ;

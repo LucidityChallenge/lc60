@@ -4,14 +4,14 @@
   * @var \App\Model\Entity\Score[]|\Cake\Collection\CollectionInterface $scores
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Score'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Participants'), ['controller' => 'Participants', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Participant'), ['controller' => 'Participants', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav>-->
 <div class="scores index large-9 medium-8 columns content">
     <h3><?= __('Scores') ?></h3>
     <div class="chart_view jqplot-cursor-legend-swatch" id="score_bars" style="margin-top:20px; margin-left:20px; width:95%; height:400px;">
