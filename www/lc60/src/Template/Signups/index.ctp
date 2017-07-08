@@ -158,7 +158,7 @@ The <b>LC60&reg;</b> will have 4 or 5 weeks. Decided by voting during the third 
 
 <?php endif; ?>
 <div>
-<h3><?= __('Are you ready to ').$this->Html->link('Sign up',$signup->signup_url).'?' ?></h3>
+<h3><?= ($open)? ($this->Html->link('Signups are open',$signup->signup_url).'!') : (__('Are you ready to ').$this->Html->link('Sign up',$signup->signup_url).'?') ?></h3>
 <a name="hype"></a><h3>Get Hype.</h3>
 <div>
 <p id="intro">Do not miss it!</p>
