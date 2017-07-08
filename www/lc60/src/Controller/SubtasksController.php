@@ -326,11 +326,11 @@ $values->subtask_type_name,
 $subtask_fetch->subtask_description,
 [
   ['Task:',$values->task_title],
-  ['Value Range:',sprintf("[%0.2f;%0.2f]",intval(100*$values->subtask_base_value)/100,
+  ['Value Range:',sprintf("[%d;%d]",intval(100*$values->subtask_base_value)/100,
   intval(100*(($values->subtask_max_value !== null)? ($values->subtask_max_value) : ($values->subtask_base_value)))/100)],
   ['Successes:',intval($values->subtask_success_count_total)],
-  ['Demand:',sprintf("%+0.2f",intval(100*$values->contemporary_demand_cur)/100)],
-  ['Current Value:',sprintf("%0.2f",intval(100*$values->final_value_cur)/100)]
+  ['Current Bonus:',sprintf("%+d",intval(100*$values->contemporary_demand_cur)/100)],
+  ['Current Value:',sprintf("%d",intval(100*$values->final_value_cur)/100)]
 
 ],
 $subtask_fetch->subtask_image,
@@ -418,13 +418,13 @@ $height
 	$comma = ', ';
       }
 
-      return $this->pngBody('webroot/font/roman/NimbusRomNo9L-Reg.ttf',
-'webroot/font/osemoji/OpenSansEmoji.ttf',
+      return $this->pngBody('../webroot/font/roman/NimbusRomNo9L-Reg.ttf',
+'../webroot/font/osemoji/OpenSansEmoji.ttf',
 $subtask_fetch->subtask_name,
 ($subtask_fetch->subtask_symbol != null) ? ('&#'.intval($subtask_fetch->subtask_symbol).';') : null,
-'webroot/font/osemoji/OpenSansEmoji.ttf',
+'../webroot/font/osemoji/OpenSansEmoji.ttf',
 [($ins[0]),($ins[1])],
-'webroot/font/osemoji/OpenSansEmoji.ttf',
+'../webroot/font/osemoji/OpenSansEmoji.ttf',
 $values->subtask_type_name,
 ($owner != '') ? ($owner) : (($values->subtask_type_ownable != 0) ? 'Available' : '' ),
 (($subtask_fetch->subtask_accumulative != 0) ? 'Accumulative' : 'Non-Accumulative'),
@@ -432,11 +432,11 @@ $values->subtask_type_name,
 $subtask_fetch->subtask_description,
 [
   ['Task:',$values->task_title],
-  ['Value Range:',sprintf("[%0.2f;%0.2f]",intval(100*$values->subtask_base_value)/100,
+  ['Value Range:',sprintf("[%d;%d]",intval(100*$values->subtask_base_value)/100,
   intval(100*(($values->subtask_max_value !== null)? ($values->subtask_max_value) : ($values->subtask_base_value)))/100)],
   ['Successes:',intval($values->subtask_success_count_total)],
-  ['Demand:',sprintf("%+0.2f",intval(100*$values->contemporary_demand_cur)/100)],
-  ['Current Value:',sprintf("%0.2f",intval(100*$values->final_value_cur)/100)]
+  ['Current Bonus:',sprintf("%+d",intval(100*$values->contemporary_demand_cur)/100)],
+  ['Current Value:',sprintf("%d",intval(100*$values->final_value_cur)/100)]
 
 ],
 $subtask_fetch->subtask_image,
@@ -470,6 +470,7 @@ $subtask_fetch->subtask_image,
 	    ->contain('Tasks')
 	    ->contain('SubtaskValues')
 	    ->where(['Tasks.task_start <=' => Time::now()])
+	    ->where(['1 =' => 0 ]) //remove this
 	    ->where(['Subtasks.subtask_visible <=' => 1])
 	    ->order(['Tasks.task_start' => 'desc', 'Subtasks.id' => 'desc'])
 	    ->limit(10)
