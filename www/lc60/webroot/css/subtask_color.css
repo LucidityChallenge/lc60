@@ -1,0 +1,39 @@
+td.subtask_red
+{
+  background-color: #A00000;
+}
+
+td.subtask_orange
+{
+ background-color: #FF6600;
+}
+
+td.subtask_yellow
+{
+ background-color: #DDAA00;
+}
+
+td.subtask_green
+{
+ background-color: #00A000;
+}
+
+td.subtask_blue
+{
+ background-color: #0099FF;
+}
+
+td.subtask_indigo
+{
+ background-color: #4400FF;
+}
+
+td.subtask_violet
+{
+ background-color: #9900FF;
+}
+
+tr.subtask_color
+{
+ background-color: #A0A0A0;
+}
