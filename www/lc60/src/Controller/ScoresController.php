@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Scores Controller
@@ -114,5 +115,14 @@ class ScoresController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        $this->Auth->allow(['index','view']);
     }
 }

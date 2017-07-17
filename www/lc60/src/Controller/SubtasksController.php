@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\I18n\Time;
 use Cake\Routing\Router;
+use Cake\Event\Event;
 
 /**
  * Subtasks Controller
@@ -511,5 +512,12 @@ $subtask_fetch->subtask_image,
       $rssString = $rssString.($this->rssTail());
 
       return $this->rssBody($rssString);
-    } 
+    }
+    
+    
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['view']);
+    }
 }

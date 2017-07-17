@@ -39,7 +39,7 @@ class ParticipantsController extends RssController
     public function view($id = null)
     {
         $participant = $this->Participants->get($id, [
-            'contain' => ['Dreams', 'Subtasks', 'DreamWithType', 'ScoreViewComplete','SubtaskShareHolderComplete','SuccessfulSubtaskTaskWithCalculatedScoring']
+            'contain' => ['Dreams', 'Subtasks', 'DreamWithType', 'ScoreViewComplete','SubtaskShareHolderComplete','SuccessfulSubtaskTaskWithCalculatedScoring', 'SubtaskCategories']
         ]);
 
         $this->set('participant', $participant);
@@ -148,5 +148,15 @@ class ParticipantsController extends RssController
       $rssString = $rssString.($this->rssTail());
 
       return $this->rssBody($rssString);
-    } 
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        $this->Auth->allow(['view']);
+    }
+
 }

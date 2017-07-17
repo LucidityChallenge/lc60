@@ -347,7 +347,7 @@ $image = $image
 .'         id="tspan3410-9"'
 .'         x="50%"'
 .'         y="13.5%"'
-.'         style="font-size:50px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'."'$title_font'".';text-align:center;text-anchor:middle;fill:#000000">'.$title.'</tspan></text>'
+.'         style="font-size:45px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'."'$title_font'".';text-align:center;text-anchor:middle;fill:#000000">'.$title.'</tspan></text>'
 /**/
 .'    <text'
 .'       xml:space="preserve"'
@@ -389,7 +389,7 @@ else
     .'       sodipodi:linespacing="100%"'
     .'         sodipodi:role="line"'
     .'         x="50%"'
-    .'         y="39.75%"'
+    .'         y="37.25%"'
     .'         style="font-size:180px;text-align:center;text-anchor:middle;font-family:'."'$emojifont'".';">'.$emojitext.'</text>';
   }
 
@@ -501,12 +501,14 @@ $updated = ''
     $this->ImageRectangleWithRoundedCorners($handle, 25,10+35,200-25-2,10+100, 5, $black);
     $this->ImageRectangleWithRoundedCorners($handle, 25+2,10+35+2,200-25-2-2,10+100-2, 5, $bg_color);
     
-    ImageTTFText ($handle, 14, 0, 10, 20, $navy, $title_font,  ($owner != null)? $owner : $type);
+    ImageTTFText ($handle, 13, 0, 10, 20, $navy, $title_font,  ($owner != null)? ($owner) : $type);
+    ImageTTFText ($handle, 6.5, 0, 100, 40, $bg_color, $fine_font,  $accumulative);
+    
     
     $i = 0;
     foreach ($fine_print as $print)
     {
-      ImageTTFText ($handle, 9, 0, 10, ($i++)*10 + 265, $black, $fine_font,  $print);
+      ImageTTFText ($handle, 6.5, 0, 10, ($i++)*10 + 265, $black, $fine_font,  $print);
     }
     
     ImageTTFText ($handle, 9, 0, 10,145, $black, $font,  $description);
