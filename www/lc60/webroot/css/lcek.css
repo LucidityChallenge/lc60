@@ -101,6 +101,8 @@ ul.pagination .disabled:hover a {
 
 .paginator {
     text-align: center;
+    float: none;
+    vertical-align: bottom;
 }
 
 .paginator ul.pagination li {
@@ -401,4 +403,33 @@ div.message.hidden {
 
 table td {
     vertical-align: top;
+}
+
+div.subtask_value_box {
+  border: 1px;
+  clear: right left top bottom;
+  padding: 0px 0px 0px 0px;
+  float: none;
+}
+
+div.subtask_value_box_float {
+  border: 1px;
+  clear: right left top bottom;
+  padding: 10px 10px 10px 10px;
+  float: left;
+  width: 250px;
+  height: 250px;
+}
+
+
+div.subtask_img {
+  border: 0px;
+  clear: right left top bottom;
+  padding: 10px 10px 10px 10px;
+  float: left;
+}
+
+.profile_picture {
+  max-width: 110px;
+  max-height: 110px;
 }
