@@ -28,7 +28,7 @@
 <div class="subtasks view large-9 medium-8 columns content">
     <h4><?= __('Subtask Information') ?></h4>
     <div>
-    <h3><?= h($subtask->subtask_name) ?></h3>
+    <h3><?= (h($subtask->subtask_name)) ?><?= ($subtask->hasDreamType) ? (': '.$this->Html->link('Dream Type',['controller' => 'dream_types','action' => 'view',($subtask->id)])) : ('') ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Task') ?></th>

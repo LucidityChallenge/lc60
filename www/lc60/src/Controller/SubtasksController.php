@@ -57,11 +57,11 @@ class SubtasksController extends ImageController
      */
     public function view($id = null)
     {
-    
-	$showSubtask = false;
-	$subtasks = null;
+    	$subtasks = null;
 	$img_width = '350px';
 	$img_height = null;
+	
+	$hasDreamType = false;
 	
 	if (null != ($this->Auth->user('id')))
 	{
@@ -73,20 +73,14 @@ class SubtasksController extends ImageController
 	  try
 	  {
 	    $dream_type = $this->Subtasks->DreamTypes->get($id);
-	    if ($dream_type != null) {
-		    $this->Flash->success(__('Redirected to Dream Type.'));
-
-		    return $this->redirect(['controller' => 'dream_types','action' => 'view',($id)]);
-	    }
+	    $hasDreamType = ($dream_type != null);
 	  }
 	  catch (RecordNotFoundException $e)
 	  {
-	    //not found, proceed with current subtask
-	    $showSubtask = true;
+	    $hasDreamType = false;
 	  }
 	}
 	
-	if ($showSubtask)
 	{
 	  $contains = ['SubtaskValues', 'Tasks', 'SubtaskCategories', 'Participants', 'SubtaskTypes', 'SuccessfulSubtaskTaskWithCalculatedScoringParticipant',		
 		'ShareHoldersParticipant'
@@ -95,7 +89,8 @@ class SubtasksController extends ImageController
 	  if (null != ($this->Auth->user('id')))
 	  {
 	    $subtask = $this->Subtasks->get($id, ['contain' => $contains]);
-	     $subtask->svg = $this->generateSvg($id, false, $img_width, $img_height);
+	    $subtask->svg = $this->generateSvg($id, false, $img_width, $img_height);
+	    $subtask->hasDreamType = $hasDreamType;
 	    $this->set('subtask', $subtask);
 	    $this->set('_serialize', ['subtask']);
 	  }
@@ -112,7 +107,7 @@ class SubtasksController extends ImageController
 	    foreach ($subtasks as $subtask)
 	    {
 	      $subtask->svg = $this->generateSvg($id, false, $img_width, $img_height);
-	    
+	      $subtask->hasDreamType = $hasDreamType;
 	      $this->set('subtask', $subtask);
 	      $this->set('_serialize', ['subtask']);
 	      $unset = false;
@@ -304,13 +299,14 @@ class SubtasksController extends ImageController
       }
      
       $values = reset($subtask_fetch->subtask_values);
-      $owner = '';
-      $comma = '';
+      //$owner = '';
+      //$comma = '';
       
       foreach ($subtask_fetch->share_holders_participant as $holder)
       {
-	$owner = $owner . $comma . $holder->participant_name;
-	$comma = ', ';
+	$owner = /*$owner . $comma .*/ $holder->participant_name;
+	//$comma = ', ';
+	break;
       }
 
       return ($this->svgData("Roman",
@@ -321,7 +317,7 @@ $subtask_fetch->subtask_name,
 [($ins[0]),($ins[1])],
 'osemoji',
 $values->subtask_type_name,
-($owner != '') ? ($owner) : (($values->subtask_type_ownable != 0) ? 'Available' : '' ),
+($owner != '') ? (($values->subtask_share_holder_count == 1)? $owner : ($values->subtask_share_holder_count.' owners')) : (($values->subtask_type_ownable != 0) ? (($values->subtask_type_unlockable != 0)? 'Locked' : 'Available') : '' ),
 (($subtask_fetch->subtask_accumulative != 0) ? 'Accumulative' : 'Non-Accumulative'),
 ($values->subtask_category_color != null) ? ($values->subtask_category_color) : '#D0D0D0',
 $subtask_fetch->subtask_description,
@@ -410,13 +406,14 @@ $height
       }
      
       $values = reset($subtask_fetch->subtask_values);
-      $owner = '';
-      $comma = '';
+      //$owner = '';
+      //$comma = '';
       
       foreach ($subtask_fetch->share_holders_participant as $holder)
       {
 	$owner = $owner . $comma . $holder->participant_name;
-	$comma = ', ';
+	//$comma = ', ';
+	break;
       }
 
       return $this->pngBody('../webroot/font/roman/NimbusRomNo9L-Reg.ttf',
@@ -427,7 +424,7 @@ $subtask_fetch->subtask_name,
 [($ins[0]),($ins[1])],
 '../webroot/font/osemoji/OpenSansEmoji.ttf',
 $values->subtask_type_name,
-($owner != '') ? ($owner) : (($values->subtask_type_ownable != 0) ? 'Available' : '' ),
+($owner != '') ? (($values->subtask_share_holder_count == 1)? $owner : ($values->subtask_share_holder_count.' owners')) : (($values->subtask_type_ownable != 0) ? (($values->subtask_type_unlockable != 0)? 'Locked' : 'Available') : '' ),
 (($subtask_fetch->subtask_accumulative != 0) ? 'Accumulative' : 'Non-Accumulative'),
 ($values->subtask_category_color != null) ? ($values->subtask_category_color) : '#D0D0D0',
 $subtask_fetch->subtask_description,

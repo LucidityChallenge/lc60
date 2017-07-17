@@ -307,7 +307,25 @@
         </table>
         <?php endif; ?>
     </div>
-    
+    <h4><?= __('Categories Completed by '.($participant->participant_name)) ?></h4>
+    <div class="related">
+       <?php if (!empty($participant->successful_subtask_category_full)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <!--<th scope="col"><?= __('Color') ?></th>-->
+                <th scope="col"><?= __('Name') ?></th>
+                <th scope="col"><?= __('Count') ?></th>
+            </tr>
+            <?php foreach ($participant->successful_subtask_category_full as $subtaskCategory): ?>
+            <tr>
+                <!--<td class="<?= ($subtaskCategory->subtask_category_class) ?>"></td>-->
+                <td><?= h($subtaskCategory->subtask_category_name) ?></td>
+                <td><?= $this->Number->format($subtaskCategory->subtask_category_count) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+	<?php endif; ?>
+    </div>
     <h4><?= __('Subtasks Owned or Shared by '.($participant->participant_name)) ?></h4>
     <div class="related">
     <!--

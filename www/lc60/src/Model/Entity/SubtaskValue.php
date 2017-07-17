@@ -42,6 +42,7 @@ use Cake\ORM\Entity;
  * @property float $final_value_pre
  * @property float $final_value_cur
  * @property int $subtask_share_holder_count
+ * @property bool $subtask_type_unlockable
  *
  * @property \App\Model\Entity\CurrentTask $current_task
  * @property \App\Model\Entity\ContemporaryTask $contemporary_task

@@ -35,6 +35,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedTotal[] $successful_subtask_task_with_calculated_total
  * @property \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedTotalComplete[] $successful_subtask_task_with_calculated_total_complete
  * @property \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedTotalParticipant[] $successful_subtask_task_with_calculated_total_participant
+ * @property \App\Model\Entity\SuccessfulSubtaskCategoryFull[] $successful_subtask_category_full
  */
 class Participant extends Entity
 {

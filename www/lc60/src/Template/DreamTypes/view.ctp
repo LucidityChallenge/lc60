@@ -4,14 +4,14 @@
   * @var \App\Model\Entity\DreamType $dreamType
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Dream Type'), ['action' => 'edit', $dreamType->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Dream Type'), ['action' => 'delete', $dreamType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dreamType->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Dream Types'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Dream Type'), ['action' => 'add']) ?> </li>
-        <!--
+        
         <li><?= $this->Html->link(__('List Dream Type Id'), ['controller' => 'DreamTypeId', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Dream Type Id'), ['controller' => 'DreamTypeId', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Successful Subtask'), ['controller' => 'SuccessfulSubtask', 'action' => 'index']) ?> </li>
@@ -22,11 +22,11 @@
         <li><?= $this->Html->link(__('New Successful Subtask Task'), ['controller' => 'SuccessfulSubtaskTask', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Successful Subtask Task With Calculated Scoring'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Successful Subtask Task With Calculated Scoring'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'add']) ?> </li>
-        -->
+        
     </ul>
-</nav>
+</nav>-->
 <div class="dreamTypes view large-9 medium-8 columns content">
-    <h3><?= h($dreamType->dream_type_name) ?></h3>
+    <h3><?= h($dreamType->dream_type_name).(': '.$this->Html->link('Subtask View',['controller' => 'subtasks','action' => 'view',($dreamType->id)])) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Dream Type Name') ?></th>
@@ -35,10 +35,6 @@
         <tr>
             <th scope="row"><?= __('Dream Type Short Name') ?></th>
             <td><?= h($dreamType->dream_type_short_name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($dreamType->id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Dream Value') ?></th>

@@ -26,9 +26,9 @@
                 <th scope="col"><?= $this->Paginator->sort('successful_subtasks') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('average_subtask_value') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('total_subtask_value') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('dividend_successes') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('average_dividend_value') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('total_dividends') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('dividend_successes','Shared Success Count') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('average_dividend_value','Average Shared Value') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('total_dividends','Shared Success Value') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('total_score') ?></th>
                 <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
             </tr>

@@ -64,7 +64,7 @@
 		</tr>
 		<tr>
 		  <th scope="row">Status:</th>
-		  <td colspan="2"><span class="digital"><?= (($subtaskValue->subtask_type_ownable == 1) && ($subtaskValue->subtask_share_holder_count == 0) && (($subtaskValue->subtask_type_id == 7) || ($subtaskValue->subtask_type_id == 6)) ) ? 'LOCKED' : 'OPEN' ?></span></td>
+		  <td colspan="2"><span class="digital"><?= (($subtaskValue->subtask_type_ownable == 1) && ($subtaskValue->subtask_share_holder_count == 0) && ($subtaskValue->subtask_type_unlockable == 1)) ? 'LOCKED' : 'OPEN' ?></span></td>
 		</tr>	   
 	    </table>
             </div>
