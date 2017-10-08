@@ -32,7 +32,7 @@ header .header-title {
 }
 
 .row {
-    max-width: 80rem;
+    /*max-width: 80rem;*/
 }
 
 .actions.columns {
@@ -48,8 +48,8 @@ header .header-title {
 
 .related table {
     border: 1;
-    width: 100%;
-    table-layout: fixed;
+    min-width: 400px;
+    /*table-layout: fixed;*/
 }
 
 span.final_score {
@@ -270,11 +270,11 @@ pre {
 }
 
 .top-bar.expanded .title-area {
-    background: #01545b;
+    background: #305050;
 }
 
 .top-bar.expanded, .top-bar,.top-bar-section ul li,.top-bar-section li:not(.has-form) a:not(.button) {
-    background: #116d76;
+    background: #405050;
 }
 
 .top-bar-section li:not(.has-form) a:not(.button):hover {
@@ -322,7 +322,7 @@ div.message {
     top: 15px;
     right: 15px;
     z-index: 999;
-    overflow: hidden;
+    /*overflow: hidden;*/
     height: 50px;
     line-height: 2.5em;
     box-radius: 5px;
@@ -366,22 +366,25 @@ div.message.hidden {
 
 /* Use 'one true layout' methods to get equal height columns */
 .container {
-    overflow: hidden;
+    /*overflow: auto;*/
     min-height: 92%; /* full height almost always */
 }
 
 /* Force equal height by overflowing */
+/*
 .content,
 #actions-sidebar {
     margin-bottom: -99999px;
     padding-bottom: 99999px;
-}
+}*/
+/*
 @media(max-width: 640px) {
     #actions-sidebar {
         padding-bottom: 2rem;
         margin-bottom: 0;
     }
 }
+*/
 
 .content h3 {
     padding-bottom: 0.5rem;
@@ -394,12 +397,13 @@ div.message.hidden {
     border-bottom: 2px solid #be140b;
 }
 
+/*
 .content .related h4 {
     padding-bottom: 0.5rem;
     margin-top: 20px;
     margin-bottom: 10px;
     border-bottom: 0px;
-}
+}*/
 
 table td {
     vertical-align: top;
@@ -433,3 +437,14 @@ div.subtask_img {
   max-width: 110px;
   max-height: 110px;
 }
+
+.subtask_picture {
+  max-width: 110px;
+  max-height: 110px;
+}
+
+div.clear {
+  float: none;
+  clear: both;
+}
+

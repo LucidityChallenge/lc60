@@ -162,7 +162,7 @@ sub,
 sup {
     font-size: 75%;
     line-height: 0;
-    /*position: relative;*/
+    position: relative;
     vertical-align: baseline;
 }
 
@@ -190,7 +190,7 @@ img {
  */
 
 svg:not(:root) {
-    overflow: auto;
+    overflow: hidden;
 }
 
 /* Grouping content
@@ -219,7 +219,7 @@ hr {
  */
 
 pre {
-    /*overflow: auto;*/
+    overflow: auto;
 }
 
 /**
@@ -397,7 +397,7 @@ legend {
  */
 
 textarea {
-    /*overflow: auto;*/
+    overflow: auto;
 }
 
 /**
