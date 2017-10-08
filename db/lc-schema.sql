@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 17, 2017 at 04:12 AM
+-- Generation Time: Sep 10, 2017 at 03:51 PM
 -- Server version: 10.0.27-MariaDB-1
 -- PHP Version: 7.0.20-2
 
@@ -131,6 +131,18 @@ CREATE TABLE `lc60_calculated_subtask_demand_inner` (
 ,`contemporary_demand` decimal(44,0)
 ,`contemporary_demand_positive` decimal(44,0)
 ,`inner_function` decimal(44,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `lc60_contemporary_success_count`
+-- (See below for the actual view)
+--
+CREATE TABLE `lc60_contemporary_success_count` (
+`contemporary_task_id` tinyint(4)
+,`subtask_id` int(11)
+,`success_count` bigint(21)
 );
 
 -- --------------------------------------------------------
@@ -299,6 +311,17 @@ CREATE TABLE `lc60_dream_scoring` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `lc60_dream_scoring_stats`
+-- (See below for the actual view)
+--
+CREATE TABLE `lc60_dream_scoring_stats` (
+`dream_count` bigint(21)
+,`dream_total_score` decimal(65,2)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `lc60_dream_type_id`
 -- (See below for the actual view)
 --
@@ -397,6 +420,19 @@ CREATE TABLE `lc60_first_share_holder_participant` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lc60_manual_value`
+--
+
+CREATE TABLE `lc60_manual_value` (
+  `subtask_id` int(11) NOT NULL,
+  `contemporary_task_id` int(11) NOT NULL,
+  `manual_demand` tinyint(11) NOT NULL,
+  `manual_value` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lc60_memos`
 --
 
@@ -424,6 +460,16 @@ CREATE TABLE `lc60_news` (
   `publish` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `lc60_open_list`
+-- (See below for the actual view)
+--
+CREATE TABLE `lc60_open_list` (
+`Name_exp_1` varchar(465)
+);
 
 -- --------------------------------------------------------
 
@@ -500,8 +546,8 @@ CREATE TABLE `lc60_score_view_complete` (
 ,`final_value_total` decimal(65,0)
 ,`dividend_count_sum_total` decimal(64,0)
 ,`dividend_count_participant_total` bigint(21)
-,`final_dividend_value_avg` decimal(64,13)
-,`final_dividend_value_total` decimal(65,9)
+,`final_dividend_value_avg` decimal(19,13)
+,`final_dividend_value_total` decimal(37,9)
 ,`final_value_total_with_dividends` decimal(65,9)
 );
 
@@ -520,8 +566,8 @@ CREATE TABLE `lc60_score_view_complete_participant` (
 ,`final_value_total` decimal(65,0)
 ,`dividend_count_sum_total` decimal(64,0)
 ,`dividend_count_participant_total` bigint(21)
-,`final_dividend_value_avg` decimal(64,13)
-,`final_dividend_value_total` decimal(65,9)
+,`final_dividend_value_avg` decimal(19,13)
+,`final_dividend_value_total` decimal(37,9)
 ,`final_value_total_with_dividends` decimal(65,9)
 );
 
@@ -539,8 +585,8 @@ CREATE TABLE `lc60_scores` (
 ,`average_subtask_value` decimal(52,4)
 ,`total_subtask_value` decimal(65,2)
 ,`dividend_successes` bigint(21)
-,`average_dividend_value` decimal(64,13)
-,`total_dividends` decimal(65,9)
+,`average_dividend_value` decimal(19,13)
+,`total_dividends` decimal(37,9)
 ,`total_score` decimal(58,2)
 );
 
@@ -569,9 +615,11 @@ CREATE TABLE `lc60_signups` (
 ,`now_date_unix` bigint(17)
 ,`open_date` varchar(19)
 ,`open_date_unix` bigint(17)
-,`begin_date` varchar(19)
+,`begin_date` timestamp
 ,`begin_date_unix` bigint(17)
 ,`participant_count` bigint(21)
+,`dream_count` bigint(21)
+,`dream_total_score` decimal(63,0)
 );
 
 -- --------------------------------------------------------
@@ -732,7 +780,8 @@ CREATE TABLE `lc60_subtask_share_holder_count` (
 CREATE TABLE `lc60_subtask_shares` (
   `id` int(11) NOT NULL,
   `subtask_id` int(11) NOT NULL,
-  `participant_id` int(11) NOT NULL
+  `participant_id` int(11) NOT NULL,
+  `subtask_share_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -968,8 +1017,8 @@ CREATE TABLE `lc60_successful_subtask_dividend_calculated_total` (
 `participant_id` int(11)
 ,`subtask_success_count_sum_total` decimal(64,0)
 ,`subtask_success_count_participant_total` bigint(21)
-,`final_dividend_value_avg` decimal(64,13)
-,`final_dividend_value_total` decimal(65,9)
+,`final_dividend_value_avg` decimal(19,13)
+,`final_dividend_value_total` decimal(37,9)
 );
 
 -- --------------------------------------------------------
@@ -1014,7 +1063,7 @@ CREATE TABLE `lc60_successful_subtask_dividend_scores` (
 ,`final_value` decimal(48,0)
 ,`subtask_dividend_rate` decimal(4,1)
 ,`subtask_share_holder_count` bigint(21)
-,`final_dividend_value` decimal(60,9)
+,`final_dividend_value` decimal(15,9)
 );
 
 -- --------------------------------------------------------
@@ -1099,6 +1148,58 @@ CREATE TABLE `lc60_successful_subtask_task_with_calculated_scoring` (
 ,`final_value` decimal(48,0)
 ,`final_value_truncate` decimal(50,2)
 ,`subtask_dividend_rate` decimal(4,1)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `lc60_successful_subtask_task_with_calculated_scoring_owner`
+-- (See below for the actual view)
+--
+CREATE TABLE `lc60_successful_subtask_task_with_calculated_scoring_owner` (
+`participant_id` int(11)
+,`dream_id` int(11)
+,`dream_type_id` int(11)
+,`dream_timestamp` timestamp
+,`dream_url` varchar(80)
+,`contemporary_task_id` tinyint(4)
+,`contemporary_task_start` timestamp
+,`contemporary_task_expiration` timestamp
+,`subtask_id` int(11)
+,`subtask_task_id` tinyint(4)
+,`subtask_super_id` int(11)
+,`subtask_name` varchar(48)
+,`subtask_category_id` tinyint(4)
+,`subtask_base_value` tinyint(4)
+,`subtask_max_value` tinyint(4)
+,`subtask_starting_demand` tinyint(4)
+,`subtask_inflation_rate` decimal(4,1)
+,`subtask_demand_cutoff` tinyint(4)
+,`subtask_bonus_base` tinyint(4)
+,`subtask_task_period_demand` tinyint(4)
+,`subtask_description` text
+,`subtask_url` varchar(48)
+,`subtask_accumulative` tinyint(4)
+,`subtask_owner_participant_id` int(11)
+,`subtask_category_name` varchar(16)
+,`subtask_category_class` varchar(16)
+,`subtask_category_description` text
+,`subtask_success_count` decimal(42,0)
+,`subtask_success_count_total` bigint(21)
+,`contemporary_demand` decimal(44,0)
+,`contemporary_demand_positive` decimal(44,0)
+,`inner_function` decimal(44,0)
+,`external_function` decimal(47,0)
+,`final_value` decimal(48,0)
+,`final_value_truncate` decimal(50,2)
+,`subtask_dividend_rate` decimal(4,1)
+,`subtask_type_id` tinyint(4)
+,`participant_name` varchar(48)
+,`task_title` varchar(48)
+,`subtask_share_holder_count` bigint(21)
+,`participant_holder_id` int(11)
+,`participant_holder_name` varchar(48)
+,`final_owner_payout` decimal(8,2)
 );
 
 -- --------------------------------------------------------
@@ -1221,7 +1322,7 @@ CREATE TABLE `lc60_tasks` (
   `task_expiration` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Why I cannot set TIMESTAMP(now() + (INTERVAL 1 WEEK)) for default',
   `task_text` text NOT NULL COMMENT '64kb of text',
   `task_url` varchar(80) NOT NULL,
-  `task_image_url` varchar(80) DEFAULT NULL
+  `task_image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1285,6 +1386,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 -- --------------------------------------------------------
 
 --
+-- Structure for view `lc60_contemporary_success_count`
+--
+DROP TABLE IF EXISTS `lc60_contemporary_success_count`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_contemporary_success_count`  AS  select `lc60_successful_subtask_task`.`contemporary_task_id` AS `contemporary_task_id`,`lc60_successful_subtask_task`.`subtask_id` AS `subtask_id`,count(0) AS `success_count` from `lc60_successful_subtask_task` group by `lc60_successful_subtask_task`.`contemporary_task_id`,`lc60_successful_subtask_task`.`subtask_id` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `lc60_current_task`
 --
 DROP TABLE IF EXISTS `lc60_current_task`;
@@ -1343,7 +1453,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_demand_view_success`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_success`  AS  select `successful_subtask_task`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task`.`subtask_id` AS `subtask_id`,(case when ((`successful_subtask_task`.`subtask_starting_demand` <= 0) or isnull(`successful_subtask_task`.`subtask_max_value`) or isnull(`successful_subtask_task`.`subtask_starting_demand`)) then 0 else `successful_subtask_task`.`subtask_starting_demand` end) AS `subtask_starting_demand`,min(`demand_accumulated_success`.`subtask_success_count`) AS `subtask_success_count`,count(0) AS `subtask_success_count_total`,`successful_subtask_task`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task`.`subtask_name` AS `subtask_name`,`successful_subtask_task`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task`.`subtask_bonus_base` AS `subtask_bonus_base`,`successful_subtask_task`.`subtask_description` AS `subtask_description`,`successful_subtask_task`.`subtask_url` AS `subtask_url`,`successful_subtask_task`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`successful_subtask_task`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task`.`subtask_category_description` AS `subtask_category_description` from (`lc60_successful_subtask_task` `successful_subtask_task` join `lc60_demand_accumulated_success` `demand_accumulated_success` on(((`successful_subtask_task`.`subtask_id` = `demand_accumulated_success`.`subtask_id`) and (`successful_subtask_task`.`contemporary_task_id` = `demand_accumulated_success`.`contemporary_task_id`)))) group by `successful_subtask_task`.`contemporary_task_id`,`successful_subtask_task`.`subtask_id`,`successful_subtask_task`.`subtask_id`,`successful_subtask_task`.`subtask_starting_demand`,`successful_subtask_task`.`subtask_task_period_demand`,`successful_subtask_task`.`subtask_task_id`,`successful_subtask_task`.`subtask_super_id`,`successful_subtask_task`.`subtask_name`,`successful_subtask_task`.`subtask_category_id`,`successful_subtask_task`.`subtask_base_value`,`successful_subtask_task`.`subtask_max_value`,`successful_subtask_task`.`subtask_inflation_rate`,`successful_subtask_task`.`subtask_demand_cutoff`,`successful_subtask_task`.`subtask_url`,`successful_subtask_task`.`subtask_accumulative`,`successful_subtask_task`.`subtask_owner_participant_id`,`successful_subtask_task`.`subtask_dividend_rate` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_demand_view_success`  AS  select `successful_subtask_task`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task`.`subtask_id` AS `subtask_id`,(case when ((`successful_subtask_task`.`subtask_starting_demand` = 0) or isnull(`successful_subtask_task`.`subtask_max_value`) or isnull(`successful_subtask_task`.`subtask_starting_demand`)) then 0 else `successful_subtask_task`.`subtask_starting_demand` end) AS `subtask_starting_demand`,max(`demand_accumulated_success`.`subtask_success_count`) AS `subtask_success_count`,count(0) AS `subtask_success_count_total`,`successful_subtask_task`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task`.`subtask_name` AS `subtask_name`,`successful_subtask_task`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task`.`subtask_bonus_base` AS `subtask_bonus_base`,`successful_subtask_task`.`subtask_description` AS `subtask_description`,`successful_subtask_task`.`subtask_url` AS `subtask_url`,`successful_subtask_task`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`successful_subtask_task`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task`.`subtask_category_description` AS `subtask_category_description` from (`lc60_successful_subtask_task` `successful_subtask_task` join `lc60_demand_accumulated_success` `demand_accumulated_success` on(((`successful_subtask_task`.`subtask_id` = `demand_accumulated_success`.`subtask_id`) and (`successful_subtask_task`.`contemporary_task_id` = `demand_accumulated_success`.`contemporary_task_id`)))) group by `successful_subtask_task`.`contemporary_task_id`,`successful_subtask_task`.`subtask_id`,`successful_subtask_task`.`subtask_id`,`successful_subtask_task`.`subtask_starting_demand`,`successful_subtask_task`.`subtask_task_period_demand`,`successful_subtask_task`.`subtask_task_id`,`successful_subtask_task`.`subtask_super_id`,`successful_subtask_task`.`subtask_name`,`successful_subtask_task`.`subtask_category_id`,`successful_subtask_task`.`subtask_base_value`,`successful_subtask_task`.`subtask_max_value`,`successful_subtask_task`.`subtask_inflation_rate`,`successful_subtask_task`.`subtask_demand_cutoff`,`successful_subtask_task`.`subtask_url`,`successful_subtask_task`.`subtask_accumulative`,`successful_subtask_task`.`subtask_owner_participant_id`,`successful_subtask_task`.`subtask_dividend_rate` ;
 
 -- --------------------------------------------------------
 
@@ -1353,6 +1463,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 DROP TABLE IF EXISTS `lc60_dream_scoring`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_dream_scoring`  AS  select `successful_subtask_task_with_calculated_scoring`.`dream_id` AS `dream_id`,sum(`successful_subtask_task_with_calculated_scoring`.`final_value_truncate`) AS `final_value_truncate` from `lc60_successful_subtask_task_with_calculated_scoring` `successful_subtask_task_with_calculated_scoring` group by `successful_subtask_task_with_calculated_scoring`.`dream_id` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `lc60_dream_scoring_stats`
+--
+DROP TABLE IF EXISTS `lc60_dream_scoring_stats`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_dream_scoring_stats`  AS  select count(0) AS `dream_count`,sum(`scoring`.`final_value_truncate`) AS `dream_total_score` from `lc60_dream_scoring` `scoring` ;
 
 -- --------------------------------------------------------
 
@@ -1398,6 +1517,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 DROP TABLE IF EXISTS `lc60_first_share_holder_participant`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_first_share_holder_participant`  AS  select max(`subtask_share_holder_count`.`subtask_share_holder_count`) AS `subtask_share_holder_count`,`subtask_share_holder_count`.`subtask_id` AS `subtask_id`,min(`participant`.`id`) AS `participant_id`,min(`participant`.`participant_name`) AS `participant_name` from ((`lc60_subtask_share_holder_count` `subtask_share_holder_count` join `lc60_subtask_share_holder` `subtask_share_holder` on((`subtask_share_holder_count`.`subtask_id` = `subtask_share_holder`.`subtask_id`))) join `lc60_participants` `participant` on((`subtask_share_holder`.`participant_id` = `participant`.`id`))) group by `subtask_share_holder_count`.`subtask_id` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `lc60_open_list`
+--
+DROP TABLE IF EXISTS `lc60_open_list`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_open_list`  AS  select concat('[url=http://lc60.keepdream.in/subtasks/view/',`lc60_subtask_values`.`subtask_id`,']&#',convert(coalesce(`lc60_subtask_values`.`subtask_symbol`,'') using utf8),'; ',`lc60_subtask_values`.`subtask_name`,': ',coalesce(`lc60_subtask_values`.`subtask_description`,''),' ',coalesce(`lc60_subtask_values`.`subtask_category_name`,''),'. Current Value: ',`lc60_subtask_values`.`final_value_cur`,'[/url]') AS `Name_exp_1` from `lc60_subtask_values` where ((`lc60_subtask_values`.`contemporary_task_id` = `lc60_subtask_values`.`current_task_id`) and ((`lc60_subtask_values`.`subtask_type_ownable` <> 1) or (`lc60_subtask_values`.`subtask_share_holder_count` <> 0) or (`lc60_subtask_values`.`subtask_type_unlockable` <> 1))) ;
 
 -- --------------------------------------------------------
 
@@ -1451,7 +1579,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_signups`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_signups`  AS  select 'http://ld4all.com/forum/viewtopic.php?t=50770' AS `signup_url`,'baddudes.gif' AS `signup_image_url`,now() AS `now_date`,unix_timestamp(now()) AS `now_date_unix`,'2017-07-08 21:00:00' AS `open_date`,unix_timestamp('2017-07-08 21:00:00') AS `open_date_unix`,'2017-07-15 21:00:00' AS `begin_date`,unix_timestamp('2017-07-15 21:00:00') AS `begin_date_unix`,count(0) AS `participant_count` from `lc60_participants` `participant` where (`participant`.`id` between 0 and 100) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_signups`  AS  select 'http://ld4all.com/forum/viewtopic.php?t=50770' AS `signup_url`,'baddudes.gif' AS `signup_image_url`,now() AS `now_date`,unix_timestamp(now()) AS `now_date_unix`,'2017-07-08 21:00:00' AS `open_date`,unix_timestamp('2017-07-08 21:00:00') AS `open_date_unix`,`task`.`task_start` AS `begin_date`,unix_timestamp(`task`.`task_start`) AS `begin_date_unix`,count(0) AS `participant_count`,`scoring_stats`.`dream_count` AS `dream_count`,truncate(`scoring_stats`.`dream_total_score`,0) AS `dream_total_score` from ((`lc60_participants` `participant` join `lc60_tasks` `task`) join `lc60_dream_scoring_stats` `scoring_stats`) where ((`task`.`id` = 1) and (`participant`.`id` between 0 and 100)) ;
 
 -- --------------------------------------------------------
 
@@ -1487,7 +1615,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_subtask_pre_values`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_subtask_pre_values`  AS  select `pre`.`subtask_id` AS `subtask_id`,`cur`.`current_task_id` AS `current_task_id`,`cur`.`contemporary_task_id` AS `contemporary_task_id`,`pre`.`contemporary_task_id` AS `contemporary_task_id_pre`,`cur`.`subtask_success_count` AS `subtask_success_count`,`cur`.`subtask_success_count_total` AS `subtask_success_count_total`,`pre`.`contemporary_demand` AS `contemporary_demand_pre`,`pre`.`contemporary_demand_positive` AS `contemporary_demand_positive_pre`,`cur`.`contemporary_demand` AS `contemporary_demand_cur`,`cur`.`contemporary_demand_positive` AS `contemporary_demand_positive_cur`,`pre`.`final_value` AS `final_value_pre`,`cur`.`final_value` AS `final_value_cur` from (`lc60_calculated_subtask_demand_final_value` `cur` join `lc60_calculated_subtask_demand_final_value` `pre` on(((`cur`.`subtask_id` = `pre`.`subtask_id`) and (`cur`.`contemporary_task_id` = (`pre`.`contemporary_task_id` + 1))))) where ((`pre`.`current_task_id` = `pre`.`contemporary_task_id`) and (`cur`.`current_task_id` = `cur`.`contemporary_task_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_subtask_pre_values`  AS  select `pre`.`subtask_id` AS `subtask_id`,`cur`.`current_task_id` AS `current_task_id`,`cur`.`contemporary_task_id` AS `contemporary_task_id`,`pre`.`contemporary_task_id` AS `contemporary_task_id_pre`,`cur`.`subtask_success_count` AS `subtask_success_count`,`cur`.`subtask_success_count_total` AS `subtask_success_count_total`,coalesce(`mv_pre`.`manual_demand`,`pre`.`contemporary_demand`) AS `contemporary_demand_pre`,coalesce((case when (`mv_pre`.`manual_demand` < 0) then 0 else `mv_pre`.`manual_demand` end),`pre`.`contemporary_demand_positive`) AS `contemporary_demand_positive_pre`,coalesce(`mv`.`manual_demand`,`cur`.`contemporary_demand`) AS `contemporary_demand_cur`,coalesce((case when (`mv`.`manual_demand` < 0) then 0 else `mv`.`manual_demand` end),`cur`.`contemporary_demand_positive`) AS `contemporary_demand_positive_cur`,coalesce(`mv_pre`.`manual_value`,`pre`.`final_value`) AS `final_value_pre`,coalesce(`mv`.`manual_value`,`cur`.`final_value`) AS `final_value_cur` from (((`lc60_calculated_subtask_demand_final_value` `cur` join `lc60_calculated_subtask_demand_final_value` `pre` on(((`cur`.`subtask_id` = `pre`.`subtask_id`) and (`cur`.`contemporary_task_id` = (`pre`.`contemporary_task_id` + 1))))) left join `lc60_manual_value` `mv` on(((`cur`.`subtask_id` = `mv`.`subtask_id`) and (`cur`.`current_task_id` = `mv`.`contemporary_task_id`)))) left join `lc60_manual_value` `mv_pre` on(((`pre`.`subtask_id` = `mv_pre`.`subtask_id`) and (`pre`.`current_task_id` = `mv_pre`.`contemporary_task_id`)))) where ((`pre`.`current_task_id` = `pre`.`contemporary_task_id`) and (((`cur`.`current_task_id` = (`cur`.`contemporary_task_id` + 0)) and (select (count(0) = 0) from `lc60_successful_subtask_task` `st` where (`st`.`subtask_id` = `cur`.`subtask_id`))) or ((`cur`.`current_task_id` = (`cur`.`contemporary_task_id` + 1)) and (select (count(0) <> 0) from `lc60_successful_subtask_task` `st` where (`st`.`subtask_id` = `cur`.`subtask_id`))))) ;
 
 -- --------------------------------------------------------
 
@@ -1586,7 +1714,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_successful_subtask_category_full`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_successful_subtask_category_full`  AS  select `participant`.`id` AS `participant_id`,`subtask_category`.`id` AS `subtask_category_id`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description`,coalesce(`lc60_successful_subtask_category`.`subtask_category_count`,0) AS `subtask_category_count` from ((`lc60_participants` `participant` join `lc60_subtask_categories` `subtask_category`) left join `lc60_successful_subtask_category` on((`subtask_category`.`id` = `lc60_successful_subtask_category`.`subtask_category_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_successful_subtask_category_full`  AS  select `participant`.`id` AS `participant_id`,`subtask_category`.`id` AS `subtask_category_id`,`subtask_category`.`subtask_category_name` AS `subtask_category_name`,`subtask_category`.`subtask_category_class` AS `subtask_category_class`,`subtask_category`.`subtask_category_description` AS `subtask_category_description`,coalesce(`successful_subtask_category`.`subtask_category_count`,0) AS `subtask_category_count` from ((`lc60_participants` `participant` join `lc60_subtask_categories` `subtask_category`) left join `lc60_successful_subtask_category` `successful_subtask_category` on(((`subtask_category`.`id` = `successful_subtask_category`.`subtask_category_id`) and (`successful_subtask_category`.`participant_id` = `participant`.`id`)))) ;
 
 -- --------------------------------------------------------
 
@@ -1604,7 +1732,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 --
 DROP TABLE IF EXISTS `lc60_successful_subtask_dividend_scores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_successful_subtask_dividend_scores`  AS  select `subtask_share_holder`.`participant_id` AS `participant_id`,`successful_subtask_task_with_calculated_scoring`.`participant_id` AS `dreamer_id`,`successful_subtask_task_with_calculated_scoring`.`dream_id` AS `dream_id`,`successful_subtask_task_with_calculated_scoring`.`dream_type_id` AS `dream_type_id`,`successful_subtask_task_with_calculated_scoring`.`dream_timestamp` AS `dream_timestamp`,`successful_subtask_task_with_calculated_scoring`.`dream_url` AS `dream_url`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_start` AS `contemporary_task_start`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_expiration` AS `contemporary_task_expiration`,`successful_subtask_task_with_calculated_scoring`.`subtask_id` AS `subtask_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_name` AS `subtask_name`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_starting_demand` AS `subtask_starting_demand`,`successful_subtask_task_with_calculated_scoring`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task_with_calculated_scoring`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task_with_calculated_scoring`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task_with_calculated_scoring`.`subtask_description` AS `subtask_description`,`successful_subtask_task_with_calculated_scoring`.`subtask_url` AS `subtask_url`,`successful_subtask_task_with_calculated_scoring`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task_with_calculated_scoring`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_description` AS `subtask_category_description`,`successful_subtask_task_with_calculated_scoring`.`subtask_success_count` AS `subtask_success_count`,`successful_subtask_task_with_calculated_scoring`.`contemporary_demand` AS `contemporary_demand`,`successful_subtask_task_with_calculated_scoring`.`contemporary_demand_positive` AS `contemporary_demand_positive`,`successful_subtask_task_with_calculated_scoring`.`inner_function` AS `inner_function`,`successful_subtask_task_with_calculated_scoring`.`external_function` AS `external_function`,`successful_subtask_task_with_calculated_scoring`.`final_value` AS `final_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_share_holder_count`.`subtask_share_holder_count` AS `subtask_share_holder_count`,(((`successful_subtask_task_with_calculated_scoring`.`final_value` * `successful_subtask_task_with_calculated_scoring`.`subtask_dividend_rate`) / 100) / `subtask_share_holder_count`.`subtask_share_holder_count`) AS `final_dividend_value` from ((`lc60_subtask_share_holder` `subtask_share_holder` join `lc60_successful_subtask_task_with_calculated_scoring` `successful_subtask_task_with_calculated_scoring` on((`subtask_share_holder`.`subtask_id` = `successful_subtask_task_with_calculated_scoring`.`subtask_id`))) join `lc60_subtask_share_holder_count` `subtask_share_holder_count` on((`subtask_share_holder`.`subtask_id` = `subtask_share_holder_count`.`subtask_id`))) where (`subtask_share_holder_count`.`subtask_share_holder_count` > 0) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_successful_subtask_dividend_scores`  AS  select `subtask_share_holder`.`participant_id` AS `participant_id`,`successful_subtask_task_with_calculated_scoring`.`participant_id` AS `dreamer_id`,`successful_subtask_task_with_calculated_scoring`.`dream_id` AS `dream_id`,`successful_subtask_task_with_calculated_scoring`.`dream_type_id` AS `dream_type_id`,`successful_subtask_task_with_calculated_scoring`.`dream_timestamp` AS `dream_timestamp`,`successful_subtask_task_with_calculated_scoring`.`dream_url` AS `dream_url`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_start` AS `contemporary_task_start`,`successful_subtask_task_with_calculated_scoring`.`contemporary_task_expiration` AS `contemporary_task_expiration`,`successful_subtask_task_with_calculated_scoring`.`subtask_id` AS `subtask_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_name` AS `subtask_name`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_starting_demand` AS `subtask_starting_demand`,`successful_subtask_task_with_calculated_scoring`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task_with_calculated_scoring`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task_with_calculated_scoring`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task_with_calculated_scoring`.`subtask_description` AS `subtask_description`,`successful_subtask_task_with_calculated_scoring`.`subtask_url` AS `subtask_url`,`successful_subtask_task_with_calculated_scoring`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task_with_calculated_scoring`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task_with_calculated_scoring`.`subtask_category_description` AS `subtask_category_description`,`successful_subtask_task_with_calculated_scoring`.`subtask_success_count` AS `subtask_success_count`,`successful_subtask_task_with_calculated_scoring`.`contemporary_demand` AS `contemporary_demand`,`successful_subtask_task_with_calculated_scoring`.`contemporary_demand_positive` AS `contemporary_demand_positive`,`successful_subtask_task_with_calculated_scoring`.`inner_function` AS `inner_function`,`successful_subtask_task_with_calculated_scoring`.`external_function` AS `external_function`,`successful_subtask_task_with_calculated_scoring`.`final_value` AS `final_value`,`successful_subtask_task_with_calculated_scoring`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`subtask_share_holder_count`.`subtask_share_holder_count` AS `subtask_share_holder_count`,(((`successful_subtask_task_with_calculated_scoring`.`subtask_base_value` * `successful_subtask_task_with_calculated_scoring`.`subtask_dividend_rate`) / 100) / `subtask_share_holder_count`.`subtask_share_holder_count`) AS `final_dividend_value` from ((`lc60_subtask_share_holder` `subtask_share_holder` join `lc60_successful_subtask_task_with_calculated_scoring` `successful_subtask_task_with_calculated_scoring` on((`subtask_share_holder`.`subtask_id` = `successful_subtask_task_with_calculated_scoring`.`subtask_id`))) join `lc60_subtask_share_holder_count` `subtask_share_holder_count` on((`subtask_share_holder`.`subtask_id` = `subtask_share_holder_count`.`subtask_id`))) where (`subtask_share_holder_count`.`subtask_share_holder_count` > 0) ;
 
 -- --------------------------------------------------------
 
@@ -1623,6 +1751,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW
 DROP TABLE IF EXISTS `lc60_successful_subtask_task_with_calculated_scoring`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_successful_subtask_task_with_calculated_scoring`  AS  select `successful_subtask_task`.`participant_id` AS `participant_id`,`successful_subtask_task`.`dream_id` AS `dream_id`,`successful_subtask_task`.`dream_type_id` AS `dream_type_id`,`successful_subtask_task`.`dream_timestamp` AS `dream_timestamp`,`successful_subtask_task`.`dream_url` AS `dream_url`,`successful_subtask_task`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task`.`contemporary_task_start` AS `contemporary_task_start`,`successful_subtask_task`.`contemporary_task_expiration` AS `contemporary_task_expiration`,`successful_subtask_task`.`subtask_id` AS `subtask_id`,`successful_subtask_task`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task`.`subtask_name` AS `subtask_name`,`successful_subtask_task`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task`.`subtask_starting_demand` AS `subtask_starting_demand`,`successful_subtask_task`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task`.`subtask_bonus_base` AS `subtask_bonus_base`,`successful_subtask_task`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task`.`subtask_description` AS `subtask_description`,`successful_subtask_task`.`subtask_url` AS `subtask_url`,`successful_subtask_task`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task`.`subtask_category_description` AS `subtask_category_description`,`successful_subtask_task`.`subtask_type_id` AS `subtask_type_id`,`calculated_subtask_demand_final_value`.`subtask_success_count` AS `subtask_success_count`,`calculated_subtask_demand_final_value`.`subtask_success_count_total` AS `subtask_success_count_total`,`calculated_subtask_demand_final_value`.`contemporary_demand` AS `contemporary_demand`,`calculated_subtask_demand_final_value`.`contemporary_demand_positive` AS `contemporary_demand_positive`,`calculated_subtask_demand_final_value`.`inner_function` AS `inner_function`,`calculated_subtask_demand_final_value`.`external_function` AS `external_function`,`calculated_subtask_demand_final_value`.`final_value` AS `final_value`,truncate(`calculated_subtask_demand_final_value`.`final_value`,2) AS `final_value_truncate`,`successful_subtask_task`.`subtask_dividend_rate` AS `subtask_dividend_rate` from (`lc60_successful_subtask_task` `successful_subtask_task` join `lc60_calculated_subtask_demand_final_value` `calculated_subtask_demand_final_value` on(((`successful_subtask_task`.`subtask_id` = `calculated_subtask_demand_final_value`.`subtask_id`) and (`successful_subtask_task`.`contemporary_task_id` = `calculated_subtask_demand_final_value`.`contemporary_task_id`)))) where (`successful_subtask_task`.`contemporary_task_id` = `calculated_subtask_demand_final_value`.`current_task_id`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `lc60_successful_subtask_task_with_calculated_scoring_owner`
+--
+DROP TABLE IF EXISTS `lc60_successful_subtask_task_with_calculated_scoring_owner`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tggtt`@`localhost` SQL SECURITY DEFINER VIEW `lc60_successful_subtask_task_with_calculated_scoring_owner`  AS  select `successful_subtask_task_with_calculated_scoring_participant`.`participant_id` AS `participant_id`,`successful_subtask_task_with_calculated_scoring_participant`.`dream_id` AS `dream_id`,`successful_subtask_task_with_calculated_scoring_participant`.`dream_type_id` AS `dream_type_id`,`successful_subtask_task_with_calculated_scoring_participant`.`dream_timestamp` AS `dream_timestamp`,`successful_subtask_task_with_calculated_scoring_participant`.`dream_url` AS `dream_url`,`successful_subtask_task_with_calculated_scoring_participant`.`contemporary_task_id` AS `contemporary_task_id`,`successful_subtask_task_with_calculated_scoring_participant`.`contemporary_task_start` AS `contemporary_task_start`,`successful_subtask_task_with_calculated_scoring_participant`.`contemporary_task_expiration` AS `contemporary_task_expiration`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_id` AS `subtask_id`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_task_id` AS `subtask_task_id`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_super_id` AS `subtask_super_id`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_name` AS `subtask_name`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_category_id` AS `subtask_category_id`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_base_value` AS `subtask_base_value`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_max_value` AS `subtask_max_value`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_starting_demand` AS `subtask_starting_demand`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_inflation_rate` AS `subtask_inflation_rate`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_demand_cutoff` AS `subtask_demand_cutoff`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_bonus_base` AS `subtask_bonus_base`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_task_period_demand` AS `subtask_task_period_demand`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_description` AS `subtask_description`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_url` AS `subtask_url`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_accumulative` AS `subtask_accumulative`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_owner_participant_id` AS `subtask_owner_participant_id`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_category_name` AS `subtask_category_name`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_category_class` AS `subtask_category_class`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_category_description` AS `subtask_category_description`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_success_count` AS `subtask_success_count`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_success_count_total` AS `subtask_success_count_total`,`successful_subtask_task_with_calculated_scoring_participant`.`contemporary_demand` AS `contemporary_demand`,`successful_subtask_task_with_calculated_scoring_participant`.`contemporary_demand_positive` AS `contemporary_demand_positive`,`successful_subtask_task_with_calculated_scoring_participant`.`inner_function` AS `inner_function`,`successful_subtask_task_with_calculated_scoring_participant`.`external_function` AS `external_function`,`successful_subtask_task_with_calculated_scoring_participant`.`final_value` AS `final_value`,`successful_subtask_task_with_calculated_scoring_participant`.`final_value_truncate` AS `final_value_truncate`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_dividend_rate` AS `subtask_dividend_rate`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_type_id` AS `subtask_type_id`,`successful_subtask_task_with_calculated_scoring_participant`.`participant_name` AS `participant_name`,`successful_subtask_task_with_calculated_scoring_participant`.`task_title` AS `task_title`,`successful_subtask_task_with_calculated_scoring_participant`.`subtask_share_holder_count` AS `subtask_share_holder_count`,`participant_owner`.`id` AS `participant_holder_id`,`participant_owner`.`participant_name` AS `participant_holder_name`,truncate(((`successful_subtask_task_with_calculated_scoring_participant`.`subtask_base_value` * `successful_subtask_task_with_calculated_scoring_participant`.`subtask_dividend_rate`) / (100 * `successful_subtask_task_with_calculated_scoring_participant`.`subtask_share_holder_count`)),2) AS `final_owner_payout` from ((`lc60_subtask_share_holder` `subtask_share_holder` join `lc60_successful_subtask_task_with_calculated_scoring_participant` `successful_subtask_task_with_calculated_scoring_participant` on((`successful_subtask_task_with_calculated_scoring_participant`.`subtask_id` = `subtask_share_holder`.`subtask_id`))) join `lc60_participants` `participant_owner` on((`subtask_share_holder`.`participant_id` = `participant_owner`.`id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1694,6 +1831,12 @@ ALTER TABLE `lc60_dream_types`
 ALTER TABLE `lc60_dreams`
   ADD PRIMARY KEY (`id`),
   ADD KEY `participant_id` (`participant_id`);
+
+--
+-- Indexes for table `lc60_manual_value`
+--
+ALTER TABLE `lc60_manual_value`
+  ADD PRIMARY KEY (`subtask_id`,`contemporary_task_id`);
 
 --
 -- Indexes for table `lc60_memos`
