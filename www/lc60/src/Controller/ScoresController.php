@@ -1,8 +1,11 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+use App\Controller\RssController;
 use Cake\Event\Event;
+use Cake\I18n\Time;
+use Cake\Routing\Router;
+use App\Model\Entity\Score;
 
 /**
  * Scores Controller
@@ -11,7 +14,7 @@ use Cake\Event\Event;
  *
  * @method \App\Model\Entity\Score[] paginate($object = null, array $settings = [])
  */
-class ScoresController extends AppController
+class ScoresController extends RssController
 {
 
     /**
@@ -26,10 +29,57 @@ class ScoresController extends AppController
             ]
         ];
         $scores = $this->paginate($this->Scores);
+        
+        foreach ($scores as $score)
+        {
+	  $this->positionName($score);
+        }
 
         $this->set(compact('scores'));
         $this->set('_serialize', ['scores']);
     }
+    
+    
+    /**
+     * Index method
+     *
+     * @return null
+     */
+    public function positionName(Score $score)
+    {
+	  $mod = $score->position % 10;	  
+	  
+	  if (($mod >= 4) || (($score->position >= 11) && ($score->position <= 13)))
+	  {
+	    $score->position_name = 'th';
+	  }
+	  else
+	  {
+	    switch ($mod)
+	    {
+	    case 1:
+	    {
+	      $score->position_name = 'st';
+	      break;
+	    }
+	    case 2:
+	    {
+	      $score->position_name = 'nd';
+	      break;
+	    }
+	    case 3:
+	    {
+	      $score->position_name = 'rd';
+	      break;
+	    }
+	    default:
+	    {
+	      $score->position_name = 'th';
+	    }
+	    }
+	  }
+    }
+    
 
     /**
      * View method
@@ -116,7 +166,45 @@ class ScoresController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
+
+    /**
+     * rss method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function rss()
+    {
+      $baseUrl= (Router::url('/', true));
+      $title= 'LC60Sc';
+      $description= 'Lucidity Challenge 60 Top Scores';
+      $ttl = 1200;
+
+      $rssString = ($this->rssHead($baseUrl,$title,$description,$ttl));
+
+      $queryScores = $this->Scores->find()
+	   // ->contain('Participants')
+	    ->where(['participant_id <' => '150'])
+	    ->order(['total_score' => 'desc'])
+	    ->limit(10)
+      ;
+      
+      foreach ($queryScores as $score)
+      {     
+	$this->positionName($score);
+	$itemTitle =  $score->position.$score->position_name. ': '. $score->participant.' ('.$score->total_score.' points)';
+	$itemDescription = '';
+	$itemUrl = $baseUrl.'participants/view/'.$score->participant_id;
+	$permalink = $baseUrl.'participants/view/'.$score->participant_id;
+	$publishTime =  date('r');
+
+	$rssString = $rssString.($this->rssItem($itemTitle,$itemDescription,$itemUrl,$permalink,$publishTime));
+      }
+
+      $rssString = $rssString.($this->rssTail());
+
+      return $this->rssBody($rssString);
+    }
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);

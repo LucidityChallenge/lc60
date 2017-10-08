@@ -4,6 +4,7 @@
   * @var \App\Model\Entity\Dream $dream
   */
 ?>
+<?php if ($dream->user_id != null) : ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -31,8 +32,9 @@
         -->
     </ul>
 </nav>
+<?php endif; ?>
 <div class="dreams view large-9 medium-8 columns content">
-    <h3><?= h($dream->id) ?></h3>
+    <h3><?= h('Dream '.$dream->id) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Participant') ?></th>
@@ -42,10 +44,12 @@
             <th scope="row"><?= __('Dream Url') ?></th>
             <td><?= $this->Html->link($dream->dream_url) ?></td>
         </tr>
+        <?php if ($dream->user_id != null) : ?>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($dream->id) ?></td>
         </tr>
+        <?php endif; ?>
         <tr>
             <th scope="row"><?= __('Dream Timestamp') ?></th>
             <td><?= h($dream->dream_timestamp) ?></td>
@@ -84,7 +88,9 @@
         <?php endif; ?>
     </div>
 
+    <?php if ($dream->user_id != null) : ?>
     <h3><?= $this->Html->link(__('Add Subtask to this Dream'), ['controller' => 'SubtaskDreams', 'action' => 'add',($dream->id)]) ?></h3>   
+    <?php endif; ?>
     <div class="related">
         <h4><?= __('Associated Subtasks') ?></h4>
         <?php if (!empty($dream->subtask_dream_super_name)): ?>
@@ -94,7 +100,9 @@
                 <th scope="col"><?= __('Subtask') ?></th>
                 <th scope="col"><?= __('Implied') ?></th>
                 <th scope="col"><?= __('Super Subtask') ?></th>
+                <?php if ($dream->user_id != null) : ?>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <?php endif; ?>
             </tr>
             <?php foreach ($dream->subtask_dream_super_name as $subtaskDreamSuper): ?>
             <tr>
@@ -102,11 +110,13 @@
                 <td><?= $this->Html->link($subtaskDreamSuper->subtask_name,['controller' => 'Subtasks', 'action' => 'view', $subtaskDreamSuper->subtask_id]) ?></td>
                 <td><?= h(($subtaskDreamSuper->implied_from_super_task==1) ? 'Yes' : 'No') ?></td>
                 <td><?= (($subtaskDreamSuper->super_subtask_name != null) ? $this->Html->link($subtaskDreamSuper->super_subtask_name,['controller' => 'Subtasks', 'action' => 'view', $subtaskDreamSuper->subtask_super_id]) : h('')) ?></td>
+                <?php if ($dream->user_id != null) : ?>
                 <td class="actions">
                     <!--<?= $this->Html->link(__('View'), ['controller' => 'SubtaskDreams', 'action' => 'view', $subtaskDreamSuper->subtask_dream_attempt]) ?>-->
                     <?= $this->Html->link(__('Edit'), ['controller' => 'SubtaskDreams', 'action' => 'edit', $subtaskDreamSuper->subtask_dream_attempt]) ?>
                     <?= ($subtaskDreamSuper->implied_from_super_task==0) ? $this->Form->postLink(__('Delete'), ['controller' => 'SubtaskDreams', 'action' => 'delete', $subtaskDreamSuper->subtask_dream_attempt], ['confirm' => __('Are you sure you want to delete # {0}?', $subtaskDreamSuper->subtask_dream_attempt)]) : '' ?>
                 </td>
+                <?php endif; ?>
             </tr>
             <?php endforeach; ?>
         </table>
@@ -192,7 +202,7 @@
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_url) ?></td>-->
                 <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h(($successfulSubtaskTaskWithCalculatedScoring->subtask_accumulative != 0) ? 'Yes' : 'No') ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_owner_participant_id) ?></td>-->
-                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_name) ?></td>
+                <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= (($successfulSubtaskTaskWithCalculatedScoring->subtask_category_name) != null) ? $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_category_name,['controller' => 'SubtaskCategories', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->subtask_category_id)]) : h('None') ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_class) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_description) ?></td>-->
                 <td class="<?= $successfulSubtaskTaskWithCalculatedScoring->subtask_category_class ?>"><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_success_count) ?></td>

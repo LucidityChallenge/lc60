@@ -158,12 +158,15 @@ The <b>LC60&reg;</b> will have 4 or 5 weeks. Decided by voting during the third 
 
 <?php endif; ?>
 <div>
-<h3><?= ($open)? ($this->Html->link('Signups are open',$signup->signup_url).'!') : (__('Are you ready to ').$this->Html->link('Sign up',$signup->signup_url).'?') ?></h3>
+<a name="signup"></a><h3><?= ($open)? ($this->Html->link('Signups are open',$signup->signup_url).'!') : (__('Are you ready to ').$this->Html->link('Sign up',$signup->signup_url).'?') ?></h3>
 <a name="hype"></a><h3>Get Hype.</h3>
 <div>
 <p id="intro">Do not miss it!</p>
+<!--
 <p id="count" class="pixel_text"><?= ($open)? 'We will try to begin in:' : 'We will open the signups in:' ?><br/><span id="day_count"></span> <span id="hour_count"></span> <span id="minute_count"></span> <span id="second_count"></span> </p>
 <p id="target" class="pixel_text"><?= ($open)? ($signup->begin_date) : ($signup->open_date) ?> UTC.</p>
+-->
+<p id="target" class="pixel_text">The LC60® is over. Thank you for participating!</p>
 <p><?= $this->Html->image($signup->signup_image_url,['alt' => 'Signups']) ?></p>
 <br/>
 <h4>Tggtt &amp; Mew151</h4>
@@ -171,7 +174,7 @@ The <b>LC60&reg;</b> will have 4 or 5 weeks. Decided by voting during the third 
 </div>
 </div>
 </div>
-
+<!--
 <?php echo '<script class="code" type="text/javascript">'; ?>
 window.onload = function() {callCount()};
 
@@ -224,6 +227,7 @@ function callCount() {
     startCountDown(<?= ($signup->now_date_unix) ?>,<?= ($open) ? ($signup->begin_date_unix) : ($signup->open_date_unix) ?>); //I replace these with seconds from DB. Current, Target.
 }
 </script>
+-->
 <?php endforeach; ?>
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
 <?php echo $this->Html->css('landing.css',['block'=>true]); ?>

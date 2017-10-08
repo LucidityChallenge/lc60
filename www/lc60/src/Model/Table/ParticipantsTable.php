@@ -32,6 +32,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedTotalCompleteTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedTotalComplete
  * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedTotalParticipantTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedTotalParticipant
  * @property \App\Model\Table\SuccessfulSubtaskCategoryFullTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskCategoryFull
+ * @property \App\Model\Table\SuccessfulSubtaskTaskWithCalculatedScoringOwnerTable|\Cake\ORM\Association\HasMany $SuccessfulSubtaskTaskWithCalculatedScoringOwner
  *
  * @method \App\Model\Entity\Participant get($primaryKey, $options = [])
  * @method \App\Model\Entity\Participant newEntity($data = null, array $options = [])
@@ -132,6 +133,12 @@ class ParticipantsTable extends Table
         $this->hasMany('SuccessfulSubtaskCategoryFull', [
             'foreignKey' => 'participant_id',
             'bindingKey' => 'id'
+        ]);
+        
+        $this->hasMany('SuccessfulSubtaskTaskWithCalculatedScoringOwner', [
+            'foreignKey' => 'participant_holder_id',
+            'bindingKey' => 'id',
+            'joinType' => 'INNER'
         ]);
     }
 

@@ -169,7 +169,7 @@ class SignupsController extends ImageController
 	  {
 	    $participant_count = sprintf(' %02d',$signup->participant_count).' joined!';
 	    // days
-	    $date = "Let's Reach 21!";////intval(($signup->begin_date_unix - $signup->now_date_unix) / (3600*24)).' days left!';
+	    $date = '  '.intval($signup->dream_count).' dreams.'."\n  ".intval($signup->dream_total_score).' points.'."\n";////intval(($signup->begin_date_unix - $signup->now_date_unix) / (3600*24)).' days left!';
 	  }
 	  else
 	  {

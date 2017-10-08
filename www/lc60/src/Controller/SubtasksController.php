@@ -468,7 +468,7 @@ $subtask_fetch->subtask_image,
 	    ->contain('Tasks')
 	    ->contain('SubtaskValues')
 	    ->where(['Tasks.task_start <=' => Time::now()])
-	    ->where(['1 =' => 0 ]) //remove this
+	    //->where(['1 =' => 0 ]) //remove this
 	    ->where(['Subtasks.subtask_visible <=' => 1])
 	    ->order(['Tasks.task_start' => 'desc', 'Subtasks.id' => 'desc'])
 	    ->limit(10)

@@ -14,7 +14,7 @@
 </nav>-->
 <div class="scores index large-9 medium-8 columns content">
     <h3><?= __('Scores') ?></h3>
-    <div class="chart_view jqplot-cursor-legend-swatch" id="score_bars" style="margin-top:20px; margin-left:20px; width:95%; height:400px;">
+    <div class="chart_view jqplot-cursor-legend-swatch" id="score_bars" style="margin-top:20px; margin-left:20px; width:95%; height:500px;">
     </div>
     <h3><span class="chart_info" id="score_bar_info">Click on a bar for more precision.</span></h3>
     <br/>
@@ -37,41 +37,11 @@
             <?php 
 	      $sdata = '';
 	      $tickdata = '';
+	      $firstScore95 = -1;
 	      foreach ($scores as $score): 
 	    ?>
             <tr>
-                <td><?=$this->Number->format($score->position) ?><span class="ordinal"><?php 
-		  $mod = $score->position % 10;
-		  
-		  
-		  if (($mod >= 4) || (($score->position >= 11) && ($score->position <= 13)))
-		  {
-		    echo 'th';
-		  }
-		  else
-		  {
-		    switch ($mod)
-		    {
-		    case 1:
-		    {
-		      echo 'st';
-		      break;
-		    }
-		    case 2:
-		    {
-		      echo 'nd';
-		      break;
-		    }
-		    case 3:
-		    {
-		      echo 'rd';
-		      break;
-		    }
-		    default:
-		    {
-		    }
-		    }
-		  }       
+                <td><?=$this->Number->format($score->position) ?><span class="ordinal"><?= $score->position_name   
                 ?></span></td>
                 <td><?= $score->has('participant') ? $this->Html->link($score->participant, ['controller' => 'Participants', 'action' => 'view', $score->participant_id]) : '' ?></td>
                 <td><?= $this->Number->format($score->successful_subtasks) ?></td>
@@ -88,11 +58,22 @@
                 </td>-->
             </tr>
 	    <?php 
+	    
+		if ($firstScore95 > ($score->total_score)):
+		  $sdata = ($firstScore95).','.$sdata;
+		  $tickdata = "'".'95% of first place'."'".','.$tickdata;
+		  unset($firstScore95);
+		endif;
+	    
 		if ($sdata != ''): $sdata = ','.$sdata; endif;
 		$sdata = ($score->total_score).$sdata;
 		
 		if ($tickdata != ''): $tickdata = ','.$tickdata; endif;
 		$tickdata = "'".($score->participant)."'".$tickdata;
+		
+		if (($score->position) == 1):
+		  $firstScore95 = (($score->total_score)*95/100);
+		endif;
 		
 	    ?>            
             <?php endforeach; ?>

@@ -96,7 +96,7 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {/*
+	if ($this->request->is(['patch', 'post', 'put'])) {/*
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
@@ -106,7 +106,7 @@ class UsersController extends AppController
             $this->Flash->error(__('The user could not be saved. Please, try again.'));*/
         }
         $this->Flash->error(__('Sorry! User functions are only managed by the admin.'));
-            return $this->redirect(['controller' => 'users', 'action' => 'login']);
+	return $this->redirect(['controller' => 'users', 'action' => 'login']);
         
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);

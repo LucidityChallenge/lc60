@@ -7,7 +7,9 @@ use Cake\ORM\Entity;
  * Score Entity
  *
  * @property int $position
+ * @property string $position_name
  * @property int $participant_id
+ * @property string $participant
  * @property int $successful_subtasks
  * @property float $average_subtask_value
  * @property float $total_subtask_value

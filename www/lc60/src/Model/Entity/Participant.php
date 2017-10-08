@@ -36,6 +36,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedTotalComplete[] $successful_subtask_task_with_calculated_total_complete
  * @property \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedTotalParticipant[] $successful_subtask_task_with_calculated_total_participant
  * @property \App\Model\Entity\SuccessfulSubtaskCategoryFull[] $successful_subtask_category_full
+ * @property \App\Model\Entity\SuccessfulSubtaskTaskWithCalculatedScoringOwner[] $successful_subtask_task_with_calculated_scoring_owner
  */
 class Participant extends Entity
 {

@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\RssController;
 use Cake\I18n\Time;
 use Cake\Routing\Router;
+use Cake\Event\Event;
 
 /**
  * Tasks Controller
@@ -163,7 +164,7 @@ class TasksController extends RssController
 
       $tasks = ($this->Tasks->find()
 	->where(['Tasks.task_start <=' => Time::now()])
-        ->where(['1 =' => 0 ]) //remove this
+        //->where(['1 =' => 0 ]) //remove this
 	->order(['Tasks.task_start' => 'desc', 'Tasks.id' => 'desc'])
       );
 
@@ -181,5 +182,12 @@ class TasksController extends RssController
       $rssString = $rssString.($this->rssTail());
 
       return $this->rssBody($rssString);
-    }     
+    }
+    
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['view','index']);
+    }
 }

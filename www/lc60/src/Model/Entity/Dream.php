@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property int $participant_id
  * @property \Cake\I18n\FrozenTime $dream_timestamp
  * @property string $dream_url
+ * @property int $user_id
  *
  * @property \App\Model\Entity\Participant $participant
  * @property \App\Model\Entity\DreamWithType[] $dream_with_type 

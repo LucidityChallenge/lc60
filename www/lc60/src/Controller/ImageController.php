@@ -515,7 +515,7 @@ $updated = ''
     
     ImageTTFText ($handle, 9, 0, 10, 26 + 265, $black, $font,  $updated);
 
-    ImageTTFText ($handle, 12, 0, 10, 165, $black, $font, ($number[0][0]).'  '.($number[0][1]));
+    ImageTTFText ($handle, 10, 0, 10.5, 165, $black, $font, ($number[0][0])."\t".($number[0][1]));
     for ($r = 1; $r < 5; $r++)
     {
       ImageTTFText ($handle, 12, 0, 10, $r *20 + 165, $black, $font,  ($number[$r][0]));

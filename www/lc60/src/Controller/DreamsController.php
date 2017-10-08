@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\RssController;
 use Cake\I18n\Time;
 use Cake\Routing\Router;
+use Cake\Event\Event;
 
 /**
  * Dreams Controller
@@ -25,7 +26,24 @@ class DreamsController extends RssController
         $this->paginate = [
             'contain' => ['Participants']
         ];
-        $dreams = $this->paginate($this->Dreams);
+	$dreams = $this->paginate($this->Dreams->find()
+	  ->where(['Dreams.dream_timestamp <=' => Time::now()])
+	  ->order(['Dreams.id' => 'DESC']));
+        $this->set(compact('dreams'));
+        $this->set('_serialize', ['dreams']);
+    }
+
+    /**
+     * manage method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function manage()
+    {
+        $this->paginate = [
+            'contain' => ['Participants']
+        ];
+        $dreams = $this->paginate($this->Dreams);        
 
         $this->set(compact('dreams'));
         $this->set('_serialize', ['dreams']);
@@ -43,6 +61,8 @@ class DreamsController extends RssController
         $dream = $this->Dreams->get($id, [
             'contain' => ['Participants', 'DreamWithType', 'SubtaskDreamSuperName', 'SubtaskDreams', 'SuccessfulSubtaskDividendScores', 'SuccessfulSubtaskTask', 'SuccessfulSubtaskTaskWithCalculatedScoring']
         ]);
+        
+        $dream->user_id = $this->Auth->user('id');
 
         $this->set('dream', $dream);
         $this->set('_serialize', ['dream']);
@@ -162,5 +182,11 @@ class DreamsController extends RssController
       $rssString = $rssString.($this->rssTail());
 
       return $this->rssBody($rssString);
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['view','index']);
     }
 }

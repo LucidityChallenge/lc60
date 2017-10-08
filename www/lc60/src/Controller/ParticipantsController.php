@@ -39,7 +39,7 @@ class ParticipantsController extends RssController
     public function view($id = null)
     {
         $participant = $this->Participants->get($id, [
-            'contain' => ['Dreams', 'Subtasks', 'DreamWithType', 'ScoreViewComplete','SubtaskShareHolderComplete','SuccessfulSubtaskTaskWithCalculatedScoring', 'SubtaskCategories', 'SuccessfulSubtaskCategoryFull']
+            'contain' => ['Dreams', 'Subtasks', 'DreamWithType', 'ScoreViewComplete','SubtaskShareHolderComplete','SuccessfulSubtaskTaskWithCalculatedScoring', 'SubtaskCategories', 'SuccessfulSubtaskCategoryFull', 'SuccessfulSubtaskTaskWithCalculatedScoringOwner']
         ]);
 
         $this->set('participant', $participant);

@@ -126,7 +126,7 @@
 	</tr>
 	<tr>
 	  <th scope="row">Change:</th>
-	  <td><span class="digital"><?= ($variation != null)? $this->Number->precision($variation,3).'%' : ('NO DATA') ?>&nbsp;</span></td>
+	  <td><span class="digital"><?= (is_null($variation))? ('NO DATA') : ($this->Number->precision($variation,3).'%') ?>&nbsp;</span></td>	  
 	  <td><span class="emoji"><?= ($variation != null)? ((($variation) > 0) ? '&#9652;' : ((($variation) == 0) ? '&#9656;' : '&#9662;')) : ('-') ?></span></td>
 	</tr>
 	<tr>

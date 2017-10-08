@@ -19,12 +19,82 @@ class SubtaskValuesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function index()
+    public function index($command = null)
     {
+    
         $this->paginate = [
             //'contain' => ['CurrentTasks', 'ContemporaryTasks', 'Subtasks', 'SubtaskTasks', 'SubtaskSupers', 'SubtaskCategories', 'SubtaskOwnerParticipants']
         ];
-        $subtaskValues = $this->paginate($this->SubtaskValues);
+        $query = $this->SubtaskValues->find();
+        
+        $params = explode(':',$command,3);
+        
+        if (count($params) >= 2)
+        
+        {
+	  if ($params[0] == 'filter')
+	  {	  
+	    if ($params[1] == 'locked')
+	    {
+	      $query->where(['subtask_type_ownable' => 1])
+		    ->andWhere(['subtask_share_holder_count' => 0])
+		    ->andWhere(['subtask_type_unlockable' => 1]);
+	    }
+	    else
+	    if ($params[1] == 'open')
+	    {
+	      $query->where(['subtask_type_ownable' => 0])
+		    ->orWhere(['subtask_share_holder_count' => 1])
+		    ->orWhere(['subtask_type_unlockable' => 0]);
+	    }
+	    else
+	    if ($params[1] == 'unlocked')
+	    {
+	      $query->where(['subtask_type_ownable' => 1])
+		    ->andWhere(['subtask_share_holder_count' => 1])
+		    ->andWhere(['subtask_type_unlockable' => 1]);
+	    }
+	    else
+	    if ($params[1] == 'task')
+	    {
+	      if (count($params) >= 3)
+	      {
+		$task_id = intval($params[2]); // intval will protect from inject
+		$query->where(['subtask_task_id ' => $task_id]);
+	      }
+	      else
+	      {
+		$query->where(['subtask_task_id >=' => 1]);
+	      }
+	    }
+	    if ($params[1] == 'subtask_category')
+	    {
+	      if (count($params) >= 3)
+	      {
+		$subtask_category_id = intval($params[2]); // intval will protect from inject
+		if ($subtask_category_id == 0)
+		{
+		  $query->where(function ($exp, $q) {
+			  return $exp->isNull('subtask_category_id');
+		      });
+		}
+		else
+		{
+		  $query->where(['subtask_category_id' => $subtask_category_id]);
+		}
+	      }
+	      else
+	      {
+		  $query->where(function ($exp, $q) {
+			  return $exp->isNull('subtask_category_id');
+		      });
+	      }
+	    }
+	    
+	  }
+        }
+        
+        $subtaskValues = $this->paginate($query);
 
         $this->set(compact('subtaskValues'));
         $this->set('_serialize', ['subtaskValues']);

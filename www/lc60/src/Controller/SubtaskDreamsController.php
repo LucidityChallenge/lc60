@@ -70,8 +70,8 @@ class SubtaskDreamsController extends AppController
         {
 	  $subtaskDream->dream_id = $new_dream_id;
         }
-        $subtasks = $this->SubtaskDreams->Subtasks->find('list', ['limit' => 200]);
-        $dreams = $this->SubtaskDreams->Dreams->find('list', ['limit' => 200]);
+        $subtasks = $this->SubtaskDreams->Subtasks->find('list', ['limit' => 600, 'order' => 'id asc']);
+        $dreams = $this->SubtaskDreams->Dreams->find('list', ['limit' => 600, 'order' => 'id desc']);
         
         $this->set(compact('subtaskDream', 'subtasks', 'dreams'));
         $this->set('_serialize', ['subtaskDream']);
@@ -98,8 +98,8 @@ class SubtaskDreamsController extends AppController
             }
             $this->Flash->error(__('The subtask dream could not be saved. Please, try again.'));
         }
-        $subtasks = $this->SubtaskDreams->Subtasks->find('list', ['limit' => 200]);
-        $dreams = $this->SubtaskDreams->Dreams->find('list', ['limit' => 200]);
+        $subtasks = $this->SubtaskDreams->Subtasks->find('list', ['limit' => 600, 'order' => 'id asc']);
+        $dreams = $this->SubtaskDreams->Dreams->find('list', ['limit' => 600, 'order' => 'id desc']);
         $this->set(compact('subtaskDream', 'subtasks', 'dreams'));
         $this->set('_serialize', ['subtaskDream']);
     }

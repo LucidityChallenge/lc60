@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * SubtaskCategories Controller
@@ -107,5 +108,11 @@ class SubtaskCategoriesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['view']);
     }
 }

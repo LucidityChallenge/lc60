@@ -63,7 +63,7 @@ class SubtaskSharesController extends AppController
             }
             $this->Flash->error(__('The subtask share could not be saved. Please, try again.'));
         }
-        $subtasks = $this->SubtaskShares->Subtasks->find('list', ['limit' => 200]);
+        $subtasks = $this->SubtaskShares->Subtasks->find('list', ['limit' => 400]);
         $participants = $this->SubtaskShares->Participants->find('list', ['limit' => 200]);
         $this->set(compact('subtaskShare', 'subtasks', 'participants'));
         $this->set('_serialize', ['subtaskShare']);
@@ -90,7 +90,7 @@ class SubtaskSharesController extends AppController
             }
             $this->Flash->error(__('The subtask share could not be saved. Please, try again.'));
         }
-        $subtasks = $this->SubtaskShares->Subtasks->find('list', ['limit' => 200]);
+        $subtasks = $this->SubtaskShares->Subtasks->find('list', ['limit' => 400]);
         $participants = $this->SubtaskShares->Participants->find('list', ['limit' => 200]);
         $this->set(compact('subtaskShare', 'subtasks', 'participants'));
         $this->set('_serialize', ['subtaskShare']);

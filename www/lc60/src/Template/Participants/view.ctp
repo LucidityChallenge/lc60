@@ -251,8 +251,8 @@
                 <th scope="col"><?= __('Category') ?></th>
                 <!--<th scope="col"><?= __('Subtask Category Class') ?></th>-->
                 <!--<th scope="col"><?= __('Subtask Category Description') ?></th>-->
-                <th scope="col"><?= __('Subtask Success Count') ?></th>
-                <th scope="col"><?= __('Contemporary Demand') ?></th>
+                <!--<th scope="col"><?= __('Subtask Success Count') ?></th>-->
+                <th scope="col"><?= __('Contemporary Bonus') ?></th>
                 <!--<th scope="col"><?= __('Contemporary Demand Positive') ?></th>-->
                 <!--<th scope="col"><?= __('Inner Function') ?></th>-->
                 <!--<th scope="col"><?= __('External Function') ?></th>-->
@@ -288,7 +288,7 @@
                 <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_category_name,['controller' => 'SubtaskCategories', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->subtask_category_id)]) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_class) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_description) ?></td>-->
-                <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_success_count) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_success_count) ?></td>-->
                 <td><?= $this->Number->format($successfulSubtaskTaskWithCalculatedScoring->contemporary_demand) ?></td>
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_demand_positive) ?></td>-->
                 <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->inner_function) ?></td>-->
@@ -307,25 +307,140 @@
         </table>
         <?php endif; ?>
     </div>
+    <a name="colors"/>
     <h4><?= __('Categories Completed by '.($participant->participant_name)) ?></h4>
     <div class="related">
        <?php if (!empty($participant->successful_subtask_category_full)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <!--<th scope="col"><?= __('Color') ?></th>-->
+                <th scope="col"><?= __('Color') ?></th>
                 <th scope="col"><?= __('Name') ?></th>
                 <th scope="col"><?= __('Count') ?></th>
             </tr>
             <?php foreach ($participant->successful_subtask_category_full as $subtaskCategory): ?>
             <tr>
-                <!--<td class="<?= ($subtaskCategory->subtask_category_class) ?>"></td>-->
-                <td><?= h($subtaskCategory->subtask_category_name) ?></td>
+                <td class="<?= ($subtaskCategory->subtask_category_class) ?>"><?= $this->Html->link('&nbsp;&nbsp;&nbsp;',['controller'=> 'subtask-categories', 'action'=>'view',($subtaskCategory->subtask_category_id)],['escape'=>false]) ?></td>
+                <td><?= $this->Html->link(($subtaskCategory->subtask_category_name),['controller'=> 'subtask-categories', 'action'=>'view',($subtaskCategory->subtask_category_id)]) ?></td>
                 <td><?= $this->Number->format($subtaskCategory->subtask_category_count) ?></td>
             </tr>
             <?php endforeach; ?>
         </table>
 	<?php endif; ?>
     </div>
+    <h4><?= __('Third Party Completions of Subtasks Owned or Shared by '.($participant->participant_name)) ?></h4>
+    <div class="plot chart_view jqplot-cursor-legend-swatch" id="score_bar_line_shares" style="margin-top:20px; margin-left:10px; width:90%; height:400px;">
+    </div>
+    <div class="related">
+        <?php 
+          $commaS = '';
+          $totalS = 0;
+          $s1dataS = '';
+          $s2dataS = '';          
+	  if (!empty($participant->successful_subtask_task_with_calculated_scoring_owner)): 
+	?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <!--<th scope="col"><?= __('Participant Id') ?></th>-->
+                <th scope="col"><?= __('Participant') ?></th>
+                <!--<th scope="col"><?= __('Dream Id') ?></th>-->
+                <!--<th scope="col"><?= __('Dream Type Id') ?></th>-->
+                <th scope="col"><?= __('Dream Timestamp') ?></th>
+                <!--<th scope="col"><?= __('Dream Url') ?></th>-->
+                <!--<th scope="col"><?= __('Contemporary Task Id') ?></th>-->
+                <!--<th scope="col"><?= __('Contemporary Task Start') ?></th>-->
+                <!--<th scope="col"><?= __('Contemporary Task Expiration') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Id') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Task Id') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Super Id') ?></th>-->
+                <th scope="col"><?= __('Name') ?></th>
+                <!--<th scope="col"><?= __('Subtask Category Id') ?></th>-->
+                <th scope="col"><?= __('Minimum Value') ?></th>
+                <!--<th scope="col"><?= __('Subtask Max Value') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Starting Demand') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Inflation Rate') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Demand Cutoff') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Task Period Demand') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Description') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Url') ?></th>-->
+                <th scope="col"><?= __('Accumulative') ?></th>
+                <!--<th scope="col"><?= __('Subtask Owner Participant Id') ?></th>-->
+                <th scope="col"><?= __('Category') ?></th>
+                <!--<th scope="col"><?= __('Subtask Category Class') ?></th>-->
+                <!--<th scope="col"><?= __('Subtask Category Description') ?></th>-->
+                <!--<th scope="col"><?= __('Contemporary Demand Positive') ?></th>-->
+                <!--<th scope="col"><?= __('Inner Function') ?></th>-->
+                <!--<th scope="col"><?= __('External Function') ?></th>-->
+                <th scope="col"><?= __('Final Value') ?></th>
+                <th scope="col"><?= __('Holder') ?></th>
+                <th scope="col"><?= __('Shared Payout') ?></th>
+                <th scope="col"><?= __('Final Payout') ?></th>            
+                <!--<th scope="col"><?= __('Subtask Dividend Rate') ?></th>-->
+                <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
+            </tr>
+            <?php foreach ($participant->successful_subtask_task_with_calculated_scoring_owner as $successfulSubtaskTaskWithCalculatedScoring): ?>
+            <tr>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->participant_id) ?></td>-->
+                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->participant_name, ['controller' => 'Participants', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->participant_id)]) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->dream_id) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->dream_type_id) ?></td>-->
+                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->dream_timestamp,['controller' => 'Dreams', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->dream_id)]) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->dream_url) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_task_id) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_task_start) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->contemporary_task_expiration) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_id) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_task_id) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_super_id) ?></td>-->
+                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_name,['controller' => 'Subtasks', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->subtask_id)]) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_id) ?></td>-->
+                <td><?= $this->Number->precision(intval(100*($successfulSubtaskTaskWithCalculatedScoring->subtask_base_value))/100,2) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_max_value) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_starting_demand) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_inflation_rate) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_demand_cutoff) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_task_period_demand) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_description) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_url) ?></td>-->
+                <td><?= h(($successfulSubtaskTaskWithCalculatedScoring->subtask_accumulative == 1)? 'Yes' : 'No') ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_owner_participant_id) ?></td>-->
+                <td><?= $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->subtask_category_name,['controller' => 'SubtaskCategories', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->subtask_category_id)]) ?></td>
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_class) ?></td>-->
+                <!--<td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_category_description) ?></td>-->
+               <td><?= $this->Number->precision(intval(100*$successfulSubtaskTaskWithCalculatedScoring->final_value)/100,2) ?></td>
+               <td><?= (($successfulSubtaskTaskWithCalculatedScoring->subtask_share_holder_count) == 1)? $this->Html->link($successfulSubtaskTaskWithCalculatedScoring->participant_holder_name,['controller' => 'Participants', 'action' => 'view',($successfulSubtaskTaskWithCalculatedScoring->participant_holder_id)]) : $this->Number->format($successfulSubtaskTaskWithCalculatedScoring->subtask_share_holder_count).' holders' ?></td>
+               <td><?= h($successfulSubtaskTaskWithCalculatedScoring->subtask_dividend_rate.'%') ?></td>
+               <td><?= $this->Number->precision(intval(100*$successfulSubtaskTaskWithCalculatedScoring->final_owner_payout)/100,2) ?></td>          
+                <!--
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'view', $successfulSubtaskTaskWithCalculatedScoring->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'edit', $successfulSubtaskTaskWithCalculatedScoring->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'SuccessfulSubtaskTaskWithCalculatedScoring', 'action' => 'delete', $successfulSubtaskTaskWithCalculatedScoring->id], ['confirm' => __('Are you sure you want to delete # {0}?', $successfulSubtaskTaskWithCalculatedScoring->id)]) ?>
+                </td>
+                -->
+            </tr>
+            <?php
+	      $dateS = $successfulSubtaskTaskWithCalculatedScoring->dream_timestamp;
+	      $valueS = $this->Number->precision(intval(100*$successfulSubtaskTaskWithCalculatedScoring->final_value)/100,2);
+	      $baseValueS = $this->Number->precision(intval(100*$successfulSubtaskTaskWithCalculatedScoring->final_owner_payout)/100,2);
+	      	      
+	      $s1dataS = $s1dataS."${commaS}[\"${dateS}\",${valueS}]";
+	      $s2dataS = $s2dataS."${commaS}[\"${dateS}\",${baseValueS}]";
+	      $commaS = ',';
+	      
+	      $totalS = $totalS + $baseValueS;
+            ?>
+            <?php endforeach; ?>
+            <tr>
+	      <td colspan="9">Total Payout:</td>
+	      <td><?= $this->Number->precision(intval(100*($totalS))/100,2) ?></td>
+            </tr>
+        </table>
+        <?php else: ?>
+        <?= __('None Known.') ?>
+        <?php endif; ?>
+    </div>
+    
+    
     <h4><?= __('Subtasks Owned or Shared by '.($participant->participant_name)) ?></h4>
     <div class="related">
     <!--
@@ -352,8 +467,14 @@
 <div class="subtaskShareHolderComplete view large-9 medium-8 columns content subtask subtask_yellow">
     <?php foreach ($participant->subtask_share_holder_complete as $subtaskShareHolderComplete): ?>
     <table class="vertical-table">
+        <tr class="subtask_color">
+	  <td colspan="2" class="<?= ($subtaskShareHolderComplete->subtask_category_class) ?>"></td>
+        </tr>
         <tr>
-            <th scope="row"><?= __('Subtask') ?></th>
+	  <th scope="row" colspan="2"><h3><?= $this->Html->link($subtaskShareHolderComplete->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',($subtaskShareHolderComplete->subtask_id)]) ?></h3></th>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Symbol') ?></th>
             <td><?= $subtaskShareHolderComplete->has('subtask') ? $this->Html->link($subtaskShareHolderComplete->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShareHolderComplete->subtask->id]) : '' ?>
                 <div class="subtask_picture"><?= $this->Html->link(((null != $subtaskShareHolderComplete->subtask_image) ? $this->Html->image($subtaskShareHolderComplete->subtask_image, ['alt' => (null != $subtaskShareHolderComplete->subtask_symbol) ? ('&#'.$subtaskShareHolderComplete->subtask_symbol.'; '.($subtaskShareHolderComplete->subtask_name)) : ($subtaskShareHolderComplete->subtask_name)]) :
 		((null != $subtaskShareHolderComplete->subtask_symbol) ? '<span class="emoji">&#'.$subtaskShareHolderComplete->subtask_symbol.';</span>' : '')),
@@ -362,25 +483,20 @@
             </td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Name') ?></th>
-            <td><?= $this->Html->link($subtaskShareHolderComplete->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',($subtaskShareHolderComplete->subtask_id)]) ?></td>
+            <th scope="row"><?= __('Category') ?></th>
+            <td><?= ($subtaskShareHolderComplete->subtask_category_name != null) ? $this->Html->link($subtaskShareHolderComplete->subtask_category_name,['controller'=>'subtask_categories', 'action' => 'view',($subtaskShareHolderComplete->subtask_category_id)]) : 'None' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Category Name') ?></th>
-            <td><?= h($subtaskShareHolderComplete->subtask_category_name) ?></td>
+            <th scope="row"><?= __('Type') ?></th>
+            <td><?= ($subtaskShareHolderComplete->subtask_type_name != null) ? $this->Html->link($subtaskShareHolderComplete->subtask_type_name,['controller'=>'subtask_types', 'action' => 'view',($subtaskShareHolderComplete->subtask_type_id)]) : 'None' ?></td>
         </tr>
-        <!--
-        <tr>
-            <th scope="row"><?= __('Category Class') ?></th>
-            <td><?= h($subtaskShareHolderComplete->subtask_category_class) ?></td>
-        </tr>-->
         <tr>
             <th scope="row"><?= __('Minimum Value') ?></th>
             <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_base_value) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Maximum Value') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_max_value) ?></td>
+            <td><?= $this->Number->format((($subtaskShareHolderComplete->subtask_max_value) == 0) ? ($subtaskShareHolderComplete->subtask_base_value) : ($subtaskShareHolderComplete->subtask_max_value)) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Minimum Bonus') ?></th>
@@ -403,7 +519,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Shared Rate') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_dividend_rate) ?></td>
+            <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_dividend_rate).'%' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Accumulative') ?></th>
@@ -1001,8 +1117,9 @@
 -->
 </div>
 </div>
-<?php if (count($participant->dream_with_type) > 1) : ?>
-
+<?php
+  $addScript = false;
+  if (count($participant->dream_with_type) > 1) : ?>
   <?php echo '<script class="code" type="text/javascript">'; ?>
 $(document).ready(function () {
     $.jqplot._noToImageButton = true;
@@ -1085,8 +1202,100 @@ $(document).ready(function () {
     });
 });
    </script>
-
-
+<?php  
+  $addScript = true;
+  endif;
+?>
+   
+<?php if (count($participant->successful_subtask_task_with_calculated_scoring_owner) > 1) : ?>
+  <?php echo '<script class="code" type="text/javascript">'; ?>
+$(document).ready(function () {
+    $.jqplot._noToImageButton = true;
+    var dream = [<?= $s1dataS ?>];
+ 
+    var acc = [<?= $s2dataS ?>];
+ 
+    var plot1 = $.jqplot("score_bar_line_shares", [dream, acc], {
+        seriesColors: ["rgba(78, 135, 194, 0.7)", "rgb(211, 235, 59)"],
+        title: 'Subtask Shared Score Evolution for <?= $participant->participant_name ?>',
+        highlighter: {
+            show: true,
+            sizeAdjust: 1,
+            tooltipOffset: 1
+        },
+        grid: {
+            background: 'rgba(57,57,57,0.0)',
+            drawBorder: false,
+            shadow: false,
+            gridLineColor: '#808080',
+            gridLineWidth: 2
+        },
+        legend: {
+	    renderer: $.jqplot.EnhancedLegendRenderer,
+            show: true,
+            sizeAdjust: 0.5,
+            placement: 'insideGrid',
+            location: 'nw',
+            showSwatches: true,
+        },
+        seriesDefaults: {
+            rendererOptions: {
+                smooth: false,
+                animation: {
+                    show: true
+                }
+            },
+            showMarker: false
+        },
+        series: [
+            {
+                fill: true,
+                label: 'Final value'
+            },
+            {
+                label: 'Share Value'
+            }
+        ],
+        axesDefaults: {
+            rendererOptions: {
+                baselineWidth: 1.5,
+                baselineColor: '#444444',
+                drawBaseline: false
+            }
+        },
+        axes: {
+            xaxis: {
+                renderer: $.jqplot.DateAxisRenderer,
+                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                tickOptions: {
+                    formatString: "%b %e",
+                    angle: 270,
+                    textColor: '#202020'
+                },
+                tickInterval: "1 day",
+                drawMajorGridlines: false
+            },
+            yaxis: {
+                renderer: $.jqplot.LogAxisRenderer,
+                pad: 0,
+                rendererOptions: {
+                    minorTicks: 1
+                },
+                tickOptions: {
+                    formatString: "%4.2f points",
+                    showMark: false
+                }
+            }
+        }
+    });
+});
+   </script>
+<?php  
+  $addScript = true;
+  endif;
+ 
+  if ($addScript) :
+?>
 <?php echo $this->Html->css('jqplot/jquery_jqplot.css',['block'=>true]); ?>
 <?php echo $this->Html->css('http://www.jqplot.com/examples/examples.css',['block'=>true]); ?>
 <?php echo $this->Html->script('jqplot/excanvas.js',['block'=>'notie', 'type' => 'text/javascript']); ?>
@@ -1102,6 +1311,5 @@ $(document).ready(function () {
 <?php echo $this->Html->script('jqplot/plugins/jqplot_canvasTextRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->script('jqplot/plugins/jqplot_enhancedLegendRenderer.js', ['block'=>true, 'type' => 'text/javascript']); ?>
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
-
 <?php  endif; ?>
 <?php echo $this->Html->css('subtask_color.css',['block'=>true]); ?>

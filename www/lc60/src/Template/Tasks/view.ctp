@@ -4,14 +4,13 @@
   * @var \App\Model\Entity\Task $task
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Task'), ['action' => 'edit', $task->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Task'), ['action' => 'delete', $task->id], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Tasks'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Task'), ['action' => 'add']) ?> </li>
-        <!--
         <li><?= $this->Html->link(__('List Current Task'), ['controller' => 'CurrentTask', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Current Task'), ['controller' => 'CurrentTask', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Dream With Type'), ['controller' => 'DreamWithType', 'action' => 'index']) ?> </li>
@@ -20,17 +19,14 @@
         <li><?= $this->Html->link(__('New Subtask Share Holder Complete'), ['controller' => 'SubtaskShareHolderComplete', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Subtask Subtask Category'), ['controller' => 'SubtaskSubtaskCategory', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Subtask Subtask Category'), ['controller' => 'SubtaskSubtaskCategory', 'action' => 'add']) ?> </li>
-        -->
         <li><?= $this->Html->link(__('List Subtasks'), ['controller' => 'Subtasks', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Subtask'), ['controller' => 'Subtasks', 'action' => 'add']) ?> </li>
-        <!--
         <li><?= $this->Html->link(__('List Successful Subtask'), ['controller' => 'SuccessfulSubtask', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Successful Subtask'), ['controller' => 'SuccessfulSubtask', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Unexpired Task'), ['controller' => 'UnexpiredTask', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Unexpired Task'), ['controller' => 'UnexpiredTask', 'action' => 'add']) ?> </li>
-        -->
     </ul>
-</nav>
+</nav>-->
 <div class="tasks view large-9 medium-8 columns content">
     <h3><?= h($task->task_title) ?></h3>
     <table class="vertical-table">
@@ -40,11 +36,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Task Url') ?></th>
-            <td><?= h($task->task_url) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($task->id) ?></td>
+            <td><?= $this->Html->link($task->task_url) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Task Start') ?></th>
@@ -261,85 +253,59 @@
 <div class="subtaskShareHolderComplete view large-9 medium-8 columns content subtask subtask_yellow">
 <h4><?= __('Subtasks') ?></h4>
     <?php foreach ($task->subtask_share_holder_complete as $subtaskShareHolderComplete): ?>
-    <h3><?= $this->Html->link($subtaskShareHolderComplete->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',($subtaskShareHolderComplete->subtask_id)]) ?></h3>
-    <div class="subtask_picture"><?= (null != $subtaskShareHolderComplete->subtask_image) ? $this->Html->image($subtaskShareHolderComplete->subtask_image, ['alt' => (null != $subtaskShareHolderComplete->subtask_symbol) ? ('&#'.$subtaskShareHolderComplete->subtask_symbol.'; '.($subtaskShareHolderComplete->subtask_name)) : ($subtaskShareHolderComplete->subtask_name)]) :
-    ((null != $subtaskShareHolderComplete->subtask_symbol) ? '<span class="emoji">&#'.$subtaskShareHolderComplete->subtask_symbol.';</span>' : '')
-    ?></div>
+  
     <table class="vertical-table">
+        <tr class="subtask_color">
+	  <td colspan="2" class="<?= ($subtaskShareHolderComplete->subtask_category_class) ?>"></td>
+	</tr>
+	<tr>
+	<th scope="row" colspan="2"><h3><?= $this->Html->link($subtaskShareHolderComplete->subtask_name, ['controller' => 'Subtasks', 'action' => 'view',($subtaskShareHolderComplete->subtask_id)]) ?></h3></th>
+	</tr>
         <tr>
-            <th scope="row"><?= __('Subtask') ?></th>
-            <td><?= $subtaskShareHolderComplete->has('subtask') ? $this->Html->link($subtaskShareHolderComplete->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShareHolderComplete->subtask->id]) : '' ?></td>
+            <th scope="row"><?= __('Symbol') ?></th>
+            <td><?= $subtaskShareHolderComplete->has('subtask') ? $this->Html->link($subtaskShareHolderComplete->subtask->subtask_name, ['controller' => 'Subtasks', 'action' => 'view', $subtaskShareHolderComplete->subtask->id]) : '' ?>
+            <div class="subtask_picture"><?= (null != $subtaskShareHolderComplete->subtask_image) ? $this->Html->image($subtaskShareHolderComplete->subtask_image, ['alt' => (null != $subtaskShareHolderComplete->subtask_symbol) ? ('&#'.$subtaskShareHolderComplete->subtask_symbol.'; '.($subtaskShareHolderComplete->subtask_name)) : ($subtaskShareHolderComplete->subtask_name)]) :
+    ((null != $subtaskShareHolderComplete->subtask_symbol) ? '<span class="emoji">&#'.$subtaskShareHolderComplete->subtask_symbol.';</span>' : '')
+    ?></div></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Participant') ?></th>
-            <td><?= $subtaskShareHolderComplete->has('participant') ? $this->Html->link($subtaskShareHolderComplete->participant->participant_name, ['controller' => 'Participants', 'action' => 'view', $subtaskShareHolderComplete->participant->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Task') ?></th>
-            <td><?= $subtaskShareHolderComplete->has('task') ? $this->Html->link($subtaskShareHolderComplete->task->task_title, ['controller' => 'Tasks', 'action' => 'view', $subtaskShareHolderComplete->task->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Name') ?></th>
+            <th scope="row"><?= __('Name') ?></th>
             <td><?= h($subtaskShareHolderComplete->subtask_name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Category') ?></th>
-            <td><?= $subtaskShareHolderComplete->has('subtask_category') ? $this->Html->link($subtaskShareHolderComplete->subtask_category->subtask_category_name, ['controller' => 'SubtaskCategories', 'action' => 'view', $subtaskShareHolderComplete->subtask_category->id]) : '' ?></td>
+            <th scope="row"><?= __('Category') ?></th>
+            <td><?= ($subtaskShareHolderComplete->subtask_category_name != null) ? $this->Html->link($subtaskShareHolderComplete->subtask_category_name,['controller'=>'subtask_categories', 'action' => 'view',($subtaskShareHolderComplete->subtask_category_id)]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Url') ?></th>
+            <th scope="row"><?= __('Type') ?></th>
+            <td><?= ($subtaskShareHolderComplete->subtask_type_name != null) ? $this->Html->link($subtaskShareHolderComplete->subtask_type_name,['controller'=>'subtask_types', 'action' => 'view',($subtaskShareHolderComplete->subtask_type_id)]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Url') ?></th>
             <td><?= h($subtaskShareHolderComplete->subtask_url) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Category Name') ?></th>
-            <td><?= h($subtaskShareHolderComplete->subtask_category_name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Category Class') ?></th>
-            <td><?= h($subtaskShareHolderComplete->subtask_category_class) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Super Id') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_super_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Base Value') ?></th>
+            <th scope="row"><?= __('Minimum Value') ?></th>
             <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_base_value) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Max Value') ?></th>
+            <th scope="row"><?= __('Maximum Value') ?></th>
             <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_max_value) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Starting Demand') ?></th>
+            <th scope="row"><?= __('Starting Bonus') ?></th>
             <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_starting_demand) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Inflation Rate') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_inflation_rate) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Demand Cutoff') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_demand_cutoff) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Task Period Demand') ?></th>
+            <th scope="row"><?= __('Weekly Bonus Increase') ?></th>
             <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_task_period_demand) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Participant Owner') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->participant_owner) ?></td>
+            <th scope="row"><?= __('Shared Rate') ?></th>
+            <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_dividend_rate).'%' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Subtask Dividend Rate') ?></th>
-            <td><?= $this->Number->format($subtaskShareHolderComplete->subtask_dividend_rate) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Subtask Accumulative') ?></th>
+            <th scope="row"><?= __('Accumulative') ?></th>
             <td><?= $subtaskShareHolderComplete->subtask_accumulative ? __('Yes') : __('No'); ?></td>
         </tr>
         <tr>
@@ -357,3 +323,4 @@
 </div>
 
 <?php echo $this->Html->css('emoji.css',['block'=>true]); ?>
+<?php echo $this->Html->css('subtask_color.css',['block'=>true]); ?>

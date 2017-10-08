@@ -4,6 +4,7 @@
   * @var \App\Model\Entity\Task[]|\Cake\Collection\CollectionInterface $tasks
   */
 ?>
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -23,33 +24,33 @@
         <li><?= $this->Html->link(__('List Unexpired Task'), ['controller' => 'UnexpiredTask', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Unexpired Task'), ['controller' => 'UnexpiredTask', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav>-->
 <div class="tasks index large-9 medium-8 columns content">
     <h3><?= __('Tasks') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('id','Number') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('task_title') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('task_start') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('task_expiration') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('task_url') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <!--<th scope="col" class="actions"><?= __('Actions') ?></th>-->
             </tr>
         </thead>
         <tbody>
             <?php foreach ($tasks as $task): ?>
             <tr>
                 <td><?= $this->Html->link($this->Number->format($task->id), ['action' => 'view', $task->id]) ?></td>
-                <td><?= h($task->task_title) ?></td>
+                <td><?= $this->Html->link($task->task_title, ['action' => 'view', $task->id]) ?></td>
                 <td><?= h($task->task_start) ?></td>
                 <td><?= h($task->task_expiration) ?></td>
-                <td><?= h($task->task_url) ?></td>
-                <td class="actions">
+                <td><?= $this->Html->link($task->task_url) ?></td>
+                <!--<td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $task->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $task->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $task->id], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?>
-                </td>
+                </td>-->
             </tr>
             <?php endforeach; ?>
         </tbody>

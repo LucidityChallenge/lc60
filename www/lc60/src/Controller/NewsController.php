@@ -178,7 +178,7 @@ class NewsController extends RssController
         // You should not add the "login" action to allow list. Doing so would
         // cause problems with normal functioning of AuthComponent.
         //$this->Auth->deny(['index']);
-        $this->Auth->allow(['view']);
+        $this->Auth->allow(['view','index']);
         $this->Auth->deny(['manage']);
     }
   

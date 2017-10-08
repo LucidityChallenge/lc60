@@ -16,6 +16,27 @@
 </nav>-->
 <div class="subtaskValues index large-9 medium-8 columns content">
     <h3><?= __('Subtask Values') ?></h3>
+    <nav class="large-3">
+    <ul class="top-nav">
+    <li><?= $this->Html->link('Show all Visible Subtasks',['action'=>'index']) ?></li>
+    <li><?= $this->Html->link('List only Open Subtasks',['action'=>'index','filter:open']) ?></li>
+    <li><?= $this->Html->link('List only Unlocked Subtasks',['action'=>'index','filter:unlocked']) ?></li>
+    <li><?= $this->Html->link('List only Locked Subtasks',['action'=>'index','filter:locked']) ?></li>
+    <li><?= $this->Html->link('List only Task 1 Subtasks',['action'=>'index','filter:task:1']) ?></li>
+    <li><?= $this->Html->link('List only Task 2 Subtasks',['action'=>'index','filter:task:2']) ?></li>
+    <li><?= $this->Html->link('List only Task 3 Subtasks',['action'=>'index','filter:task:3']) ?></li>
+    <li><?= $this->Html->link('List only Task 4 Subtasks',['action'=>'index','filter:task:4']) ?></li>
+    <li><?= $this->Html->link('List only Task 5 Subtasks',['action'=>'index','filter:task:5']) ?></li>
+    <li><?= $this->Html->link('List only Gray Subtasks',['action'=>'index','filter:subtask_category:null']) ?></li>
+    <li><?= $this->Html->link('List only Red Subtasks',['action'=>'index','filter:subtask_category:1']) ?></li>
+    <li><?= $this->Html->link('List only Orange Subtasks',['action'=>'index','filter:subtask_category:2']) ?></li>
+    <li><?= $this->Html->link('List only Yellow Subtasks',['action'=>'index','filter:subtask_category:3']) ?></li>
+    <li><?= $this->Html->link('List only Green Subtasks',['action'=>'index','filter:subtask_category:4']) ?></li>
+    <li><?= $this->Html->link('List only Blue Subtasks',['action'=>'index','filter:subtask_category:5']) ?></li>
+    <li><?= $this->Html->link('List only Indigo Subtasks',['action'=>'index','filter:subtask_category:6']) ?></li>
+    <li><?= $this->Html->link('List only Violet Subtasks',['action'=>'index','filter:subtask_category:7']) ?></li>
+    </ul>
+    </nav>
     <div>
     <p>&nbsp;</p>
 
@@ -59,7 +80,7 @@
 		</tr>
 		<tr>
 		  <th scope="row">Change:</th>
-		  <td><span class="digital"><?= ($variation != null)? $this->Number->precision($variation,3).'%' : ('NO DATA') ?>&nbsp;</span></td>
+		  <td><span class="digital"><?= (is_null($variation))? ('NO DATA') : ($this->Number->precision($variation,3).'%') ?>&nbsp;</span></td>
 		  <td><span class="emoji"><?= ($variation != null)? ((($variation) > 0) ? '&#9652;' : ((($variation) == 0) ? '&#9656;' : '&#9662;')) : ('-') ?></span></td>
 		</tr>
 		<tr>
@@ -68,9 +89,15 @@
 		</tr>	   
 	    </table>
             </div>
-            <?php endforeach; ?>
+	    <?php endforeach;
+		if (count($subtaskValues) == 0):
+			echo $this->Html->image('http://4.bp.blogspot.com/-W62AQFK0nsc/Ud4oQBu0xDI/AAAAAAAAFWk/H5JzZoNmwt4/s1600/Yao_ming_meme_by_lecatinga-d4kpe13.png',['alt'=>'Nothing Here']);
+			echo h('Nothing to see here!');
+		endif;
+
+	    ?>
     <p>&nbsp;</p></div>
-    <div class="paginator">
+    <div class="paginator clear">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -108,7 +135,7 @@
         </tbody>
     </table>
     <p>&nbsp;</p>
-    <div class="paginator">
+    <div class="paginator clear">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
